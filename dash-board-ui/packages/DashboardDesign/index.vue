@@ -53,8 +53,8 @@
           >
             <div class="app-container app-design-wrap">
               <AppDashBoard
-                :isDesign="true"
                 ref="Render"
+                :is-design="true"
                 @openRightPanel="openRightPanel"
               />
             </div>
@@ -497,12 +497,13 @@ export default {
       justify-content: center;
       /*align-items: center;*/
       .app-display-wrapper {
-        margin-top: 5%;
+        margin-top: 10%;
         position: relative;
         // 水平垂直居中
-        width: 366.318px;
+        width: 300px;
         height: 80%;
         min-height: 600px;
+        max-height: 630px;
         background: url(packages/DashboardDesign/images/iphone.png) no-repeat center 0;
         background-size: 100% 100%;
 

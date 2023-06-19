@@ -2,12 +2,12 @@
   <div
     style="width: 100%;height: 100%"
     class="db-design-wrap "
-    @touchstart='touchmove'
-    @touchend='touchend'
+    @touchstart="touchmove"
+    @touchend="touchend"
   >
-<!--    <lyzTable sticky style="width: 100%" :columns="columnData" :list="config.option.tableData">-->
-<!--      <template slot="nodata">暂无数据</template>-->
-<!--    </lyzTable>-->
+    <!--    <lyzTable sticky style="width: 100%" :columns="columnData" :list="config.option.tableData">-->
+    <!--      <template slot="nodata">暂无数据</template>-->
+    <!--    </lyzTable>-->
     <Table
       :id="config.code"
       :ref="config.code"
@@ -21,8 +21,8 @@
     >
       <TableColumn
         v-for="(col, index) in columnData"
-        :fixed="index===0"
         :key="index"
+        :fixed="index===0"
         show-overflow-tooltip
         :label="col.remark"
         :prop="col.alias"
@@ -35,7 +35,7 @@
 import commonMixins from 'packages/js/mixins/commonMixins'
 import paramsMixins from 'packages/js/mixins/paramsMixins'
 import linkageMixins from 'packages/js/mixins/linkageMixins'
-import { Table, TableColumn } from 'element-ui';
+import { Table, TableColumn } from 'element-ui'
 export default {
   name: 'TableChart',
   mixins: [paramsMixins, commonMixins, linkageMixins],
@@ -49,22 +49,22 @@ export default {
       default: () => ({})
     }
   },
-  components:{Table,TableColumn},
+  components: { Table, TableColumn },
   data () {
     return {
-      isScrollbar:false
+      isScrollbar: false
     }
   },
   computed: {
     // 按照lyzTable的格式要求来处理列字段
-    columnData(){
-      let arr=[]
-     for(let col in this.config.option.columnData) {
-       arr.push({
-         ...this.config.option.columnData[col]
-       })
-     }
-     return arr
+    columnData () {
+      const arr = []
+      for (const col in this.config.option.columnData) {
+        arr.push({
+          ...this.config.option.columnData[col]
+        })
+      }
+      return arr
     },
     // columnData(){
     //   const arr = []
@@ -131,10 +131,10 @@ export default {
     this.tableRowStyle()
   },
   methods: {
-    touchmove(){
+    touchmove () {
       this.isScrollbar = true
     },
-    touchend(){
+    touchend () {
       this.isScrollbar = false
     },
     // 表格行样式
