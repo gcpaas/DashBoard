@@ -16,11 +16,15 @@ import '@/assets/css/index.less'
 // 移动端适配
 import 'amfe-flexible'
 import '@/assets/icons'
+import remoteComponents from '../../pcExample/remoteComponents/exports.js'
 import { registerConfig } from '@gcpaas/dash-board-app-ui'
 registerConfig({
   httpConfigs: {
     baseURL: window.SITE_CONFIG?.baseUrl
-  }
+  },
+  customPlots: [],
+  // 远程组件列表
+  remoteComponents
 }, router)
 Vue.use(Vant)
 Vue.config.productionTip = false
