@@ -10,7 +10,10 @@
           v-if="isDesign"
           :name="icons[5]"
         />
-        <van-icon v-if="!isDesign" name="enlarge" />
+        <van-icon
+          v-if="!isDesign"
+          name="enlarge"
+        />
       </div>
     </header>
     <component
@@ -20,57 +23,57 @@
       :key="config.key"
       :config="config"
     />
-    <div v-if="designVisible">
-      <el-dialog
-        :visible.sync="designVisible"
-        :append-to-body="true"
-        :title="config.title"
-        class="db-dialog-wrap db-el-dialog"
-        width="50%"
-      >
-        <div
-          class="dialog-box"
-          style="height: 500px"
-        >
-          <component
-            :is="resolveComponentType(config.type)"
-            :id="`${config.code}${config.key}`"
-            :ref="config.code"
-            :key="config.key + 'dialog'"
-            :config="config"
-            :is-dialog="isDialog"
-          />
-        </div>
-      </el-dialog>
-    </div>
-
-    <van-popup
-      v-model="previewVisible"
-      closeable
-      close-icon-position="top-left"
-      position="right"
-      style="width: 100%;height: 100%"
+    <!--    <div v-if="designVisible">-->
+    <el-dialog
+      :visible.sync="designVisible"
+      :append-to-body="true"
+      :title="config.title"
+      class="db-dialog-wrap db-el-dialog"
+      width="50%"
     >
       <div
-        id="dialogBox"
         class="dialog-box"
+        style="height: 500px"
+      >
+        <component
+          :is="resolveComponentType(config.type)"
+          :id="`${config.code}${config.key}`"
+          :ref="config.code"
+          :key="config.key + 'dialog'"
+          :config="config"
+          :is-dialog="isDialog"
+        />
+      </div>
+    </el-dialog>
+    <div v-if="previewVisible">
+      <van-popup
+        v-model="previewVisible"
+        closeable
+        close-icon-position="top-left"
+        position="right"
+        style="width: 100%;height: 100%"
       >
         <div
-          ref="dialogContent"
-          class="dialog-content"
+          id="dialogBox"
+          class="dialog-box"
         >
-          <component
-            :is="resolveComponentType(config.type)"
-            :id="`${config.code}${config.key}${randomKey}`"
-            :ref="config.code"
-            :key="config.key + 'dialog' + randomKey"
-            class="component-box"
-            :config="config"
-            :is-dialog="isDialog"
-          />
+          <div
+            ref="dialogContent"
+            class="dialog-content"
+          >
+            <component
+              :is="resolveComponentType(config.type)"
+              :id="`${config.code}${config.key}${randomKey}`"
+              :ref="config.code"
+              :key="config.key + 'dialog' + randomKey"
+              class="component-box"
+              :config="config"
+              :is-dialog="isDialog"
+            />
+          </div>
         </div>
-      </div>
-    </van-popup>
+      </van-popup>
+    </div>
   </div>
 </template>
 <script>
