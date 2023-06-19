@@ -42,7 +42,7 @@ module.exports = {
   },
   publicPath:
     process.env.VUE_APP_HISTORY === 'y' ? process.env.VUE_APP_BASE : './',
-  outputDir: 'gc-starter-dashboard-ui',
+  outputDir: '@gcpaas/dash-board-ui',
   assetsDir: 'static',
   lintOnSave: false,
   productionSourceMap: false,
@@ -69,8 +69,8 @@ module.exports = {
         // 仪表盘工程路径别名
         packages: resolve('packages'),
         app: resolve('appPackages'),
-        'gc-starter-dashboard-ui': resolve('packages/index.js'),
-        'gc-starter-dashboard-app-ui': resolve('appPackages/index.js')
+        '@gcpaas/dash-board-ui': resolve('packages/index.js'),
+        '@gcpaas/dash-board-app-ui': resolve('appPackages/index.js')
       },
       fallback: {
         path: false,

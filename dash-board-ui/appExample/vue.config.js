@@ -89,8 +89,8 @@ module.exports = defineConfig({
         'gc-starter-ui-plus': resolve('src/utils/gcCore.js'),
         packages: resolve('../packages'),
         app: resolve('../appPackages'),
-        'gc-starter-dashboard-ui': resolve('../packages/index.js'),
-        'gc-starter-dashboard-app-ui': resolve('../appPackages/index.js')
+        '@gcpaas/dash-board-ui': resolve('../packages/index.js'),
+        '@gcpaas/dash-board-app-ui': resolve('../appPackages/index.js')
       },
       fallback: {
         path: false,

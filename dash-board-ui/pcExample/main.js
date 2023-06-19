@@ -9,7 +9,7 @@ import store from './store'
 import router from './router'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/styles/index.scss'
-import { registerConfig } from 'gc-starter-dashboard-ui'
+import { registerConfig } from '@gcpaas/dash-board-ui'
 import remoteComponents from '@/remoteComponents/exports.js'
 Vue.use(ElementUI, { size: 'mini' })
 

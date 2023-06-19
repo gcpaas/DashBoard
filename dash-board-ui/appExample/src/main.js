@@ -16,7 +16,7 @@ import '@/assets/css/index.less'
 // 移动端适配
 import 'amfe-flexible'
 import '@/assets/icons'
-import { registerConfig } from 'gc-starter-dashboard-app-ui'
+import { registerConfig } from '@gcpaas/dash-board-app-ui'
 registerConfig({
   httpConfigs: {
     baseURL: `http://127.0.0.1:8082/dashboardServer`

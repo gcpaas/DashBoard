@@ -1,5 +1,5 @@
 {
-  "name": "gc-starter-dashboard-app-ui",
+  "name": "@gcpaas/dash-board-app-ui",
   "version": "0.0.1-2023061302-Alpha",
   "description": "自定义仪表盘",
   "author": "gc-starter",
@@ -19,9 +19,9 @@
   ],
   "repository": {
     "type": "github",
-    "url": "https://github.com/gcpaas/gc-starter-dashboard-ui"
+    "url": "https://github.com/gcpaas/DashBoard"
   },
-  "homepage": "https://github.com/gcpaas/gc-starter-dashboard-ui",
+  "homepage": "https://github.com/gcpaas/DashBoard",
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "serve:max": "node --max_old_space_size=4096 node_modules/@vue/cli-service/bin/vue-cli-service.js serve --open",
@@ -38,7 +38,7 @@
     "set-commit-hook": "git config core.hooksPath hooks",
     "generate-changelog": "conventional-changelog -p -i CHANGELOG.md -s -r 0",
     "analyzer": "cross-env NODE_ENV=production npm_config_report=true npm run build",
-    "lib:app": "npm install && vue-cli-service build --no-lint  --target lib --name dashboardApp --dest libApp index.js"
+    "lib:app": "npm install && vue-cli-service build --no-lint  --target lib --name dashboardApp --dest dash-board-app-ui index.js"
   },
   "husky": {
     "hooks": {

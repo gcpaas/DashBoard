@@ -16,7 +16,7 @@
 </template>
 <script>
 // import { DashBoardAppRun } from 'gc-starter-dashboard-render-app'
-import { DashboardAppRun } from 'gc-starter-dashboard-app-ui'
+import { DashboardAppRun } from '@gcpaas/dash-board-app-ui'
 // import 'gc-starter-dashboard-render-app/lib/dashboardAppRender.css'
 import Vue from 'vue'
 import { NavBar } from 'vant'

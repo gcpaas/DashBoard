@@ -1,5 +1,5 @@
 {
-  "name": "gcpaas-bigscreen-h5",
+  "name": "@gcpaas/dash-board-app",
   "version": "1.0.0",
   "description": "自定义大屏H5端组件开发模板",
   "author": "gc-starter",

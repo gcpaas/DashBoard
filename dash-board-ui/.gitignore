@@ -1,5 +1,5 @@
-gc-starter-dashboard-ui.zip
-gc-starter-dashboard-ui
+@gcpaas/dash-board-ui.zip
+@gcpaas/dash-board-ui
 chuangDa
 chuangDa.zip
 deploy.sh
@@ -367,6 +367,6 @@ bh_unicode_properties.cache
 # https://packagecontrol.io/packages/sublime-github
 GitHub.sublime-settings
 
-lib
+dash-board-ui
 gc-starter-lowcode-ui
-libApp
+dash-board-app-ui

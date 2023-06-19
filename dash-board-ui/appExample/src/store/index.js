@@ -9,7 +9,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import user from './modules/user'
 import core from './modules/core'
-import { $dashboard } from 'gc-starter-dashboard-app-ui'
+import { $dashboard } from '@gcpaas/dash-board-app-ui'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({

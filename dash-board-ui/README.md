@@ -57,7 +57,7 @@
 ### 1. 安装依赖
 
 ``` bash
-npm install gc-starter-dashboard-ui
+npm install @gcpaas/dash-board-ui
 ```
 
 ### 2. 在 `main.js` 引入仪表盘
@@ -72,7 +72,7 @@ Vue.use(ElementUI, { size: 'mini' })
 import 'codemirror/mode/vue/vue.js'
 
 // 引入仪表盘css
-import 'gc-starter-dashboard-ui/lib/dashboard.css'
+import '@gcpaas/dash-board-ui/lib/dashboard.css'
 ```
 
 ###  3. 在 `main.js` 配置仪表盘
@@ -87,7 +87,7 @@ window.CONFIG.baseUrl=http://127.0.0.1:8081/bigScreenServer
 
 ```javascript
 // file: main.js
-import { registerConfig } from 'gc-starter-dashboard-ui'
+import { registerConfig } from '@gcpaas/dash-board-ui'
 registerConfig({
   httpConfigs: {
     baseURL: `这里是后端服务地址的值，如：window.CONFIG.baseUrl`
@@ -98,7 +98,7 @@ registerConfig({
 
 
 ```javascript
-import { registerConfig as registerConfigDashboard } from 'gc-starter-dashboard-ui'
+import { registerConfig as registerConfigDashboard } from '@gcpaas/dash-board-ui'
 registerConfig({
   // ...
 }, router)
@@ -115,7 +115,7 @@ VUE_APP_BASE_URL=http://127.0.0.1:8081/dashboardServer
 ```javascript
 // file: main.js
 
-import { registerConfig } from 'gc-starter-dashboard-ui'
+import { registerConfig } from '@gcpaas/dash-board-ui'
 registerConfig({
   httpConfigs: {
     baseURL: `这里是后端服务地址的值，如：process.env.VUE_APP_BASE_URL`
@@ -128,7 +128,7 @@ registerConfig({
 ```js
 // file: 项目中导出strore的文件
 
-import { $dashboard } from 'gc-starter-dashboard-ui'
+import { $dashboard } from '@gcpaas/dash-board-ui'
 const store = new Vuex.Store({
   modules: 
     // 导出仪表盘所需vuex模块
