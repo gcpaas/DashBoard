@@ -1,5 +1,5 @@
 /*
- * @description: 
+ * @description:
  * @Author: wujian
  * @Date: 2022-11-04 13:48:11
  * @LastEditors: wujian
@@ -16,7 +16,7 @@ var productionConfig = {
       login:'/static/images/login/logo.png'
     }
   },
-  baseUrl: 'http://localhost:8081/xxx',
+  baseUrl: 'http://gcpaas.gccloud.com/dashboardServer',
 }
 // 必须的
 window.SITE_CONFIG = configDeepMerge(window.SITE_CONFIG,productionConfig)
