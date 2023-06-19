@@ -1,0 +1,38 @@
+/**
+ * @description: 对vant组件的一些样式修改
+ */
+// 输入框左侧的图标垂直居中
+.van-field__left-icon {
+  align-self: center;
+}
+// 输入框文字垂直居中
+.van-cell__title {
+  align-self: center;
+}
+.van-loading{
+  top: calc(35vh);
+  text-align: center;
+}
+// 宫格组件，带徽标样式，徽标位置调整
+.van-info {
+  top: 3px !important;
+  right: 6px !important;
+}
+//navBar
+.van-nav-bar {
+  .van-nav-bar__left{
+    padding: 0 16px;
+   i{
+    color: #333333;
+   }
+  }
+  .van-nav-bar__text {
+    color: @primary-color !important;
+  }
+}
+
+.van-nav-bar--fixed{
+  z-index: 9 !important;
+}
+
+
