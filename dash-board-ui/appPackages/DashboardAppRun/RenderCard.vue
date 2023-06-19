@@ -10,7 +10,7 @@
           v-if="isDesign"
           :name="icons[5]"
         />
-        <van-icon
+        <VanIcon
           v-if="!isDesign"
           name="enlarge"
         />
@@ -86,12 +86,12 @@ import Svgs from 'packages/Svgs/index.vue'
 import RemoteComponent from 'packages/RemoteComponents/index.vue'
 import IconSvg from 'packages/SvgIcon'
 import Icon from 'packages/assets/images/pageIcon/export'
-import VanDialog from 'vant/lib/popup'
+import VanPopup from 'vant/lib/popup'
 import 'vant/lib/popup/style'
 import VanIcon from 'vant/lib/icon'
 import 'vant/lib/icon/style'
 import Vue from 'vue'
-Vue.use(VanDialog)
+Vue.use(VanPopup)
 Vue.use(VanIcon)
 const components = {}
 for (const key in pcComponent) {

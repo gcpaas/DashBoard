@@ -5,9 +5,9 @@
       // version
       version: 'v1.0.0',
       // 网页标题和导航副标题
-      title: '千行移动端',
+      title: '仪表盘',
       // 登录页面项目描述
-      description: '<h5>千行移动端</h5><ul><li>千行移动端</li><li>千行移动端</li></ul>',
+      description: '<h5>仪表盘</h5><ul><li>仪表盘</li><li>仪表盘</li></ul>',
 
       // 登录设置
       login: {
@@ -32,7 +32,7 @@
         welcome: {
           enable: false,
           title: "欢迎",
-          template: "欢迎登录千行移动端"
+          template: "欢迎登录仪表盘"
         },
         // 登录后是否自动跳转到指定地址
         autoRedirect: true
