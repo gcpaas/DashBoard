@@ -19,7 +19,7 @@ import '@/assets/icons'
 import { registerConfig } from '@gcpaas/dash-board-app-ui'
 registerConfig({
   httpConfigs: {
-    baseURL: `http://127.0.0.1:8082/dashboardServer`
+    baseURL: window.SITE_CONFIG?.baseUrl
   }
 }, router)
 Vue.use(Vant)
