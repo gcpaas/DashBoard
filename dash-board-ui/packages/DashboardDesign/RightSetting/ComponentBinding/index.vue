@@ -202,7 +202,7 @@ export default {
   height: 100%;
 }
 /deep/ .el-tabs__content {
-  height: calc(100% - 40px);
+  height: calc(90vh - 40px);
   overflow-y: auto;
 }
 .setting-body {
