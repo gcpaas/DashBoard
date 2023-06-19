@@ -10,7 +10,10 @@
           v-if="isDesign"
           :name="icons[5]"
         />
-        <van-icon v-if="!isDesign" name="enlarge" />
+        <van-icon
+          v-if="!isDesign"
+          name="enlarge"
+        />
       </div>
     </header>
     <component
@@ -43,34 +46,35 @@
         </div>
       </el-dialog>
     </div>
-
-    <van-popup
-      v-model="previewVisible"
-      closeable
-      close-icon-position="top-left"
-      position="right"
-      style="width: 100%;height: 100%"
-    >
-      <div
-        id="dialogBox"
-        class="dialog-box"
+    <div v-if="previewVisible">
+      <van-popup
+        v-model="previewVisible"
+        closeable
+        close-icon-position="top-left"
+        position="right"
+        style="width: 100%;height: 100%"
       >
         <div
-          ref="dialogContent"
-          class="dialog-content"
+          id="dialogBox"
+          class="dialog-box"
         >
-          <component
-            :is="resolveComponentType(config.type)"
-            :id="`${config.code}${config.key}${randomKey}`"
-            :ref="config.code"
-            :key="config.key + 'dialog' + randomKey"
-            class="component-box"
-            :config="config"
-            :is-dialog="isDialog"
-          />
+          <div
+            ref="dialogContent"
+            class="dialog-content"
+          >
+            <component
+              :is="resolveComponentType(config.type)"
+              :id="`${config.code}${config.key}${randomKey}`"
+              :ref="config.code"
+              :key="config.key + 'dialog' + randomKey"
+              class="component-box"
+              :config="config"
+              :is-dialog="isDialog"
+            />
+          </div>
         </div>
-      </div>
-    </van-popup>
+      </van-popup>
+    </div>
   </div>
 </template>
 <script>
