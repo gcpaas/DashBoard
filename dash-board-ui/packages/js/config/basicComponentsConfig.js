@@ -23,7 +23,7 @@ const typeList = [
   'iframeChart',
   'digitalFlop',
   'tables',
-  'dashBoardScrollRanking',
+  'dashboardScrollRanking',
   // 'dashBoardScrollBoard',
   'video',
   // 'input',

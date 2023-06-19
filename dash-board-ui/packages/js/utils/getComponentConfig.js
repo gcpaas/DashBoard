@@ -55,7 +55,7 @@ export default function getComponentConfig (type) {
         y: 0,
         type
       }
-    case 'dashBoardScrollRanking':
+    case 'dashboardScrollRanking':
       return {
         name: '排名表',
         title: '排名表',

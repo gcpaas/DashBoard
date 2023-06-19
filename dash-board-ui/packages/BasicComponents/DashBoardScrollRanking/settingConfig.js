@@ -26,7 +26,7 @@ export const settingConfig = {
   }
 }
 const customConfig = {
-  type: 'dashBoardScrollRanking',
+  type: 'dashboardScrollRanking',
   root: {
     contribution: false
   },
