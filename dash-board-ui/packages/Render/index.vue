@@ -8,6 +8,7 @@
       width: '100%',
       height: '100%',
       backgroundColor: pageInfo.pageConfig.bgColor,
+      backgroundImage: `url(${pageInfo.pageConfig.bg})`
     }"
     @drop="drop($event)"
     @dragover.prevent
