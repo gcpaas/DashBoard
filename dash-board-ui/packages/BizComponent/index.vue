@@ -226,7 +226,10 @@ export default {
     },
     backManagement () {
       this.$router.push({
-        path: window.DS_CONFIG?.routers?.componentUrl
+        path: window.DS_CONFIG?.routers?.componentUrl,
+        query: {
+          type: 'bizComponent'
+        }
       })
     },
     createdImg () {

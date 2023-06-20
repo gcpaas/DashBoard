@@ -120,7 +120,7 @@
           </div>
           <div class="dashboard-card-img">
             <el-image
-              :src="catalogInfo !== 'system'?screen.coverPicture:screen.img"
+              :src="catalogInfo !== 'system' ? screen.coverPicture : screen.img"
               fit="fill"
               style="width: 100%; height: 100%"
             >
@@ -153,7 +153,10 @@
       </div>
     </div>
 
-    <div class="footer-pagination-wrap"  v-if="catalogInfo !== 'system'">
+    <div
+      v-if="catalogInfo !== 'system'"
+      class="footer-pagination-wrap"
+    >
       <!-- <div class="footer-pagination-wrap-text">
         总共 {{ totalCount }} 个项目
       </div> -->
@@ -292,6 +295,7 @@ export default {
           .then((data) => {
             this.list = data.list
             this.totalCount = data.totalCount
+            console.log(this.list)
           })
           .finally(() => {
             this.loading = false
@@ -307,6 +311,7 @@ export default {
           .then((data) => {
             this.list = data.list
             this.totalCount = data.totalCount
+            console.log(this.list)
           })
           .finally(() => {
             this.loading = false
