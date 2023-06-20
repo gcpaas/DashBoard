@@ -86,8 +86,14 @@
                       >
                         加载中···
                       </div>
-                      <div slot="error" class="image-slot" style="font-size: 20px">
-                        <div class="error-img-text"> {{ screen.name }}</div>
+                      <div
+                        slot="error"
+                        class="image-slot"
+                        style="font-size: 20px"
+                      >
+                        <div class="error-img-text">
+                          {{ screen.name }}
+                        </div>
                       </div>
                     </el-image>
                   </div>
@@ -202,6 +208,15 @@
                         class="image-slot"
                       >
                         加载中···
+                      </div>
+                      <div
+                        slot="error"
+                        class="image-slot"
+                        style="font-size: 20px"
+                      >
+                        <div class="error-img-text">
+                          {{ screen.name }}
+                        </div>
                       </div>
                     </el-image>
                   </div>
@@ -564,9 +579,6 @@ export default {
               display: flex;
               align-items: center;
               justify-content: center;
-            }
-            /deep/.el-image__error {
-              // background-color: #1d1d1d;
             }
           }
 
