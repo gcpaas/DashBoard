@@ -21,5 +21,6 @@ files.keys().forEach(key => {
     img
   })
 })
+console.log(remoteComponents)
 
 export default remoteComponents

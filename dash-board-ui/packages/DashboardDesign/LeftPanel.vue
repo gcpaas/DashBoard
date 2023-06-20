@@ -382,7 +382,7 @@ export default {
           height: calc(100vh - 55px);
         }
         .page-left-content-components {
-          width: 100%;
+          width: 160px;
           text-align: center;
           padding-bottom: 20px;
           margin-bottom: 20px;
@@ -400,6 +400,7 @@ export default {
               width: 100%;
               background: var(--db-background-2);
               margin-bottom: 8px;
+              // margin-right: 8px;
               border : 1px solid #e8e8e8;
 
               .component-name {
@@ -534,6 +535,6 @@ export default {
 }
 
 /deep/ .el-scrollbar__wrap{
-  margin-right: -8px !important;
+  // margin-right: 0 !important;
 }
 </style>

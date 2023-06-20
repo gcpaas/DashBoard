@@ -122,7 +122,7 @@ export default {
       border-radius: 10px;
       margin: 0 8px;
       &:hover{
-        background-color: var(--db-background-1);
+        background-color: rgba(0, 122, 255, 0.0627451);
         cursor: pointer;
         color: var(--db-el-text);;
       }

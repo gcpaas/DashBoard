@@ -80,16 +80,17 @@ export default {
     .nav-link {
       display: flex;
       align-items: center;
+      justify-content: center;
       // transition: color 0.2s;
       text-decoration: none !important;
       color: var(--db-el-text);
-      width: auto;
-      min-width: 140px;
+      width: 190px;
+      box-sizing: border-box;
+      // min-width: 140px;
       line-height: 35px;
       font-size: 14px;
       text-align: left;
       cursor: pointer;
-      padding: 0 40px;
 
       &.nav-active,
       &:hover {
@@ -102,7 +103,7 @@ export default {
     }
 
     &.nav-active {
-      border-radius: 10px 10px 0px 0;
+      // border-radius: 10px 10px 0px 0;
       border: 1px solid #007aff;
       background-color: #007aff;
       .nav-link{
