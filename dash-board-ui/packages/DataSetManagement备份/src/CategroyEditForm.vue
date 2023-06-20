@@ -45,9 +45,9 @@
 </template>
 
 <script>
-import { categoryAdd, categoryUpdate } from 'packages/js/utils/datasetConfigService'
+import { addOrUpdateTree } from 'packages/js/utils/datasetConfigService'
 export default {
-  name: 'CategroyEditForm',
+  name: 'OriginalTableCategory',
   props: {
     appCode: {
       type: String,
@@ -56,7 +56,7 @@ export default {
   },
   data () {
     return {
-      type: 'dataset',
+      tableName: '',
       dataForm: {
         id: '',
         name: '',
@@ -129,30 +129,18 @@ export default {
             id: id,
             name: this.dataForm.name,
             parentId: parentId,
-            type: this.type,
+            tableName: this.tableName,
             moduleCode: this.appCode
           }
-          if (id) {
-            categoryUpdate(params).then((r) => {
-              this.$message.success('保存成功')
-              this.cancel()
-              try {
-                this.$parent.init()
-              } catch (error) {
-                this.$parent.initLazyDatasetTypeTree()
-              }
-            })
-          } else {
-            categoryAdd(params).then((r) => {
-              this.$message.success('保存成功')
-              this.cancel()
-              try {
-                this.$parent.init()
-              } catch (error) {
-                this.$parent.initLazyDatasetTypeTree()
-              }
-            })
-          }
+          addOrUpdateTree(params).then((r) => {
+            this.$message.success('保存成功')
+            this.cancel()
+            try {
+              this.$parent.init()
+            } catch (error) {
+              this.$parent.initLazyOrgTree()
+            }
+          })
         } else {
           return false
         }

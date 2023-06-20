@@ -154,7 +154,6 @@ export default {
   },
   mounted () {
     this.init()
-    console.log(this.timerEmptyState())
   },
   methods: {
     init () {

@@ -1,8 +1,9 @@
 <template>
   <el-dialog
     title="新增"
-    :visible.sync="dialogVisible"
+    :visible.sync="setTypeVisible"
     width="800px"
+    :before-close="handleClose"
     :append-to-body="true"
     :close-on-click-modal="false"
     class="db-dialog-wrap db-el-dialog"
@@ -10,29 +11,7 @@
     <div class="type-wrap">
       <el-row :gutter="20">
         <el-col
-          v-for="dataset in datasetTypeList.filter(item =>item.datasetType !=='')"
-          :key="dataset.datasetType"
-          :span="8"
-          :xs="24"
-          :sm="12"
-          :md="8"
-          style="minWidth: 200px;"
-        >
-          <el-card
-            class="db-el-card"
-            shadow="hover"
-          >
-            <div
-              class="type-item"
-              @click="openAddForm(dataset.datasetType,dataset.componentName)"
-            >
-              {{ dataset.name }}
-            </div>
-          </el-card>
-        </el-col>
-
-        <!-- <el-col
-          v-if="datasetTypeList.includes('original')"
+          v-if="dsType.includes('original')"
           :span="spanNum"
         >
           <el-card
@@ -41,14 +20,14 @@
           >
             <div
               class="type-item"
-              @click="openAddForm('original')"
+              @click="typeChose('original')"
             >
               原始数据集
             </div>
           </el-card>
-        </el-col> -->
-        <!-- <el-col
-          v-if="datasetTypeList.includes('custom')"
+        </el-col>
+        <el-col
+          v-if="dsType.includes('custom')"
           :span="spanNum"
         >
           <el-card
@@ -57,14 +36,14 @@
           >
             <div
               class="type-item"
-              @click="openAddForm('custom')"
+              @click="typeChose('custom')"
             >
               自助数据集
             </div>
           </el-card>
-        </el-col> -->
-        <!-- <el-col
-          v-if="datasetTypeList.includes('storedProcedure')"
+        </el-col>
+        <el-col
+          v-if="dsType.includes('storedProcedure')"
           :span="spanNum"
         >
           <el-card
@@ -73,14 +52,14 @@
           >
             <div
               class="type-item"
-              @click="openAddForm('storedProcedure')"
+              @click="typeChose('storedProcedure')"
             >
               存储过程数据集
             </div>
           </el-card>
-        </el-col> -->
-        <!-- <el-col
-          v-if="datasetTypeList.includes('json')"
+        </el-col>
+        <el-col
+          v-if="dsType.includes('json')"
           :span="spanNum"
         >
           <el-card
@@ -89,14 +68,14 @@
           >
             <div
               class="type-item"
-              @click="openAddForm('json')"
+              @click="typeChose('json')"
             >
               JSON数据集
             </div>
           </el-card>
-        </el-col> -->
-        <!-- <el-col
-          v-if="datasetTypeList.includes('script')"
+        </el-col>
+        <el-col
+          v-if="dsType.includes('script')"
           :span="spanNum"
         >
           <el-card
@@ -105,12 +84,12 @@
           >
             <div
               class="type-item"
-              @click="openAddForm('script')"
+              @click="typeChose('script')"
             >
               脚本数据集
             </div>
           </el-card>
-        </el-col> -->
+        </el-col>
       </el-row>
     </div>
   </el-dialog>
@@ -119,28 +98,31 @@
 <script>
 export default {
   props: {
-    datasetTypeList: {
+    dsType: {
       type: Array,
-      default: () => ([])
+      default: () => (['original', 'custom', 'storedProcedure', 'json', 'script'])
     }
   },
   data () {
     return {
-      dialogVisible: false
+      spanNum: 8,
+      setTypeVisible: false
     }
   },
   created () {
     // eslint-disable-next-line eqeqeq
-    // if (this.datasetTypeList.length == 1) this.spanNum = 24
-    // if ([2, 4].includes(this.datasetTypeList.length)) this.spanNum = 12
-    // if ([3, 5, 6].includes(this.datasetTypeList.length)) this.spanNum = 8
+    if (this.dsType.length == 1) this.spanNum = 24
+    if ([2, 4].includes(this.dsType.length)) this.spanNum = 12
+    if ([3, 5, 6].includes(this.dsType.length)) this.spanNum = 8
   },
   methods: {
+    handleClose () {
+      this.setTypeVisible = false
+    },
     // 选择新增类型
-    openAddForm (type, componentName) {
-      console.log()
-      this.dialogVisible = false
-      this.$emit('openAddForm', type, componentName)
+    typeChose (type) {
+      this.setTypeVisible = false
+      this.$emit('setDatasetOfType', type)
     }
   }
 }

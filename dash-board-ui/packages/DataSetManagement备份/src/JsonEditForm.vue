@@ -1,6 +1,6 @@
 <template>
   <div
-    v-loading="saveLoading"
+    v-loading="saveloading"
     class="inner-container "
     :element-loading-text="saveText"
   >
@@ -171,11 +171,11 @@
             <div class="field-wrap db-field-wrap">
               <div
                 v-for="field in structurePreviewList"
-                :key="field.fieldName"
+                :key="field.columnName"
                 class="field-item"
                 @click="fieldsetVisible = true"
               >
-                <span>{{ field.fieldName }}</span>&nbsp;<span
+                <span>{{ field.columnName }}</span>&nbsp;<span
                   v-show="field.fieldDesc"
                   style="color: #909399;"
                 >({{
@@ -224,6 +224,77 @@
           </el-table>
         </div>
       </div>
+      <div
+        v-if="!isEdit"
+        class="dataPreView"
+      >
+        <el-tabs v-model="activeName">
+          <el-tab-pane
+            label="数据1预览"
+            name="data"
+          >
+            <div class="db-table-box">
+              <el-table
+                align="center"
+                :data="dataPreviewList"
+                max-height="400"
+                :border="true"
+                class="db-el-table"
+              >
+                <el-table-column
+                  v-for="(value, key) in dataPreviewList[0]"
+                  :key="key"
+                  :label="key"
+                  align="center"
+                  show-overflow-tooltip
+                  :render-header="renderHeader"
+                >
+                  <template slot-scope="scope">
+                    <span>{{ scope.row[key] }}</span>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </div>
+          </el-tab-pane>
+          <el-tab-pane
+            label="数据集结构"
+            name="structure"
+          >
+            <div class="db-table-box">
+              <el-table
+                max-height="400"
+                :data="structurePreviewList"
+                :border="true"
+                align="center"
+                class="db-el-table"
+              >
+                <el-table-column
+                  align="center"
+                  show-overflow-tooltip
+                  prop="columnName"
+                  label="字段值"
+                />
+                <el-table-column
+                  align="center"
+                  prop="fieldDesc"
+                  label="字段描述"
+                >
+                  <template slot-scope="scope">
+                    <el-input
+                      v-if="isEdit"
+                      v-model="scope.row.fieldDesc"
+                      size="small"
+                      class="labeldsc db-el-input"
+                    />
+                    <span v-else>{{ scope.row.fieldDesc }}</span>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </div>
+          </el-tab-pane>
+        </el-tabs>
+      </div>
+
       <!-- 字段填充方式 -->
       <el-dialog
         title="提示"
@@ -279,7 +350,7 @@
             <el-table-column
               align="left"
               show-overflow-tooltip
-              prop="fieldName"
+              prop="columnName"
               label="字段值"
             />
             <el-table-column
@@ -324,11 +395,10 @@
 <script>
 import vueJsonEditor from 'vue-json-editor'
 import vueJsonViewer from 'vue-json-viewer'
-import { getCategoryTree, datasetAdd, datasetUpdate, getDataset, nameCheckRepeat } from 'packages/js/utils/datasetConfigService'
+import { getDatasetTypeList, datasetAddorUpdate, getDataset, nameCheckRepeat } from 'packages/js/utils/datasetConfigService'
 import _ from 'lodash'
 
 export default {
-  name: 'JsonEditForm',
   components: {
     vueJsonEditor,
     vueJsonViewer
@@ -374,28 +444,29 @@ export default {
         id: '',
         name: '',
         typeId: '',
-        datasetType: 'json',
-        remark: '',
-        // 以下为config配置
         json: '',
-        fieldDesc: {},
-        fieldList: []
+        remark: ''
       },
       rules: {
         name: [
           { required: true, message: '请输入数据集名称', trigger: 'blur' },
           { validator: validateName, trigger: 'blur' }
         ]
+        // typeId: [
+        //   {required: true, message: '请选择分组', trigger: 'blur'}
+        // ]
       },
       typeName: '',
       categoryData: [],
+      activeName: 'data',
       structurePreviewList: [],
       structurePreviewListCopy: [],
       dataPreviewList: [],
       fieldsetVisible: false,
       fieldDescVisible: false,
       passTest: false, // 通过测试
-      saveLoading: false,
+      fieldDesc: null, // 字段描述
+      saveloading: false,
       saveText: ''
     }
   },
@@ -403,58 +474,12 @@ export default {
     this.init()
   },
   methods: {
-    /**
-     * 初始化
-     * 1. 获取分类树
-     * 2. 获取数据集详情
-     * 3. 分析JSON
-     */
-    async init () {
-      this.categoryData = await getCategoryTree({ tableName: 'dataset', moduleCode: this.appCode })
-      if (this.typeId) {
-        this.dataForm.typeId = this.typeId
-        this.$nextTick(() => {
-          try {
-            this.typeName = this.$refs.categorySelectTree.getNode(this.dataForm.typeId).data.name
-          } catch (error) {
-            console.error(error)
-          }
-        })
-      }
-      if (!this.datasetId) {
-        this.dataForm.json = []
-        return
-      }
-      getDataset(this.datasetId).then(res => {
-        this.dataForm.id = res.id
-        this.dataForm.name = res.name
-        this.dataForm.typeId = res.typeId
-        this.dataForm.remark = res.remark
-        this.dataForm.datasetType = res.datasetType
-        this.dataForm.moduleCode = res.moduleCode
-        this.dataForm.editable = res.editable
-        this.dataForm.sourceId = res.sourceId
-        // config 配置
-        this.dataForm.fieldDesc = res.config.fieldDesc
-        this.dataForm.json = JSON.parse(res.config.json)
-        if (this.dataForm.typeId) {
-          this.$nextTick(() => {
-            try {
-              this.typeName = this.$refs.categorySelectTree.getNode(this.dataForm.typeId).data.name
-            } catch (error) {
-              console.error(error)
-            }
-          })
-        }
-        this.analysisJSON(null, true)
-      })
+    // json错误校验
+    onError () {
+      this.passTest = false
     },
-    /**
-     * 保存数据集
-     * @param  formName 表单名称
-     * @param  noCheckToSave 保存时是否检查
-     */
-    save (formName, noCheckToSave = false) {
+    // 保存数据集
+    save (formName, nochecktosave = false) {
       if (!this.passTest) {
         this.$message.error('请确保JSON不为空且解析通过')
         return
@@ -463,7 +488,7 @@ export default {
         this.$message.warning('该JSON未生成输出字段，请重新检查')
         return
       }
-      if (!noCheckToSave) {
+      if (!nochecktosave) {
         const temp = this.structurePreviewList.some(item => {
           return item.fieldDesc === '' || !item.hasOwnProperty('fieldDesc')
         }) // true-存在为空
@@ -473,110 +498,102 @@ export default {
         }
       }
       this.$refs[formName].validate((valid) => {
-        if (!valid) {
-          return
-        }
-        this.dataForm.fieldList = this.structurePreviewList.length ? this.structurePreviewList : []
-        let datasetSave = null
-        datasetSave = this.dataForm.id ? datasetUpdate : datasetAdd
-        const datasetParams = {
-          id: this.dataForm.id,
-          name: this.dataForm.name,
-          typeId: this.dataForm.typeId,
-          datasetType: 'json',
-          remark: this.dataForm.remark,
-          moduleCode: this.appCode,
-          editable: this.appCode ? 1 : 0,
-          config: {
-            className: 'com.gccloud.dataset.entity.config.JsonDataSetConfig',
-            json: JSON.stringify(this.dataForm.json),
-            fieldDesc: this.dataForm.fieldDesc,
-            fieldList: this.dataForm.fieldList
+        if (valid) {
+          // 通过校验
+          const data = {
+            json: this.dataForm.json,
+            fieldDesc: this.fieldDesc
           }
+          this.saveloading = true
+          this.saveText = '正在保存...'
+          datasetAddorUpdate({
+            id: this.datasetId,
+            name: this.dataForm.name,
+            typeId: this.dataForm.typeId,
+            remark: this.dataForm.remark,
+            datasetType: 'json',
+            moduleCode: this.appCode,
+            editable: this.appCode ? 1 : 0,
+            data: JSON.stringify(data)
+          }).then(() => {
+            this.$message.success('保存成功')
+            this.$parent.init(false)
+            this.$parent.setType = null
+            this.saveloading = false
+            this.saveText = ''
+          }).catch(() => {
+            this.saveloading = false
+            this.saveText = ''
+          })
+        } else {
+          return false
         }
-        datasetSave(datasetParams).then(() => {
-          this.$message.success('保存成功')
-          this.$parent.init(false)
-          this.$parent.setType = null
-          this.saveLoading = false
-          this.saveText = ''
-        }).catch(() => {
-          this.saveLoading = false
-          this.saveText = ''
-        })
       })
     },
-    /**
-     * 使用字段名作为字段描述
-     */
+    // 字段值填充
     fieldDescFill () {
-      this.dataForm.fieldDesc = {}
+      this.fieldDesc = {}
       this.structurePreviewList.forEach(field => {
         if (field.fieldDesc === '' || !field.hasOwnProperty('fieldDesc')) {
-          field.fieldDesc = field.fieldName
-          this.dataForm.fieldDesc[field.fieldName] = field.fieldName
+          field.fieldDesc = field.columnName
+          this.fieldDesc[field.columnName] = field.columnName
         } else {
-          this.dataForm.fieldDesc[field.fieldName] = field.fieldDesc
+          this.fieldDesc[field.columnName] = field.fieldDesc
         }
       })
       this.save('form')
       this.fieldDescVisible = false
     },
-    /**
-     * 进入字段描述编辑弹窗
-     */
+    // 进入编辑
     fieldDescEdit () {
       this.fieldDescVisible = false
       this.fieldsetVisible = true
     },
-    /**
-     * 跳过字段描述编辑直接保存
-     */
+    // 继续保存
     toSave () {
-      this.dataForm.fieldDesc = {}
+      this.fieldDesc = {}
       this.structurePreviewList.forEach(field => {
-        this.dataForm.fieldDesc[field.fieldName] = field.fieldDesc
+        this.fieldDesc[field.columnName] = field.fieldDesc
       })
       this.save('form', true)
       this.fieldDescVisible = false
     },
-    /**
-     * 取消字段描述编辑
-     */
+    // 取消操作
     cancelField () {
       this.structurePreviewListCopy = _.cloneDeep(this.structurePreviewList)
       this.fieldsetVisible = false
     },
-    /**
-     * 保存字段描述编辑
-     */
+    // 设置输出字段
     setField () {
       this.structurePreviewList = _.cloneDeep(this.structurePreviewListCopy)
       if (this.structurePreviewList.length) {
-        this.dataForm.fieldDesc = {}
+        this.fieldDesc = {}
         this.structurePreviewList.forEach(key => {
-          this.dataForm.fieldDesc[key.fieldName] = key.fieldDesc
+          this.fieldDesc[key.columnName] = key.fieldDesc
         })
       } else {
-        this.dataForm.fieldDesc = null
+        this.fieldDesc = null
       }
       this.fieldsetVisible = false
     },
-    // json错误校验
-    onError () {
-      this.passTest = false
+    // 字段描述构建及同步
+    buildFieldDesc () {
+      const fieldDesc = {}
+      this.structurePreviewList.forEach(field => {
+        if (this.fieldDesc.hasOwnProperty(field.columnName)) {
+          field.fieldDesc = this.fieldDesc[field.columnName]
+        }
+        fieldDesc[field.columnName] = field.fieldDesc
+      })
+      this.fieldDesc = fieldDesc
     },
-    /**
-     * 解析JSON
-     * @param  $event 事件
-     * @param  initAnalysis 是否初始化解析
-     */
+    // 解析json
     analysisJSON ($event, initAnalysis = false) {
       if (Object.prototype.toString.call(this.dataForm.json) === '[object Object]') {
         // json为对象
         this.structurePreviewList = Object.keys(this.dataForm.json).map(key => {
           return {
-            fieldName: key,
+            columnName: key,
             fieldDesc: ''
           }
         })
@@ -587,7 +604,7 @@ export default {
         if (Object.prototype.toString.call(this.dataForm.json[0]) === '[object Object]') {
           this.structurePreviewList = Object.keys(this.dataForm.json[0]).map(key => {
             return {
-              fieldName: key,
+              columnName: key,
               fieldDesc: ''
             }
           })
@@ -597,7 +614,7 @@ export default {
           try {
             this.structurePreviewList = Object.keys(JSON.parse(this.dataForm.json[0])).map(key => {
               return {
-                fieldName: key,
+                columnName: key,
                 fieldDesc: ''
               }
             })
@@ -618,7 +635,7 @@ export default {
             // json为对象
             this.structurePreviewList = Object.keys(json).map(key => {
               return {
-                fieldName: key,
+                columnName: key,
                 fieldDesc: ''
               }
             })
@@ -629,7 +646,7 @@ export default {
             if (Object.prototype.toString.call(json[0]) === '[object Object]') {
               this.structurePreviewList = Object.keys(json[0]).map(key => {
                 return {
-                  fieldName: key,
+                  columnName: key,
                   fieldDesc: ''
                 }
               })
@@ -639,7 +656,7 @@ export default {
               try {
                 this.structurePreviewList = Object.keys(JSON.parse(json[0])).map(key => {
                   return {
-                    fieldName: key,
+                    columnName: key,
                     fieldDesc: ''
                   }
                 })
@@ -659,7 +676,7 @@ export default {
           this.$message.warning('JSON格式错误')
         }
       }
-      if (this.structurePreviewList.length && this.dataForm.fieldDesc) {
+      if (this.structurePreviewList.length && this.fieldDesc) {
         this.buildFieldDesc()
       }
       if (this.passTest && !initAnalysis) {
@@ -667,57 +684,64 @@ export default {
       }
       this.structurePreviewListCopy = _.cloneDeep(this.structurePreviewList)
     },
-    /**
-     * 构建字段描述
-     */
-    buildFieldDesc () {
-      const fieldDesc = {}
-      this.structurePreviewList.forEach(field => {
-        if (this.dataForm.fieldDesc.hasOwnProperty(field.fieldName)) {
-          field.fieldDesc = this.dataForm.fieldDesc[field.fieldName]
-        }
-        fieldDesc[field.fieldName] = field.fieldDesc
-      })
-      this.dataForm.fieldDesc = fieldDesc
+    // 初始化
+    async init () {
+      this.categoryData = await getDatasetTypeList({ tableName: 'r_dataset', moduleCode: this.appCode })
+      if (this.typeId) {
+        this.dataForm.typeId = this.typeId
+        this.$nextTick(() => {
+          try {
+            this.typeName = this.$refs.categorySelectTree.getNode(this.dataForm.typeId).data.name
+          } catch (error) {
+            console.error(error)
+          }
+        })
+      }
+      if (this.datasetId) {
+        getDataset(this.datasetId).then(res => {
+          this.dataForm.id = res.id
+          const data = JSON.parse(res.data)
+          this.dataForm.name = res.name
+          this.dataForm.typeId = res.typeId
+          this.dataForm.remark = res.remark
+          this.dataForm.json = data.json
+          this.fieldDesc = data.fieldDesc
+          if (this.dataForm.typeId) {
+            this.$nextTick(() => {
+              try {
+                this.typeName = this.$refs.categorySelectTree.getNode(this.dataForm.typeId).data.name
+              } catch (error) {
+                console.error(error)
+              }
+            })
+          }
+          this.analysisJSON(null, true)
+        })
+      }
     },
-    /**
-     * 回到数据集列表页面
-     */
     goBack () {
       this.$emit('back')
     },
-    /**
-     * 表头添加提示
-     * @param h
-     * @param column
-     * @param index
-     * @returns {*}
-     */
+    // 表头添加提示
     renderHeader (h, { column, index }) {
       const labelLong = column.label.length // 表头label长度
       const size = 14 // 根据需要定义标尺，直接使用字体大小确定就行，也可以根据需要定义
       column.minWidth = labelLong * size < 120 ? 120 : labelLong * size // 根据label长度计算该表头最终宽度
       return h('span', { class: 'cell-content', style: { width: '100%' } }, [column.label])
     },
-    /**
-     * 清空分类
-     */
+    // 清空分类
     clearType () {
       this.typeName = ''
       this.dataForm.typeId = ''
     },
-    /**
-     * 分类展开高亮
-     */
+    // 分类展开高亮
     setCurrentNode ($event) {
       if ($event) {
         const key = this.dataForm.typeId || null
         this.$refs.categorySelectTree.setCurrentKey(key)
       }
     },
-    /**
-     * 分类选择
-     */
+    // 分类选择
     selectParentCategory (value) {
       this.dataForm.typeId = value.id
       this.typeName = value.name
@@ -857,7 +881,7 @@ export default {
   position: relative;
   padding: 16px 0;
   padding-left: 12px;
-  border-bottom: 1px solid var(--db-background-1);
+  border-bottom: 1px solid var(--db-el-background-2);
 
   &::before {
     content: "";
