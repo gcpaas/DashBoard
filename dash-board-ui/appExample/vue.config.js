@@ -46,6 +46,8 @@ const cdn = {
 }
 
 module.exports = defineConfig({
+  // 1. 开启运行时编译
+  runtimeCompiler: true,
   publicPath: process.env.VUE_APP_HISTORY === 'y' ? process.env.VUE_APP_BASE : './', // 署应用包时的基本 URL。 vue-router hash 模式使用
   //  publicPath: '/app/', //署应用包时的基本 URL。  vue-router history模式使用
   outputDir: 'dash-board-app', //  生产环境构建文件的目录
@@ -90,7 +92,9 @@ module.exports = defineConfig({
         packages: resolve('../packages'),
         app: resolve('../appPackages'),
         '@gcpaas/dash-board-ui': resolve('../packages/index.js'),
-        '@gcpaas/dash-board-app-ui': resolve('../appPackages/index.js')
+        '@gcpaas/dash-board-app-ui': resolve('../appPackages/index.js'),
+        // 2. 此处vue指向 vue/dist/vue.common
+        vue$: 'vue/dist/vue.common'
       },
       fallback: {
         path: false,
