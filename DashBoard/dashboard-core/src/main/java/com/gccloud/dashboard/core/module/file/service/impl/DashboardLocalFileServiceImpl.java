@@ -1,10 +1,10 @@
 package com.gccloud.dashboard.core.module.file.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import com.gccloud.common.exception.GlobalException;
 import com.gccloud.dashboard.core.config.DashboardConfig;
 import com.gccloud.dashboard.core.config.bean.FileConfig;
 import com.gccloud.dashboard.core.module.file.entity.DashboardFileEntity;
-import com.gccloud.dashboard.core.exception.GlobalException;
 import com.gccloud.dashboard.core.module.file.service.IDashboardFileService;
 import com.gccloud.dashboard.core.module.file.service.IDashboardOssService;
 import lombok.extern.slf4j.Slf4j;

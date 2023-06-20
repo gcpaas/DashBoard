@@ -1,14 +1,14 @@
 package com.gccloud.dashboard.core.module.type.controller;
 
+import com.gccloud.common.utils.BeanConvertUtils;
+import com.gccloud.common.validator.ValidatorUtils;
+import com.gccloud.common.validator.group.Insert;
+import com.gccloud.common.validator.group.Update;
+import com.gccloud.common.vo.R;
 import com.gccloud.dashboard.core.module.type.dto.TypeDTO;
 import com.gccloud.dashboard.core.module.type.entity.TypeEntity;
 import com.gccloud.dashboard.core.module.type.service.ITypeService;
 import com.gccloud.dashboard.core.module.type.vo.TypeVO;
-import com.gccloud.dashboard.core.utils.BeanConvertUtils;
-import com.gccloud.dashboard.core.validator.ValidatorUtils;
-import com.gccloud.dashboard.core.validator.group.Insert;
-import com.gccloud.dashboard.core.validator.group.Update;
-import com.gccloud.dashboard.core.vo.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

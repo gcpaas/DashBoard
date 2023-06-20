@@ -1,8 +1,8 @@
 package com.gccloud.dashboard.core.module.type.service;
 
+import com.gccloud.common.service.ISuperService;
 import com.gccloud.dashboard.core.module.type.dto.TypeDTO;
 import com.gccloud.dashboard.core.module.type.entity.TypeEntity;
-import com.gccloud.dashboard.core.service.ISuperService;
 
 import java.util.List;
 

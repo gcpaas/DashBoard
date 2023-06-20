@@ -1,10 +1,9 @@
 package com.gccloud.dashboard.core.module.chart.components;
 
+import com.gccloud.dashboard.core.constant.PageDesignConstant;
 import com.gccloud.dashboard.core.module.chart.bean.Btn;
 import com.gccloud.dashboard.core.module.chart.bean.Chart;
 import com.gccloud.dashboard.core.module.chart.bean.Field;
-
-import com.gccloud.dashboard.core.constant.PageDesignConstant;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

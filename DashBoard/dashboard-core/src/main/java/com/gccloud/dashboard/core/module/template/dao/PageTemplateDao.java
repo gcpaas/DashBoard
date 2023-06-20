@@ -1,6 +1,6 @@
 package com.gccloud.dashboard.core.module.template.dao;
 
-import com.gccloud.dashboard.core.dao.DashboardBaseDao;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.gccloud.dashboard.core.module.template.entity.PageTemplateEntity;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,5 +10,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2023/3/20 16:41
  */
 @Mapper
-public interface PageTemplateDao extends DashboardBaseDao<PageTemplateEntity> {
+public interface PageTemplateDao extends BaseMapper<PageTemplateEntity> {
 }

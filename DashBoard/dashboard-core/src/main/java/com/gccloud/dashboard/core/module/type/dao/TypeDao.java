@@ -1,6 +1,6 @@
 package com.gccloud.dashboard.core.module.type.dao;
 
-import com.gccloud.dashboard.core.dao.DashboardBaseDao;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.gccloud.dashboard.core.module.type.entity.TypeEntity;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,6 +10,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @Version 1.0.0
  */
 @Mapper
-public interface TypeDao extends DashboardBaseDao<TypeEntity> {
+public interface TypeDao extends BaseMapper<TypeEntity> {
 
 }

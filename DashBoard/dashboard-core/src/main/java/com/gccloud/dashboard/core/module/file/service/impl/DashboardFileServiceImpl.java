@@ -2,13 +2,13 @@ package com.gccloud.dashboard.core.module.file.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.gccloud.dashboard.core.exception.GlobalException;
+import com.gccloud.common.exception.GlobalException;
+import com.gccloud.common.utils.QueryWrapperUtils;
+import com.gccloud.common.vo.PageVO;
 import com.gccloud.dashboard.core.module.file.dao.DashboardFileDao;
 import com.gccloud.dashboard.core.module.file.dto.FileSearchDTO;
 import com.gccloud.dashboard.core.module.file.entity.DashboardFileEntity;
 import com.gccloud.dashboard.core.module.file.service.IDashboardFileService;
-import com.gccloud.dashboard.core.vo.PageVO;
-import com.gccloud.dashboard.core.utils.QueryWrapperUtils;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

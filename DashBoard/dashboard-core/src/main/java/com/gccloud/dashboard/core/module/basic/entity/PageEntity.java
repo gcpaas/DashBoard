@@ -2,7 +2,7 @@ package com.gccloud.dashboard.core.module.basic.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.gccloud.dashboard.core.entity.SuperEntity;
+import com.gccloud.common.entity.SuperEntity;
 import com.gccloud.dashboard.core.constant.PageDesignConstant;
 import com.gccloud.dashboard.core.module.basic.dto.BasePageDTO;
 import com.gccloud.dashboard.core.module.basic.entity.type.BasePageDTOTypeHandler;
