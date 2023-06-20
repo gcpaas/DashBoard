@@ -66,7 +66,7 @@ public class DashboardPageServiceImpl extends ServiceImpl<PageDao, PageEntity> i
             }
             chart.setCode(CodeGenerateUtils.generate(chart.getType() == null ? "chart" : chart.getType()));
         }
-        if (StringUtils.isBlank(dashboardPageDTO.getCoverPicture())) {
+        if (StringUtils.isNotBlank(dashboardPageDTO.getCoverPicture())) {
             String base64Str = dashboardPageDTO.getCoverPicture();
             String fileUrl = this.saveCoverPicture(base64Str, dashboardPageDTO.getCode());
             dashboardPageDTO.setCoverPicture(fileUrl);
