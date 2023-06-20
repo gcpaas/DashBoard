@@ -24,7 +24,7 @@
     <div v-if="!chartSettingShow">
       <SettingTitle>定时器</SettingTitle>
       <el-empty
-        v-if="pageInfo.chartList.length === 0"
+        v-if="timerEmptyState"
         description="请添加图表，并绑定数据集"
       />
       <div
@@ -147,6 +147,7 @@ export default {
         this.chartOptions = []
         if (Array.isArray(val) && val.length) {
           this.init()
+          this.timerEmptyState()
         }
       },
       deep: true
@@ -202,6 +203,9 @@ export default {
     },
     chartChange (val) {
       this.chartOptions.find(item => item.code === val).disabled = true
+    },
+    timerEmptyState () {
+      return this.pageInfo.chartList.every(chart => !chart.dataSource.businessKey)
     }
   }
 }
