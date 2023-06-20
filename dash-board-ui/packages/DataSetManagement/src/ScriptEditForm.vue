@@ -135,7 +135,7 @@
                 ref="targetInSql"
                 v-model="dataForm.script"
                 :options="cOptions"
-                style="margin-top: 2px"
+                style="margin-top: 2px;border: 1px solid rgb(232, 232, 232);"
               />
             </div>
             <div style="text-align: center; padding: 16px 0;">

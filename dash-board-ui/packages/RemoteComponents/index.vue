@@ -74,11 +74,10 @@ export default {
         getBizComponentInfo(this.config.customize.vueBizComponentCode).then(data => {
           const vueContent = data.vueContent
           const settingContent = data.settingContent
-          if (!this.config?.option?.data) {
+          if ((!this.config?.option?.data) || (!this.config?.data?.length)) {
             this.resolveStrSetting(settingContent)
             this.config = this.buildOption(this.config, { success: false })
           }
-
           this.remoteComponent = remoteVueLoader('data:text/plain,' + encodeURIComponent(vueContent))
         }).finally(() => {
           this.loading = false

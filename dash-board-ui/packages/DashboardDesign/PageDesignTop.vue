@@ -177,7 +177,6 @@ export default {
       ],
       appInfo: '',
       saveLoading: false,
-      createdImgLoading: false,
       saveAndPreviewLoading: false
     }
   },
