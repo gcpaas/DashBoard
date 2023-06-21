@@ -489,17 +489,16 @@ export default {
     // 移动端样式
     .app-wrap-box{
       position: relative;
-      /*width: calc(100% - 210px);*/
       width: 100%;
       height: 100%;
       overflow-y: auto;
       display: flex;
       justify-content: center;
-      /*align-items: center;*/
       .app-display-wrapper {
-        margin-top: 10%;
         position: relative;
-        // 水平垂直居中
+        top: 0;
+        bottom: 0;
+        margin: auto;
         width: 300px;
         height: 80%;
         min-height: 600px;
