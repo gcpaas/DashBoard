@@ -438,7 +438,7 @@ const setting = [
     groupName: 'yAxis'
   },
   // 边距 padding
-    {
+  {
     label: '图表边距',
     type: 'padding',
     field: 'appendPadding',
@@ -474,7 +474,6 @@ const optionHandler = '  option.legend = option.legendEnable ? {position: settin
   '  if (option.legendEnable) {\n' +
   '    option.legend.itemName = option.legendItemName\n' +
   '  }'
-
 
 // 数据处理脚本
 const dataHandler = ''

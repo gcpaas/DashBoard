@@ -1,9 +1,28 @@
 <template>
   <div class="design-wrap">
-    <div class="card-wrap"  v-if="option.data.length">
-      <div v-for="(data,index) in option.data" :key="index" class="card-item-wrap">
-        <div v-if="option.customizeList[index]" class="value-box"  :style="'font-size:'+ option.customizeList[index].metricFontSize+'px;font-weight:'+ option.customizeList[index].metricFontWeight+';color:'+option.customizeList[index].metricColor">{{option.customizeList[index].numberFormat=='kilobit'?numberToCurrencyNo(data.value):data.value ||'--'}}</div>
-        <div v-if="option.customizeList[index]" class="label-box" :style="'font-size:'+ option.customizeList[index].descriptionFontSize+'px;font-weight:'+ option.customizeList[index].descriptionWeight+';color:'+option.customizeList[index].descriptionColor">{{data.label}}</div>
+    <div
+      v-if="option.data.length"
+      class="card-wrap"
+    >
+      <div
+        v-for="(data,index) in option.data"
+        :key="index"
+        class="card-item-wrap"
+      >
+        <div
+          v-if="option.customizeList[index]"
+          class="value-box"
+          :style="'font-size:'+ option.customizeList[index].metricFontSize+'px;font-weight:'+ option.customizeList[index].metricFontWeight+';color:'+option.customizeList[index].metricColor"
+        >
+          {{ option.customizeList[index].numberFormat=='kilobit'?numberToCurrencyNo(data.value):data.value ||'--' }}
+        </div>
+        <div
+          v-if="option.customizeList[index]"
+          class="label-box"
+          :style="'font-size:'+ option.customizeList[index].descriptionFontSize+'px;font-weight:'+ option.customizeList[index].descriptionWeight+';color:'+option.customizeList[index].descriptionColor"
+        >
+          {{ data.label }}
+        </div>
       </div>
     </div>
     <div
@@ -19,8 +38,6 @@ import { refreshComponentMixin } from 'packages/js/mixins/refreshComponent'
 import commonMixins from 'packages/js/mixins/commonMixins'
 import paramsMixins from 'packages/js/mixins/paramsMixins'
 import linkageMixins from 'packages/js/mixins/linkageMixins'
-
-
 
 export default {
   name: 'MultipleNumberChart',
@@ -98,7 +115,7 @@ export default {
       } else {
         // 返回的模拟数据
         config.customize.customizeList = []
-        for (let col in data.columnData) {
+        for (const col in data.columnData) {
           const val = data.columnData[col]
           multipleDataList.push({
             label: val.remark || val.alias,
@@ -157,7 +174,7 @@ export default {
     height: calc(100% - 30px);
     display: grid;
     box-sizing: border-box;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
     align-items: center;
     justify-items: center;
     grid-gap:20px 20px;

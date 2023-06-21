@@ -92,7 +92,7 @@ export default {
     height: calc(100% - 20px);
     padding: 16px 16px 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
     align-items: center;
     justify-items: center;
 

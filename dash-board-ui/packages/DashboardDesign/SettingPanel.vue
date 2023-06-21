@@ -161,7 +161,7 @@ export default {
         this.pageInfo.pageConfig.refreshConfig = []
       } else {
         this.pageInfo.chartList.forEach(chart => {
-          if (chart.dataSource.businessKey) {
+          if (chart.dataSource && chart.dataSource.businessKey) {
             this.chartOptions.push({
               code: chart.code,
               title: chart.title,
@@ -172,9 +172,6 @@ export default {
           }
         })
       }
-    },
-    toggleShow () {
-      this.$emit('update:rightVisiable', !this.rightVisiable)
     },
     close () {
       this.$emit('update:rightVisiable', false)

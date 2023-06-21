@@ -388,36 +388,13 @@ export default {
         ]?.updateChartData(_.cloneDeep(config))
       }
     },
-    onSelectArea (area) {
-      const { startX, startY, endX, endY } = area
-      // 计算所有在此区域中的组件，如果在此区域中，将其code添加到activeCodes数组中
-      const activeCodes = this.chartList
-        ?.filter((chart) => {
-          const { x, y, w, h } = chart
-          return startX <= x && x + w <= endX && startY <= y && y + h <= endY
-        })
-        ?.map((chart) => chart.code)
-      this.changeActiveCodes(activeCodes)
-    },
     changeStart ({ x, y }) {
       this.ruleStartX = x
       this.ruleStartY = y
     },
-    // 保存并预览
-    saveAndPreview () {
-      this.$refs.PageTopSetting.execRun()
-    },
     // 保存
     save () {
       this.$refs.PageTopSetting.save('saveLoading')
-    },
-    changeScreenZoom (zoom) {
-      // 自适应
-      if (zoom === 'auto') {
-        this.$refs.Rules.initZoom()
-      } else {
-        this.changeZoom(zoom)
-      }
     },
     updateRightVisiable (visiable) {
       this.rightVisiable = visiable
@@ -489,17 +466,16 @@ export default {
     // 移动端样式
     .app-wrap-box{
       position: relative;
-      /*width: calc(100% - 210px);*/
       width: 100%;
       height: 100%;
       overflow-y: auto;
       display: flex;
       justify-content: center;
-      /*align-items: center;*/
       .app-display-wrapper {
-        margin-top: 10%;
         position: relative;
-        // 水平垂直居中
+        top: 0;
+        bottom: 0;
+        margin: auto;
         width: 300px;
         height: 80%;
         min-height: 600px;

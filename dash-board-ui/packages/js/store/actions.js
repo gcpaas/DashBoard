@@ -1,9 +1,8 @@
 // 组件配置转化
 import _ from 'lodash'
 import { setModules } from 'packages/js/utils/configImport'
-import { getScreenInfo, getDataSetDetails, getDataByDataSetId } from '../api/bigScreenApi'
+import { getScreenInfo} from '../api/bigScreenApi'
 import { stringToFunction } from '../utils/evalFunctions'
-import { EventBus } from '../utils/eventBus'
 import plotList from 'packages/G2Plots/plotList'
 export default {
   // 初始化页面数据

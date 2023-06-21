@@ -2,16 +2,6 @@
 import { commonConfig, displayOption } from 'packages/js/config'
 
 export const settingConfig = {
-  legend: false,
-  isGroup: true,
-  data: [],
-  label: {
-    // 可手动配置 label 数据标签位置
-    position: 'top', // 'top', 'bottom', 'middle',
-    // 配置样式
-    content: ''
-  },
-  seriesField: '', // 分组
   displayOption: {
     ...displayOption,
     dataAllocation: { enable: true },

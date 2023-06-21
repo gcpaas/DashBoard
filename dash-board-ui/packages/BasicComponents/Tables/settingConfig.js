@@ -1,18 +1,8 @@
 import { commonConfig, displayOption } from 'packages/js/config'
 
 export const settingConfig = {
-  padding: [30, 30, 50, 80],
-  legend: false,
-  isGroup: true,
   data: [],
   color: '',
-  label: {
-    // 可手动配置 label 数据标签位置
-    position: 'top', // 'top', 'bottom', 'middle',
-    // 配置样式
-    content: ''
-  },
-  seriesField: '', // 分组
   displayOption: {
     ...displayOption,
     metricField: {

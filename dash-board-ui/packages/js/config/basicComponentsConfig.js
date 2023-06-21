@@ -25,7 +25,7 @@ const typeList = [
   'tables',
   'dashboardScrollRanking',
   // 'dashBoardScrollBoard',
-  'video',
+  'video'
   // 'input',
   // 'button'
 ]
