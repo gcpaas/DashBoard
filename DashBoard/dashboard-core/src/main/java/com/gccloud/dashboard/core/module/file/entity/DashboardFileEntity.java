@@ -1,7 +1,7 @@
 package com.gccloud.dashboard.core.module.file.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
-import com.gccloud.dashboard.core.entity.SuperEntity;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.gccloud.common.entity.SuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

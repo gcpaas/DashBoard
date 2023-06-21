@@ -1,9 +1,9 @@
 package com.gccloud.dashboard.core.module.file.service;
 
+import com.gccloud.common.service.ISuperService;
+import com.gccloud.common.vo.PageVO;
 import com.gccloud.dashboard.core.module.file.dto.FileSearchDTO;
 import com.gccloud.dashboard.core.module.file.entity.DashboardFileEntity;
-import com.gccloud.dashboard.core.service.ISuperService;
-import com.gccloud.dashboard.core.vo.PageVO;
 
 import java.util.List;
 

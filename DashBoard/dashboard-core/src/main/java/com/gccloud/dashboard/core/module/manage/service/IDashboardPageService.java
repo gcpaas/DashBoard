@@ -1,10 +1,10 @@
 package com.gccloud.dashboard.core.module.manage.service;
 
+import com.gccloud.common.vo.PageVO;
 import com.gccloud.dashboard.core.module.basic.entity.PageEntity;
-import com.gccloud.dashboard.core.module.manage.dto.DashboardPageDTO;
 import com.gccloud.dashboard.core.module.basic.service.IBasePageService;
+import com.gccloud.dashboard.core.module.manage.dto.DashboardPageDTO;
 import com.gccloud.dashboard.core.module.manage.dto.DashboardSearchDTO;
-import com.gccloud.dashboard.core.vo.PageVO;
 
 /**
  * @author hongyang

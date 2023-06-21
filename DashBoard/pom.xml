@@ -34,6 +34,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
+        <dataset-core.version>0.0.1.2023062101.Alpha</dataset-core.version>
         <swagger.annotations.version>1.5.20</swagger.annotations.version>
         <swagger.bootstrap.version>1.9.6</swagger.bootstrap.version>
         <swagger.version>2.9.2</swagger.version>

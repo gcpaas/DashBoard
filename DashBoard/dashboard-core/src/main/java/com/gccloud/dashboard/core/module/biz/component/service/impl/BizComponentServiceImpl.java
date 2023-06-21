@@ -2,14 +2,14 @@ package com.gccloud.dashboard.core.module.biz.component.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.gccloud.common.exception.GlobalException;
+import com.gccloud.common.vo.PageVO;
 import com.gccloud.dashboard.core.config.DashboardConfig;
-import com.gccloud.dashboard.core.exception.GlobalException;
 import com.gccloud.dashboard.core.module.biz.component.dao.BizComponentDao;
 import com.gccloud.dashboard.core.module.biz.component.dto.BizComponentSearchDTO;
 import com.gccloud.dashboard.core.module.biz.component.entity.BizComponentEntity;
 import com.gccloud.dashboard.core.module.biz.component.service.IBizComponentService;
 import com.gccloud.dashboard.core.utils.CodeGenerateUtils;
-import com.gccloud.dashboard.core.vo.PageVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -39,8 +39,19 @@ public class BizComponentServiceImpl extends ServiceImpl<BizComponentDao, BizCom
         LambdaQueryWrapper<BizComponentEntity> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.like(StringUtils.isNotBlank(searchDTO.getName()), BizComponentEntity::getName, searchDTO.getName());
         queryWrapper.eq(StringUtils.isNotBlank(searchDTO.getType()), BizComponentEntity::getType, searchDTO.getType());
-        return this.page(searchDTO, queryWrapper);
-        
+        PageVO<BizComponentEntity> page = this.page(searchDTO, queryWrapper);
+        List<BizComponentEntity> list = page.getList();
+        String urlPrefix = dashboardConfig.getFile().getUrlPrefix();
+        if (!urlPrefix.endsWith("/")) {
+            urlPrefix += "/";
+        }
+        for (BizComponentEntity entity : list) {
+            if (StringUtils.isBlank(entity.getCoverPicture())) {
+                continue;
+            }
+            entity.setCoverPicture(urlPrefix + entity.getCoverPicture().replace("\\", "/"));
+        }
+        return page;
     }
 
     @Override
@@ -48,7 +59,18 @@ public class BizComponentServiceImpl extends ServiceImpl<BizComponentDao, BizCom
         LambdaQueryWrapper<BizComponentEntity> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.like(StringUtils.isNotBlank(searchDTO.getName()), BizComponentEntity::getName, searchDTO.getName());
         queryWrapper.eq(StringUtils.isNotBlank(searchDTO.getType()), BizComponentEntity::getType, searchDTO.getType());
-        return this.list(queryWrapper);
+        List<BizComponentEntity> list = this.list(queryWrapper);
+        String urlPrefix = dashboardConfig.getFile().getUrlPrefix();
+        if (!urlPrefix.endsWith("/")) {
+            urlPrefix += "/";
+        }
+        for (BizComponentEntity entity : list) {
+            if (StringUtils.isBlank(entity.getCoverPicture())) {
+                continue;
+            }
+            entity.setCoverPicture(urlPrefix + entity.getCoverPicture().replace("\\", "/"));
+        }
+        return list;
     }
 
     @Override
@@ -62,7 +84,15 @@ public class BizComponentServiceImpl extends ServiceImpl<BizComponentDao, BizCom
         if (list.size() == 0) {
             throw new GlobalException("组件不存在");
         }
-        return list.get(0);
+        BizComponentEntity entity = list.get(0);
+        String urlPrefix = dashboardConfig.getFile().getUrlPrefix();
+        if (!urlPrefix.endsWith("/")) {
+            urlPrefix += "/";
+        }
+        if (StringUtils.isNotBlank(entity.getCoverPicture())) {
+            entity.setCoverPicture(urlPrefix + entity.getCoverPicture().replace("\\", "/"));
+        }
+        return entity;
     }
 
     @Override

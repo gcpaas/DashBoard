@@ -51,7 +51,7 @@
             </div>
             <ul
               v-show="!noData"
-              id="orgTree"
+              id="datasetTypeTree"
               class="ztree"
             />
             <div
@@ -129,7 +129,7 @@
         <div class="left-tab-box">
           <ul>
             <li
-              v-for="_type in typeData"
+              v-for="_type in datasetTypeList"
               :key="_type.name"
               :class="{ 'tab-style': true, 'tab-active': _type.datasetType == curType }"
               @click="getTypeData(_type.datasetType)"
@@ -157,15 +157,15 @@ import 'ztree/js/jquery.ztree.exhide'
 import 'packages/assets/style/zTree/metroStyle.css'
 import 'packages/assets/style/zTree/zTree.scss'
 import 'packages/assets/style/zTree/zTreeSelect.scss'
-import { getDatasetTypeList, categoryRemove } from 'packages/js/utils/datasetConfigService'
+import { getCategoryTree, categoryRemove } from 'packages/js/utils/datasetConfigService'
 import OrgEditForm from './CategroyEditForm.vue'
 export default {
-  name: 'OrgTreeIndex',
+  name: 'DatasetTypeTreeIndex',
   components: {
     OrgEditForm
   },
   props: {
-    dsType: {
+    datasetTypeList: {
       type: Array,
       default: () => (['original', 'custom', 'storedProcedure', 'json', 'script'])
     },
@@ -178,14 +178,6 @@ export default {
     return {
       activeName: 'group',
       categoryData: [],
-      typeDataList: [
-        { name: '全部', datasetType: '' },
-        { name: '原始数据集', datasetType: 'original' },
-        { name: '自助数据集', datasetType: 'custom' },
-        { name: '存储过程数据集', datasetType: 'storedProcedure' },
-        { name: 'JSON数据集', datasetType: 'json' },
-        { name: '脚本数据集', datasetType: 'script' }
-      ],
       curType: '-1',
       noData: false,
       loading: false,
@@ -229,16 +221,9 @@ export default {
       isBoth: false // 是否为全部
     }
   },
-  computed: {
-    typeData () {
-      const types = this.typeDataList.filter(type => {
-        return type.datasetType === '' || this.dsType.includes(type.datasetType)
-      })
-      return types
-    }
-  },
+  computed: { },
   mounted () {
-    this.initLazyOrgTree()
+    this.initLazyDatasetTypeTree()
   },
 
   methods: {
@@ -250,7 +235,7 @@ export default {
         this.$refs.editForm.dialogFormVisible = true
         this.$refs.editForm.init({ parentId: 0 }, true)
         this.$refs.editForm.radio = 0
-        this.$refs.editForm.title = '分组新增'
+        this.$refs.editForm.title = '节点新增'
       })
     },
     addDiyDom (treeId, treeNode) {
@@ -303,14 +288,14 @@ export default {
       }
     },
     // 初始化树节点
-    initLazyOrgTree () {
+    initLazyDatasetTypeTree () {
       this.loading = true
-      getDatasetTypeList({ tableName: 'r_dataset', moduleCode: this.appCode }).then((res) => {
+      getCategoryTree({ type: 'dataset', moduleCode: this.appCode }).then((res) => {
         this.categoryData = res.map((item) => {
           return { isParent: item.hasChildren, ...item }
         })
         this.categoryData.unshift({ name: '全部', id: '', parentId: '0' })
-        this.ztreeObj = $.fn.zTree.init($('#orgTree'), this.ztreeSetting, this.categoryData)
+        this.ztreeObj = $.fn.zTree.init($('#datasetTypeTree'), this.ztreeSetting, this.categoryData)
         this.$emit('reCategory')
       }).then((e) => {
         this.loading = false
@@ -362,14 +347,14 @@ export default {
     reSearch () {
       this.activeName = 'group'
       if (this.queryForm.searchKey) {
-        const treeObj = $.fn.zTree.getZTreeObj('orgTree')
+        const treeObj = $.fn.zTree.getZTreeObj('datasetTypeTree')
         const nodes = treeObj.getNodesByParam('isHidden', true)
         treeObj.showNodes(nodes)
         const hiddenNodes = treeObj.getNodesByFilter(this.filterNode)
         treeObj.hideNodes(hiddenNodes)
         treeObj.expandAll(true)
       } else {
-        this.initLazyOrgTree()
+        this.initLazyDatasetTypeTree()
       }
     },
     // 节点点击事件
@@ -394,32 +379,32 @@ export default {
       this.editFormVisible = true
       if (editType === this.editTypeConstant.editOrg) {
         this.$nextTick(() => {
-          this.$refs.editForm.tableName = 'r_dataset'
+          this.$refs.editForm.type = 'dataset'
           this.$refs.editForm.dialogFormVisible = true
           this.$refs.editForm.init(this.rightClickForm.org, false)
-          this.$refs.editForm.title = '分组编辑'
+          this.$refs.editForm.title = '节点编辑'
         })
         return
       }
       // 新增同级节点
       if (editType === this.editTypeConstant.addSiblingOrg) {
         this.$nextTick(() => {
-          this.$refs.editForm.tableName = 'r_dataset'
+          this.$refs.editForm.type = 'dataset'
           this.$refs.editForm.dialogFormVisible = true
           this.$refs.editForm.init(this.rightClickForm.org, true)
           this.$refs.editForm.radio = 0
-          this.$refs.editForm.title = '分组新增'
+          this.$refs.editForm.title = '节点新增'
         })
         return
       }
       // 新增子节点
       if (editType === this.editTypeConstant.addChildOrg) {
         this.$nextTick(() => {
-          this.$refs.editForm.tableName = 'r_dataset'
+          this.$refs.editForm.type = 'dataset'
           this.$refs.editForm.dialogFormVisible = true
           this.$refs.editForm.init(this.rightClickForm.org, true)
           this.$refs.editForm.radio = 1
-          this.$refs.editForm.title = '分组新增'
+          this.$refs.editForm.title = '节点新增'
         })
       }
     },
@@ -434,7 +419,7 @@ export default {
     },
     // 删除分类
     deleteOrg (org) {
-      this.$confirm('删除数据集分类，确定进行删除操作?', '提示',
+      this.$confirm('删除数据集分组，确定进行删除操作?', '提示',
         {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -448,7 +433,7 @@ export default {
         categoryRemove(org.id).then((data) => {
           this.$message.success('操作成功')
           // this.ztreeObj.removeNode(org)
-          this.initLazyOrgTree()
+          this.initLazyDatasetTypeTree()
           // 刷新右侧表格
           this.$emit('refreshData', org)
         })

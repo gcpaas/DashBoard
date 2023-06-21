@@ -13,10 +13,9 @@ export function saveScreen (data) {
 
 // 根据数据集获取数据集详情
 export function getDataSetDetails (id) {
-  return get('/dashboard/ds/getDataSetDetails', {
-    id
-  })
+  return get('/dataset/datasetInfo/' + id)
 }
+
 // 模拟后端返回自定义主题配置
 export function getThemeConfig () {
   return get('https://mock.mengxuegu.com/mock/64239ff6e24b4b4cfeaca5ea/example/theme')

@@ -1,6 +1,6 @@
 package com.gccloud.dashboard.core.module.biz.component.dao;
 
-import com.gccloud.dashboard.core.dao.DashboardBaseDao;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.gccloud.dashboard.core.module.biz.component.entity.BizComponentEntity;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,5 +10,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2023/6/5 11:39
  */
 @Mapper
-public interface BizComponentDao extends DashboardBaseDao<BizComponentEntity> {
+public interface BizComponentDao extends BaseMapper<BizComponentEntity> {
 }

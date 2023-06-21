@@ -1,10 +1,10 @@
 package com.gccloud.dashboard.core.module.biz.component.controller;
 
+import com.gccloud.common.vo.PageVO;
+import com.gccloud.common.vo.R;
 import com.gccloud.dashboard.core.module.biz.component.dto.BizComponentSearchDTO;
 import com.gccloud.dashboard.core.module.biz.component.entity.BizComponentEntity;
 import com.gccloud.dashboard.core.module.biz.component.service.IBizComponentService;
-import com.gccloud.dashboard.core.vo.PageVO;
-import com.gccloud.dashboard.core.vo.R;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;

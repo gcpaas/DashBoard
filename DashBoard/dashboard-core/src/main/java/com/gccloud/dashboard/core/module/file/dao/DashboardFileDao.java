@@ -1,6 +1,6 @@
 package com.gccloud.dashboard.core.module.file.dao;
 
-import com.gccloud.dashboard.core.dao.DashboardBaseDao;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.gccloud.dashboard.core.module.file.entity.DashboardFileEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -11,7 +11,7 @@ import java.util.List;
  * 文件
  */
 @Mapper
-public interface DashboardFileDao extends DashboardBaseDao<DashboardFileEntity> {
+public interface DashboardFileDao extends BaseMapper<DashboardFileEntity> {
     /**
      * 更新文件下载次数
      *

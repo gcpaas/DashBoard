@@ -115,7 +115,6 @@
   </transition>
 </template>
 <script>
-import _ from 'lodash'
 import basicComponents from 'packages/js/config/basicComponentsConfig'
 import g2PlotComponents, { getCustomPlots } from '../G2Plots/plotList'
 import LayerList from './LayerList/index.vue'
@@ -235,12 +234,6 @@ export default {
           false
         )
       })
-    },
-    onClone (e) {
-      return _.cloneDeep(e)
-    },
-    onStart (e) {
-      // this.$emit('onStart', e)
     },
     // 拖拽组件时触发
     onEnd (e) {},

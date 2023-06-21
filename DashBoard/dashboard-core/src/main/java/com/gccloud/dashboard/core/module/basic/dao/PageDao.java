@@ -1,6 +1,6 @@
 package com.gccloud.dashboard.core.module.basic.dao;
 
-import com.gccloud.dashboard.core.dao.DashboardBaseDao;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.gccloud.dashboard.core.module.basic.entity.PageEntity;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,6 +10,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @Version 1.0.0
  */
 @Mapper
-public interface PageDao extends DashboardBaseDao<PageEntity> {
+public interface PageDao extends BaseMapper<PageEntity> {
 
 }

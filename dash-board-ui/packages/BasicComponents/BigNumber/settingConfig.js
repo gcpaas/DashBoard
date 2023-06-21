@@ -1,11 +1,6 @@
 import { commonConfig, displayOption } from 'packages/js/config'
 
 export const settingConfig = {
-  padding: [30, 30, 30, 60],
-  headFontSize: '16',
-  subFontSize: '14',
-  legend: false,
-  isGroup: true,
   data: null,
   // 设置面板属性的显隐
   displayOption: {

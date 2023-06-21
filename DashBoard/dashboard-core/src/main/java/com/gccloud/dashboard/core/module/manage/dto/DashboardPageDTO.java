@@ -1,10 +1,10 @@
 package com.gccloud.dashboard.core.module.manage.dto;
 
-import com.gccloud.dashboard.core.module.chart.bean.Chart;
+import com.gccloud.common.validator.group.Insert;
+import com.gccloud.common.validator.group.Update;
 import com.gccloud.dashboard.core.constant.PageDesignConstant;
-import com.gccloud.dashboard.core.validator.group.Insert;
-import com.gccloud.dashboard.core.validator.group.Update;
 import com.gccloud.dashboard.core.module.basic.dto.BasePageDTO;
+import com.gccloud.dashboard.core.module.chart.bean.Chart;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

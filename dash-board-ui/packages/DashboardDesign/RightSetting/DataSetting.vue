@@ -70,7 +70,7 @@
             </div>
           </div>
           <metricSetting
-            :dataSourceDataList="dataSourceDataList"
+            :data-source-data-list="dataSourceDataList"
             :config="config"
           />
         </div>
@@ -635,13 +635,13 @@ export default {
   computed: {
     ...mapState({
       pageInfo: state => state.dashboard.pageInfo,
-      config: state => state.dashboard.activeItemConfig,
+      config: state => state.dashboard.activeItemConfig
     }),
     dataSourceDataList () {
       return this.fieldsList?.map(item => ({
         ...item,
-        comment: item?.comment || item?.name,
-        name: item?.name
+        comment: item?.fieldDesc || item?.fieldName,
+        name: item?.fieldName
       }))
     },
     appCode: {
@@ -665,8 +665,8 @@ export default {
       return (
         list?.map(field => {
           return {
-            label: field.comment,
-            value: field.name
+            label: field.fieldDesc,
+            value: field.fieldName
           }
         }) || []
       )
@@ -763,8 +763,8 @@ export default {
           this.config.inParams =
             this.fieldsList?.map(field => {
               return {
-                name: field.comment, // 参数名
-                code: field.name // 参数值
+                name: field.fieldDesc, // 参数名
+                code: field.fieldName // 参数值
               }
             }) || []
         }

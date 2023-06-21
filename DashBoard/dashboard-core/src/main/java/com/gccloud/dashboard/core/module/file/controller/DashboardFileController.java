@@ -1,14 +1,14 @@
 package com.gccloud.dashboard.core.module.file.controller;
 
-import com.gccloud.dashboard.core.controller.SuperController;
+import com.gccloud.common.controller.SuperController;
+import com.gccloud.common.utils.BeanConvertUtils;
+import com.gccloud.common.vo.PageVO;
+import com.gccloud.common.vo.R;
 import com.gccloud.dashboard.core.module.file.dto.FileSearchDTO;
 import com.gccloud.dashboard.core.module.file.entity.DashboardFileEntity;
 import com.gccloud.dashboard.core.module.file.service.IDashboardFileService;
 import com.gccloud.dashboard.core.module.file.service.IDashboardOssService;
 import com.gccloud.dashboard.core.module.file.vo.SysFileVO;
-import com.gccloud.dashboard.core.utils.BeanConvertUtils;
-import com.gccloud.dashboard.core.vo.PageVO;
-import com.gccloud.dashboard.core.vo.R;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

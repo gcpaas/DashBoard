@@ -1,7 +1,7 @@
 package com.gccloud.dashboard.core.module.basic.entity.type;
 
+import com.gccloud.common.utils.JSON;
 import com.gccloud.dashboard.core.module.basic.dto.BasePageDTO;
-import com.gccloud.dashboard.core.utils.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;

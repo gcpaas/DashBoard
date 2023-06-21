@@ -102,8 +102,14 @@
               >
                 加载中···
               </div>
-              <div slot="error" class="image-slot" style="font-size: 20px">
-                <div class="error-img-text"> {{ screen.name }}</div>
+              <div
+                slot="error"
+                class="image-slot"
+                style="font-size: 20px"
+              >
+                <div class="error-img-text">
+                  {{ screen.name }}
+                </div>
               </div>
             </el-image>
           </div>

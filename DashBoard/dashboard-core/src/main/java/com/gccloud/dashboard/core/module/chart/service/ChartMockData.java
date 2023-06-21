@@ -1,8 +1,7 @@
 package com.gccloud.dashboard.core.module.chart.service;
 
+import com.gccloud.common.utils.JSON;
 import com.gccloud.dashboard.core.module.chart.vo.ChartDataVO;
-import com.gccloud.dashboard.core.constant.PageDesignConstant;
-import com.gccloud.dashboard.core.utils.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.core.io.Resource;

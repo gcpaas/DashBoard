@@ -152,7 +152,7 @@
 
 // select
 .db-el-select {
-  // border-color: var(--db-el-border) !important;
+  text-align: center;
   background-color: var(--db-el-background-1) !important;
 
   .el-tag.el-tag--info {
@@ -327,6 +327,9 @@
 
 .db-el-pagination {
   text-align: right;
+  .el-select-dropdown__wrap{
+    text-align: center;
+  }
 }
 
 .db-el-message-box {
