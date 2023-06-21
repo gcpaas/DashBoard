@@ -84,15 +84,6 @@ const getSourceView = (id = '-1', flag = false) => get(`/datasource/getViewList/
  */
 const getTableFieldList = (sourceId = '-1', tableName = '', flag = false) => get(`/datasource//getFieldList/table/${sourceId}/${tableName}`, {}, flag)
 
-/**
- * 获取数据源下视图字段列表
- * @param sourceId
- * @param viewName
- * @param flag
- * @returns {Promise<*>}
- */
-const getViewFieldList = (sourceId = '-1', viewName = '', flag = false) => get(`/datasource//getFieldList/view/${sourceId}/${viewName}`, {}, flag)
-
 export {
   add,
   update,
@@ -103,6 +94,5 @@ export {
   sourceRemove,
   getSourceTable,
   getSourceView,
-  getTableFieldList,
-  getViewFieldList
+  getTableFieldList
 }

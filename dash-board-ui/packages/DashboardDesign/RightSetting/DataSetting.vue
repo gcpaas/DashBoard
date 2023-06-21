@@ -700,7 +700,7 @@ export default {
     }
   },
   mounted () {
-    if (this.config.dataSource && this.config.dataSource.businessKey) {
+    if (this.config && this.config.dataSource && this.config.dataSource.businessKey) {
       this.getDataSetDetailsById(this.config.dataSource.businessKey, 'initial')
     }
   },

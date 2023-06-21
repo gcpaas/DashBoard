@@ -1,8 +1,5 @@
 import Icon from 'packages/assets/images/bigScreenIcon/export'
-// import _ from 'lodash'
 export default function getComponentConfig (type) {
-  // const _type = _.upperFirst(type)
-  // const className = `com.gccloud.starter.lowcode.page.bigscreen.components.${_type}Chart`
   switch (type) {
     case 'bigNumber':
       return {
