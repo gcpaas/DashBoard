@@ -388,36 +388,13 @@ export default {
         ]?.updateChartData(_.cloneDeep(config))
       }
     },
-    onSelectArea (area) {
-      const { startX, startY, endX, endY } = area
-      // 计算所有在此区域中的组件，如果在此区域中，将其code添加到activeCodes数组中
-      const activeCodes = this.chartList
-        ?.filter((chart) => {
-          const { x, y, w, h } = chart
-          return startX <= x && x + w <= endX && startY <= y && y + h <= endY
-        })
-        ?.map((chart) => chart.code)
-      this.changeActiveCodes(activeCodes)
-    },
     changeStart ({ x, y }) {
       this.ruleStartX = x
       this.ruleStartY = y
     },
-    // 保存并预览
-    saveAndPreview () {
-      this.$refs.PageTopSetting.execRun()
-    },
     // 保存
     save () {
       this.$refs.PageTopSetting.save('saveLoading')
-    },
-    changeScreenZoom (zoom) {
-      // 自适应
-      if (zoom === 'auto') {
-        this.$refs.Rules.initZoom()
-      } else {
-        this.changeZoom(zoom)
-      }
     },
     updateRightVisiable (visiable) {
       this.rightVisiable = visiable

@@ -160,11 +160,6 @@ export default {
         style.remove()
       }
     },
-    resetPresetLineDelay () {
-      setTimeout(() => {
-        this.resetPresetLine()
-      }, 500)
-    },
     // 点击当前组件时打开右侧面板
     openRightPanel (config) {
       this.$emit('openRightPanel', config)
@@ -177,24 +172,6 @@ export default {
       if (transferData) {
         this.addChart(transferData, { x: e?.x, y: e?.y })
       }
-    },
-    /**
-     * 改变组件大小
-     * @param x
-     * @param y
-     * @param width
-     * @param height
-     * @param chart
-     */
-    onResize (x, y, width, height, chart) {
-      chart.x = x
-      chart.y = y
-      chart.w = width
-      chart.h = height
-      this.changeGridShow(true)
-      this.setPresetLine({
-        ...chart
-      })
     },
     /**
      *

@@ -36,7 +36,7 @@ import paramsMixins from 'packages/js/mixins/paramsMixins'
 import linkageMixins from 'packages/js/mixins/linkageMixins'
 import Empty from './Empty'
 export default {
-  name: 'Rank',
+  name: 'DashboardScrollRanking',
   mixins: [paramsMixins, commonMixins, linkageMixins],
   props: {
     config: {
