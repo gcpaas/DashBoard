@@ -173,27 +173,6 @@ export default {
         this.addChart(transferData, { x: e?.x, y: e?.y })
       }
     },
-    /**
-     *
-     * @param x
-     * @param y
-     * @param chart
-     */
-    onDrag (x, y, chart) {
-      // 防止事件冒泡
-      event.stopPropagation()
-      if (chart.group) {
-        // 查找和自己是一个组合的组件
-        this.dragGroupChart(x, y, chart)
-      } else {
-        chart.x = x
-        chart.y = y
-      }
-      this.changeGridShow(true)
-      this.setPresetLine({
-        ...chart
-      })
-    },
     resizestop (i, height, width) {
       const chart = this.chartList?.find((item) => item.code === i)
       const newChart = {
@@ -232,12 +211,6 @@ export default {
       this.changeGridShow(false)
       this.freeze = false
       this.saveTimeLine(`拖拽${chart?.title}`)
-    },
-    // 辅助线
-    getRefLineParams (params) {
-      const { vLine, hLine } = params
-      this.vLine = vLine
-      this.hLine = hLine
     },
     // 新增元素
     addChart (chart, position) {
@@ -283,60 +256,6 @@ export default {
       config.key = config.code
       const index = this.chartList.length
       this.addChatInLayout(config, index, this.chartList)
-    },
-    /**
-     * 拖拽相同组合的组件
-     * @param x 组合元素当前x
-     * @param y 组合元素当前y
-     * @param chart
-     */
-    dragGroupChart (x, y, chart) {
-      if (chart.group) {
-        const diffX = x - chart.x
-        const diffY = y - chart.y
-        const group = chart.group
-        // 找到相同group的组件，并找到边界
-        const groupChartList = this.chartList.filter(
-          (groupChart) => groupChart.group === group
-        )
-        const groupMinX = Math.min(
-          ...groupChartList?.map((groupChart) => groupChart.x + diffX)
-        )
-        const groupMinY = Math.min(
-          ...groupChartList?.map((groupChart) => groupChart.y + diffY)
-        )
-        const groupMaxX = Math.max(
-          ...groupChartList?.map(
-            (groupChart) => groupChart.x + diffX + groupChart.w
-          )
-        )
-        const groupMaxY = Math.max(
-          ...groupChartList?.map(
-            (groupChart) => groupChart.y + diffY + groupChart.h
-          )
-        )
-        // 如果其中某个组件超出画布，则不移动 (此处无法阻止移动，故在拖拽结束后重置位置)
-        if (
-          (groupMinX <= 0 ||
-            groupMinY <= 0 ||
-            groupMaxX >= this.pageConfig.w ||
-            groupMaxY >= this.pageConfig.h) &&
-          // 偏移的绝对值要大于0
-          (Math.abs(diffX) > 0 || Math.abs(diffY) > 0)
-        ) {
-          this.freeze = true
-          return
-        }
-
-        // 移动相应的diff距离
-        groupChartList?.map((groupChart) => {
-          this.changeChartConfig({
-            ...groupChart,
-            x: groupChart.x + diffX,
-            y: groupChart.y + diffY
-          })
-        })
-      }
     },
 
     addChatInLayout (item, index, layout) {
