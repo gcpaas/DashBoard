@@ -305,7 +305,8 @@ export default {
 .db-render-wrap {
   position: relative;
   background-size: cover;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   .drag-item {
     cursor: move;
