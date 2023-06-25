@@ -5,7 +5,7 @@
   >
     <el-scrollbar class="data-set-scrollbar">
       <div class="header">
-        <el-page-header class="bs-el-page-header">
+        <el-page-header class="db-el-page-header">
           <template slot="content">
             <div class="page-header">
               <div class="page-header-left">
@@ -13,7 +13,7 @@
               </div>
               <div class="page-header-right">
                 <el-button
-                  class="bs-el-button-default"
+                  class="db-el-button-default"
                   @click="openNewWindow('https://www.yuque.com/chuinixiongkou/bigscreen/groovy_dataset')"
                 >
                   帮助
@@ -26,7 +26,7 @@
                   保存
                 </el-button>
                 <el-button
-                  class="bs-el-button-default"
+                  class="db-el-button-default"
                   @click="goBack"
                 >
                   返回
@@ -53,7 +53,7 @@
                 >
                   <el-input
                     v-model="dataForm.name"
-                    class="bs-el-input"
+                    class="db-el-input"
                     clearable
                     :disabled="!isEdit"
                   />
@@ -67,8 +67,8 @@
                   <el-select
                     ref="selectParentName"
                     v-model="dataForm.typeId"
-                    class="bs-el-select"
-                    popper-class="bs-el-select"
+                    class="db-el-select"
+                    popper-class="db-el-select"
                     clearable
                     :disabled="!isEdit"
                     @clear="clearType"
@@ -89,7 +89,7 @@
                           :default-expand-all="true"
                           :highlight-current="true"
                           :expand-on-click-node="false"
-                          class="bs-el-tree"
+                          class="db-el-tree"
                           @node-click="selectParentCategory"
                         >
                           <span
@@ -118,7 +118,7 @@
                 >
                   <el-input
                     v-model="dataForm.remark"
-                    class="bs-el-input"
+                    class="db-el-input"
                     :disabled="!isEdit"
                   />
                 </el-form-item>
@@ -153,7 +153,7 @@
         >
           <div class="right-setting">
             <!-- <div class="paramConfig">
-              <div class="title-style bs-title-style">
+              <div class="title-style db-title-style">
                 方法参数
                 <el-button
                   type="text"
@@ -163,7 +163,7 @@
                   配置
                 </el-button>
               </div>
-              <div class="field-wrap bs-field-wrap bs-scrollbar">
+              <div class="field-wrap db-field-wrap db-scrollbar">
                 <div
                   v-for="param in dataForm.config.paramsList"
                   :key="param.name"
@@ -188,7 +188,7 @@
               </div>
             </div> -->
             <div class="structure">
-              <div class="title-style bs-title-style">
+              <div class="title-style db-title-style">
                 输出字段
                 <el-button
                   type="text"
@@ -198,7 +198,7 @@
                   配置
                 </el-button>
               </div>
-              <div class="field-wrap bs-field-wrap bs-scrollbar">
+              <div class="field-wrap db-field-wrap db-scrollbar">
                 <div
                   v-for="(field, key) in outputFieldList"
                   :key="key"
@@ -235,14 +235,14 @@
         </div>
         <div
           v-loading="tableLoading"
-          class="bs-table-box is-Edit bs-scrollbar"
+          class="db-table-box is-Edit db-scrollbar"
         >
           <el-table
             align="center"
             :data="dataPreviewList"
             max-height="400"
             :border="true"
-            class="bs-el-table bs-scrollbar"
+            class="db-el-table db-scrollbar"
           >
             <el-table-column
               v-for="(value, key) in dataPreviewList[0]"
@@ -269,13 +269,13 @@
             label="数据预览"
             name="data"
           >
-            <div class="bs-table-box">
+            <div class="db-table-box">
               <el-table
                 align="center"
                 :data="dataPreviewList"
                 max-height="400"
                 :border="true"
-                class="bs-el-table"
+                class="db-el-table"
               >
                 <el-table-column
                   v-for="(value, key) in dataPreviewList[0]"
@@ -297,7 +297,7 @@
             label="数据集结构"
             name="structure"
           >
-            <div class="bs-table-box">
+            <div class="db-table-box">
               <el-table
                 max-height="400"
                 :data="outputFieldList"
@@ -320,7 +320,7 @@
                       v-if="isEdit"
                       v-model="scope.row.fieldDesc"
                       size="small"
-                      class="labeldsc bs-el-input"
+                      class="labeldsc db-el-input"
                     />
                     <span v-else>{{ scope.row.fieldDesc }}</span>
                   </template>
@@ -763,7 +763,7 @@ export default {
 .title-style {
   padding: 8px 12px;
   background-color: #f6f7fb;
-  border-left: 5px solid var(--bs-el-color-primary);
+  border-left: 5px solid var(--db-el-color-primary);
   margin: 16px 16px 0 0;
 }
 
@@ -818,11 +818,11 @@ export default {
 .result-view {
   font-size: 14px;
   font-weight: 600;
-  color: var(--bs-el-text);
+  color: var(--db-el-text);
   position: relative;
   padding: 16px 0;
   padding-left: 12px;
-  border-bottom: 1px solid var(--bs-background-1);
+  border-bottom: 1px solid var(--db-background-1);
 
   &::before {
     content: "";
@@ -831,11 +831,11 @@ export default {
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    border-left: 4px solid var(--bs-el-color-primary);
+    border-left: 4px solid var(--db-el-color-primary);
   }
 }
 
-/deep/ .bs-table-box.is-Edit .el-table {
+/deep/ .db-table-box.is-Edit .el-table {
   max-height: unset !important;
 
   .el-table__body-wrapper {
@@ -843,7 +843,7 @@ export default {
   }
 }
 
-.bs-table-box {
+.db-table-box {
   padding: 0;
   height: 100% !important;
   margin-bottom: 0 !important;

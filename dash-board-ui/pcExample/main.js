@@ -11,8 +11,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/styles/index.scss'
 import { registerConfig } from '@gcpaas/dash-board-ui'
 import remoteComponents from '@/remoteComponents/exports.js'
+import customDatasetComponents from '@/customDatasetComponents/exports.js'
 Vue.use(ElementUI, { size: 'mini' })
-
 registerConfig(
   {
     routers: {
@@ -37,7 +37,9 @@ registerConfig(
     },
     customPlots: [],
     // 远程组件列表
-    remoteComponents
+    remoteComponents,
+    customDatasetComponents
+
   },
   router
 )
@@ -46,7 +48,7 @@ promise.polyfill()
 // 自定义指令
 Vue.use(ElementUI, { size: 'mini' })
 Vue.config.productionTip = false
-
+console.log('remoteComponents', remoteComponents)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
