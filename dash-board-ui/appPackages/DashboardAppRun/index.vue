@@ -221,7 +221,7 @@ export default {
     }
     .render-item-mid {
       position: relative;
-      height: 280px;
+      height: 218px;
     }
     .render-item-xmid {
       position: relative;
