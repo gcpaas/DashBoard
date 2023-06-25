@@ -638,7 +638,20 @@ export default {
             }
           })
         }
-
+        // 如果脚本有变化，生成的keys和outputFieldList的长度不一致，就重新生成outputFieldList，仅添加变化的那个字段，其余的不变化
+        if (this.outputFieldList.length !== keys.length) {
+          const newKeys = keys.filter(item => {
+            return !this.outputFieldList.some(key => {
+              return key.fieldName === item
+            })
+          })
+          newKeys.forEach(item => {
+            this.outputFieldList.push({
+              fieldName: item,
+              fieldDesc: ''
+            })
+          })
+        }
         if (this.outputFieldList.length && this.fieldDesc && !isInit) {
           this.buildFieldDesc()
         }
