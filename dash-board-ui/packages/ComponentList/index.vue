@@ -295,7 +295,6 @@ export default {
           .then((data) => {
             this.list = data.list
             this.totalCount = data.totalCount
-            console.log(this.list)
           })
           .finally(() => {
             this.loading = false
@@ -311,7 +310,6 @@ export default {
           .then((data) => {
             this.list = data.list
             this.totalCount = data.totalCount
-            console.log(this.list)
           })
           .finally(() => {
             this.loading = false

@@ -197,7 +197,6 @@ export default {
       const code = this.$route.query.code
       if (code) {
         getBizComponentInfo(code).then(data => {
-          console.log('data', data)
           this.form = {
             ...data,
             name: data.name,

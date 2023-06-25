@@ -48,7 +48,6 @@ promise.polyfill()
 // 自定义指令
 Vue.use(ElementUI, { size: 'mini' })
 Vue.config.productionTip = false
-console.log('remoteComponents', remoteComponents)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
