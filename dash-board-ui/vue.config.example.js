@@ -42,7 +42,7 @@ module.exports = {
   },
   publicPath:
     process.env.VUE_APP_HISTORY === 'y' ? process.env.VUE_APP_BASE : './',
-  outputDir: 'dash-board-ui',
+  outputDir: 'dashboard',
   assetsDir: 'static',
   lintOnSave: false,
   productionSourceMap: false,
