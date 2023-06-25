@@ -7,14 +7,14 @@
       append-to-body
       :close-on-click-modal="false"
       :before-close="handleClose"
-      class="bs-dialog-wrap bs-el-dialog"
+      class="db-dialog-wrap db-el-dialog"
     >
-      <div class="bs-table-box">
+      <div class="db-table-box">
         <el-table
           :data="insideFieldList"
           :border="true"
           align="center"
-          class="bs-el-table"
+          class="db-el-table"
         >
           <el-empty slot="empty" />
           <el-table-column
@@ -32,7 +32,7 @@
               <el-input
                 v-model="scope.row.fieldDesc"
                 size="small"
-                class="labeldsc bs-el-input"
+                class="labeldsc db-el-input"
               />
             </template>
           </el-table-column>
@@ -43,7 +43,7 @@
         class="dialog-footer"
       >
         <el-button
-          class="bs-el-button-default"
+          class="db-el-button-default"
           @click="cancelField"
         >
           取消

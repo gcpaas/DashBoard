@@ -216,6 +216,7 @@
 
 <script>
 import TypeTree from './TypeTree.vue'
+import JsDataSet from './JsDataSet/JsDataSet.vue'
 import JsonEditForm from './JsonEditForm.vue'
 import table from 'packages/js/utils/table.js'
 import ScriptEditForm from './ScriptEditForm.vue'
@@ -238,7 +239,8 @@ export default {
     CustomEditForm,
     JsonEditForm,
     StoredProcedureEditForm,
-    ScriptEditForm
+    ScriptEditForm,
+    JsDataSet
   },
   mixins: [pageMixins],
   props: {
@@ -463,7 +465,8 @@ export default {
         { name: '自助数据集', datasetType: 'custom', componentName: 'CustomEditForm' },
         { name: '存储过程数据集', datasetType: 'storedProcedure', componentName: 'StoredProcedureEditForm' },
         { name: 'JSON数据集', datasetType: 'json', componentName: 'JsonEditForm' },
-        { name: '脚本数据集', datasetType: 'script', componentName: 'ScriptEditForm' }
+        { name: '脚本数据集', datasetType: 'script', componentName: 'ScriptEditForm' },
+        { name: 'JS数据集', datasetType: 'js', componentName: 'JsDataSet' }
       ]
       // 将获得到的远程数据集进行组装
       window.BS_CONFIG?.customDatasetComponents.forEach((item) => {

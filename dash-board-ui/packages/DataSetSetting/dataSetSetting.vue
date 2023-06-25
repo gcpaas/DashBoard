@@ -110,7 +110,7 @@ export default {
     min-height: 400px;
 
     .el-table {
-      max-height: 300px;
+      max-height: 295px;
     }
 
     .db-table-box {
@@ -133,10 +133,14 @@ export default {
 
     ::v-deep .db-el-pagination {
       right: 6px !important;
+      margin-bottom: 10px;
     }
 
-    ::v-deep .data-set-scrollbar {
-        height: 515px !important;
+    // ::v-deep .data-set-scrollbar {
+    //     height: 515px !important;
+    // }
+    ::v-deep .el-scrollbar{
+      height: auto !important;
     }
   }
 }
