@@ -40,7 +40,9 @@ export default {
     const type = this.$route?.query?.type
     if (type) {
       this.activeType = type
-      this.$emit('getPageInfo', type)
+      this.$nextTick(() => {
+        this.$emit('getPageInfo', type)
+      })
     }
   },
   methods: {
