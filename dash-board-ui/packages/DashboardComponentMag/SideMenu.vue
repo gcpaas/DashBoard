@@ -36,20 +36,24 @@ export default {
       activeType: 'component'
     }
   },
-  mounted () {
+  created () {
     const type = this.$route?.query?.type
     if (type) {
-      this.activeType = type
-      this.$nextTick(() => {
-        this.$emit('getPageInfo', type)
-      })
+      this.componentHandle(this.componentList.find(item => item.type === type))
+    } else {
+      this.componentHandle(this.componentList[0])
     }
   },
   methods: {
     // 点击左侧组件
     componentHandle (com) {
       this.activeType = com.type
-      this.$emit('getPageInfo', com.type)
+      this.$router.push({
+        path: window.DS_CONFIG?.routers?.componentUrl || '/big-screen-components',
+        query: {
+          type: com.type
+        }
+      })
     }
   }
 }

@@ -1,20 +1,13 @@
 <template>
   <div class="right-screen-list-wrap">
-    <ComponentList
-      :catalog-info="catalogInfo"
-    />
+    <ComponentList />
   </div>
 </template>
 <script>
 import ComponentList from 'packages/ComponentList'
 export default {
   name: '',
-  props: {
-    catalogInfo: {
-      type: String,
-      default: ''
-    }
-  },
+  props: { },
   components: { ComponentList },
   data () {
     return {
