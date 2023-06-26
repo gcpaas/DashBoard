@@ -134,7 +134,7 @@
                 ref="targetInSql"
                 v-model="dataForm.config.script"
                 :options="codemirrorOption"
-                style="margin-top: 2px"
+                style="margin-top: 2px;border: 1px solid rgb(232, 232, 232);"
               />
             </div>
             <div style="text-align: center; padding: 16px 0;">
@@ -358,7 +358,7 @@ import { nameCheckRepeat, datasetAdd, datasetUpdate, getDataset, getCategoryTree
 import { codemirror } from 'vue-codemirror'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/lib/codemirror.css'
-import 'codemirror/theme/nord.css'
+import 'codemirror/theme/eclipse.css'
 export default {
   name: 'JsDataSet',
   components: {
@@ -424,7 +424,7 @@ export default {
         mode: 'text/javascript',
         lineNumbers: true,
         lineWrapping: true,
-        theme: 'nord',
+        theme: 'eclipse',
         extraKey: { Ctrl: 'autocomplete' },
         hintOptions: {
           completeSingle: true
