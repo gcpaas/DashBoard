@@ -57,7 +57,7 @@ export default {
       // key和code相等，说明是一进来刷新，调用list接口
       if (this.config.code === this.config.key || this.isPreview) {
         // 改变样式
-        config = this.changeStyle(config)
+        config = this.changeStyle(config) ? this.changeStyle(config) : config
         // 改变数据
         config = this.changeDataByCode(config)
       } else {
@@ -152,14 +152,15 @@ export default {
         })
       })
     },
-    buildOption (config, data) {
+    dataFormatting (config, data) {
       // 覆盖
     },
     newChart (option) {
       // 覆盖
     },
     changeStyle (config) {
-      // 覆盖
+      // this.changeChartConfig(config)
+      // return config
     }
   }
 }

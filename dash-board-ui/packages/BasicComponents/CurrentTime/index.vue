@@ -30,6 +30,7 @@
 <script>
 import moment from 'moment'
 import paramsMixins from 'packages/js/mixins/paramsMixins'
+import { mapMutations } from 'vuex'
 export default {
   name: 'CurrentTime',
   mixins: [paramsMixins],
@@ -56,6 +57,13 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      changeChartConfig: 'dashboard/changeChartConfig'
+    }),
+    changeStyle (config) {
+      // this.changeChartConfig(config)
+      this.getCurrentTime(config.dateFormat)
+    },
     // 实时显示当前系统时间
     getCurrentTime (dateFormat) {
       if (this.timer) {
