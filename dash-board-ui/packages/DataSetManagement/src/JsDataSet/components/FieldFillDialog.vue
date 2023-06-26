@@ -7,9 +7,9 @@
       width="420px"
       append-to-body
       :close-on-click-modal="false"
-      class="bs-dialog-wrap bs-el-dialog"
+      class="db-dialog-wrap db-el-dialog"
     >
-      <p style="color:var(--bs-el-text);line-height: 24px;padding-left: 10px;display: flex;">
+      <p style="color:var(--db-el-text);line-height: 24px;padding-left: 10px;display: flex;">
         <i
           class="el-icon-warning"
           style="color: #E6A23C;font-size: 24px;margin-right: 5px;"
@@ -21,13 +21,13 @@
         class="dialog-footer"
       >
         <el-button
-          class="bs-el-button-default"
+          class="db-el-button-default"
           @click="fieldDescFill"
         >
           使用字段名填充
         </el-button>
         <el-button
-          class="bs-el-button-default"
+          class="db-el-button-default"
           @click="fieldDescEdit"
         >
           进入编辑

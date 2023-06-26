@@ -7,15 +7,15 @@
       append-to-body
       :close-on-click-modal="false"
       :before-close="handleClose"
-      class="bs-dialog-wrap bs-el-dialog"
+      class="db-dialog-wrap db-el-dialog"
     >
-      <div class="bs-table-box">
+      <div class="db-table-box">
         <el-table
           ref="singleTable"
           :data="paramsList"
           :border="true"
           align="center"
-          class="bs-el-table"
+          class="db-el-table"
         >
           <el-empty slot="empty" />
           <el-table-column
@@ -26,7 +26,7 @@
             <template slot-scope="scope">
               <el-input
                 v-model="scope.row.name"
-                class="bs-el-input"
+                class="db-el-input"
                 placeholder="请输入名称"
                 clearable
                 @change="checkParamsName(scope.row)"
@@ -43,8 +43,8 @@
             <template slot-scope="scope">
               <el-select
                 v-model="scope.row.type"
-                popper-class="bs-el-select"
-                class="bs-el-select"
+                popper-class="db-el-select"
+                class="db-el-select"
                 placeholder="请选择"
               >
                 <el-option
@@ -90,7 +90,7 @@
               <el-input
                 v-else
                 v-model="scope.row.value"
-                class="bs-el-input"
+                class="db-el-input"
                 clearable
                 placeholder="请输入值"
               />
@@ -105,7 +105,7 @@
               <el-input
                 v-model="scope.row.remark"
                 clearable
-                class="bs-el-input"
+                class="db-el-input"
                 placeholder="请输入备注"
               />
             </template>
@@ -143,7 +143,7 @@
         class="dialog-footer"
       >
         <el-button
-          class="bs-el-button-default"
+          class="db-el-button-default"
           @click="cancel"
         >
           取消
