@@ -87,8 +87,8 @@ export default {
           size: size,
           type: config.type
         }).then((data) => {
-          this.config = this.dataFormatting(config, data)
-          // this.changeChartConfig(config)
+          this.dataFormatting(config, data)
+          this.changeChartConfig(config)
         }).catch((err) => {
           console.log(err)
         }).finally(() => {
@@ -143,7 +143,7 @@ export default {
       }
       return new Promise((resolve, reject) => {
         getUpdateChartInfo(params).then((data) => {
-          config = this.dataFormatting(config, data)
+          this.dataFormatting(config, data)
           this.changeChartConfig(config)
         }).catch(err => {
           console.log(err)
