@@ -3,7 +3,6 @@
  * @Date: 2023-03-24 17:10:43
  * @Author: xing.heng
  */
-import _ from 'lodash'
 import { mapMutations, mapState } from 'vuex'
 import { getChatInfo, getUpdateChartInfo } from '../api/bigScreenApi'
 export default {
@@ -23,6 +22,7 @@ export default {
     }
   },
   mounted () {
+    this.chartInit()
   },
   methods: {
     ...mapMutations({
@@ -31,27 +31,6 @@ export default {
     /**
      * 初始化组件
      */
-    // chartInit () {
-    // 初始化组件和数据，若自己的组件的初始化和数据处理不一样，可重写该方法
-    // 如果key和code相等，说明是一进来刷新，调用list，否则是更新，调用 chart
-    // 或者是组件联动,也需要调用/chart/data/list更新
-    // if (this.config.code === this.config.key || this.isPreview) {
-    //   // 根据数据集初始化的组件
-    //   if (this.isPreview) {
-    //     this.getCurrentOption().then(({ config, data }) => {
-    //       config = this?.buildOption(config, data)
-    //       if (config) {
-    //         this.changeChartConfig(config)
-    //         this?.newChart(config.option)
-    //       }
-    //     })
-    //   } else {
-    //     this.updateChartData(this.config)
-    //   }
-    // } else {
-    //   this?.newChart(this.config.option)
-    // }
-    // },
     chartInit () {
       let config = this.config
       // key和code相等，说明是一进来刷新，调用list接口
@@ -96,34 +75,6 @@ export default {
         })
       })
     },
-    /**
-     *  根据 chatCode 获取后端返回的数据list
-     * @param pageCode
-     * @param chartCode
-     * @param type
-     * @param current
-     * @param size
-     * @returns {Promise<*>}
-     */
-    // async getDataByCode (
-    //   pageCode,
-    //   chartCode,
-    //   type,
-    //   current = 1,
-    //   size = 10
-    // ) {
-    //   let parentCode
-    //   const data = await getChatInfo({
-    //     innerChartCode: parentCode ? chartCode : undefined,
-    //     chartCode: parentCode || chartCode,
-    //     current: current,
-    //     pageCode: pageCode,
-    //     size: size,
-    //     type: type
-    //   })
-    //   return data
-    // },
-
     /**
      * @description: 更新chart
      * @param {Object} config

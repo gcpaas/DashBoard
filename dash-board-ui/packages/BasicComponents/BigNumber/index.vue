@@ -78,7 +78,6 @@ export default {
   },
   watch: {},
   mounted () {
-    this.chartInit()
   },
   methods: {
     dataFormatting (config, data) {
@@ -96,15 +95,6 @@ export default {
       }
       return config
     }
-    // changeData () {
-    //   this.getCurrentOption().then(({ data, config }) => {
-    //     if (data.success) {
-    //       const _config = this.buildOption(config, data)
-    //       this.config.option.data = _config.option.data
-    //       this.config.customize.numberFormat = _config.customize.numberFormat
-    //     }
-    //   })
-    // }
   }
 }
 </script>

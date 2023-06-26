@@ -153,7 +153,7 @@ export default {
         })
       })
     },
-    buildOption (config, data) {
+    dataFormatting (config, data) {
       config.option.tableData = data?.data
       const filteredData = {}
       const columnData = data?.columnData || {}

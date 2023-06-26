@@ -69,7 +69,6 @@ export default {
   },
   watch: {},
   mounted () {
-    this.chartInit()
   },
   methods: {
     numberToCurrencyNo (value) {
@@ -94,7 +93,7 @@ export default {
       }
       return intPartFormat + floatPart
     },
-    buildOption (config, data) {
+    dataFormatting (config, data) {
       const metricFieldList = config.dataSource.metricFieldList || []
       let multipleDataList = []
       // 当返回的数据状态为成功时
