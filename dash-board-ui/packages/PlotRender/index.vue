@@ -68,7 +68,6 @@ export default {
     this.plotList = [...this.plotList, ...getCustomPlots()]
   },
   mounted () {
-    this.chartInit()
   },
   beforeDestroy () {
     if (this.chart) {
