@@ -18,7 +18,6 @@ import commonMixins from 'packages/js/mixins/commonMixins'
 import { mapState, mapMutations } from 'vuex'
 import * as g2Plot from '@antv/g2plot'
 import plotList, { getCustomPlots } from '../G2Plots/plotList'
-import { getChatInfo, getUpdateChartInfo } from '../js/api/bigScreenApi'
 export default {
   name: 'PlotCustomComponent',
   mixins: [commonMixins, linkageMixins],
@@ -110,50 +109,6 @@ export default {
       this.chart.render()
       this.registerEvent()
     },
-    /**
-       * @description: 只更新数据
-       */
-    // updateData () {
-    //   this.getCurrentOption().then(({ data, config }) => {
-    //     if (data.success) {
-    //       // 成功后更新数据
-    //       config = this.buildOption(config, data)
-    //       const dataKey = config.option.dataKey
-    //       // eslint-disable-next-line no-inner-declarations
-    //       function getValueFromOption (option, dataKey) {
-    //         try {
-    //           return eval('option.' + dataKey)
-    //         } catch (error) {
-    //           return undefined
-    //         }
-    //       }
-    //       const newData = getValueFromOption(config.option, dataKey)
-    //       if (this.chart) {
-    //         this.chart.changeData(newData)
-    //       }
-    //     }
-    //   })
-    // },
-    /**
-       * 更新组件
-       */
-    // updateChart () {
-    //   if (this.isPreview) {
-    //     this.getCurrentOption().then(({ data, config }) => {
-    //       if (data.success) {
-    //         // 成功后更新数据
-    //         config = this.buildOption(config, data)
-    //         this.changeChartConfig(config)
-    //         this.chart.update(config.option)
-    //       } else {
-    //         config.option.data = this.plotList.find(plot => plot.name === config.name)?.option.data
-    //         this.chart.update(config.option)
-    //       }
-    //     })
-    //   } else {
-    //     this.updateChartData(this.config)
-    //   }
-    // },
     /**
        * 注册事件
        */
