@@ -373,20 +373,25 @@ export default {
     },
     // 自定义属性更新
     updateSetting (config) {
-      config.key = new Date().getTime()
-      this.changeChartConfig(_.cloneDeep(config))
+      // config.key = new Date().getTime()
+      // this.changeChartConfig(_.cloneDeep(config))
+      this.$refs.Render?.$refs['RenderCard' + config.code][0]?.$refs[
+        config.code
+      ]?.changeStyle(_.cloneDeep(config))
     },
     // 动态属性更新
     updateDataSetting (config) {
-      if (
-        this.$refs.Render?.$refs['RenderCard' + config.code][0] &&
-        this.$refs.Render?.$refs['RenderCard' + config.code][0]?.$refs[config.code] &&
-        this.$refs.Render?.$refs['RenderCard' + config.code][0]?.$refs[config.code]?.updateChartData
-      ) {
-        this.$refs.Render?.$refs['RenderCard' + config.code][0]?.$refs[
-          config.code
-        ]?.updateChartData(_.cloneDeep(config))
-      }
+      config.key = new Date().getTime()
+      this.changeChartConfig(_.cloneDeep(config))
+      // if (
+      //   this.$refs.Render?.$refs['RenderCard' + config.code][0] &&
+      //   this.$refs.Render?.$refs['RenderCard' + config.code][0]?.$refs[config.code] &&
+      //   this.$refs.Render?.$refs['RenderCard' + config.code][0]?.$refs[config.code]?.updateChartData
+      // ) {
+      //   this.$refs.Render?.$refs['RenderCard' + config.code][0]?.$refs[
+      //     config.code
+      //   ]?.updateChartData(_.cloneDeep(config))
+      // }
     },
     changeStart ({ x, y }) {
       this.ruleStartX = x

@@ -81,7 +81,7 @@ export default {
     this.chartInit()
   },
   methods: {
-    buildOption (config, data) {
+    dataFormatting (config, data) {
       let dataList = ''
       if (data.data instanceof Array) {
         dataList = config.dataSource.metricField
@@ -95,16 +95,16 @@ export default {
         data: dataList
       }
       return config
-    },
-    updateData () {
-      this.getCurrentOption().then(({ data, config }) => {
-        if (data.success) {
-          const _config = this.buildOption(config, data)
-          this.config.option.data = _config.option.data
-          this.config.customize.numberFormat = _config.customize.numberFormat
-        }
-      })
     }
+    // changeData () {
+    //   this.getCurrentOption().then(({ data, config }) => {
+    //     if (data.success) {
+    //       const _config = this.buildOption(config, data)
+    //       this.config.option.data = _config.option.data
+    //       this.config.customize.numberFormat = _config.customize.numberFormat
+    //     }
+    //   })
+    // }
   }
 }
 </script>

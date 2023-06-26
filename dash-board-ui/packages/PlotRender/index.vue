@@ -18,6 +18,7 @@ import commonMixins from 'packages/js/mixins/commonMixins'
 import { mapState, mapMutations } from 'vuex'
 import * as g2Plot from '@antv/g2plot'
 import plotList, { getCustomPlots } from '../G2Plots/plotList'
+import { getChatInfo, getUpdateChartInfo } from '../js/api/bigScreenApi'
 export default {
   name: 'PlotCustomComponent',
   mixins: [commonMixins, linkageMixins],
@@ -78,80 +79,84 @@ export default {
   methods: {
     ...mapMutations('dashboard', ['changeChartConfig']),
     chartInit () {
-      // key和code相等，说明是一进来刷新，调用/chart/data/list
-      if (this.config.code === this.config.key || this.isPreview) {
-        // 先给默认数据, 渲染出图表
-        const config = _.cloneDeep(this.config)
-        // config.option = plotList.find(plot => plot.name === config.name)?.option
-        this.newChart(config.option)
-
-        // 再根据数据更新组件
-        this.updateChart()
+      let config = this.config
+      // key和code相等，说明是一进来刷新，调用list接口
+      if (this.isPreview) {
+        // 改变样式
+        config = this.changeStyle(config)
+        // 改变数据
+        this.changeDataByCode(config).then((res) => {
+          // 初始化图表
+          this.newChart(res)
+        }).catch(() => {})
       } else {
-        // 否则说明是更新或者复制
-        this.newChart(this.config.option)
+        // 否则说明是更新，这里的更新只指更新数据（改变样式时是直接调取changeStyle方法），因为更新数据会改变key,调用chart接口
+        this.changeData(config).then((res) => {
+          // 初始化图表
+          this.newChart(res)
+        })
       }
     },
     /**
-     * 构造chart
-     */
-    newChart (option) {
-      this.chart = new g2Plot[this.config.chartType](this.chatId, {
+       * 构造chart
+       */
+    newChart (config) {
+      this.chart = new g2Plot[config.chartType](this.chatId, {
         renderer: 'svg',
         // 仪表盘缩放状态下，点击准确
         supportCSSTransform: true,
-        ...option || this.config.option
+        ...config.option
       })
       this.chart.render()
       this.registerEvent()
     },
     /**
-     * @description: 只更新数据
-     */
-    updateData () {
-      this.getCurrentOption().then(({ data, config }) => {
-        if (data.success) {
-          // 成功后更新数据
-          config = this.buildOption(config, data)
-          const dataKey = config.option.dataKey
-          // eslint-disable-next-line no-inner-declarations
-          function getValueFromOption (option, dataKey) {
-            try {
-              return eval('option.' + dataKey)
-            } catch (error) {
-              return undefined
-            }
-          }
-          const newData = getValueFromOption(config.option, dataKey)
-          if (this.chart) {
-            this.chart.changeData(newData)
-          }
-        }
-      })
-    },
+       * @description: 只更新数据
+       */
+    // updateData () {
+    //   this.getCurrentOption().then(({ data, config }) => {
+    //     if (data.success) {
+    //       // 成功后更新数据
+    //       config = this.buildOption(config, data)
+    //       const dataKey = config.option.dataKey
+    //       // eslint-disable-next-line no-inner-declarations
+    //       function getValueFromOption (option, dataKey) {
+    //         try {
+    //           return eval('option.' + dataKey)
+    //         } catch (error) {
+    //           return undefined
+    //         }
+    //       }
+    //       const newData = getValueFromOption(config.option, dataKey)
+    //       if (this.chart) {
+    //         this.chart.changeData(newData)
+    //       }
+    //     }
+    //   })
+    // },
     /**
-     * 更新组件
-     */
-    updateChart () {
-      if (this.isPreview) {
-        this.getCurrentOption().then(({ data, config }) => {
-          if (data.success) {
-            // 成功后更新数据
-            config = this.buildOption(config, data)
-            this.changeChartConfig(config)
-            this.chart.update(config.option)
-          } else {
-            config.option.data = this.plotList.find(plot => plot.name === config.name)?.option.data
-            this.chart.update(config.option)
-          }
-        })
-      } else {
-        this.updateChartData(this.config)
-      }
-    },
+       * 更新组件
+       */
+    // updateChart () {
+    //   if (this.isPreview) {
+    //     this.getCurrentOption().then(({ data, config }) => {
+    //       if (data.success) {
+    //         // 成功后更新数据
+    //         config = this.buildOption(config, data)
+    //         this.changeChartConfig(config)
+    //         this.chart.update(config.option)
+    //       } else {
+    //         config.option.data = this.plotList.find(plot => plot.name === config.name)?.option.data
+    //         this.chart.update(config.option)
+    //       }
+    //     })
+    //   } else {
+    //     this.updateChartData(this.config)
+    //   }
+    // },
     /**
-     * 注册事件
-     */
+       * 注册事件
+       */
     registerEvent () {
       // 图表添加事件进行数据联动
       let formData = {}
@@ -165,21 +170,17 @@ export default {
         this.linkage(formData)
       })
     },
-    /**
-     * 组件的配置
-     * @returns {Promise<unknown>}
-     */
-    buildOption (config, data) {
-      config = _.cloneDeep(config)
-      // 遍历config.setting，将config.setting中的值赋值给config.option中对应的optionField
+    // 将config.setting的配置转化为option里的配置，这里之所以将转化的方法提出来，是因为在改变维度指标和样式的时候都需要转化
+    transformSettingToOption (config, type) {
+      let option = null
       config.setting.forEach(set => {
         if (set.optionField) {
           const optionField = set.optionField.split('.')
-          let option = config.option
+          option = config.option
           optionField.forEach((field, index) => {
             if (index === optionField.length - 1) {
               // 数据配置时，必须有值才更新
-              if ((set.tabName === 'data' && set.value) || set.tabName === 'custom') {
+              if (set.tabName === type && set.value) {
                 option[field] = set.value
               }
             } else {
@@ -188,9 +189,34 @@ export default {
           })
         }
       })
-      // eslint-disable-next-line no-unused-vars
+      config.option = option
+      return config
+    },
+    dataFormatting (config, data) {
+      // 获取到后端返回的数据，有则赋值
+      if (config.dataHandler) {
+        try {
+          // 此处函数处理data
+          eval(config.dataHandler)
+        } catch (e) {
+          console.error(e)
+        }
+      }
+      // 数据返回成功则赋值
+      if (data.success) {
+        config = this.transformSettingToOption(config, 'data')
+        config.option.data = data.data
+      } else {
+        // 数据返回失败则赋前端的模拟数据
+        config.option.data = this.plotList?.find(plot => plot.name === config.name)?.option?.data
+      }
+      return config
+    },
+    // 组件的样式改变，返回改变后的config
+    changeStyle (config) {
+      config = this.transformSettingToOption(config, 'custom')
+      // 这里定义了option和setting是为了保证在执行eval时,optionHandler、dataHandler里面可能会用到，
       const option = config.option
-      // eslint-disable-next-line no-unused-vars
       const setting = config.setting
       if (this.config.optionHandler) {
         try {
@@ -200,30 +226,120 @@ export default {
           console.error(e)
         }
       }
-      if (data.success) {
-        data = data.data
-        if (this.config.dataHandler) {
-          try {
-            // 此处函数处理data
-            eval(this.config.dataHandler)
-          } catch (e) {
-            console.error(e)
-          }
-        }
-        // eslint-disable-next-line no-undef
-        config.option = option
-        config.option.data = data
-      } else {
-        // 数据获取失败，使用前端配置中的默认数据
-        config.option.data = this.plotList?.find(plot => plot.name === this.config.name)?.option?.data
+      if (this.chart) {
+        this.chart.update(config.option)
       }
+      this.changeChartConfig(config)
       return config
     }
+    // // 通过list接口获取数据(初始化使用)
+    // changeDataByCode (config) {
+    //   let currentPage = 1
+    //   let size = 10
+    //   if (config?.option?.pagination) {
+    //     currentPage = config.option.pagination.currentPage
+    //     size = config.option.pagination.pageSize
+    //   }
+    //   return new Promise((resolve, reject) => {
+    //     getChatInfo({
+    //       innerChartCode: this.pageCode ? config.code : undefined,
+    //       chartCode: this.pageCode || config.code,
+    //       current: currentPage,
+    //       pageCode: this.pageCode,
+    //       size: size,
+    //       type: config.type
+    //     }).then((data) => {
+    //       config = this.dataFormatting(config, data)
+    //     }).catch((err) => {
+    //       console.log(err)
+    //     }).finally(() => {
+    //       resolve(config)
+    //     })
+    //   })
+    // },
+    // // 通过chart接口获取数据(更新使用)
+    // changeData (config) {
+    //   // 调接口获取后端返回的数据
+    //   const filterList = this.filterList
+    //   const params = {
+    //     chart: {
+    //       ...config,
+    //       option: undefined
+    //     },
+    //     current: 1,
+    //     pageCode: this.pageCode,
+    //     type: config.type,
+    //     filterList
+    //   }
+    //   return new Promise((resolve, reject) => {
+    //     getUpdateChartInfo(params).then((data) => {
+    //       config = this.dataFormatting(config, data)
+    //     }).catch(err => {
+    //       console.log(err)
+    //     }).finally(() => {
+    //       resolve(config)
+    //     })
+    //   })
+    // }
+    /**
+       * 组件的配置
+       * @returns {Promise<unknown>}
+       */
+    // buildOption (config, data) {
+    //   config = _.cloneDeep(config)
+    //   // 遍历config.setting，将config.setting中的值赋值给config.option中对应的optionField
+    //   config.setting.forEach(set => {
+    //     if (set.optionField) {
+    //       const optionField = set.optionField.split('.')
+    //       let option = config.option
+    //       optionField.forEach((field, index) => {
+    //         if (index === optionField.length - 1) {
+    //           // 数据配置时，必须有值才更新
+    //           if ((set.tabName === 'data' && set.value) || set.tabName === 'custom') {
+    //             option[field] = set.value
+    //           }
+    //         } else {
+    //           option = option[field]
+    //         }
+    //       })
+    //     }
+    //   })
+    //   // eslint-disable-next-line no-unused-vars
+    //   const option = config.option
+    //   // eslint-disable-next-line no-unused-vars
+    //   const setting = config.setting
+    //   if (this.config.optionHandler) {
+    //     try {
+    //       // 此处函数处理config
+    //       eval(this.config.optionHandler)
+    //     } catch (e) {
+    //       console.error(e)
+    //     }
+    //   }
+    //   if (data.success) {
+    //     data = data.data
+    //     if (this.config.dataHandler) {
+    //       try {
+    //         // 此处函数处理data
+    //         eval(this.config.dataHandler)
+    //       } catch (e) {
+    //         console.error(e)
+    //       }
+    //     }
+    //     // eslint-disable-next-line no-undef
+    //     config.option = option
+    //     config.option.data = data
+    //   } else {
+    //     // 数据获取失败，使用前端配置中的默认数据
+    //     config.option.data = this.plotList?.find(plot => plot.name === this.config.name)?.option?.data
+    //   }
+    //   return config
+    // }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/chartStyle.scss';
+  @import '~packages/assets/style/chartStyle.scss';
 
 </style>
