@@ -57,6 +57,9 @@ export default {
   mounted () {
   },
   methods: {
+    // 由于静态组件没有混入公共函数，所以需要定义一个changeStyle方法，以免报错
+    changeStyle () {
+    },
     goToLink (link) {
       if (link.target !== 'push' || link.url.indexOf('http://') > -1 || link.url.indexOf('https://') > -1) {
         window.open(link.url, link.target)
