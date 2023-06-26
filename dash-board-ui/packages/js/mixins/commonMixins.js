@@ -96,7 +96,7 @@ export default {
       return new Promise((resolve, reject) => {
         getUpdateChartInfo(params).then((data) => {
           config = this.dataFormatting(config, data)
-          this.changeChartConfig(config)
+          // this.changeChartConfig(config)
           if (this.chart) {
             this.chart.changeData(config.option.data)
           }
