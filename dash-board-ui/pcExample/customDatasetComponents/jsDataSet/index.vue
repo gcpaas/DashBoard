@@ -127,11 +127,10 @@
           </el-form>
           <div
             v-if="isEdit"
-            class="sql-config"
+            class="javascript-config"
           >
             <div>
               <codemirror
-                ref="targetInSql"
                 v-model="dataForm.config.script"
                 :options="codemirrorOption"
                 style="margin-top: 2px;border: 1px solid rgb(232, 232, 232);"
@@ -731,7 +730,7 @@ export default {
   }
 }
 
-.sql-config {
+.javascript-config {
   padding: 0 16px;
 }
 
