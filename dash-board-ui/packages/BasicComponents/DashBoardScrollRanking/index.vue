@@ -142,7 +142,6 @@ export default {
       padding: 0 16px 16px 16px;
       overflow-y: auto;
       height: calc(100% - 27px);
-      box-sizing: border-box;
       .chart-right-list{
         display: flex;
         align-items: center;
