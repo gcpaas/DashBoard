@@ -118,7 +118,6 @@ export default {
   },
   created () { },
   mounted () {
-    this.chartInit()
     if (this.config.customize.evenRowBackgroundColor && !this.config.customize.oddRowBackgroundColor) {
       this.config.customize.oddRowBackgroundColor = this.config.customize.bodyBackgroundColor
       this.config.customize.bodyBackgroundColor = ''

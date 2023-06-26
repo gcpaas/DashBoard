@@ -113,10 +113,9 @@ export default {
   },
   watch: {},
   mounted () {
-    this.chartInit()
   },
   methods: {
-    buildOption (config, data) {
+    dataFormatting (config, data) {
       let dataList = ''
       if (data.data instanceof Array) {
         dataList = config.dataSource.dimensionField

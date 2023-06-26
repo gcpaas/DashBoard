@@ -79,9 +79,10 @@ export default {
      * @description: 更新chart
      * @param {Object} config
      */
-    changeData (config) {
-      // 调接口获取后端返回的数据
-      const filterList = this.filterList
+    changeData (config, filterList) {
+      // debugger
+      // // 调接口获取后端返回的数据
+      // const filterList = this.filterList
       const params = {
         chart: {
           ...config,
@@ -90,12 +91,15 @@ export default {
         current: 1,
         pageCode: this.pageCode,
         type: config.type,
-        filterList
+        filterList: filterList || this.filterList
       }
       return new Promise((resolve, reject) => {
         getUpdateChartInfo(params).then((data) => {
           config = this.dataFormatting(config, data)
           this.changeChartConfig(config)
+          if (this.chart) {
+            this.chart.changeData(config.option.data)
+          }
         }).catch(err => {
           console.log(err)
         }).finally(() => {

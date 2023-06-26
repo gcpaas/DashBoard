@@ -54,7 +54,6 @@ export default {
   watch: {
   },
   mounted () {
-    // this.chartInit()
   },
   methods: {
     dataFormatting (config, data) {
