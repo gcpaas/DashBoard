@@ -2,7 +2,7 @@
   <div>
     <el-dialog
       :close-on-click-modal="false"
-      title="分组管理"
+      title="分组管11理"
       :visible.sync="formVisible"
       :append-to-body="true"
       destroy-on-close

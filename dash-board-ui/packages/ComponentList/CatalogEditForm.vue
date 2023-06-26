@@ -15,27 +15,27 @@
         label-width="100px"
       >
         <div class="top-search-wrap">
-        <el-input
-          v-model="searchKey"
-          class="db-el-input"
-          placeholder="请输入分组名称"
-          prefix-icon="el-icon-search"
-          clearable
-          @clear="reSearch"
-          @keyup.enter.native="reSearch"
-        />
-        <el-button
-          type="primary"
-          @click="reSearch"
-        >
-          搜索
-        </el-button>
-        <el-button
-          type="primary"
-          @click="addCatalog"
-        >
-          新增
-        </el-button>
+          <el-input
+            v-model="searchKey"
+            class="db-el-input"
+            placeholder="请输入分组名称"
+            prefix-icon="el-icon-search"
+            clearable
+            @clear="reSearch"
+            @keyup.enter.native="reSearch"
+          />
+          <el-button
+            type="primary"
+            @click="reSearch"
+          >
+            搜索
+          </el-button>
+          <el-button
+            type="primary"
+            @click="addCatalog"
+          >
+            新增
+          </el-button>
         </div>
         <el-table
           :key="randomKey"
@@ -146,7 +146,7 @@ export default {
     catalogType: {
       type: String,
       default: ''
-    },
+    }
   },
   data () {
     return {
