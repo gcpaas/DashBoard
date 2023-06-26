@@ -79,7 +79,7 @@ export default {
     chartInit () {
       let config = this.config
       // key和code相等，说明是一进来刷新，调用list接口
-      if (this.isPreview) {
+      if (this.config.code === this.config.key || this.isPreview) {
         // 改变样式
         config = this.changeStyle(config)
         // 改变数据

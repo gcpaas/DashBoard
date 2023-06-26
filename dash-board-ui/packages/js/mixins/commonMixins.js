@@ -59,8 +59,8 @@ export default {
       }
       return new Promise((resolve, reject) => {
         getChatInfo({
-          innerChartCode: this.pageCode ? config.code : undefined,
-          chartCode: this.pageCode || config.code,
+          // innerChartCode: this.pageCode ? config.code : undefined,
+          chartCode: config.code,
           current: currentPage,
           pageCode: this.pageCode,
           size: size,
