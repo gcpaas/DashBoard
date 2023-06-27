@@ -80,9 +80,6 @@ export default {
      * @param {Object} config
      */
     changeData (config, filterList) {
-      // debugger
-      // // 调接口获取后端返回的数据
-      // const filterList = this.filterList
       const params = {
         chart: {
           ...config,

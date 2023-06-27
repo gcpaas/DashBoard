@@ -168,7 +168,7 @@ export default {
       } else {
         config.option.columnData = columnData
       }
-      // this.$set(this.headerCellStyleObj, "backgroundColor", config.customize.headerBackgroundColor)
+      this.updateKey = new Date().getTime()
       return config
     }
   }

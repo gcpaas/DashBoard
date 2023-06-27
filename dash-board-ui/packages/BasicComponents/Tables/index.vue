@@ -123,16 +123,8 @@ export default {
       } else {
         config.option.columnData = columnData
       }
+      this.updateKey = new Date().getTime()
       return config
-    },
-    updateData () {
-      this.getCurrentOption().then(({ data, config }) => {
-        if (data.success) {
-          this.config.option.tableData = data?.data
-          this.config.option.columnData = data?.columnData || {}
-          this.$refs[config.code].doLayout()
-        }
-      })
     }
   }
 }
