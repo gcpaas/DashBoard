@@ -86,7 +86,6 @@ export default {
   },
   // 改变当前组件的xywh
   changeActiveItemWH(state, chart) {
-    console.log(state.activeItemConfig)
     if (chart.code === state.activeItemConfig.code) {
       state.activeItemConfig = {
         ...state.activeItemConfig,

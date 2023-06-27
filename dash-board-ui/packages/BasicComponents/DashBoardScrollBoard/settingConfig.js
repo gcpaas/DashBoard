@@ -9,7 +9,7 @@ export const settingConfig = {
   displayOption: {
     ...displayOption,
     headerField: {
-      enable: true
+      enable: false
     },
     metricField: {
       // 指标
