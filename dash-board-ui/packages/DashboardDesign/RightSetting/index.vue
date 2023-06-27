@@ -88,7 +88,7 @@ export default {
     configDataSource () {
       return {
         dataSource: _.cloneDeep(this.config.dataSource),
-        linkage: this.config?.linkage,
+        linkage: _.cloneDeep(this.config?.linkage),
         dataHandler: this.config?.dataHandler,
         dataSourceSetting: _.cloneDeep(this.config?.setting?.filter(item => item.tabName === 'data')) || []
       }
