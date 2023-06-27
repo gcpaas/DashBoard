@@ -15,6 +15,7 @@
       :header-cell-style="headerCellStyle"
       :cell-style="cellStyle"
       :row-class-name="tableRowClassName"
+      @row-click="rowClick"
     >
       <el-table-column
         v-for="(col, index) in config.option.columnData"
@@ -91,6 +92,10 @@ export default {
     this.tableRowStyle()
   },
   methods: {
+    // 表格点击事件
+    rowClick (row) {
+      this.linkage(row)
+    },
     // 表格行样式
     tableRowClassName ({ row, rowIndex }) {
       this.tableRowStyle()
