@@ -57,11 +57,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations({
-      changeChartConfig: 'dashboard/changeChartConfig'
-    }),
     changeStyle (config) {
-      // this.changeChartConfig(config)
       this.getCurrentTime(config.dateFormat)
     },
     // 实时显示当前系统时间

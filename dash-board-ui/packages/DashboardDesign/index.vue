@@ -373,14 +373,13 @@ export default {
     },
     // 自定义属性更新
     updateSetting (config) {
-      if(config.type==='map'){
-         config.key = new Date().getTime()
+      if (config.type === 'map') {
+        config.key = new Date().getTime()
       }
       this.changeChartConfig(_.cloneDeep(config))
       this.$refs.Render?.$refs['RenderCard' + config.code][0]?.$refs[
         config.code
       ]?.changeStyle(_.cloneDeep(config))
-
     },
     // 动态属性更新
     updateDataSetting (config) {
