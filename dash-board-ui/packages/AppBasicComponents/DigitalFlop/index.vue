@@ -129,14 +129,6 @@ export default {
         data: dataList
       }
       return config
-    },
-    updateData () {
-      this.getCurrentOption().then(({ data, config }) => {
-        if (data.success) {
-          const _config = this.buildOption(config, data)
-          this.config.option.data = _config.option.data
-        }
-      })
     }
   }
 }
