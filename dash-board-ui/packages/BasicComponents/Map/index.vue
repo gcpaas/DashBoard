@@ -77,7 +77,7 @@ export default {
         // 改变数据
         this.changeDataByCode(config).then((res) => {
           // 改变样式
-          config = this.changeStyle(res)
+          // config = this.changeStyle(res)
           this.newChart(config)
         }).catch(() => {})
       } else {
@@ -88,7 +88,190 @@ export default {
         })
       }
     },
-    changeStyle (config) {
+    // changeStyle (config) {
+    //   const option = {
+    //     // 背景颜色
+    //     backgroundColor: config.customize.backgroundColor,
+    //     geo: {
+    //       map: config.customize.scope,
+    //       label: {
+    //         // 通常状态下的样式
+    //         normal: {
+    //           show: config.customize.mapName,
+    //           textStyle: {
+    //             color: '#fff'
+    //           }
+    //         },
+    //         // 鼠标放上去的样式
+    //         emphasis: {
+    //           textStyle: {
+    //             color: '#fff'
+    //           }
+    //         }
+    //       },
+    //       // 地图区域的样式设置
+    //       itemStyle: {
+    //         normal: {
+    //           borderColor: config.customize.mapLineColor,
+    //           borderWidth: 1,
+    //           areaColor: config.customize.areaColor,
+    //           shadowColor: 'fffff',
+    //           shadowOffsetX: -2,
+    //           shadowOffsetY: 2,
+    //           shadowBlur: 10
+    //         },
+    //         // 鼠标放上去高亮的样式
+    //         emphasis: {
+    //           areaColor: '#389BB7',
+    //           borderWidth: 0
+    //         }
+    //       }
+    //     },
+    //     // 提示浮窗样式
+    //     tooltip: {
+    //       show: false,
+    //       trigger: 'item',
+    //       alwaysShowContent: false,
+    //       backgroundColor: config.customize.tooltipBackgroundColor,
+    //       borderColor: config.customize.borderColor,
+    //       hideDelay: 100,
+    //       triggerOn: 'mousemove',
+    //       enterable: true,
+    //       textStyle: {
+    //         color: '#DADADA',
+    //         fontSize: '12',
+    //         width: 20,
+    //         height: 30,
+    //         overflow: 'break'
+    //       },
+    //       showDelay: 100
+    //     },
+    //     series: config.customize.scatter
+    //       ? [
+    //         // {
+    //         //   type: 'effectScatter',
+    //         //   coordinateSystem: 'geo',
+    //         //   effectType: 'ripple',
+    //         //   showEffectOn: 'render',
+    //         //   rippleEffect: {
+    //         //     period: 10,
+    //         //     scale: 10,
+    //         //     brushType: 'fill'
+    //         //   },
+
+    //           //   hoverAnimation: true,
+    //           //   itemStyle: {
+    //           //     normal: {
+    //           //       color: 'rgba(255, 235, 59, .7)',
+    //           //       shadowBlur: 10,
+    //           //       shadowColor: '#333'
+    //           //     }
+    //           //   },
+    //           //   tooltip: {
+    //           //     formatter(params) {
+    //           //       return `<p style="text-align:center;line-height: 30px;height:30px;font-size: 14px;border-bottom: 1px solid #7A8698;">${
+    //           //         params.name
+    //           //       }</p>
+    //           //   <div style="line-height:22px;margin-top:5px">GDP<span style="margin-left:12px;color:#fff;float:right">${
+    //           //     params.data?.value[2] || '--'
+    //           //   }</span></div>`
+    //           //     },
+    //           //     show: true
+    //           //   },
+    //           //   zlevel: 1,
+    //           //   data: [
+    //           //     { name: '西藏自治区', value: [91.23, 29.5, 1] },
+    //           //     { name: '黑龙江省', value: [128.03, 47.01, 1007] },
+    //           //     { name: '北京市', value: [116.4551, 40.2539, 5007] }
+    //           //   ]
+    //           // }
+    //           {
+    //             type: 'scatter',
+    //             coordinateSystem: 'geo',
+    //             symbol: 'pin',
+    //             legendHoverLink: true,
+    //             symbolSize: [60, 60],
+    //             showEffectOn: 'render',
+    //             rippleEffect: {
+    //               brushType: 'stroke'
+    //             },
+    //             hoverAnimation: true,
+    //             zlevel: 1,
+    //             // 这里渲染标志里的内容以及样式
+    //             label: {
+    //               show: true,
+    //               formatter (value) {
+    //                 return value.data.value[2]
+    //               },
+    //               color: config.customize.scatterColor
+    //             },
+    //             // 标志的样式
+    //             itemStyle: {
+    //               normal: {
+    //                 color: this.config.customize.scatterBackgroundColor,
+    //                 shadowBlur: 2,
+    //                 shadowColor: 'D8BC37'
+    //               }
+    //             },
+    //             data: config.option?.data
+    //           }
+    //         ]
+    //       : [
+    //           {
+    //             type: 'map',
+    //             map: this.config.customize.scope,
+    //             geoIndex: 0,
+    //             roam: false,
+    //             zoom: 1.5,
+    //             center: [105, 36],
+    //             showLegendSymbol: false, // 存在legend时显示
+    //             data: config.option?.data,
+    //             tooltip: {
+    //               formatter (params) {
+    //                 return `<p style="text-align:center;line-height: 30px;height:30px;font-size: 14px;border-bottom: 1px solid #7A8698;">${
+    //                 params.name
+    //               }</p>
+    //             <div style="line-height:22px;margin-top:5px">GDP<span style="margin-left:12px;color:#fff;float:right">${
+    //                 params.data?.value[2] || '--'
+    //               }</span></div>`
+    //               },
+    //               show: true
+    //             }
+    //           }
+    //         ]
+    //   }
+    //   if (this.config.customize.visual) {
+    //     option.visualMap = {
+    //       show: true,
+    //       min: this.config.customize.range[0],
+    //       max: this.config.customize.range[1],
+    //       seriesIndex: [0],
+    //       inRange: {
+    //         color: this.config.customize.rangeColor
+    //       }
+    //     }
+    //   }
+    //   const newConfig = {
+    //     ...config,
+    //     option
+    //   }
+    //   return newConfig
+    // },
+    dataFormatting (config, data) {
+      const dataList = []
+      data?.data?.forEach(item => {
+        dataList.push({ name: item[config.customize.name], value: [item[config.customize.xaxis], item[config.customize.yaxis], item[config.customize.value]] })
+      })
+      config.option = {
+        ...config.option,
+        data: dataList
+      }
+      return config
+    },
+    async newChart (config) {
+      this.charts = echarts.init(
+        document.getElementById(this.ChartId)
+      )
       const option = {
         // 背景颜色
         backgroundColor: config.customize.backgroundColor,
@@ -208,24 +391,24 @@ export default {
                 // 标志的样式
                 itemStyle: {
                   normal: {
-                    color: this.config.customize.scatterBackgroundColor,
+                    color: config.customize.scatterBackgroundColor,
                     shadowBlur: 2,
                     shadowColor: 'D8BC37'
                   }
                 },
-                data: config.options?.data
+                data: config.option?.data
               }
             ]
           : [
               {
                 type: 'map',
-                map: this.config.customize.scope,
+                map: config.customize.scope,
                 geoIndex: 0,
                 roam: false,
                 zoom: 1.5,
                 center: [105, 36],
                 showLegendSymbol: false, // 存在legend时显示
-                data: config.options?.data,
+                data: config.option?.data,
                 tooltip: {
                   formatter (params) {
                     return `<p style="text-align:center;line-height: 30px;height:30px;font-size: 14px;border-bottom: 1px solid #7A8698;">${
@@ -240,42 +423,21 @@ export default {
               }
             ]
       }
-      if (this.config.customize.visual) {
+      if (config.customize.visual) {
         option.visualMap = {
           show: true,
-          min: this.config.customize.range[0],
-          max: this.config.customize.range[1],
+          min: config.customize.range[0],
+          max: config.customize.range[1],
           seriesIndex: [0],
           inRange: {
-            color: this.config.customize.rangeColor
+            color: config.customize.rangeColor
           }
         }
       }
-      const newConfig = {
-        ...config,
-        option
-      }
-      return newConfig
-    },
-    dataFormatting (config, data) {
-      const dataList = []
-      data?.data?.forEach(item => {
-        dataList.push({ name: item[config.customize.name], value: [item[config.customize.xaxis], item[config.customize.yaxis], item[config.customize.value]] })
-      })
-      config.option = {
-        ...config.option,
-        data: dataList
-      }
-      return config
-    },
-    async newChart (config) {
-      this.charts = echarts.init(
-        document.getElementById(this.ChartId)
-      )
       const mapUrl = `${window.DS_CONFIG?.httpConfigs?.baseURL}/static/chinaMap/${config.customize.level}/${config.customize.dataMap}`
       const map = await get(decodeURI(mapUrl), {}, true)
       echarts.registerMap(config.customize.scope, map)
-      this.charts.setOption(config.option)
+      this.charts.setOption(option)
       // this.charts.on('click', (params) => {
       //   get(
       //     `${window.DS_CONFIG?.httpConfigs?.baseURL}/static/chinaMap/province/${params.name}.json`,

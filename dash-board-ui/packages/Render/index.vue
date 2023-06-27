@@ -139,7 +139,8 @@ export default {
       'changeLayout',
       'changeActiveCode',
       'changeChartConfig',
-      // 'changeActiveItemWH',
+      'changeActiveItemWH',
+      'changeActiveItemConfig',
       'addItem',
       'delItem',
       'resetPresetLine',
@@ -181,9 +182,10 @@ export default {
         h: height
       }
       this.changeChartConfig({ ...newChart })
-      // if (i === this.activeCode) {
-      //   this.changeActiveItemWH({ code: chart.code, w: width, h: height })
-      // }
+      this.changeActiveItemConfig({ ...newChart })
+      if (i === this.activeCode) {
+        this.changeActiveItemWH({ code: chart.code, w: width, h: height })
+      }
       this.saveTimeLine(`改变${chart?.title}大小`)
     },
     dragstop (i, left, top) {
@@ -195,9 +197,10 @@ export default {
       }
       if (!this.freeze) {
         this.changeChartConfig({ ...newChart })
-        // if (i === this.activeCode) {
-        //   this.changeActiveItemWH({ code: chart.code, x: left, y: top })
-        // }
+        this.changeActiveItemConfig({ ...newChart })
+        if (i === this.activeCode) {
+          this.changeActiveItemWH({ code: chart.code, x: left, y: top })
+        }
       } else {
         const index = this.chartList.findIndex(
           (_chart) => _chart.code === chart.code
