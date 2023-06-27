@@ -147,19 +147,22 @@ export default {
       return config
     },
     dataFormatting (config, data) {
-      // 获取到后端返回的数据，有则赋值
-      if (config.dataHandler) {
-        try {
-          // 此处函数处理data
-          eval(config.dataHandler)
-        } catch (e) {
-          console.error(e)
-        }
-      }
       // 数据返回成功则赋值
       if (data.success) {
+        data = data.data
+        // 获取到后端返回的数据，有则赋值
+        const option = config.option
+        const setting = config.setting
+        if (config.dataHandler) {
+          try {
+            // 此处函数处理data
+            eval(config.dataHandler)
+          } catch (e) {
+            console.error(e)
+          }
+        }
         config = this.transformSettingToOption(config, 'data')
-        config.option.data = data.data
+        config.option.data = data
       } else {
         // 数据返回失败则赋前端的模拟数据
         config.option.data = this.plotList?.find(plot => plot.name === config.name)?.option?.data
