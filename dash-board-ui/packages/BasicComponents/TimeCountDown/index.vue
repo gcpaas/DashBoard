@@ -83,10 +83,6 @@ export default {
     }
   },
   mounted () {
-    // this.config.endTime = this.config.endTime
-    //   ? new Date(this.config.endTime).getTime()
-    //   : new Date().getTime() + 3 * 3600 * 1000 * 24 - 1000
-    // this.getTime()
     this.changeStyle()
   },
   // 销毁定时器
