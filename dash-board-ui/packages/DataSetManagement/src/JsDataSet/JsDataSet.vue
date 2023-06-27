@@ -9,7 +9,7 @@
           <template slot="content">
             <div class="page-header">
               <div class="page-header-left">
-                {{ !isEdit ? 'js数据集详情' : dataForm.id ? 'js数据集编辑' : 'js数据集新增' }}
+                {{ !isEdit ? 'JS数据集详情' : dataForm.id ? 'JS数据集编辑' : 'JS数据集新增' }}
               </div>
               <div class="page-header-right">
                 <el-button
@@ -134,13 +134,13 @@
                 ref="targetInSql"
                 v-model="dataForm.config.script"
                 :options="codemirrorOption"
-                style="margin-top: 2px"
+                style="margin-top: 2px;border: 1px solid rgb(232, 232, 232);"
               />
             </div>
             <div style="text-align: center; padding: 16px 0;">
               <el-button
                 type="primary"
-                @click="toExecute"
+                @click="scriptExecute()"
               >
                 执行
               </el-button>
@@ -152,7 +152,7 @@
           :span="8"
         >
           <div class="right-setting">
-            <!-- <div class="paramConfig">
+            <div class="paramConfig">
               <div class="title-style db-title-style">
                 方法参数
                 <el-button
@@ -186,7 +186,7 @@
                   </el-button>
                 </div>
               </div>
-            </div> -->
+            </div>
             <div class="structure">
               <div class="title-style db-title-style">
                 输出字段
@@ -358,7 +358,7 @@ import { nameCheckRepeat, datasetAdd, datasetUpdate, getDataset, getCategoryTree
 import { codemirror } from 'vue-codemirror'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/lib/codemirror.css'
-import 'codemirror/theme/nord.css'
+import 'codemirror/theme/eclipse.css'
 export default {
   name: 'JsDataSet',
   components: {
@@ -424,7 +424,7 @@ export default {
         mode: 'text/javascript',
         lineNumbers: true,
         lineWrapping: true,
-        theme: 'nord',
+        theme: 'eclipse',
         extraKey: { Ctrl: 'autocomplete' },
         hintOptions: {
           completeSingle: true
@@ -516,7 +516,7 @@ export default {
             moduleCode: appCode,
             editable: appCode ? 1 : 0,
             config: {
-              className:'com.gccloud.dataset.entity.config.JsDataSetConfig',
+              className: 'com.gccloud.dataset.entity.config.JsDataSetConfig',
               script: dataForm.config.script,
               fieldDesc,
               paramsList: dataForm.config.paramsList,
@@ -606,16 +606,18 @@ export default {
         const javascript = this.dataForm.config.script
         let scriptMethod = null
         try {
+          const scriptAfterReplacement = javascript.replace(/\${(.*?)}/g, (match, p) => {
+            return `'${this.dataForm.config.paramsList.find(param => param.name === p).value}'`
+          })
           // eslint-disable-next-line no-new-func
-          scriptMethod = new Function(javascript)
+          scriptMethod = new Function(scriptAfterReplacement)
         } catch (error) {
           this.passTest = false
-          this.$message.error('脚本执行错误，请检查脚本')
+          this.$message.error(`脚本执行错误，请检查脚本，具体错误：${error}`)
           return
         }
         // 调用方法生成随机数据
         const returnResult = scriptMethod()
-        console.log(returnResult)
         //  检查数据是否为数组
         if (!Array.isArray(returnResult)) {
           this.passTest = false
@@ -672,15 +674,15 @@ export default {
       }
     },
     // 执行事件
-    toExecute () {
-      // if (this.dataForm.config.paramsList.length) {
-      //   this.isSet = false
-      //   this.paramsVisible = true
-      // } else {
-      // 无参数，直接执行脚本
-      this.scriptExecute()
-      // }
-    },
+    // toExecute () {
+    // if (this.dataForm.config.paramsList.length) {
+    //   this.isSet = false
+    //   this.paramsVisible = true
+    // } else {
+    // 无参数，直接执行脚本
+    // this.scriptExecute()
+    // }
+    // },
     // 清空分类
     clearType () {
       this.typeName = ''

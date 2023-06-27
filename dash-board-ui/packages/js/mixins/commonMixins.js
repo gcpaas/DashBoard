@@ -123,6 +123,19 @@ export default {
         filterList
       }
       getUpdateChartInfo(params).then((res) => {
+        if (res.executionByFrontend) {
+          try {
+            const scriptAfterReplacement = res.data.replace(/\${(.*?)}/g, (match, p) => {
+              // 根据parmas的key获取value
+              return `'${this.config.dataSource?.params[p]}' || '${p}'`
+            })
+            // eslint-disable-next-line no-new-func
+            const scriptMethod = new Function(scriptAfterReplacement)
+            res.data = scriptMethod()
+          } catch (error) {
+            console.error('数据集脚本执行失败', error)
+          }
+        }
         // 获取数据后更新组件配置
         config = this.buildOption(config, res)
         if (config) {
