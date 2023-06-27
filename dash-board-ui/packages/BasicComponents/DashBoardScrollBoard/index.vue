@@ -44,7 +44,7 @@ export default {
   mounted () {
   },
   methods: {
-    buildOption (config, data) {
+    dataFormatting (config, data) {
       const header = []
       const dataList = []
       const alignList = []
