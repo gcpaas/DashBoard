@@ -95,7 +95,12 @@ export default {
           config = this.dataFormatting(config, data)
           // this.changeChartConfig(config)
           if (this.chart) {
-            this.chart.changeData(config.option.data)
+            // 单指标组件和多指标组件的changeData传参不同
+            if (['Liquid', 'Gauge', 'RingProgress'].includes(config.chartType)) {
+              this.chart.changeData(config.option.percent)
+            } else {
+              this.chart.changeData(config.option.data)
+            }
           }
         }).catch(err => {
           console.log(err)
