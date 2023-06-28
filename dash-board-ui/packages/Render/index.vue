@@ -142,6 +142,7 @@ export default {
       'changeActiveItemWH',
       'addItem',
       'delItem',
+      'changeActiveItemConfig',
       'resetPresetLine',
       'changeGridShow',
       'setPresetLine',
@@ -181,6 +182,7 @@ export default {
         h: height
       }
       this.changeChartConfig({ ...newChart })
+      this.changeActiveItemConfig({ ...newChart })
       if (i === this.activeCode) {
         this.changeActiveItemWH({ code: chart.code, w: width, h: height })
       }
@@ -195,6 +197,7 @@ export default {
       }
       if (!this.freeze) {
         this.changeChartConfig({ ...newChart })
+        this.changeActiveItemConfig({ ...newChart })
         if (i === this.activeCode) {
           this.changeActiveItemWH({ code: chart.code, x: left, y: top })
         }

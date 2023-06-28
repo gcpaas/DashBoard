@@ -114,7 +114,7 @@ export default {
     configStyle: {
       handler (val) {
         if (val) {
-          this.$emit('updateSetting', this.config)
+          this.$emit('updateSetting', {...val,code:this.config.code})
           this.saveTimeLine(`更新${val?.title}组件属性`)
         }
       },

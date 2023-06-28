@@ -110,7 +110,8 @@ export default {
      * @description: 更新chart
      * @param {Object} config
      */
-    updateChartData (config) {
+    updateChartData(config) {
+
       const filterList = this.filterList
       const params = {
         chart: {
