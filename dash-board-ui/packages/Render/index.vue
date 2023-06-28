@@ -181,7 +181,7 @@ export default {
         w: width,
         h: height
       }
-      this.changeChartConfig({ ...newChart })
+      this.changeChartConfig({ code: chart.code, w: width, h: height })
       // this.changeActiveItemConfig({ ...newChart })
       if (i === this.activeCode) {
         this.changeActiveItemWH({ code: chart.code, w: width, h: height })
@@ -196,7 +196,7 @@ export default {
         y: top
       }
       if (!this.freeze) {
-        this.changeChartConfig({ ...newChart })
+        this.changeChartConfig({ code: chart.code, x: left, y: top })
         // this.changeActiveItemConfig({ ...newChart })
         if (i === this.activeCode) {
           this.changeActiveItemWH({ code: chart.code, x: left, y: top })
