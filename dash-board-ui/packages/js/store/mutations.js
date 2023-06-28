@@ -81,8 +81,12 @@ export default {
       { type: 'v', site: x || 0 }
     ]
   },
-  changeActiveItemConfig (state, config) {
-    state.activeItemConfig = _.cloneDeep(config)
+  changeActiveItemConfig(state, config) {
+    const index = state.pageInfo.chartList.findIndex(
+      item => item.code === config.code
+    )
+    state.activeItemConfig = _.cloneDeep({...state.pageInfo.chartList[index],
+      ...config})
   },
   // 改变当前组件的xywh
   changeActiveItemWH (state, chart) {
