@@ -1,6 +1,6 @@
 {
   "name": "@gcpaas/dash-board-ui",
-  "version": "0.0.1-2023060802-Alpha",
+  "version": "0.0.1-2023062703-Alpha",
   "description": "自定义仪表盘",
   "author": "gc-starter",
   "license": "MIT",
@@ -42,7 +42,7 @@
     "lib:app": "cd appPackages && npm install && vue-cli-service build --no-lint  --target lib --name dashboardApp --dest dash-board-app-ui index.js",
     "package": "npm run lib && npm publish",
     "package:test": "npm run lib && npm pack",
-    "package:app": "npm run lib:app && npm publish",
+    "package:app": "npm run lib:app && npm publinpmsh",
     "package:app:test": "npm run lib:app && npm pack"
   },
   "husky": {
