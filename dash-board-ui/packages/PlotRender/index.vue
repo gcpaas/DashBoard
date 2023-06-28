@@ -165,6 +165,42 @@ export default {
         this.linkage(formData)
       })
     },
+    changeStyle (config) {
+      config = _.cloneDeep(config)
+      // 遍历config.setting，将config.setting中的值赋值给config.option中对应的optionField
+      config.setting.forEach(set => {
+        if (set.optionField) {
+          const optionField = set.optionField.split('.')
+          let option = config.option
+          optionField.forEach((field, index) => {
+            if (index === optionField.length - 1) {
+              // 数据配置时，必须有值才更新
+              if (set.tabName === 'custom') {
+                option[field] = set.value
+              }
+            } else {
+              option = option[field]
+            }
+          })
+        }
+      })
+      // eslint-disable-next-line no-unused-vars
+      const option = config.option
+      // eslint-disable-next-line no-unused-vars
+      const setting = config.setting
+      if (this.config.optionHandler) {
+        try {
+          // 此处函数处理config
+          eval(this.config.optionHandler)
+        } catch (e) {
+          console.error(e)
+        }
+      }
+      if (this.chart) {
+        this.chart.update(config.option)
+      }
+      this.changeChartConfig(config)
+    },
     /**
      * 组件的配置
      * @returns {Promise<unknown>}

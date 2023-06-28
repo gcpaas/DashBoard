@@ -26,7 +26,8 @@ export default {
   },
   methods: {
     ...mapMutations({
-      changeChartConfig: 'dashboard/changeChartConfig'
+      changeChartConfig: 'dashboard/changeChartConfig',
+      changeActiveItemConfig: 'dashboard/changeActiveItemConfig'
     }),
     /**
      * 初始化组件
@@ -141,6 +142,7 @@ export default {
         if (config) {
           config.key = new Date().getTime()
           this.changeChartConfig(config)
+          // this.changeActiveItemConfig(config)
         }
         // this.$message.success('更新成功')
       }).catch((err) => {
