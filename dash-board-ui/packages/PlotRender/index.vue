@@ -166,7 +166,7 @@ export default {
       })
     },
     changeStyle (config) {
-      config = _.cloneDeep(config)
+      config = _.cloneDeep({...this.config,...config})
       // 遍历config.setting，将config.setting中的值赋值给config.option中对应的optionField
       config.setting.forEach(set => {
         if (set.optionField) {

@@ -373,9 +373,7 @@ export default {
     },
     // 自定义属性更新
     updateSetting (config) {
-      console.log(config)
       if (config.type === 'customComponent') {
-
         if (
           this.$refs.Render?.$refs['RenderCard' + config.code][0] &&
           this.$refs.Render?.$refs['RenderCard' + config.code][0]?.$refs[config.code] &&
