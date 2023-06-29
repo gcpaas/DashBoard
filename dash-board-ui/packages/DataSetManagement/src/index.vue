@@ -432,16 +432,16 @@ export default {
       return this.getComponents(this.datasetTypeList.find(type => type.datasetType === datasetType)?.componentName)?.config?.showOperate ?? true
     },
     getComponents (componentName) {
-      if (window.DS_CONFIG?.customDatasetComponents && window.DS_CONFIG?.customDatasetComponents.length > 0) {
-        const components = Object.values(this.$options.components)
-        let remoteComponentData = null
+      const components = Object.values(this.$options.components)
+      let remoteComponentData = null
+      if (window.BS_CONFIG?.customDatasetComponents.length > 0) {
         // 获取远程组件
-        remoteComponentData = window.DS_CONFIG?.customDatasetComponents.find(item => item.config.componentName === componentName)
-        return {
-          component: components.find(component => component.name === componentName) || remoteComponentData?.vueFile,
-          config: remoteComponentData?.config || null,
-          key: new Date().getTime()
-        }
+        remoteComponentData = window.BS_CONFIG?.customDatasetComponents.find(item => item.config.componentName === componentName)
+      }
+      return {
+        component: components.find(component => component.name === componentName) || remoteComponentData?.vueFile,
+        config: remoteComponentData?.config || null,
+        key: new Date().getTime()
       }
     },
     // 初始化

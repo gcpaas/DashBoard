@@ -67,6 +67,19 @@ export default {
           size: size,
           type: config.type
         }).then((data) => {
+          if (data.executionByFrontend) {
+            try {
+              const scriptAfterReplacement = data.data.replace(/\${(.*?)}/g, (match, p) => {
+                // 根据parmas的key获取value
+                return `'${this.config.dataSource?.params[p]}' || '${p}'`
+              })
+              // eslint-disable-next-line no-new-func
+              const scriptMethod = new Function(scriptAfterReplacement)
+              data.data = scriptMethod()
+            } catch (error) {
+              console.error('数据集脚本执行失败', error)
+            }
+          }
           config = this.dataFormatting(config, data)
           this.changeChartConfig(config)
         }).catch((err) => {
@@ -95,8 +108,6 @@ export default {
         getUpdateChartInfo(params).then((data) => {
           if (data.executionByFrontend) {
             try {
-              const returnResult = eval(`(${data.data})`)()
-              data.data = returnResult
               const scriptAfterReplacement = data.data.replace(/\${(.*?)}/g, (match, p) => {
                 // 根据parmas的key获取value
                 return `'${this.config.dataSource?.params[p]}' || '${p}'`

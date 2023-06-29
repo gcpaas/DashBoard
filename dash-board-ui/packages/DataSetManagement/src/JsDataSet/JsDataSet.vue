@@ -153,7 +153,7 @@
           <div class="right-setting">
             <div class="paramConfig">
               <div class="title-style db-title-style">
-                方法参数
+                动态参数
                 <el-button
                   type="text"
                   style="float: right;border: none;margin-top: -4px;"
