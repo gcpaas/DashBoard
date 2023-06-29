@@ -158,6 +158,7 @@ import ColorSelect from 'packages/ColorMultipleSelect/index.vue'
 import PaddingSetting from 'packages/DashboardDesign/RightSetting/PaddingSetting/index.vue'
 import GradualSetting from 'packages/DashboardDesign/RightSetting/GradualSetting/index.vue'
 import PosWhSetting from 'packages/DashboardDesign/RightSetting/PosWhSetting.vue'
+import _ from 'lodash'
 export default {
   name: 'CustomComponentSetting',
   components: {
@@ -208,7 +209,20 @@ export default {
       return this.$route.query.code
     }
   },
-  watch: {},
+  watch: {
+    // groupList: {
+    //   handler (val, oldValue) {
+    //     if (!_.isEqual(val, oldValue)) {
+    //       const list = val.map(item => {
+    //         return item.list
+    //       })
+    //       this.config.setting = [...this.config.setting, ...list]
+    //       this.$store.commit('dashboard/changeActiveItemConfig', this.config)
+    //     }
+    //   },
+    //   deep: true
+    // }
+  },
   mounted () {
     const groupNameList = []
     this.config.setting.filter(

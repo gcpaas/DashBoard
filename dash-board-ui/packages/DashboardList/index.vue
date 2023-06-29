@@ -92,7 +92,7 @@
           </div>
           <div class="dashboard-card-img">
             <el-image
-              :src="screen.coverPicture"
+              :src="`${screen.coverPicture}?time=${new Date().getTime()}`"
               fit="fill"
               style="width: 100%; height: 100%"
             >

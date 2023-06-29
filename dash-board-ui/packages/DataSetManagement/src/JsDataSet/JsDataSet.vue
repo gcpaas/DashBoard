@@ -139,7 +139,7 @@
             <div style="text-align: center; padding: 16px 0;">
               <el-button
                 type="primary"
-                @click="toExecute"
+                @click="scriptExecute()"
               >
                 执行
               </el-button>
@@ -151,7 +151,7 @@
           :span="8"
         >
           <div class="right-setting">
-            <!-- <div class="paramConfig">
+            <div class="paramConfig">
               <div class="title-style db-title-style">
                 方法参数
                 <el-button
@@ -185,7 +185,7 @@
                   </el-button>
                 </div>
               </div>
-            </div> -->
+            </div>
             <div class="structure">
               <div class="title-style db-title-style">
                 输出字段
@@ -350,9 +350,9 @@
 </template>
 
 <script>
-import ParamsSettingDialog from './ParamsSettingDialog.vue'
-import OutputFieldDialog from './OutputFieldDialog.vue'
-import FieldFillDialog from './FieldFillDialog.vue'
+import ParamsSettingDialog from './components/ParamsSettingDialog.vue'
+import OutputFieldDialog from './components/OutputFieldDialog.vue'
+import FieldFillDialog from './components/FieldFillDialog.vue'
 import { nameCheckRepeat, datasetAdd, datasetUpdate, getDataset, getCategoryTree } from 'packages/js/utils/datasetConfigService'
 import { codemirror } from 'vue-codemirror'
 import 'codemirror/mode/javascript/javascript'
@@ -511,11 +511,11 @@ export default {
             name: dataForm.name,
             typeId: dataForm.typeId,
             remark: dataForm.remark,
-            datasetType: config.datasetType,
+            datasetType: 'js',
             moduleCode: appCode,
             editable: appCode ? 1 : 0,
             config: {
-              className: config.className,
+              className: 'com.gccloud.dataset.entity.config.JsDataSetConfig',
               script: dataForm.config.script,
               fieldDesc,
               paramsList: dataForm.config.paramsList,
@@ -605,11 +605,14 @@ export default {
         const javascript = this.dataForm.config.script
         let scriptMethod = null
         try {
+          const scriptAfterReplacement = javascript.replace(/\${(.*?)}/g, (match, p) => {
+            return `'${this.dataForm.config.paramsList.find(param => param.name === p).value}'`
+          })
           // eslint-disable-next-line no-new-func
-          scriptMethod = new Function(javascript)
+          scriptMethod = new Function(scriptAfterReplacement)
         } catch (error) {
           this.passTest = false
-          this.$message.error('脚本执行错误，请检查脚本')
+          this.$message.error(`脚本执行错误，请检查脚本，具体错误：${error}`)
           return
         }
         // 调用方法生成随机数据
@@ -636,7 +639,20 @@ export default {
             }
           })
         }
-
+        // 如果脚本有变化，生成的keys和outputFieldList的长度不一致，就重新生成outputFieldList，仅添加变化的那个字段，其余的不变化
+        if (this.outputFieldList.length !== keys.length) {
+          const newKeys = keys.filter(item => {
+            return !this.outputFieldList.some(key => {
+              return key.fieldName === item
+            })
+          })
+          newKeys.forEach(item => {
+            this.outputFieldList.push({
+              fieldName: item,
+              fieldDesc: ''
+            })
+          })
+        }
         if (this.outputFieldList.length && this.fieldDesc && !isInit) {
           this.buildFieldDesc()
         }
@@ -657,15 +673,15 @@ export default {
       }
     },
     // 执行事件
-    toExecute () {
-      // if (this.dataForm.config.paramsList.length) {
-      //   this.isSet = false
-      //   this.paramsVisible = true
-      // } else {
-      // 无参数，直接执行脚本
-      this.scriptExecute()
-      // }
-    },
+    // toExecute () {
+    // if (this.dataForm.config.paramsList.length) {
+    //   this.isSet = false
+    //   this.paramsVisible = true
+    // } else {
+    // 无参数，直接执行脚本
+    // this.scriptExecute()
+    // }
+    // },
     // 清空分类
     clearType () {
       this.typeName = ''
