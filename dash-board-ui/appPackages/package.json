@@ -4,12 +4,12 @@
   "description": "自定义仪表盘",
   "author": "gc-starter",
   "license": "MIT",
-  "main": "libApp/dashboardApp.umd.min.js",
+  "main": "dash-board-app-ui/dashboardApp.umd.min.js",
   "files": [
-    "libApp/fonts/*",
-    "libApp/img/*",
-    "libApp/dashboardApp.css",
-    "libApp/dashboardApp.umd.min.js.gz"
+    "dash-board-app-ui/fonts/*",
+    "dash-board-app-ui/img/*",
+    "dash-board-app-ui/dashboardApp.css",
+    "dash-board-app-ui/dashboardApp.umd.min.js.gz"
   ],
   "keywords": [
     "dashboardApp",
