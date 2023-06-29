@@ -1,15 +1,15 @@
 {
   "name": "@gcpaas/dash-board-ui",
-  "version": "0.0.1-2023062703-Alpha",
+  "version": "0.0.1-2023062904-Alpha",
   "description": "自定义仪表盘",
   "author": "gc-starter",
   "license": "MIT",
   "main": "lib/dashboard.umd.min.js",
   "files": [
-    "lib/fonts/*",
-    "lib/img/*",
-    "lib/dashboard.css",
-    "lib/dashboard.umd.min.js.gz"
+    "dash-board-ui/fonts/*",
+    "dash-board-ui/img/*",
+    "dash-board-ui/dashboard.css",
+    "dash-board-ui/dashboard.umd.min.js.gz"
   ],
   "keywords": [
     "dashboard",
