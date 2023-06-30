@@ -474,20 +474,18 @@ export default {
         top: 0;
         bottom: 0;
         margin: auto;
-        width: 300px;
-        height: 80%;
-        min-height: 600px;
-        max-height: 630px;
-        background: url(packages/DashboardDesign/images/iphone.png) no-repeat center 0;
+        width: 375px;
+        height: 800px;
+        /*background: url(packages/DashboardDesign/images/iphone.png) no-repeat center 0;*/
         background-size: 100% 100%;
-
+        box-shadow: 0px 0px 10px #dddddd;
         .app-design-wrap {
           // 缩放比例
           position: absolute;
-          top: 4rem;
-          left: 1.6rem;
-          right: 1.6rem;
-          bottom: 30px;
+          top: 1rem;
+          left: .6rem;
+          right: .6rem;
+          bottom: -2rem;
           overflow: auto;
           border-radius: 0 0 35px 35px;
         }
