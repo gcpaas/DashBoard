@@ -64,10 +64,8 @@ export default {
       if (link.url.indexOf('http://') > -1 || link.url.indexOf('https://') > -1) {
         window.open(link.url, link.target)
       } else {
-        const { href } = this.$router.resolve({
-          path: '/'
-        })
-        window.open(href + link.url, link.target)
+        const { href } = this.$router.resolve({path:link.url})
+        window.open(href, link.target)
       }
     }
   }

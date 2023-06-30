@@ -25,6 +25,6 @@ export default {
 <style lang="scss" scoped>
 .db-manage-main-wrap {
   display: flex;
-  height: 100%;
+  height: 95%;
 }
 </style>

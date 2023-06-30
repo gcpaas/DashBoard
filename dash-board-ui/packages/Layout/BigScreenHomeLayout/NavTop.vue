@@ -10,9 +10,9 @@
         class="nav-link"
         @click="toggleNav(nav)"
       >
-        <span class="nav-icon">
+        <!-- <span class="nav-icon">
           <i :class="['iconfont-bigscreen', nav.icon]" />
-        </span>
+        </span> -->
         {{ nav.name }}
       </a>
     </span>
@@ -67,13 +67,13 @@ export default {
   top: 30px;
   position: sticky;
   width: 100%;
-  margin-top: 109px;
+  margin-top: 110px;
   min-width: 1024px;
   user-select: none;
   .nav-span {
     position: relative;
     top: 3px;
-    border-bottom: 1px solid #007aff;
+    // border-bottom: 1px solid #007aff;
     background-repeat: repeat-x;
     background-position: 0 34px;
 
@@ -103,15 +103,16 @@ export default {
     }
 
     &.nav-active {
+      border-top: 2px solid var(--db-el-color-primary);
       // border-radius: 10px 10px 0px 0;
-      border: 1px solid #007aff;
-      background-color: #007aff;
-      .nav-link{
-        color: #fff !important;
-      }
-      .iconfont-bigscreen {
-        color: #fff !important;
-      }
+      // border: 1px solid #007aff;
+      background-color: var(--db-el-background-2);
+      // .nav-link{
+      //   color: #fff !important;
+      // }
+      // .iconfont-bigscreen {
+      //   color: #fff !important;
+      // }
     }
 
   }
