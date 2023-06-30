@@ -700,9 +700,11 @@ export default {
     clearVerify () {
       this.config.dataSource.metricField = ''
       this.config.dataSource.dimensionField = ''
+      this.config.dataSource.metricFieldList = []
       this.config.dataSource.dimensionFieldList = []
       this.config.dataSource.seriesField = ''
       this.config.dataSource.params = {}
+      this.config.customize.customizeList = []
     },
     // 根据数据集来获取数据集详情
     getDataSetDetailsById (id, type) {
