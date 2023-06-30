@@ -218,10 +218,12 @@ export default {
 .dashboard-list-wrap {
   position: relative;
   height: 100%;
-  padding: 16px;
+  // padding: 16px;
+  // margin: 16px;
   color: #9ea9b2;
-  border: 1px solid #e8e8e8;
-  background-color: var(--db-background-1) !important;
+  background-color: var(--db-background-2);
+  // border: 1px solid #e8e8e8;
+  // background-color: var(--db-background-1) !important;
 
   .top-search-wrap {
     display: flex;
@@ -251,6 +253,7 @@ export default {
     // 间隙自适应
     justify-content: space-around;
     // max-height: calc(100vh - 270px);
+    padding: 2px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 15px;
@@ -301,15 +304,17 @@ export default {
         height: 100%;
         cursor: pointer;
         background-color: var(--db-background-2);
-        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+        margin-bottom: 2px;
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+        border: 1px solid transparent;
         color: var(--db-el-title);
-        border: 1px solid var(--db-background-2);
         &:hover {
           color: var(--db-el-text);
           border: 1px solid var(--db-el-color-primary);
         }
 
         .add-dashboard-card-text {
+          color: var(--db-el-color-primary);
           font-size: 24px;
         }
 
@@ -391,8 +396,8 @@ export default {
     align-items: center;
     justify-content: flex-end;
     width: 100%;
-    margin-top: 20px;
     padding: 0 20px;
+    margin-top: 8px;
   }
 }
 // .db-pagination {

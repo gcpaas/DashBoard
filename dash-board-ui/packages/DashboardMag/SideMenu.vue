@@ -252,7 +252,8 @@ export default {
 <style lang="scss" scoped>
   @import '~packages/assets/style/bsTheme.scss';
   .side-catalog-wrap{
-    border-right : 1px solid #e8e8e8;
+    // border-right : 1px solid #e8e8e8;
+    margin-top: 16px;
     padding-top: 16px;
     width: 220px;
     height: 100%;
@@ -260,7 +261,7 @@ export default {
     color: var(--db-el-title);
     background-color: var(--db-background-2);
     .side-catalog-box{
-      height: calc(100% - 50px);
+      height: calc(100% - 66px);
       overflow-y: auto;
       .side-catalog-all{
         font-weight: bold;
@@ -296,8 +297,9 @@ export default {
       }
       /*菜单激活时的样式*/
       .active-catalog{
-        background: rgba(0,122,255,.06274509803921569);
-        color: #007aff;
+        border-left: 4px solid var(--db-el-color-primary);
+        background: var(--db-background-primary);
+        color: var(--db-el-color-primary);
         // background-image: linear-gradient(to right , var(--db-el-color-primary), var(--db-background-2));
         // background-repeat: round;
         // color: var(--db-el-text);

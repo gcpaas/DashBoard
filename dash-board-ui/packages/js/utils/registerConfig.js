@@ -128,6 +128,7 @@ function registerRouters (config, router) {
 function registerTheme (config) {
   const defaultTheme = {
     '--db-background-header': '#007aff', // 头部颜色
+    '--db-background-primary': 'rgba(64,158,255,0.1)', // elment-ui主题色对应的背景色
     '--db-background-1': '#fff', // 整体背景色
     '--db-background-2': '#fff', // 布局背景色
     '--db-el-background-1': '#fff', // 组件背景色，输入框...
