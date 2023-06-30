@@ -373,7 +373,7 @@ export default {
     },
     // 自定义属性更新
     updateSetting (config) {
-      if (config.type === 'map'||config.type==='video') {
+      if (config.type === 'map') {
         config.key = new Date().getTime()
       }
       this.changeChartConfig(_.cloneDeep(config))
