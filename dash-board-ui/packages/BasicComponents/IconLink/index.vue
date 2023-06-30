@@ -61,13 +61,13 @@ export default {
     changeStyle () {
     },
     goToLink (link) {
-      if (link.target !== 'push' || link.url.indexOf('http://') > -1 || link.url.indexOf('https://') > -1) {
+      if (link.url.indexOf('http://') > -1 || link.url.indexOf('https://') > -1) {
         window.open(link.url, link.target)
       } else {
         const { href } = this.$router.resolve({
           path: '/'
         })
-        window.open(href + link.url, '_self')
+        window.open(href + link.url, link.target)
       }
     }
   }

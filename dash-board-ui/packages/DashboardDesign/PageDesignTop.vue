@@ -10,29 +10,48 @@
       <span class="logo-text name-span">{{ pageInfo.name }}</span>
     </div>
     <!-- 中间切换按钮 -->
-    <div class="terminal-btn">
-      <div
-        class="svg-box"
+
+    <div class="head-btn-group">
+      <!-- <div class="terminal-btn">
+        <div
+          class="svg-box"
+          :class="{'active-avg-box':terminal === 'pc'}"
+          @click="chooseTerminal('pc')"
+        >
+          <icon-svg
+            :name="icons[4]"
+            class="img-btn-svg"
+          />
+        </div>
+        <div
+          class="svg-box"
+          :class="{'active-avg-box':terminal === 'app'}"
+          @click="chooseTerminal('app')"
+        >
+          <icon-svg
+            :name="icons[3]"
+            class="img-btn-svg"
+          />
+        </div>
+      </div> -->
+       <CusBtn
+        @click.native="chooseTerminal('pc')"
         :class="{'active-avg-box':terminal === 'pc'}"
-        @click="chooseTerminal('pc')"
       >
         <icon-svg
           :name="icons[4]"
           class="img-btn-svg"
         />
-      </div>
-      <div
-        class="svg-box"
-        :class="{'active-avg-box':terminal === 'app'}"
-        @click="chooseTerminal('app')"
+      </CusBtn>
+       <CusBtn
+       :class="{'active-avg-box':terminal === 'app'}"
+        @click.native="chooseTerminal('app')"
       >
         <icon-svg
           :name="icons[3]"
           class="img-btn-svg"
         />
-      </div>
-    </div>
-    <div class="head-btn-group">
+      </CusBtn>
       <CusBtn
         :loading="saveAndPreviewLoading"
         @click.native="designAssign()"
@@ -432,7 +451,9 @@ export default {
   .iconfont-bigscreen {
     color: #fff;
   }
-
+  .active-avg-box{
+      background-color: rgba(255, 255, 255, 0.27) !important;
+    }
   .terminal-btn{
     position: absolute;
    left: 50%;
@@ -451,9 +472,7 @@ export default {
         cursor: pointer;
       }
     }
-    .active-avg-box{
-      background-color: rgba(255, 255, 255, 0.1) !important;
-    }
+
     .img-btn-svg{
       width: 30px;
       height: 30px;

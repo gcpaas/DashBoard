@@ -62,7 +62,6 @@
                     v-for="item in [
                       { label: '当前窗口', value: '_self' },
                       { label: '新窗口', value: '_blank' },
-                      { label: '本工程', value: 'push' }
                     ]"
                     :key="item.value"
                     :label="item.label"
@@ -133,7 +132,7 @@ export default {
         ],
         url: [
           { required: true, message: '请输入链接地址', trigger: 'blur' },
-          { type: 'url', message: '请输入正确的链接地址', trigger: 'blur' }
+          // { type: 'url', message: '请输入正确的链接地址', trigger: 'blur' }
         ]
       }
     }
