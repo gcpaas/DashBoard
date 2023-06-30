@@ -94,9 +94,12 @@ export default {
         config = await this.changeDataByCode(config)
       } else {
         // 否则说明是更新，这里的更新只指更新数据（改变样式时是直接调取changeStyle方法），因为更新数据会改变key,调用chart接口
-        // eslint-disable-next-line no-unused-vars
-        config = await this.changeData(config)
-        this.changeChartConfig(config)
+        // TODO 直接改变prop控制台会报错，待优化
+        try {
+          this.config = await this.changeData(config)
+        } catch (e) {
+          console.error(e)
+        }
       }
     },
     linkEvent (formData) {
