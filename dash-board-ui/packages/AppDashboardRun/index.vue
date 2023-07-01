@@ -124,7 +124,9 @@ export default {
       bottom: 0;
       margin: auto;
       width: 375px;
-      height: 800px;
+      height: 80%;
+      min-height: 600px;
+      background-size: 100% 100%;
       box-shadow: 0px 0px 10px #dddddd;
       .app-design-wrap {
         // 缩放比例

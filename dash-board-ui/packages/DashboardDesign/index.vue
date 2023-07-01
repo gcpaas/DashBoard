@@ -475,8 +475,8 @@ export default {
         bottom: 0;
         margin: auto;
         width: 375px;
-        height: 800px;
-        /*background: url(packages/DashboardDesign/images/iphone.png) no-repeat center 0;*/
+        height: 80%;
+        min-height: 600px;
         background-size: 100% 100%;
         box-shadow: 0px 0px 10px #dddddd;
         .app-design-wrap {

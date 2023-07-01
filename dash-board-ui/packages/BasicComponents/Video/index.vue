@@ -76,10 +76,14 @@ export default {
   },
 
   watch: {},
-  mounted () {},
+  mounted () {
+  },
   methods: {
     // 由于静态组件没有混入公共函数，所以需要定义一个changeStyle方法，以免报错
-    changeStyle () {
+    changeStyle (config) {
+      this.videoOptions.sources.type = config.customize.videoType
+      this.videoOptions.sources.type = config.customize.videoUrl
+      this.videoOptions.poster = config.customize.posterUrl
     }
   }
 }
