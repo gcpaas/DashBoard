@@ -67,12 +67,12 @@ export default {
   top: 30px;
   position: sticky;
   width: 100%;
-  margin-top: 110px;
+  margin-top: 109px;
   min-width: 1024px;
   user-select: none;
   .nav-span {
     position: relative;
-    top: 3px;
+    top: 1px;
     // border-bottom: 1px solid #007aff;
     background-repeat: repeat-x;
     background-position: 0 34px;
@@ -87,7 +87,7 @@ export default {
       width: 190px;
       box-sizing: border-box;
       // min-width: 140px;
-      line-height: 35px;
+      line-height: 40px;
       font-size: 14px;
       text-align: left;
       cursor: pointer;
@@ -103,10 +103,19 @@ export default {
     }
 
     &.nav-active {
-      border-top: 2px solid var(--db-el-color-primary);
+      // border-top: 2px solid var(--db-el-color-primary);
       // border-radius: 10px 10px 0px 0;
       // border: 1px solid #007aff;
       background-color: var(--db-el-background-2);
+      &:after{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--db-el-color-primary);
+      }
       // .nav-link{
       //   color: #fff !important;
       // }
