@@ -142,7 +142,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~packages/BasicComponents/fonts/index.css";
+@import "../fonts/index.css";
 .db-design-wrap{
   width: 100%;
 }

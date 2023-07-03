@@ -278,7 +278,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/DashboardDesign/fonts/iconfont.css';
+@import '../DashboardDesign/fonts/iconfont.css';
 .db-left-panel {
   display: flex;
   background-color: var(--db-background-leftPanel);

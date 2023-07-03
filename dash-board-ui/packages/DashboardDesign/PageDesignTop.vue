@@ -3,7 +3,7 @@
     <div class="logo-wrap item-wrap">
       <img
         class="menu-img"
-        src="~packages/DashboardDesign/images/app.png"
+        src="../DashboardDesign/images/app.png"
         alt="返回"
         @click="backManagement"
       >
@@ -390,7 +390,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~packages/DashboardDesign/fonts/iconfont.css';
+@import '../DashboardDesign/fonts/iconfont.css';
 .default-layout-box {
   display: flex;
   flex-wrap: wrap;

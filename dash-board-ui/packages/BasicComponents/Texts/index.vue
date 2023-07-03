@@ -47,7 +47,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '~packages/assets/style/chartStyle.scss';
+  @import '../../assets/style/chartStyle.scss';
   .content-box{
     text-align: center;
     /* 将背景设为渐变 */

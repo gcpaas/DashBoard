@@ -604,8 +604,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
-@import '~packages/assets/style/zTree/treePackUp.scss';
+@import '../../assets/style/bsTheme.scss';
+@import '../../assets/style/zTree/treePackUp.scss';
 
 .db-pagination {
   ::v-deep .el-input__inner {

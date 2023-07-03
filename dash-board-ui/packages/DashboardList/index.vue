@@ -311,7 +311,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../assets/style/bsTheme.scss';
 .dashboard-list-wrap {
   position: relative;
   height: 100%;

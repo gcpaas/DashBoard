@@ -203,7 +203,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../~packages/assets/style/settingWrap.scss';
+@import '../../assets/style/settingWrap.scss';
 .db-setting-wrap {
   /deep/ .el-form-item{
     margin-bottom: 14px!important
