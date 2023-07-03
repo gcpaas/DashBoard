@@ -361,7 +361,7 @@ const setting = [
     groupName: 'yAxis'
   },
   // 边距 padding
-    {
+  {
     label: '图表边距',
     type: 'padding',
     field: 'appendPadding',
@@ -428,7 +428,7 @@ const option = {
     position: 'middle', // 'top', 'bottom', 'middle',
     // 配置样式
     style: {
-      fill: '#59F25F',
+      fill: '#8C8C8C',
       opacity: 0,
       fontSize: 12
     }
