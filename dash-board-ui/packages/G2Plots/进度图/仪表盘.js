@@ -174,7 +174,7 @@ const option = {
   // },
   statistic: {
     title: {
-      offsetY: -36,
+      offsetY: -20,
       style: {
         fontSize: 20,
         lineHeight: 2,

@@ -122,21 +122,22 @@ export default {
       position: relative;
       top: 0;
       bottom: 0;
-      margin: auto;
+      margin: 16px 0;
       width: 375px;
-      height: 80%;
-      min-height: 600px;
+      height: calc(100% - 32px);
       background-size: 100% 100%;
       box-shadow: 0px 0px 10px #dddddd;
+      box-sizing: border-box;
       .app-design-wrap {
         // 缩放比例
         position: absolute;
         top: 1rem;
         left: .6rem;
         right: .6rem;
-        bottom: -2rem;
+        bottom: -1rem;
         overflow: auto;
         border-radius: 0 0 35px 35px;
+        box-sizing: border-box;
       }
     }
   }

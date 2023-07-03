@@ -54,9 +54,54 @@ const setting = [
     value: '',
     tabName: 'custom',
     options: [
-      { label: '圆形', value: 'circle' },
-      { label: '三角形', value: 'triangle' },
-      { label: '菱形', value: 'diamond' }
+      {
+        label: '无',
+        value: false
+      },
+      {
+        label: '空心圆',
+        value: 'hollow-circle'
+      },
+      {
+        label: '圆形',
+        value: 'circle'
+      },
+      {
+        label: '正方形',
+        value: 'square'
+      },
+      {
+        label: '菱形',
+        value: 'diamond'
+      },
+      {
+        label: '三角形',
+        value: 'triangle'
+      },
+      {
+        label: '六边形',
+        value: 'hexagon'
+      },
+      {
+        label: '菱形交叉',
+        value: 'bowtie'
+      },
+      {
+        label: '十字形',
+        value: 'cross'
+      },
+      {
+        label: 'I形',
+        value: 'tick'
+      },
+      {
+        label: '加号',
+        value: 'plus'
+      },
+      {
+        label: '连字号',
+        value: 'hyphen'
+      }
     ],
     groupName: 'graph'
   },
@@ -81,11 +126,11 @@ const setting = [
     groupName: 'graph'
   },
   {
-    label: '数据标签字体大小',
-    type: 'inputNumber',
-    field: 'label_style_fontSize',
-    optionField: 'label.style.fontSize',
-    value: 12,
+    label: '数据标签',
+    type: 'switchNumber', // 设置组件类型
+    field: 'label_style_opacity', // 字段
+    optionField: 'label.style.opacity', // 对应options中的字段
+    value: 0,
     tabName: 'custom',
     groupName: 'graph'
   },
@@ -94,7 +139,16 @@ const setting = [
     type: 'colorPicker',
     field: 'label_style_fill',
     optionField: 'label.style.fill',
-    value: 'rgba(255,255,255,0)',
+    value: '#000000',
+    tabName: 'custom',
+    groupName: 'graph'
+  },
+  {
+    label: '数据标签大小',
+    type: 'inputNumber',
+    field: 'label_style_fontSize',
+    optionField: 'label.style.fontSize',
+    value: 12,
     tabName: 'custom',
     groupName: 'graph'
   },
@@ -377,7 +431,7 @@ const setting = [
     groupName: 'yAxis'
   },
   // 边距 padding
-    {
+  {
     label: '图表边距',
     type: 'padding',
     field: 'appendPadding',
@@ -424,7 +478,8 @@ const option = {
   },
   label: {
     style: {
-      fill: '#fff',
+      fill: '#000',
+      opacity: 0,
       fontSize: 12
     }
   },
