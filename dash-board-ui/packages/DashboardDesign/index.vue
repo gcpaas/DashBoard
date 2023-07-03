@@ -29,7 +29,7 @@
         v-loading="pageLoading"
         class="grid-wrap-box"
         :style="{
-          height: 'calc(100vh - 48px)'
+          height: 'calc(100vh - 40px)'
         }"
         tabindex="1000"
         @keydown="designKeydown"
@@ -473,12 +473,12 @@ export default {
         position: relative;
         top: 0;
         bottom: 0;
-        margin: auto;
+        margin: 16px 0;
         width: 375px;
-        height: 80%;
-        min-height: 600px;
+        height: calc(100% - 32px);
         background-size: 100% 100%;
         box-shadow: 0px 0px 10px #dddddd;
+        box-sizing: border-box;
         .app-design-wrap {
           // 缩放比例
           position: absolute;
@@ -488,6 +488,7 @@ export default {
           bottom: -2rem;
           overflow: auto;
           border-radius: 0 0 35px 35px;
+          box-sizing: border-box;
         }
       }
     }
