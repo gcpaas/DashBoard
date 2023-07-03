@@ -71,14 +71,14 @@ const setting = [
         label: '实心条形',
         value: 'default'
       },
-      {
-        label: '线性',
-        value: 'line'
-      },
       // {
-      //   label: '空心条形',
-      //   value: 'hollow-rect'
+      //   label: '线性',
+      //   value: 'line'
       // },
+      {
+        label: '空心条形',
+        value: 'hollow-rect'
+      },
       {
         label: '钉形',
         value: 'tick'
@@ -463,7 +463,7 @@ const setting = [
     groupName: 'yAxis'
   },
   // 边距 padding
-    {
+  {
     label: '图表边距',
     type: 'padding',
     field: 'appendPadding',
