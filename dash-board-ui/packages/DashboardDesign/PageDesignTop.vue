@@ -12,39 +12,18 @@
     <!-- 中间切换按钮 -->
 
     <div class="head-btn-group">
-      <!-- <div class="terminal-btn">
-        <div
-          class="svg-box"
-          :class="{'active-avg-box':terminal === 'pc'}"
-          @click="chooseTerminal('pc')"
-        >
-          <icon-svg
-            :name="icons[4]"
-            class="img-btn-svg"
-          />
-        </div>
-        <div
-          class="svg-box"
-          :class="{'active-avg-box':terminal === 'app'}"
-          @click="chooseTerminal('app')"
-        >
-          <icon-svg
-            :name="icons[3]"
-            class="img-btn-svg"
-          />
-        </div>
-      </div> -->
-       <CusBtn
-        @click.native="chooseTerminal('pc')"
+      <CusBtn
+        style="margin-right: 0px"
         :class="{'active-avg-box':terminal === 'pc'}"
+        @click.native="chooseTerminal('pc')"
       >
         <icon-svg
           :name="icons[4]"
           class="img-btn-svg"
         />
       </CusBtn>
-       <CusBtn
-       :class="{'active-avg-box':terminal === 'app'}"
+      <CusBtn
+        :class="{'active-avg-box':terminal === 'app'}"
         @click.native="chooseTerminal('app')"
       >
         <icon-svg
