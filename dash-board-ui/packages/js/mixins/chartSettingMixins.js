@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import ColorSelect from 'packages/ColorMultipleSelect/index.vue'
+import ColorSelect from 'dashPackages/ColorMultipleSelect/index.vue'
 const chartSettingMixins = {
   components: {
     ColorSelect

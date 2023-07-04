@@ -234,13 +234,13 @@
 import AddDialog from './addDialog.vue'
 import ChooseTemplateDialog from './ChooseTemplateDialog.vue'
 import pageMenuDialog from './pageMenuDialog.vue'
-import BigScreenRun from 'packages/DashboardRun/index.vue'
-import Icon from 'packages/assets/images/pageIcon/export'
+import BigScreenRun from 'dashPackages/DashboardRun/index.vue'
+import Icon from 'dashPackages/assets/images/pageIcon/export'
 import { getPageType } from './utils'
 import _ from 'lodash'
 // import axios from 'axios'
-import { post } from 'packages/js/utils/http'
-import IconSvg from 'packages/SvgIcon'
+import { post } from 'dashPackages/js/utils/http'
+import IconSvg from 'dashPackages/SvgIcon'
 let dashBoardPageCode = null
 export default {
   name: 'PageManage',

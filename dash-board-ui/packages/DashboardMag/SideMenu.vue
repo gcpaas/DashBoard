@@ -110,7 +110,7 @@
   </div>
 </template>
 <script>
-import { get, post } from '../../packages/js/utils/http'
+import { get, post } from 'dashPackages/js/utils/http'
 import _ from 'lodash'
 
 export default {

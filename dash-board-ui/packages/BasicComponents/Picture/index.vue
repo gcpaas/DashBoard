@@ -44,7 +44,7 @@ export default {
   },
   data () {
     return {
-      noImageUrl: require('packages/BasicComponents/Picture/images/noImage.png')
+      noImageUrl: require('dashPackages/BasicComponents/Picture/images/noImage.png')
     }
   },
   computed: {},

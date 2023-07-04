@@ -1,9 +1,9 @@
 // 组件配置转化
 import _ from 'lodash'
-import { setModules } from 'packages/js/utils/configImport'
+import { setModules } from 'dashPackages/js/utils/configImport'
 import { getScreenInfo} from '../api/bigScreenApi'
 import { stringToFunction } from '../utils/evalFunctions'
-import plotList from 'packages/G2Plots/plotList'
+import plotList from 'dashPackages/G2Plots/plotList'
 export default {
   // 初始化页面数据
   initLayout ({ commit, dispatch }, code) {

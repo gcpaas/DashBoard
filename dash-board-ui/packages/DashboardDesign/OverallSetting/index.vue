@@ -52,10 +52,10 @@
 </template>
 
 <script>
-import ColorPicker from 'packages/ColorPicker/index.vue'
+import ColorPicker from 'dashPackages/ColorPicker/index.vue'
 import BgImg from './BgImgDialog.vue'
 import { mapState, mapMutations } from 'vuex'
-import { getThemeConfig } from 'packages/js/api/bigScreenApi'
+import { getThemeConfig } from 'dashPackages/js/api/bigScreenApi'
 import _ from 'lodash'
 import { G2 } from '@antv/g2plot'
 export default {

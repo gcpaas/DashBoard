@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import paramsMixins from 'packages/js/mixins/paramsMixins'
+import paramsMixins from 'dashPackages/js/mixins/paramsMixins'
 export default {
   name: 'TimeCountDown',
   mixins: [paramsMixins],

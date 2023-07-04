@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import SourceMag from 'packages/SourceMag'
+import SourceMag from 'dashPackages/SourceMag'
 export default {
   name: '',
   props: {},

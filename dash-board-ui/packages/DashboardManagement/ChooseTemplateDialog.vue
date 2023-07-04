@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import TemplateList from 'packages/TemplateList'
+import TemplateList from 'dashPackages/TemplateList'
 export default {
   name: 'ChooseTemplistDialog',
   components: {

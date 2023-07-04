@@ -1,22 +1,22 @@
-import 'packages/assets/style/common/index.scss'
-import 'packages/assets/style/bsTheme.scss'
+import 'dashPackages/assets/style/common/index.scss'
+import 'dashPackages/assets/style/bsTheme.scss'
 // 仪表盘管理页面
-import DashboardManagement from 'packages/DashboardMag'
+import DashboardManagement from 'dashPackages/DashboardMag'
 // 渲染整个dashboard的渲染引擎
-import DashboardRun from 'packages/DashboardRun'
+import DashboardRun from 'dashPackages/DashboardRun'
 // 仪表盘设计引擎
-import DashboardDesign from 'packages/DashboardDesign'
+import DashboardDesign from 'dashPackages/DashboardDesign'
 // 数据源管理
-import DataSourceManagement from 'packages/DataSourceManagement'
+import DataSourceManagement from 'dashPackages/DataSourceManagement'
 // 数据集管理
-import DataSetManagement from 'packages/DataSetManagement'
+import DataSetManagement from 'dashPackages/DataSetManagement'
 
 // 仪表盘 vuex store数据
-import dashboardStore from 'packages/js/store'
+import dashboardStore from 'dashPackages/js/store'
 // 注册基础配置
-import registerConfig from 'packages/js/utils/registerConfig'
+import registerConfig from 'dashPackages/js/utils/registerConfig'
 // 更新主题
-import updateTheme from 'packages/js/utils/updateTheme'
+import updateTheme from 'dashPackages/js/utils/updateTheme'
 
 // 存储组件列表
 const components = [

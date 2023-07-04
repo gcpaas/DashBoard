@@ -67,7 +67,7 @@ module.exports = {
         '@': resolve('pcExample'),
         vue$: 'vue/dist/vue.common',
         // 仪表盘工程路径别名
-        packages: resolve('packages'),
+        dashPackages: resolve('packages'),
         app: resolve('appPackages'),
         '@gcpaas/dash-board-ui': resolve('packages/index.js'),
         '@gcpaas/dash-board-app-ui': resolve('appPackages/index.js')
@@ -121,21 +121,21 @@ module.exports = {
     config.plugins.delete('prefetch-index') //  关闭prefetch
     config.module
       .rule('svg')
-      .exclude.add(resolve('packages/assets/images/dataSourceIcon/svg'))
-      .add(resolve('packages/assets/images/pageIcon/svg'))
-      .add(resolve('packages/assets/images/appPrependIcon/svg'))
-      .add(resolve('packages/assets/images/bigScreenIcon/svg'))
-      .add(resolve('packages/Svgs/svg'))
+      .exclude.add(resolve('dashPackages/assets/images/dataSourceIcon/svg'))
+      .add(resolve('dashPackages/assets/images/pageIcon/svg'))
+      .add(resolve('dashPackages/assets/images/appPrependIcon/svg'))
+      .add(resolve('dashPackages/assets/images/bigScreenIcon/svg'))
+      .add(resolve('dashPackages/Svgs/svg'))
       .end()
 
     config.module
       .rule('icons')
       .test(/\.svg$/)
-      .include.add(resolve('packages/assets/images/dataSourceIcon/svg'))
-      .add(resolve('packages/assets/images/pageIcon/svg'))
-      .add(resolve('packages/assets/images/appPrependIcon/svg'))
-      .add(resolve('packages/assets/images/bigScreenIcon/svg'))
-      .add(resolve('packages/Svgs/svg'))
+      .include.add(resolve('dashPackages/assets/images/dataSourceIcon/svg'))
+      .add(resolve('dashPackages/assets/images/pageIcon/svg'))
+      .add(resolve('dashPackages/assets/images/appPrependIcon/svg'))
+      .add(resolve('dashPackages/assets/images/bigScreenIcon/svg'))
+      .add(resolve('dashPackages/Svgs/svg'))
       .end()
       .use('svg-sprite-loader')
       .loader('svg-sprite-loader')

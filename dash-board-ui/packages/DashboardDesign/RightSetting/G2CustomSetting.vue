@@ -151,13 +151,13 @@
   </div>
 </template>
 <script>
-import SettingTitle from 'packages/SettingTitle/index.vue'
-import { chartSettingMixins } from 'packages/js/mixins/chartSettingMixins'
-import ColorSelect from 'packages/ColorMultipleSelect/index.vue'
-// import ColorPicker from 'packages/ColorPicker/index.vue'
-import PaddingSetting from 'packages/DashboardDesign/RightSetting/PaddingSetting/index.vue'
-import GradualSetting from 'packages/DashboardDesign/RightSetting/GradualSetting/index.vue'
-import PosWhSetting from 'packages/DashboardDesign/RightSetting/PosWhSetting.vue'
+import SettingTitle from 'dashPackages/SettingTitle/index.vue'
+import { chartSettingMixins } from 'dashPackages/js/mixins/chartSettingMixins'
+import ColorSelect from 'dashPackages/ColorMultipleSelect/index.vue'
+// import ColorPicker from 'dashPackages/ColorPicker/index.vue'
+import PaddingSetting from 'dashPackages/DashboardDesign/RightSetting/PaddingSetting/index.vue'
+import GradualSetting from 'dashPackages/DashboardDesign/RightSetting/GradualSetting/index.vue'
+import PosWhSetting from 'dashPackages/DashboardDesign/RightSetting/PosWhSetting.vue'
 import _ from 'lodash'
 export default {
   name: 'CustomComponentSetting',

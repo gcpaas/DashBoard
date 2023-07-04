@@ -6,8 +6,8 @@
  * @LastEditTime: 2023-06-01 10:23:13
  */
 
-import getComponentConfig from 'packages/js/utils/getComponentConfig'
-import linkageConfig from 'packages/js/config/linkageConfig'
+import getComponentConfig from 'dashPackages/js/utils/getComponentConfig'
+import linkageConfig from 'dashPackages/js/config/linkageConfig'
 // 关于设置组件在右侧面板可以展示哪些属性配置
 export const displayOption = {
   serverPagination: {

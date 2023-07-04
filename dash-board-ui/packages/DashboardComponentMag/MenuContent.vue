@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import ComponentList from 'packages/ComponentList'
+import ComponentList from 'dashPackages/ComponentList'
 export default {
   name: '',
   props: { },

@@ -27,7 +27,7 @@
   </div>
 </template>
 <script>
-import BorderSetting from 'packages/DashboardDesign/BorderSetting.vue'
+import BorderSetting from 'dashPackages/DashboardDesign/BorderSetting.vue'
 export default {
   name: 'Border8Setting',
   components: {

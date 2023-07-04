@@ -35,7 +35,7 @@
   </el-dialog>
 </template>
 <script>
-import DataSetManagement from 'packages/DataSetManagement'
+import DataSetManagement from 'dashPackages/DataSetManagement'
 export default {
   name: 'DataSetSetting',
   components: { DataSetManagement },

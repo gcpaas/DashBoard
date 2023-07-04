@@ -125,10 +125,10 @@
   </div>
 </template>
 <script>
-import SettingTitle from 'packages/SettingTitle/index.vue'
-import IconPicker from 'packages/IconPicker/index.vue'
-import ColorPicker from 'packages/ColorPicker/index.vue'
-import PosWhSetting from 'packages/DashboardDesign/RightSetting/PosWhSetting.vue'
+import SettingTitle from 'dashPackages/SettingTitle/index.vue'
+import IconPicker from 'dashPackages/IconPicker/index.vue'
+import ColorPicker from 'dashPackages/ColorPicker/index.vue'
+import PosWhSetting from 'dashPackages/DashboardDesign/RightSetting/PosWhSetting.vue'
 export default {
   name: 'Border14Setting',
   components: {

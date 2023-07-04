@@ -208,7 +208,7 @@
 </template>
 
 <script>
-import { checkRepeat, sourceLinkTest, addOrUpdateDataSource } from 'packages/js/utils/dataSourceService'
+import { checkRepeat, sourceLinkTest, addOrUpdateDataSource } from 'dashPackages/js/utils/dataSourceService'
 export default {
   props: {
     appCode: {

@@ -117,7 +117,7 @@
 </template>
 <script>
 import IconSelect from './IconSelect/index.vue'
-import SettingTitle from 'packages/SettingTitle/index.vue'
+import SettingTitle from 'dashPackages/SettingTitle/index.vue'
 export default {
   name: 'BarSetting',
   components: {

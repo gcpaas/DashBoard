@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import PosWhSetting from 'packages/DashboardDesign/RightSetting/PosWhSetting.vue'
+import PosWhSetting from 'dashPackages/DashboardDesign/RightSetting/PosWhSetting.vue'
 export default {
   name: 'CurrentTimeSetting',
   components: {

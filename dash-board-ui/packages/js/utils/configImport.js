@@ -19,7 +19,7 @@ function importComponentSettingConfig (files) {
     dataModules[moduleName] = files(key).dataConfig
   })
 }
-importComponentSettingConfig(require.context('packages/BasicComponents', true, /\.js$/))
-importComponentSettingConfig(require.context('packages/Borders', true, /\.js$/))
-importComponentSettingConfig(require.context('packages/Decorations', true, /\.js$/))
+importComponentSettingConfig(require.context('dashPackages/BasicComponents', true, /\.js$/))
+importComponentSettingConfig(require.context('dashPackages/Borders', true, /\.js$/))
+importComponentSettingConfig(require.context('dashPackages/Decorations', true, /\.js$/))
 export { setModules, dataModules }

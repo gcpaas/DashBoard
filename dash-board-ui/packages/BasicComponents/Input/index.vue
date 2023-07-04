@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import commonMixins from 'packages/js/mixins/commonMixins'
-import linkageMixins from 'packages/js/mixins/linkageMixins'
+import commonMixins from 'dashPackages/js/mixins/commonMixins'
+import linkageMixins from 'dashPackages/js/mixins/linkageMixins'
 export default {
   name: 'BasicComponentInput',
   mixins: [commonMixins, linkageMixins],

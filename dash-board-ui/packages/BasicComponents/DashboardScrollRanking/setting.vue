@@ -54,8 +54,8 @@
   </div>
 </template>
 <script>
-import SettingTitle from 'packages/SettingTitle/index.vue'
-import ColorPicker from 'packages/ColorPicker/index.vue'
+import SettingTitle from 'dashPackages/SettingTitle/index.vue'
+import ColorPicker from 'dashPackages/ColorPicker/index.vue'
 export default {
   name: 'BarSetting',
   components: {
