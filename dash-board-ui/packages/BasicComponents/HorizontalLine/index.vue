@@ -17,7 +17,7 @@
   </div>
 </template>
 <script>
-import { refreshComponentMixin } from 'packages/js/mixins/refreshComponent'
+import { refreshComponentMixin } from 'dashPackages/js/mixins/refreshComponent'
 export default {
   name: 'HorizontalLine',
   components: {},

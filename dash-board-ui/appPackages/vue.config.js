@@ -32,7 +32,7 @@ module.exports = {
     resolve: {
       alias: {
         '@': resolve('../pcExample'),
-        packages: resolve('../packages'),
+        dashPackages: resolve('../packages'),
         app: resolve('../appPackages')
       },
       fallback: {

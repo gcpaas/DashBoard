@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import BigScreenMag from 'packages/DashboardMag'
+import BigScreenMag from 'dashPackages/DashboardMag'
 export default {
   name: '',
   props: {},

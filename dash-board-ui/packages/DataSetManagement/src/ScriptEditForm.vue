@@ -522,7 +522,7 @@ import {
   getDataset,
   datasetExecuteTest,
   datasetAdd, datasetUpdate
-} from 'packages/js/utils/datasetConfigService'
+} from 'dashPackages/js/utils/datasetConfigService'
 import { codemirror } from 'vue-codemirror'
 import 'codemirror/mode/groovy/groovy'
 

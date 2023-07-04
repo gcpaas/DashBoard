@@ -109,8 +109,8 @@
 </template>
 
 <script>
-import Icon from 'packages/assets/images/appPrependIcon/export'
-import IconSvg from 'packages/SvgIcon'
+import Icon from 'dashPackages/assets/images/appPrependIcon/export'
+import IconSvg from 'dashPackages/SvgIcon'
 import _ from 'lodash'
 export default {
   name: 'IconChoose',

@@ -7,7 +7,7 @@
   </div>
 </template>
 <script>
-import SourceList from 'packages/SourceList'
+import SourceList from 'dashPackages/SourceList'
 export default {
   name: '',
   props: {

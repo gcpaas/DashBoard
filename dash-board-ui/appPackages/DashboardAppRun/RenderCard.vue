@@ -78,14 +78,14 @@
   </div>
 </template>
 <script>
-import { resolveComponentType } from 'packages/js/utils'
-import pcComponent from 'packages/js/utils/appComponentImport'
-import { dataInit, destroyedEvent } from 'packages/js/utils/eventBus'
-import CustomComponent from 'packages/PlotRender/index.vue'
-import Svgs from 'packages/Svgs/index.vue'
-import RemoteComponent from 'packages/RemoteComponents/index.vue'
-import IconSvg from 'packages/SvgIcon'
-import Icon from 'packages/assets/images/pageIcon/export'
+import { resolveComponentType } from 'dashPackages/js/utils'
+import pcComponent from 'dashPackages/js/utils/appComponentImport'
+import { dataInit, destroyedEvent } from 'dashPackages/js/utils/eventBus'
+import CustomComponent from 'dashPackages/PlotRender/index.vue'
+import Svgs from 'dashPackages/Svgs/index.vue'
+import RemoteComponent from 'dashPackages/RemoteComponents/index.vue'
+import IconSvg from 'dashPackages/SvgIcon'
+import Icon from 'dashPackages/assets/images/pageIcon/export'
 import VanPopup from 'vant/lib/popup'
 import 'vant/lib/popup/style'
 import VanIcon from 'vant/lib/icon'

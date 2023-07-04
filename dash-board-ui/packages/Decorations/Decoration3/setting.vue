@@ -41,9 +41,9 @@
   </div>
 </template>
 <script>
-import ColorPicker from 'packages/ColorPicker/index.vue'
-import PosWhSetting from 'packages/DashboardDesign/RightSetting/PosWhSetting.vue'
-import SettingTitle from 'packages/SettingTitle/index.vue'
+import ColorPicker from 'dashPackages/ColorPicker/index.vue'
+import PosWhSetting from 'dashPackages/DashboardDesign/RightSetting/PosWhSetting.vue'
+import SettingTitle from 'dashPackages/SettingTitle/index.vue'
 export default {
   name: 'BarSetting',
   components: {

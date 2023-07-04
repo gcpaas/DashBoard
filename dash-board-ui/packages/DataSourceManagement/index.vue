@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import Icon from 'packages/assets/images/dataSourceIcon/export'
-import IconSvg from 'packages/SvgIcon'
+import Icon from 'dashPackages/assets/images/dataSourceIcon/export'
+import IconSvg from 'dashPackages/SvgIcon'
 export default {
   name: 'DataSourceManagement',
   components: {

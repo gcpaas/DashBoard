@@ -126,7 +126,7 @@
   </el-dialog>
 </template>
 <script>
-import { operatorList } from 'packages/js/dict/chartDict'
+import { operatorList } from 'dashPackages/js/dict/chartDict'
 export default {
   name: 'RalationSetting',
   components: {

@@ -29,7 +29,7 @@
 
 <script>
 import moment from 'moment'
-import paramsMixins from 'packages/js/mixins/paramsMixins'
+import paramsMixins from 'dashPackages/js/mixins/paramsMixins'
 import { mapMutations } from 'vuex'
 export default {
   name: 'CurrentTime',

@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { categoryAdd, categoryUpdate } from 'packages/js/utils/datasetConfigService'
+import { categoryAdd, categoryUpdate } from 'dashPackages/js/utils/datasetConfigService'
 export default {
   name: 'CategroyEditForm',
   props: {

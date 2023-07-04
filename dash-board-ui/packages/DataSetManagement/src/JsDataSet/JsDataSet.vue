@@ -353,7 +353,7 @@
 import ParamsSettingDialog from './components/ParamsSettingDialog.vue'
 import OutputFieldDialog from './components/OutputFieldDialog.vue'
 import FieldFillDialog from './components/FieldFillDialog.vue'
-import { nameCheckRepeat, datasetAdd, datasetUpdate, getDataset, getCategoryTree } from 'packages/js/utils/datasetConfigService'
+import { nameCheckRepeat, datasetAdd, datasetUpdate, getDataset, getCategoryTree } from 'dashPackages/js/utils/datasetConfigService'
 import { codemirror } from 'vue-codemirror'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/lib/codemirror.css'

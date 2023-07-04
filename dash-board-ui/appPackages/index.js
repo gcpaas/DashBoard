@@ -1,15 +1,15 @@
-import 'packages/assets/style/common/index.scss'
-import 'packages/assets/style/bsTheme.scss'
+import 'dashPackages/assets/style/common/index.scss'
+import 'dashPackages/assets/style/bsTheme.scss'
 
 // 渲染整个bigScreenApp的渲染引擎
 import DashboardAppRun from 'app/DashboardAppRun'
 
 // 仪表盘 vuex store数据
-import dashboardStore from 'packages/js/store'
+import dashboardStore from 'dashPackages/js/store'
 // 注册基础配置
 import registerConfig from './utils/registerConfig'
 // 更新主题
-import updateTheme from 'packages/js/utils/updateTheme'
+import updateTheme from 'dashPackages/js/utils/updateTheme'
 
 // 存储组件列表
 const components = [
