@@ -41,7 +41,7 @@ export default {
         // eslint-disable-next-line prefer-const, no-unused-vars
         let data = []
         // eslint-disable-next-line prefer-const
-        let settingContent = this.settingContent?.replaceAll('const ', '')
+        let settingContent = this.settingContentInner?.replaceAll('const ', '')
         // 去掉 export default及后面代码
         settingContent = settingContent?.replace(/export default[\s\S]*/, '')
         eval(settingContent)
@@ -49,18 +49,6 @@ export default {
           option,
           setting
         }
-      },
-      set (val) {}
-    },
-    settingContentInner: {
-      get () {
-        return this.settingContent?.replaceAll('const ', '')
-      },
-      set (val) {}
-    },
-    vueContentInner: {
-      get () {
-        return this.vueContent
       },
       set (val) {}
     }
@@ -71,13 +59,20 @@ export default {
     },
     vueContentInner () {
       this.getRemoteComponent()
+    },
+    vueContent (newVal) {
+      this.vueContentInner = newVal
+    },
+    settingContent (newVal) {
+      this.settingContentInner = newVal
     }
   },
   data () {
     return {
       loading: false,
       remoteComponent: null,
-      newConfig: {}
+      vueContentInner: this.vueContent,
+      settingContentInner: this.settingContent?.replaceAll('const ', '')
     }
   },
   created () {
@@ -116,9 +111,9 @@ export default {
       this.loading = false
     },
     /**
-     * 组件的配置
-     * @returns {Promise<unknown>}
-     */
+       * 组件的配置
+       * @returns {Promise<unknown>}
+       */
     dataFormatting (config, data) {
       config = _.cloneDeep(config)
       // 遍历config.setting，将config.setting中的值赋值给config.option中对应的optionField
@@ -150,19 +145,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bs-remote-preview {
-  position: absolute;
-  min-height: 100%;
-  min-width: 100%;
-  overflow: hidden;
-  box-sizing: border-box;
-
-  .remote-preview-inner-wrap {
+  .bs-remote-preview {
     position: absolute;
-    height: 100%;
-    width: 100%;
-    overflow: auto;
-    padding: 20px;
+    min-height: 100%;
+    min-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    .remote-preview-inner-wrap {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      overflow: auto;
+      padding: 20px;
+      background-color: var(--bs-background-1);
+    }
   }
-}
 </style>

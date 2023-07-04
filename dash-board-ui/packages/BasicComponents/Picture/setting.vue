@@ -62,13 +62,13 @@
                 alt=""
               >
               <span class="el-upload-list__item-actions">
-                  <span
-                    class="el-upload-list__item-delete"
-                    @click="handleRemove(file)"
-                  >
-                    <i class="el-icon-delete" />
-                  </span>
+                <span
+                  class="el-upload-list__item-delete"
+                  @click="handleRemove(file)"
+                >
+                  <i class="el-icon-delete" />
                 </span>
+              </span>
             </div>
             <el-input
               slot="tip"
@@ -84,7 +84,7 @@
           label="不透明度"
           label-width="100px"
         >
-         <el-input-number
+          <el-input-number
             v-model="config.customize.opacity"
             class="db-el-input-number"
             placeholder="请输入不透明度"
@@ -133,14 +133,14 @@ export default {
       hideUpload: false,
       rules: {
         'customize.url': [
-          { required: true, message: '请输入链接地址', trigger: 'blur' },
+          { required: true, message: '请输入URL地址', trigger: 'blur' },
           // 地址校验
           {
             validator: (rule, value, callback) => {
               if (value) {
                 const reg = /^(http|https):\/\/([\w.]+\/?)\S*/
                 if (!reg.test(value)) {
-                  callback(new Error('请输入正确的链接地址'))
+                  callback(new Error('请输入正确的URL地址'))
                 } else {
                   callback()
                 }
