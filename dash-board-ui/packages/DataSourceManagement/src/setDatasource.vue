@@ -208,7 +208,7 @@
 </template>
 
 <script>
-import { checkRepeat, sourceLinkTest, addOrUpdateDataSource } from 'dashPackages/js/utils/dataSourceService'
+import { checkRepeat, sourceLinkTest, add, update } from 'dashPackages/js/utils/dataSourceService'
 export default {
   props: {
     appCode: {
@@ -365,7 +365,7 @@ export default {
         moduleCode: this.appCode
       }).then(r => {
         if (r) {
-          callback(new Error(r))
+          callback(new Error('数据源名称已存在'))
         } else {
           callback()
         }
@@ -467,20 +467,35 @@ export default {
       // }
       this.$refs.dataForm.validate((valid) => {
         if (valid) {
-          addOrUpdateDataSource({
-            ...this.dataForm,
-            moduleCode: this.appCode,
-            editable: this.appCode ? 1 : 0
-          }).then(() => {
-            this.$message.success('保存成功')
-            // 刷新表格
-            this.$emit('refreshTable')
-            this.handleClose()
-          })
+          if (this.dataForm.id) {
+            update({
+              ...this.dataForm,
+              moduleCode: this.appCode,
+              editable: this.appCode ? 1 : 0
+            }).then(() => {
+              this.$message.success('保存成功')
+              // 刷新表格
+              this.$emit('refreshTable')
+              this.handleClose()
+            })
+          } else {
+            add({
+              ...this.dataForm,
+              moduleCode: this.appCode,
+              editable: this.appCode ? 1 : 0
+            }).then(() => {
+              this.$message.success('保存成功')
+              // 刷新表格
+              this.$emit('refreshTable')
+              this.handleClose()
+            })
+          }
+
         } else {
           return false
         }
       })
+    }
     }
   }
 }
