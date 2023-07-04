@@ -9,7 +9,7 @@ import com.gccloud.common.utils.QueryWrapperUtils;
 import com.gccloud.common.vo.PageVO;
 import com.gccloud.dashboard.core.config.DashboardConfig;
 import com.gccloud.dashboard.core.constant.PageDesignConstant;
-import com.gccloud.dashboard.core.module.basic.dao.PageDao;
+import com.gccloud.dashboard.core.module.basic.dao.DashboardPageDao;
 import com.gccloud.dashboard.core.module.basic.entity.PageEntity;
 import com.gccloud.dashboard.core.module.chart.bean.Chart;
 import com.gccloud.dashboard.core.module.chart.components.datasource.DataSetDataSource;
@@ -41,7 +41,7 @@ import java.util.Objects;
  */
 @Service
 @Slf4j
-public class DashboardPageServiceImpl extends ServiceImpl<PageDao, PageEntity> implements IDashboardPageService {
+public class DashboardPageServiceImpl extends ServiceImpl<DashboardPageDao, PageEntity> implements IDashboardPageService {
 
 
     @Resource

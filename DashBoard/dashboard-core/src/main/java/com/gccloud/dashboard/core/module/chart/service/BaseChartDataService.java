@@ -35,9 +35,8 @@ import java.util.*;
  * @version 1.0
  * @date 2022/8/8 15:11
  */
-@Data
 @Slf4j
-@Service
+@Service("dashboardBaseChartDataService")
 public class BaseChartDataService {
 
     @Resource

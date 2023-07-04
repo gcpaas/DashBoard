@@ -18,7 +18,7 @@ import java.io.InputStream;
  * @date 2022/8/25 17:09
  */
 @Slf4j
-@Service("chartMockDataService")
+@Service("dashboardChartMockDataService")
 public class ChartMockData {
 
     public static ChartDataVO getMockData(String type) {

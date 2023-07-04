@@ -30,7 +30,7 @@ import java.net.URLEncoder;
  */
 @Service
 @Slf4j
-@ConditionalOnProperty(prefix = "gc.starter.component", name = "ISysOssService", havingValue = "SysLocalFileServiceImpl", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "gc.starter.dashboard.component", name = "IDashboardOssService", havingValue = "SysLocalFileServiceImpl", matchIfMissing = true)
 public class DashboardLocalFileServiceImpl implements IDashboardOssService {
 
     @Resource
