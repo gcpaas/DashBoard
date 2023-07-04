@@ -26,5 +26,5 @@ function importComponents (files) {
     }
   })
 }
-importComponents(require.context('packages/BasicComponents', true, /\index.vue$/))
+importComponents(require.context('dashPackages/BasicComponents', true, /\index.vue$/))
 export default modules

@@ -5,7 +5,7 @@ Vue.use(Router)
 export const baseRoutes = [
   {
     path: '/notPermission',
-    component: () => import('packages/NotPermission/index.vue')
+    component: () => import('dashPackages/NotPermission/index.vue')
   }
 ]
 

@@ -140,8 +140,8 @@
   </el-dialog>
 </template>
 <script>
-import { get } from 'packages/js/utils/http'
-import { pageMixins } from 'packages/js/mixins/page'
+import { get } from 'dashPackages/js/utils/http'
+import { pageMixins } from 'dashPackages/js/mixins/page'
 import _ from 'lodash'
 export default {
   name: 'SourceDialog',
@@ -214,7 +214,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../../assets/style/bsTheme.scss';
 .dashboard-list-wrap {
   position: relative;
   height: 100%;

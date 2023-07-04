@@ -29,7 +29,7 @@
 
 <script>
 import moment from 'moment'
-import paramsMixins from 'packages/js/mixins/paramsMixins'
+import paramsMixins from 'dashPackages/js/mixins/paramsMixins'
 import { mapMutations } from 'vuex'
 export default {
   name: 'CurrentTime',
@@ -81,7 +81,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~packages/BasicComponents/fonts/index.css";
+@import "../fonts/index.css";
 .db-design-wrap{
   width: 100%;
 }

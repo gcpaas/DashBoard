@@ -12,13 +12,13 @@
   </div>
 </template>
 <script>
-import linkageMixins from 'packages/js/mixins/linkageMixins'
-import commonMixins from 'packages/js/mixins/commonMixins'
+import linkageMixins from 'dashPackages/js/mixins/linkageMixins'
+import commonMixins from 'dashPackages/js/mixins/commonMixins'
 import remoteVueLoader from 'remote-vue2-loader'
 import { mapMutations, mapState } from 'vuex'
 import _ from 'lodash'
-import innerRemoteComponents, { getRemoteComponents } from 'packages/RemoteComponents/remoteComponentsList'
-import { getBizComponentInfo } from 'packages/js/api/bigScreenApi'
+import innerRemoteComponents, { getRemoteComponents } from 'dashPackages/RemoteComponents/remoteComponentsList'
+import { getBizComponentInfo } from 'dashPackages/js/api/bigScreenApi'
 export default {
   name: 'LcdpRemoteComponent',
   mixins: [linkageMixins, commonMixins],

@@ -35,7 +35,7 @@
   </el-dialog>
 </template>
 <script>
-import DataSetManagement from 'packages/DataSetManagement'
+import DataSetManagement from 'dashPackages/DataSetManagement'
 export default {
   name: 'DataSetSetting',
   components: { DataSetManagement },
@@ -95,7 +95,7 @@ export default {
 <style lang="scss"></style>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../assets/style/bsTheme.scss';
 
 .data-set-wrap {
   /deep/ .el-dialog__body {

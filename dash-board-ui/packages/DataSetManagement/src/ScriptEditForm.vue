@@ -522,7 +522,7 @@ import {
   getDataset,
   datasetExecuteTest,
   datasetAdd, datasetUpdate
-} from 'packages/js/utils/datasetConfigService'
+} from 'dashPackages/js/utils/datasetConfigService'
 import { codemirror } from 'vue-codemirror'
 import 'codemirror/mode/groovy/groovy'
 
@@ -939,7 +939,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../../assets/style/bsTheme.scss';
 
 .data-set-scrollbar {
   height: 100%;

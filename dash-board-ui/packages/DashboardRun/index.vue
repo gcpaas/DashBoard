@@ -45,10 +45,10 @@
   </div>
 </template>
 <script>
-import { get } from 'packages/js/utils/http'
-import RenderCard from 'packages/Render/RenderCard.vue'
+import { get } from 'dashPackages/js/utils/http'
+import RenderCard from 'dashPackages/Render/RenderCard.vue'
 import { mapActions, mapMutations, mapState } from 'vuex'
-import { getThemeConfig } from 'packages/js/api/bigScreenApi'
+import { getThemeConfig } from 'dashPackages/js/api/bigScreenApi'
 import { compile } from 'tiny-sass-compiler/dist/tiny-sass-compiler.esm-browser.prod.js'
 import { G2 } from '@antv/g2plot'
 import VueGridLayout from 'vue-grid-layout'

@@ -158,8 +158,8 @@
   </div>
 </template>
 <script>
-import { get, post } from 'packages/js/utils/http'
-import { pageMixins } from 'packages/js/mixins/page'
+import { get, post } from 'dashPackages/js/utils/http'
+import { pageMixins } from 'dashPackages/js/mixins/page'
 import EditForm from './EditForm.vue'
 export default {
   name: 'BigScreenList',
@@ -311,7 +311,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../assets/style/bsTheme.scss';
 .dashboard-list-wrap {
   position: relative;
   height: 100%;

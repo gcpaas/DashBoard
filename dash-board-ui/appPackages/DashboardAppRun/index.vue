@@ -37,12 +37,12 @@
   </div>
 </template>
 <script>
-import Configuration from 'packages/Render/Configuration.vue'
+import Configuration from 'dashPackages/Render/Configuration.vue'
 import RenderCard from './RenderCard'
 import { mapActions, mapMutations, mapState } from 'vuex'
-import { randomString } from '../../packages/js/utils'
-import plotList from 'packages/G2Plots/plotList'
-import { getThemeConfig } from '../../packages/js/api/bigScreenApi'
+import { randomString } from 'dashPackages/js/utils'
+import plotList from 'dashPackages/G2Plots/plotList'
+import { getThemeConfig } from 'dashPackages/js/api/bigScreenApi'
 import { G2 } from '@antv/g2plot'
 export default {
   name: 'DashboardAppRun',

@@ -49,7 +49,7 @@ module.exports = {
     resolve: {
       alias: {
         '@': resolve('pcExample'),
-        packages: resolve('packages'),
+        dashPackages: resolve('packages'),
         app: resolve('appPackages')
       },
       fallback: {
@@ -78,23 +78,23 @@ module.exports = {
     // set svg-sprite-loader
     config.module
       .rule('svg')
-      .exclude.add(resolve('packages/assets/images/bigScreenIcon/svg'))
-      .add(resolve('packages/Svgs/svg'))
-      .add(resolve('packages/assets/images/dataSourceIcon/svg'))
-      .add(resolve('packages/assets/images/appPrependIcon/svg'))
-      .add(resolve('packages/assets/images/pageIcon/svg'))
-      .add(resolve('packages/assets/images/terminalIcon/svg'))
+      .exclude.add(resolve('dashPackages/assets/images/bigScreenIcon/svg'))
+      .add(resolve('dashPackages/Svgs/svg'))
+      .add(resolve('dashPackages/assets/images/dataSourceIcon/svg'))
+      .add(resolve('dashPackages/assets/images/appPrependIcon/svg'))
+      .add(resolve('dashPackages/assets/images/pageIcon/svg'))
+      .add(resolve('dashPackages/assets/images/terminalIcon/svg'))
       .end()
 
     config.module
       .rule('icons')
       .test(/\.svg$/)
-      .include.add(resolve('packages/assets/images/bigScreenIcon/svg'))
-      .add(resolve('packages/Svgs/svg'))
-      .add(resolve('packages/assets/images/dataSourceIcon/svg'))
-      .add(resolve('packages/assets/images/appPrependIcon/svg'))
-      .add(resolve('packages/assets/images/pageIcon/svg'))
-      .add(resolve('packages/assets/images/terminalIcon/svg'))
+      .include.add(resolve('dashPackages/assets/images/bigScreenIcon/svg'))
+      .add(resolve('dashPackages/Svgs/svg'))
+      .add(resolve('dashPackages/assets/images/dataSourceIcon/svg'))
+      .add(resolve('dashPackages/assets/images/appPrependIcon/svg'))
+      .add(resolve('dashPackages/assets/images/pageIcon/svg'))
+      .add(resolve('dashPackages/assets/images/terminalIcon/svg'))
       .end()
       .use('svg-sprite-loader')
       .loader('svg-sprite-loader')

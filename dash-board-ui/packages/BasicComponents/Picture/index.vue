@@ -44,7 +44,7 @@ export default {
   },
   data () {
     return {
-      noImageUrl: require('packages/BasicComponents/Picture/images/noImage.png')
+      noImageUrl: require('dashPackages/BasicComponents/Picture/images/noImage.png')
     }
   },
   computed: {},
@@ -59,7 +59,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '~packages/assets/style/chartStyle.scss';
+  @import '../../assets/style/chartStyle.scss';
 .db-design-wrap {
   width: 100%;
   background-color: rgba(0, 0, 0, 0);

@@ -5,7 +5,7 @@
         <div class="logo-wrap item-wrap">
           <img
             class="menu-img"
-            src="~packages/DashboardDesign/images/app.png"
+            src="../DashboardDesign/images/app.png"
             alt="返回"
             @click="backManagement"
           >
@@ -102,9 +102,9 @@
 </template>
 <script>
 import { toJpeg, toPng } from 'html-to-image'
-import CusBtn from 'packages/DashboardDesign/BtnLoading'
+import CusBtn from 'dashPackages/DashboardDesign/BtnLoading'
 import BizComponentPreview from './Preview'
-import { getBizComponentInfo, updateBizComponent } from 'packages/js/api/bigScreenApi'
+import { getBizComponentInfo, updateBizComponent } from 'dashPackages/js/api/bigScreenApi'
 import { defaultSettingContent, defaultVueContent } from './config/defaultBizConfig'
 import { codemirror } from 'vue-codemirror'
 import 'codemirror/lib/codemirror.css'
@@ -119,7 +119,7 @@ import {
   showSize,
   dataURLtoBlob,
   translateBlobToBase64
-} from 'packages/js/utils/compressImg'
+} from 'dashPackages/js/utils/compressImg'
 
 import * as imageConversion from 'image-conversion'
 

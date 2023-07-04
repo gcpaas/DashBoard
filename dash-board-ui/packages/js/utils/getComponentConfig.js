@@ -1,4 +1,4 @@
-import Icon from 'packages/assets/images/bigScreenIcon/export'
+import Icon from 'dashPackages/assets/images/bigScreenIcon/export'
 export default function getComponentConfig (type) {
   switch (type) {
     case 'bigNumber':
@@ -122,7 +122,7 @@ export default function getComponentConfig (type) {
         name: '翻牌器',
         title: '翻牌器',
         icon: null,
-        img: require('packages/BasicComponents/DigitalFlop/images/fanpaiqi.png'),
+        img: require('dashPackages/BasicComponents/DigitalFlop/images/fanpaiqi.png'),
         className:
           'com.gccloud.dashboard.core.module.chart.components.DashboardDigitalFlopChart',
         w: 12,

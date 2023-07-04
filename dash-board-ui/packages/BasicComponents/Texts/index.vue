@@ -12,8 +12,8 @@
   </div>
 </template>
 <script>
-import commonMixins from 'packages/js/mixins/commonMixins'
-import paramsMixins from 'packages/js/mixins/paramsMixins'
+import commonMixins from 'dashPackages/js/mixins/commonMixins'
+import paramsMixins from 'dashPackages/js/mixins/paramsMixins'
 export default {
   name: 'Texts',
   components: {},
@@ -47,7 +47,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '~packages/assets/style/chartStyle.scss';
+  @import '../../assets/style/chartStyle.scss';
   .content-box{
     text-align: center;
     /* 将背景设为渐变 */

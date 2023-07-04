@@ -92,26 +92,26 @@
 <script>
 import SourceDialog from './SourceDialog/index.vue'
 import ComponentDialog from './ComponentDialog/index.vue'
-import iframeDialog from 'packages/BasicComponents/SuperLinkChart/iframeDialog'
+import iframeDialog from 'dashPackages/BasicComponents/SuperLinkChart/iframeDialog'
 import {
   dataConfig,
   settingConfig
-} from 'packages/BasicComponents/Picture/settingConfig'
+} from 'dashPackages/BasicComponents/Picture/settingConfig'
 import LeftPanel from './LeftPanel.vue'
 import SettingPanel from './SettingPanel.vue'
 import PageTopSetting from './PageDesignTop.vue'
 import Render from '../Render'
 import { mapActions, mapMutations, mapState } from 'vuex'
 import { G2 } from '@antv/g2plot'
-import multipleSelectMixin from 'packages/js/mixins/multipleSelectMixin'
-import { getThemeConfig, getScreenInfo } from 'packages/js/api/bigScreenApi'
+import multipleSelectMixin from 'dashPackages/js/mixins/multipleSelectMixin'
+import { getThemeConfig, getScreenInfo } from 'dashPackages/js/api/bigScreenApi'
 import _ from 'lodash'
-import { get } from 'packages/js/utils/http'
+import { get } from 'dashPackages/js/utils/http'
 import { randomString } from '../js/utils'
-import { isFirefox } from 'packages/js/utils/userAgent'
-import { handleResData } from 'packages/js/store/actions.js'
+import { isFirefox } from 'dashPackages/js/utils/userAgent'
+import { handleResData } from 'dashPackages/js/store/actions.js'
 import AppDashBoard from '../../appPackages/DashboardAppRun/index.vue'
-import { EventBus } from 'packages/js/utils/eventBus'
+import { EventBus } from 'dashPackages/js/utils/eventBus'
 export default {
   name: 'BigScreenDesign',
   components: {

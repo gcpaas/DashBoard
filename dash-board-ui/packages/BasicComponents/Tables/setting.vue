@@ -94,9 +94,9 @@
   </div>
 </template>
 <script>
-import SettingTitle from 'packages/SettingTitle/index.vue'
-import ColorPicker from 'packages/ColorPicker/index.vue'
-import { chartSettingMixins } from 'packages/js/mixins/chartSettingMixins'
+import SettingTitle from 'dashPackages/SettingTitle/index.vue'
+import ColorPicker from 'dashPackages/ColorPicker/index.vue'
+import { chartSettingMixins } from 'dashPackages/js/mixins/chartSettingMixins'
 export default {
   components: {
     ColorPicker,
@@ -138,7 +138,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../~packages/assets/style/settingWrap.scss";
+@import "../../assets/style/settingWrap.scss";
 
 .lc-field-body {
   padding: 12px 16px;

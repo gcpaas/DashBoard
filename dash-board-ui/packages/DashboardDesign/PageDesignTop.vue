@@ -3,7 +3,7 @@
     <div class="logo-wrap item-wrap">
       <img
         class="menu-img"
-        src="~packages/DashboardDesign/images/app.png"
+        src="../DashboardDesign/images/app.png"
         alt="返回"
         @click="backManagement"
       >
@@ -98,20 +98,20 @@
 <script>
 import { toJpeg, toPng } from 'html-to-image'
 import { mapMutations, mapActions, mapState } from 'vuex'
-import { saveScreen } from 'packages/js/api/bigScreenApi'
-import ChooseTemplateDialog from 'packages/DashboardManagement/ChooseTemplateDialog.vue'
+import { saveScreen } from 'dashPackages/js/api/bigScreenApi'
+import ChooseTemplateDialog from 'dashPackages/DashboardManagement/ChooseTemplateDialog.vue'
 import _ from 'lodash'
-import { stringifyObjectFunctions } from 'packages/js/utils/evalFunctions'
-import AssignDialog from 'packages/DashboardDesign/AssignDialog/index.vue'
-import HistoryList from 'packages/DashboardDesign/HistoryList/index.vue'
+import { stringifyObjectFunctions } from 'dashPackages/js/utils/evalFunctions'
+import AssignDialog from 'dashPackages/DashboardDesign/AssignDialog/index.vue'
+import HistoryList from 'dashPackages/DashboardDesign/HistoryList/index.vue'
 import CusBtn from './BtnLoading'
-import IconSvg from 'packages/SvgIcon'
-import Icon from 'packages/assets/images/pageIcon/export'
+import IconSvg from 'dashPackages/SvgIcon'
+import Icon from 'dashPackages/assets/images/pageIcon/export'
 import {
   showSize,
   dataURLtoBlob,
   translateBlobToBase64
-} from 'packages/js/utils/compressImg'
+} from 'dashPackages/js/utils/compressImg'
 import * as imageConversion from 'image-conversion'
 export default {
   name: 'PageTopSetting',
@@ -369,7 +369,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~packages/DashboardDesign/fonts/iconfont.css';
+@import '../DashboardDesign/fonts/iconfont.css';
 .default-layout-box {
   display: flex;
   flex-wrap: wrap;

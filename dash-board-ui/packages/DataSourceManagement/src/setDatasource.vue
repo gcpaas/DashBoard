@@ -208,7 +208,7 @@
 </template>
 
 <script>
-import { checkRepeat, sourceLinkTest, add, update } from 'packages/js/utils/dataSourceService'
+import { checkRepeat, sourceLinkTest, add, update } from 'dashPackages/js/utils/dataSourceService'
 export default {
   props: {
     appCode: {
@@ -502,5 +502,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../../assets/style/bsTheme.scss';
 </style>

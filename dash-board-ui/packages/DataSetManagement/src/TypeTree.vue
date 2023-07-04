@@ -154,10 +154,10 @@ import $ from 'jquery'
 import 'ztree/js/jquery.ztree.core'
 import 'ztree/js/jquery.ztree.exedit'
 import 'ztree/js/jquery.ztree.exhide'
-import 'packages/assets/style/zTree/metroStyle.css'
-import 'packages/assets/style/zTree/zTree.scss'
-import 'packages/assets/style/zTree/zTreeSelect.scss'
-import { getCategoryTree, categoryRemove } from 'packages/js/utils/datasetConfigService'
+import 'dashPackages/assets/style/zTree/metroStyle.css'
+import 'dashPackages/assets/style/zTree/zTree.scss'
+import 'dashPackages/assets/style/zTree/zTreeSelect.scss'
+import { getCategoryTree, categoryRemove } from 'dashPackages/js/utils/datasetConfigService'
 import OrgEditForm from './CategroyEditForm.vue'
 export default {
   name: 'DatasetTypeTreeIndex',
@@ -448,7 +448,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../../assets/style/bsTheme.scss';
 
 /deep/ .el-tabs {
   .el-tabs__header {

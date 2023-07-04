@@ -740,8 +740,8 @@ import {
   datasetExecuteTest,
   getCategoryTree,
   getDataset
-} from 'packages/js/utils/datasetConfigService'
-import { datasourceList } from 'packages/js/utils/dataSourceService'
+} from 'dashPackages/js/utils/datasetConfigService'
+import { datasourceList } from 'dashPackages/js/utils/dataSourceService'
 import { codemirror } from 'vue-codemirror'
 import 'codemirror/mode/sql/sql.js'
 import 'codemirror/theme/eclipse.css'
@@ -1316,7 +1316,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../../assets/style/bsTheme.scss';
 
 .data-set-scrollbar {
   height: 100%;

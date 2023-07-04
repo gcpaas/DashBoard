@@ -571,14 +571,14 @@
   </div>
 </template>
 <script>
-import metricSetting from 'packages/DashboardDesign/metricSetting/index.vue'
+import metricSetting from 'dashPackages/DashboardDesign/metricSetting/index.vue'
 import ElDragSelect from './ElDragSelect.vue'
 import { isEmpty, cloneDeep } from 'lodash'
-import ComponentRelation from 'packages/DashboardDesign/RightSetting/ComponentRelation/index.vue'
-import ComponentBinding from 'packages/DashboardDesign/RightSetting/ComponentBinding/index.vue'
-import dataSetSelect from 'packages/DataSetSetting/index.vue'
+import ComponentRelation from 'dashPackages/DashboardDesign/RightSetting/ComponentRelation/index.vue'
+import ComponentBinding from 'dashPackages/DashboardDesign/RightSetting/ComponentBinding/index.vue'
+import dataSetSelect from 'dashPackages/DataSetSetting/index.vue'
 import { mapState } from 'vuex'
-import { getDataSetDetails } from 'packages/js/api/bigScreenApi'
+import { getDataSetDetails } from 'dashPackages/js/api/bigScreenApi'
 export default {
   name: 'DataSetting',
   components: {
@@ -801,7 +801,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "~packages/assets/style/settingWrap.scss";
+  @import "../../assets/style/settingWrap.scss";
   .add-filter-box {
     position: relative;
     .add-filter {

@@ -15,7 +15,7 @@
 import { videoPlayer } from 'vue-video-player'
 import 'video.js/dist/video-js.css'
 import 'videojs-contrib-hls'
-import { refreshComponentMixin } from 'packages/js/mixins/refreshComponent'
+import { refreshComponentMixin } from 'dashPackages/js/mixins/refreshComponent'
 export default {
   name: 'Video',
   components: { videoPlayer },
@@ -90,7 +90,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '~packages/assets/style/chartStyle.scss';
+  @import '../../assets/style/chartStyle.scss';
 .db-design-wrap {
   background-color: transparent;
   overflow-y: hidden;

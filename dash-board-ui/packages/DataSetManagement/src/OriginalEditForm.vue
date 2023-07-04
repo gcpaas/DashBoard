@@ -472,8 +472,8 @@ import {
   nameCheckRepeat,
   datasetExecuteTest,
   getDataset, datasetUpdate, datasetAdd
-} from 'packages/js/utils/datasetConfigService'
-import { datasourceList, getSourceTable, getSourceView, getTableFieldList } from 'packages/js/utils/dataSourceService'
+} from 'dashPackages/js/utils/datasetConfigService'
+import { datasourceList, getSourceTable, getSourceView, getTableFieldList } from 'dashPackages/js/utils/dataSourceService'
 import _ from 'lodash'
 export default {
   name: 'OriginalEditForm',
@@ -1013,7 +1013,7 @@ export default {
 <style lang="scss"></style>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../../assets/style/bsTheme.scss';
 
 .data-set-scrollbar {
   height: 100%;

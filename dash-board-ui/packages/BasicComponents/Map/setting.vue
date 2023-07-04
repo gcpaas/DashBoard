@@ -219,12 +219,12 @@
   </div>
 </template>
 <script>
-import SettingTitle from 'packages/SettingTitle/index.vue'
-import { chartSettingMixins } from 'packages/js/mixins/chartSettingMixins'
-import ColorSelect from 'packages/ColorMultipleSelect/index.vue'
-import ColorPicker from 'packages/ColorPicker/index.vue'
-import { get } from 'packages/js/utils/http'
-import PosWhSetting from 'packages/DashboardDesign/RightSetting/PosWhSetting.vue'
+import SettingTitle from 'dashPackages/SettingTitle/index.vue'
+import { chartSettingMixins } from 'dashPackages/js/mixins/chartSettingMixins'
+import ColorSelect from 'dashPackages/ColorMultipleSelect/index.vue'
+import ColorPicker from 'dashPackages/ColorPicker/index.vue'
+import { get } from 'dashPackages/js/utils/http'
+import PosWhSetting from 'dashPackages/DashboardDesign/RightSetting/PosWhSetting.vue'
 export default {
   name: 'BarSetting',
   components: {
@@ -296,7 +296,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../~packages/assets/style/settingWrap.scss';
+@import '../../assets/style/settingWrap.scss';
 // 筛选条件的按钮样式
 .add-filter-box {
   position: relative;

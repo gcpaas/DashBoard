@@ -1,5 +1,5 @@
 
-import { commonConfig } from 'packages/js/config'
+import { commonConfig } from 'dashPackages/js/config'
 
 export const settingConfig = {
   displayOption: {

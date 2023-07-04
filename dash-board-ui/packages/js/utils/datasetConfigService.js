@@ -1,7 +1,7 @@
 /*!
  * 数据集管理
  */
-import { get, post } from 'packages/js/utils/http'
+import { get, post } from 'dashPackages/js/utils/http'
 
 /**
  * 数据集分页查询

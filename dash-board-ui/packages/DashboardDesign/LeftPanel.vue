@@ -115,11 +115,11 @@
   </transition>
 </template>
 <script>
-import basicComponents from 'packages/js/config/basicComponentsConfig'
+import basicComponents from 'dashPackages/js/config/basicComponentsConfig'
 import g2PlotComponents, { getCustomPlots } from '../G2Plots/plotList'
 import LayerList from './LayerList/index.vue'
 import { mapMutations } from 'vuex'
-import IconSvg from 'packages/SvgIcon'
+import IconSvg from 'dashPackages/SvgIcon'
 export default {
   name: 'PageLeftPanel',
   components: {
@@ -278,7 +278,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/DashboardDesign/fonts/iconfont.css';
+@import '../DashboardDesign/fonts/iconfont.css';
 .db-left-panel {
   display: flex;
   background-color: var(--db-background-leftPanel);

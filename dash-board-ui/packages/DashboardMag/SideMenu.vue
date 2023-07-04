@@ -110,7 +110,7 @@
   </div>
 </template>
 <script>
-import { get, post } from '../../packages/js/utils/http'
+import { get, post } from 'dashPackages/js/utils/http'
 import _ from 'lodash'
 
 export default {
@@ -250,7 +250,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  @import '~packages/assets/style/bsTheme.scss';
+  @import '../assets/style/bsTheme.scss';
   .side-catalog-wrap{
     // border-right : 1px solid #e8e8e8;
     margin-top: 16px;

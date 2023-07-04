@@ -89,7 +89,7 @@ module.exports = defineConfig({
         views: resolve('src/views'),
         components: resolve('src/components'),
         'gc-starter-ui-plus': resolve('src/utils/gcCore.js'),
-        packages: resolve('../packages'),
+        dashPackages: resolve('../packages'),
         app: resolve('../appPackages'),
         '@gcpaas/dash-board-ui': resolve('../packages/index.js'),
         '@gcpaas/dash-board-app-ui': resolve('../appPackages/index.js'),

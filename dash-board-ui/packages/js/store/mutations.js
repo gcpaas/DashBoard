@@ -10,7 +10,7 @@ import Vue from 'vue'
 import _ from 'lodash'
 import { defaultData } from './state'
 import moment from 'moment'
-import { EventBus } from 'packages/js/utils/eventBus'
+import { EventBus } from 'dashPackages/js/utils/eventBus'
 export default {
   // 改变页面基本信息，后端请求的页面信息存储到此处
   changePageInfo (state, pageInfo) {

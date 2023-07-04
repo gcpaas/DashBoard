@@ -324,7 +324,7 @@
 <script>
 import vueJsonEditor from 'vue-json-editor'
 import vueJsonViewer from 'vue-json-viewer'
-import { getCategoryTree, datasetAdd, datasetUpdate, getDataset, nameCheckRepeat } from 'packages/js/utils/datasetConfigService'
+import { getCategoryTree, datasetAdd, datasetUpdate, getDataset, nameCheckRepeat } from 'dashPackages/js/utils/datasetConfigService'
 import _ from 'lodash'
 
 export default {
@@ -731,7 +731,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../../assets/style/bsTheme.scss';
 
 .data-set-scrollbar {
   height: 100%;

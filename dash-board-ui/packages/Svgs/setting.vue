@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import PosWhSetting from 'packages/DashboardDesign/RightSetting/PosWhSetting.vue'
+import PosWhSetting from 'dashPackages/DashboardDesign/RightSetting/PosWhSetting.vue'
 export default {
   name: 'CurrentTimeSetting',
   components: {
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "../~packages/assets/style/settingWrap.scss";
+  @import "../assets/style/settingWrap.scss";
   .setting-wrap{
     padding: 16px;
   }

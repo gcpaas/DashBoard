@@ -218,14 +218,14 @@
 import TypeTree from './TypeTree.vue'
 import JsDataSet from './JsDataSet/JsDataSet.vue'
 import JsonEditForm from './JsonEditForm.vue'
-import table from 'packages/js/utils/table.js'
+import table from 'dashPackages/js/utils/table.js'
 import ScriptEditForm from './ScriptEditForm.vue'
 import CustomEditForm from './CustomEditForm.vue'
-import { pageMixins } from 'packages/js/mixins/page'
+import { pageMixins } from 'dashPackages/js/mixins/page'
 import OriginalEditForm from './OriginalEditForm.vue'
 import DatasetTypeDialog from './DatasetTypeDialog.vue'
 import StoredProcedureEditForm from './StoredProcedureEditForm.vue'
-import { datasetPage, datasetRemove } from 'packages/js/utils/datasetConfigService'
+import { datasetPage, datasetRemove } from 'dashPackages/js/utils/datasetConfigService'
 export default {
   name: 'DataSetManagement',
   directives: {
@@ -604,8 +604,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
-@import '~packages/assets/style/zTree/treePackUp.scss';
+@import '../../assets/style/bsTheme.scss';
+@import '../../assets/style/zTree/treePackUp.scss';
 
 .db-pagination {
   ::v-deep .el-input__inner {

@@ -340,11 +340,11 @@
   </el-dialog>
 </template>
 <script>
-import { get } from 'packages/js/utils/http'
-import { pageMixins } from 'packages/js/mixins/page'
+import { get } from 'dashPackages/js/utils/http'
+import { pageMixins } from 'dashPackages/js/mixins/page'
 import _ from 'lodash'
-import innerRemoteComponents, { getRemoteComponents, getRemoteComponentConfig } from 'packages/RemoteComponents/remoteComponentsList'
-import { getBizComponentPage } from 'packages/js/api/bigScreenApi'
+import innerRemoteComponents, { getRemoteComponents, getRemoteComponentConfig } from 'dashPackages/RemoteComponents/remoteComponentsList'
+import { getBizComponentPage } from 'dashPackages/js/api/bigScreenApi'
 export default {
   name: 'ComponentDialog',
   mixins: [pageMixins],
@@ -464,7 +464,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '~packages/assets/style/bsTheme.scss';
+  @import '../../assets/style/bsTheme.scss';
   .dashboard-list-wrap {
     position: relative;
     height: 100%;

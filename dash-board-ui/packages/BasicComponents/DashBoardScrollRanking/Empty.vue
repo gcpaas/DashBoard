@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import IconSvg from 'packages/SvgIcon'
+import IconSvg from 'dashPackages/SvgIcon'
 export default {
   name: 'Empty',
   components: {

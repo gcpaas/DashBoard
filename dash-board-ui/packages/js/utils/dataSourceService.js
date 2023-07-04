@@ -1,7 +1,7 @@
 /*!
  * 数据源管理
  */
-import { get, post } from 'packages/js/utils/http'
+import { get, post } from 'dashPackages/js/utils/http'
 
 /**
  * 修改数据源

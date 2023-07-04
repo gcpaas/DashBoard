@@ -51,14 +51,14 @@
 </template>
 <script>
 import { mapMutations } from 'vuex'
-import { resolveComponentType } from 'packages/js/utils'
-import pcComponent from 'packages/js/utils/componentImport'
-import { dataInit, destroyedEvent } from 'packages/js/utils/eventBus'
+import { resolveComponentType } from 'dashPackages/js/utils'
+import pcComponent from 'dashPackages/js/utils/componentImport'
+import { dataInit, destroyedEvent } from 'dashPackages/js/utils/eventBus'
 import CustomComponent from '../PlotRender/index.vue'
 import Svgs from '../Svgs/index.vue'
-import RemoteComponent from 'packages/RemoteComponents/index.vue'
-import IconSvg from 'packages/SvgIcon'
-import Icon from 'packages/assets/images/pageIcon/export'
+import RemoteComponent from 'dashPackages/RemoteComponents/index.vue'
+import IconSvg from 'dashPackages/SvgIcon'
+import Icon from 'dashPackages/assets/images/pageIcon/export'
 const components = {}
 for (const key in pcComponent) {
   if (Object.hasOwnProperty.call(pcComponent, key)) {

@@ -249,7 +249,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~packages/DashboardDesign/fonts/iconfont.css';
+@import '../../DashboardDesign/fonts/iconfont.css';
 .wrapper {
   box-sizing: border-box;
   position: absolute;

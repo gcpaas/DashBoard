@@ -126,7 +126,7 @@
   </el-dialog>
 </template>
 <script>
-import { operatorList } from 'packages/js/dict/chartDict'
+import { operatorList } from 'dashPackages/js/dict/chartDict'
 export default {
   name: 'RalationSetting',
   components: {
@@ -209,5 +209,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../../../assets/style/bsTheme.scss';
 </style>
