@@ -2,6 +2,8 @@ import 'dashPackages/assets/style/common/index.scss'
 import 'dashPackages/assets/style/bsTheme.scss'
 // 仪表盘管理页面
 import DashboardManagement from 'dashPackages/DashboardMag'
+
+import DashboardAppRun from 'dashPackages/DashboardAppRun'
 // 渲染整个dashboard的渲染引擎
 import DashboardRun from 'dashPackages/DashboardRun'
 // 仪表盘设计引擎
@@ -24,7 +26,8 @@ const components = [
   DashboardRun,
   DashboardDesign,
   DataSetManagement,
-  DataSourceManagement
+  DataSourceManagement,
+  DashboardAppRun
 ]
 
 const $dashboard = {
@@ -44,6 +47,7 @@ export {
   DashboardDesign,
   DataSetManagement,
   DataSourceManagement,
+  DashboardAppRun,
 
   $dashboard,
   registerConfig,
@@ -57,6 +61,7 @@ export default {
   DashboardDesign,
   DataSetManagement,
   DataSourceManagement,
+  DashboardAppRun,
 
   $dashboard,
   registerConfig,

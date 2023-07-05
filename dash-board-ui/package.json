@@ -1,6 +1,6 @@
 {
   "name": "@gcpaas/dash-board-ui",
-  "version": "0.0.1-2023070303-Alpha",
+  "version": "0.0.1-2023070409-Alpha",
   "description": "自定义仪表盘",
   "author": "gc-starter",
   "license": "MIT",
@@ -68,7 +68,7 @@
     "nprogress": "0.2.0",
     "path-to-regexp": "2.4.0",
     "qs": "^6.9.6",
-    "remote-vue2-loader": "1.0.4",
+    "remote-vue2-loader": "1.0.3",
     "sortablejs": "^1.15.0",
     "tiny-sass-compiler": "^0.12.2",
     "vant": "^2.12.54",

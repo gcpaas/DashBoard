@@ -110,7 +110,7 @@ import { get } from 'dashPackages/js/utils/http'
 import { randomString } from '../js/utils'
 import { isFirefox } from 'dashPackages/js/utils/userAgent'
 import { handleResData } from 'dashPackages/js/store/actions.js'
-import AppDashBoard from '../../appPackages/DashboardAppRun/index.vue'
+import AppDashBoard from 'dashPackages/DashboardAppRun/index.vue'
 import { EventBus } from 'dashPackages/js/utils/eventBus'
 export default {
   name: 'BigScreenDesign',

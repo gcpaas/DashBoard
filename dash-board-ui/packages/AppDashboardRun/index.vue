@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-import DashboardAppRun from '../../appPackages/DashboardAppRun/index.vue'
+import DashboardAppRun from 'dashPackages/DashboardAppRun/index.vue'
 import { getThemeConfig } from '../js/api/bigScreenApi'
 import { G2 } from '@antv/g2plot'
 import { mapActions, mapMutations, mapState } from 'vuex'

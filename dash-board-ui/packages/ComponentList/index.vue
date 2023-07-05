@@ -282,7 +282,7 @@ export default {
           parentCode: this.catalogCode || null,
           current: this.current,
           size: this.size,
-          searchKey: this.searchKey,
+          searchKey: this.name,
           type: 'component'
         })
           .then((data) => {
@@ -296,7 +296,6 @@ export default {
         get('/dashboard/bizComponent/page', {
           current: this.current,
           size: this.size,
-          searchKey: this.searchKey,
           name: this.name,
           type: this.catalogCode || null
         })
