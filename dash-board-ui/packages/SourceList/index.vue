@@ -34,10 +34,12 @@
         搜索
       </el-button>
       <el-upload
+        accept="image/*, video/*"
         class="upload-demo"
         :action="upLoadUrl"
         :headers="headers"
         :data="{ module: code }"
+        :before-upload="beforeUpload"
         :on-success="uploadSuccess"
         :on-error="uploadError"
         multiple
@@ -217,6 +219,17 @@ export default {
   },
   methods: {
     uploadError (err, file, fileList) {
+    },
+    beforeUpload (file) {
+      const isImage = file.type.startsWith('image/')
+      const isVideo = file.type.startsWith('video/')
+      const isValidFileType = isImage || isVideo
+
+      if (!isValidFileType) {
+        this.$message.error('只能上传图片或视频文件')
+      }
+
+      return isValidFileType
     },
     uploadSuccess (response, file, fileList) {
       if (response.code === 200) {

@@ -123,9 +123,9 @@ export default {
       this.loading = false
     },
     /**
-     * 组件的配置
-     * @returns {Promise<unknown>}
-     */
+       * 组件的配置
+       * @returns {Promise<unknown>}
+       */
     dataFormatting (config, data) {
       config = _.cloneDeep(config)
       // 遍历config.setting，将config.setting中的值赋值给config.option中对应的optionField
@@ -157,20 +157,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bs-remote-preview {
-  position: absolute;
-  min-height: 100%;
-  min-width: 100%;
-  overflow: hidden;
-  box-sizing: border-box;
-
-  .remote-preview-inner-wrap {
+  .bs-remote-preview {
     position: absolute;
-    height: 100%;
-    width: 100%;
-    overflow: auto;
-    padding: 20px;
-        background-color: var(--db-background-1);
+    min-height: 100%;
+    min-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    .remote-preview-inner-wrap {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      overflow: auto;
+      padding: 20px;
+      background-color: var(--bs-background-1);
+    }
   }
-}
 </style>
