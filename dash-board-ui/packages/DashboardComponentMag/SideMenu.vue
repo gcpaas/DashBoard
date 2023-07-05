@@ -75,10 +75,10 @@ export default {
   }
   .side-catalog-wrap{
     // border-right : 1px solid #e8e8e8;
-    margin-top: 16px;
+    // margin-top: 16px;
     padding-top: 16px;
     width: 220px;
-    height: 100%;
+    // height: 100%;
     box-sizing: border-box;
     color: var(--db-el-title);
     background-color: var(--db-background-2);

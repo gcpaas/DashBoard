@@ -20,6 +20,10 @@ import registerConfig from 'dashPackages/js/utils/registerConfig'
 // 更新主题
 import updateTheme from 'dashPackages/js/utils/updateTheme'
 
+const DashboardSourceMag = () => import('./SourceMag')
+// 大屏组件管理页面
+const DashboardComponentMag = () => import('./DashboardComponentMag')
+
 // 存储组件列表
 const components = [
   DashboardManagement,
@@ -27,7 +31,9 @@ const components = [
   DashboardDesign,
   DataSetManagement,
   DataSourceManagement,
-  DashboardAppRun
+  DashboardAppRun,
+  DashboardSourceMag,
+  DashboardComponentMag
 ]
 
 const $dashboard = {
@@ -48,6 +54,8 @@ export {
   DataSetManagement,
   DataSourceManagement,
   DashboardAppRun,
+  DashboardSourceMag,
+  DashboardComponentMag,
 
   $dashboard,
   registerConfig,
@@ -62,6 +70,8 @@ export default {
   DataSetManagement,
   DataSourceManagement,
   DashboardAppRun,
+  DashboardSourceMag,
+  DashboardComponentMag,
 
   $dashboard,
   registerConfig,

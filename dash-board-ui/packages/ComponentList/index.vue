@@ -411,9 +411,9 @@ export default {
 @import '../assets/style/bsTheme.scss';
 .dashboard-list-wrap {
   position: relative;
-  height: 100%;
+  height: calc(100vh - 192px);
   padding: 16px;
-  margin: 16px;
+  margin-left: 16px;
   color: #9ea9b2;
   background-color: var(--db-background-2);
 
@@ -446,9 +446,9 @@ export default {
     overflow: auto;
     // 间隙自适应
     justify-content: space-around;
-    max-height: calc(100vh - 300px);
+    max-height: calc(100% - 100px);
+    padding: 2px 3px 10px 2px;
     display: grid;
-    padding: 2px;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 15px;
 
@@ -629,6 +629,7 @@ export default {
   .footer-pagination-wrap {
     position: absolute;
     bottom: 10px;
+    right: 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;

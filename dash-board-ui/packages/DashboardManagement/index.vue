@@ -139,6 +139,7 @@
     <el-dialog
       :title="catalogData.id ? '编辑目录':'新增目录'"
       :visible.sync="catalogVisible"
+      :append-to-body="true"
       width="30%"
       class="db-dialog-wrap catalog-dialog db-el-dialog"
       @close="handleClose"

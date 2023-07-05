@@ -170,6 +170,9 @@
                 >
                   删除
                 </el-button>
+                 <slot :item='scope.row'>
+
+                </slot>
               </template>
             </el-table-column>
           </el-table>
@@ -614,6 +617,14 @@ export default {
     background: var(--db-el-background-1);
   }
 }
+.inner-container{
+  position: relative;
+  .db-pagination{
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+  }
+}
 
 .db-container .inner-container .el-form .filter-item {
   /deep/ .el-input__inner {
@@ -622,7 +633,7 @@ export default {
 }
 
 .right-box {
-  margin-left: 20px;
+  // margin-left: 20px;
 
   // ::v-deep .ztreeNodeMenu {
   //   ul {

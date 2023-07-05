@@ -101,6 +101,9 @@
               >
                 删除
               </el-button>
+              <slot :item='scope.row'>
+
+              </slot>
             </template>
           </el-table-column>
         </el-table>
@@ -281,7 +284,14 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../assets/style/bsTheme.scss';
-
+.inner-container{
+  position: relative;
+  .db-pagination {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+  }
+}
 // .db-pagination {
 //   ::v-deep .el-input__inner {
 

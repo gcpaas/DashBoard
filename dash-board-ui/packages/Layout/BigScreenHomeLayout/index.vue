@@ -150,6 +150,7 @@ export default {
     height: calc(100vh - 150px);
     background-color: var(--db-el-background-2);
     box-sizing: border-box;
+    padding:16px 16px 16px 0
   }
 }
 

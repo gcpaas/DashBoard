@@ -59,6 +59,7 @@
     <el-dialog
       :title="currentCatalog.code ? '编辑分组':'新建分组'"
       :visible.sync="catalogVisible"
+      :append-to-body="true"
       custom-class="db-el-dialog"
       width="30%"
       class="db-dialog-wrap db-el-dialog"
@@ -253,10 +254,10 @@ export default {
   @import '../assets/style/bsTheme.scss';
   .side-catalog-wrap{
     // border-right : 1px solid #e8e8e8;
-    margin-top: 16px;
+    // margin-top: 16px;
     padding-top: 16px;
     width: 220px;
-    height: 100%;
+    // height: 100%;
     box-sizing: border-box;
     color: var(--db-el-title);
     background-color: var(--db-background-2);
