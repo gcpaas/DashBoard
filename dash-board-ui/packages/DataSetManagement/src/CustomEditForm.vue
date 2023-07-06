@@ -1070,13 +1070,12 @@ export default {
           customClass: 'db-el-message-box'
         }).then(() => {
           this.saveFun(formName)
-          this.goBack()
         }).catch(() => {
 
         })
       } else {
         this.saveFun(formName)
-        this.goBack()
+
       }
     },
     /**
@@ -1133,6 +1132,7 @@ export default {
           this.$parent.setType = null
           this.saveLoading = false
           this.saveText = ''
+          this.goBack()
         }).catch(() => {
           this.saveLoading = false
           this.saveText = ''
@@ -1468,6 +1468,9 @@ export default {
 }
 
 .db-pagination {
+  position: relative !important;
+  bottom: 0 !important;
+  padding: 0 12px 16px 16px !important;
   ::v-deep .el-input__inner {
     width: 110px !important;
     border: none;

@@ -97,9 +97,9 @@
             ref="userTable"
             v-table
             v-loading="dataListLoading"
-            height="100%"
             class="db-el-table db-scrollbar"
             :element-loading-text="loadingText"
+            height="100%"
             :data="tableData"
             :header-cell-style="sortStyle"
             @sort-change="reSort"
@@ -615,14 +615,6 @@ export default {
     width: 110px !important;
     border:none;
     background: var(--db-el-background-1);
-  }
-}
-.inner-container{
-  position: relative;
-  .db-pagination{
-    position: absolute;
-    bottom: 10px;
-    right: 0;
   }
 }
 

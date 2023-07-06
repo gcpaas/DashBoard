@@ -101,18 +101,17 @@ export default {
   /deep/ .el-dialog__body {
     position: relative;
     padding: 0 !important;
-    min-height: 400px;
+    min-height: 535px;
     overflow: hidden;
   }
 
   ::v-deep .db-container {
     padding: 0;
-    min-height: 400px;
+    min-height: 535px;
 
     .el-table {
-      max-height: 295px;
+      max-height: calc(90vh - 350px);
     }
-
     .db-table-box {
       margin-bottom: 0px;
     }
@@ -123,9 +122,15 @@ export default {
   }
 
   .db-data-set-management {
+    ::v-deep .db-container{
+      margin-left: 0 !important;
+    }
     ::v-deep .ztree {
       height: auto !important;
     }
+     ::v-deep  .layout {
+        position: absolute !important;
+      }
 
     ::v-deep .db-table-box {
       height: auto !important;
@@ -133,14 +138,13 @@ export default {
 
     ::v-deep .db-el-pagination {
       right: 6px !important;
-      margin-bottom: 10px;
     }
 
     // ::v-deep .data-set-scrollbar {
     //     height: 515px !important;
     // }
     ::v-deep .el-scrollbar{
-      height: auto !important;
+       height: 515px !important;
     }
   }
 }

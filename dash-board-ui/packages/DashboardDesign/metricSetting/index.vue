@@ -44,6 +44,8 @@
                 <el-select
                   v-model="customize.metric"
                   clearable
+                  class="db-el-select"
+                  popper-class="db-el-select"
                   @change="chooseMetric($event,index)"
                 >
                   <el-option
