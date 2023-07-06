@@ -1070,11 +1070,13 @@ export default {
           customClass: 'db-el-message-box'
         }).then(() => {
           this.saveFun(formName)
+          this.goBack()
         }).catch(() => {
 
         })
       } else {
         this.saveFun(formName)
+        this.goBack()
       }
     },
     /**

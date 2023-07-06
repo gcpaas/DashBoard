@@ -500,11 +500,13 @@ export default {
           this.$parent.setType = null
           this.saveLoading = false
           this.saveText = ''
+          this.goBack()
         }).catch(() => {
           this.saveLoading = false
           this.saveText = ''
         })
       })
+
     },
     /**
      * 使用字段名作为字段描述

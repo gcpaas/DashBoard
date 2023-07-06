@@ -46,6 +46,7 @@
             :limit="1"
             list-type="picture-card"
             :on-success="handleUploadSuccess"
+            :on-error="handleUploadError"
             :before-upload="beforeUpload"
           >
             <i
@@ -76,7 +77,6 @@
               class="upload-tip"
               placeholder="或输入链接地址"
               clearable
-              @change="handleUrlChange"
             />
           </el-upload>
         </el-form-item>
@@ -164,7 +164,20 @@ export default {
       }
     }
   },
-  watch: {},
+  watch: {
+    'config.customize.url': function (val) {
+      if (val) {
+        this.fileList = [
+          {
+            name: this.config.title,
+            url: this.config.customize.url
+          }
+        ]
+      } else {
+        this.fileList = []
+      }
+    }
+  },
   mounted () {
     if (this.config.customize.url) {
       this.fileList = [
@@ -189,7 +202,11 @@ export default {
         ]
       } else {
         this.$message.error(res.msg)
+        this.fileList = []
       }
+    },
+     handleUploadError () {
+      this.$message.error('上传失败')
     },
     handleRemove () {
       this.fileList = []
@@ -202,9 +219,7 @@ export default {
       }
       return isLt2M
     },
-    handleUrlChange (val) {
-      this.config.customize.url = val
-    }
+   
   }
 }
 </script>
