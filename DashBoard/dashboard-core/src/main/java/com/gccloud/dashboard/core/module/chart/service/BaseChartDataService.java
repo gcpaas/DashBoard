@@ -35,9 +35,8 @@ import java.util.*;
  * @version 1.0
  * @date 2022/8/8 15:11
  */
-@Data
 @Slf4j
-@Service
+@Service("dashboardBaseChartDataService")
 public class BaseChartDataService {
 
     @Resource
@@ -49,6 +48,7 @@ public class BaseChartDataService {
     public ChartDataVO dataQuery(Chart chart, ChartDataSearchDTO searchDTO) {
         BaseChartDataSource dataSource = chart.getDataSource();
         if (dataSource == null) {
+            // 返回null是交给上级调用做判空的，null则会返回模拟数据
             return null;
         }
         if (!dataSource.getClass().equals(DataSetDataSource.class)) {

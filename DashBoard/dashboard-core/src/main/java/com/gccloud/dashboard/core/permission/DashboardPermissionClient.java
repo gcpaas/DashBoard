@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
  * @date 2023/5/15 10:43
  */
 @Component
-public class PermissionClient {
+public class DashboardPermissionClient {
 
     @Autowired(required = false)
-    private IPermissionService tokenService;
+    private IDashboardPermissionService tokenService;
 
     public boolean verifyApiPermission(HttpServletRequest request, String... permissions) {
         boolean verify = true;

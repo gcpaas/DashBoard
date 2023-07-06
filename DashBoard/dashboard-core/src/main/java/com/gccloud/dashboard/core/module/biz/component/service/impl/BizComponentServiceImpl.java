@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.gccloud.common.exception.GlobalException;
 import com.gccloud.common.vo.PageVO;
 import com.gccloud.dashboard.core.config.DashboardConfig;
-import com.gccloud.dashboard.core.module.biz.component.dao.BizComponentDao;
+import com.gccloud.dashboard.core.module.biz.component.dao.DashboardBizComponentDao;
 import com.gccloud.dashboard.core.module.biz.component.dto.BizComponentSearchDTO;
 import com.gccloud.dashboard.core.module.biz.component.entity.BizComponentEntity;
 import com.gccloud.dashboard.core.module.biz.component.service.IBizComponentService;
@@ -28,8 +28,8 @@ import java.util.List;
  * @date 2023/6/5 13:35
  */
 @Slf4j
-@Service
-public class BizComponentServiceImpl extends ServiceImpl<BizComponentDao, BizComponentEntity> implements IBizComponentService {
+@Service("dashboardBizComponentService")
+public class BizComponentServiceImpl extends ServiceImpl<DashboardBizComponentDao, BizComponentEntity> implements IBizComponentService {
 
     @Resource
     private DashboardConfig dashboardConfig;
