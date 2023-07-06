@@ -45,8 +45,8 @@
             :auto-upload="true"
             :limit="1"
             list-type="picture-card"
-            :on-success="handleUploadSuccess"
             :on-error="handleUploadError"
+            :on-success="handleUploadSuccess"
             :before-upload="beforeUpload"
           >
             <i
@@ -94,28 +94,15 @@
             :step="0.01"
           />
         </el-form-item>
-        <!-- <el-form-item
-          label="圆角"
-          label-width="100px"
-        >
-          <el-input-number
-            v-model="config.customize.radius"
-            class="db-el-input-number"
-            placeholder="请输入圆角大小"
-            :min="0"
-          />
-        </el-form-item> -->
       </div>
     </el-form>
   </div>
 </template>
 <script>
 import SettingTitle from 'dashPackages/SettingTitle/index.vue'
-import PosWhSetting from 'dashPackages/DashboardDesign/RightSetting/PosWhSetting.vue'
 export default {
   name: 'PicSetting',
   components: {
-    PosWhSetting,
     SettingTitle
   },
   data () {
@@ -219,7 +206,7 @@ export default {
       }
       return isLt2M
     },
-   
+
   }
 }
 </script>

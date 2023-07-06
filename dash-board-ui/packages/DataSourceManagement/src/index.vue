@@ -101,9 +101,7 @@
               >
                 删除
               </el-button>
-              <slot :item='scope.row'>
-
-              </slot>
+              <slot :item="scope.row" />
             </template>
           </el-table-column>
         </el-table>
@@ -292,12 +290,4 @@ export default {
     right: 0;
   }
 }
-// .db-pagination {
-//   ::v-deep .el-input__inner {
-
-//     width: 110px !important;
-//     border: none;
-//     background: var(--db-el-background-2);
-//   }
-// }
 </style>
