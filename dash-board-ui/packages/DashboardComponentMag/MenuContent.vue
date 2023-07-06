@@ -1,13 +1,18 @@
 <template>
   <div class="right-screen-list-wrap">
-    <ComponentList />
+    <ComponentList :catalog-info="catalogInfo" />
   </div>
 </template>
 <script>
 import ComponentList from 'dashPackages/ComponentList'
 export default {
   name: '',
-  props: { },
+  props: {
+    catalogInfo: {
+      type: String,
+      default: 'component'
+    }
+  },
   components: { ComponentList },
   data () {
     return {

@@ -1,7 +1,7 @@
 <template>
   <div class="db-manage-main-wrap">
-    <side-menu />
-    <menu-content />
+    <side-menu @getPageInfo="getPageInfo" />
+    <menu-content :catalog-info="catalogInfo" />
   </div>
 </template>
 <script>
@@ -14,11 +14,15 @@ export default {
   components: { SideMenu, MenuContent },
   data () {
     return {
-      catalogInfo: ''
+      catalogInfo: 'component'
     }
   },
   mounted () {},
-  methods: { }
+  methods: {
+    getPageInfo (type) {
+      this.catalogInfo = type
+    }
+  }
 }
 </script>
 

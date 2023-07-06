@@ -64,6 +64,13 @@ const getLabelDetail = (id = '-1') => get(`/label/getLabelDetail/${id}`)
  */
 const updateLabelType = (data) => post(`/label/updateLabelType`, data)
 
+
+/**
+ * 根据标签id获取数据集id列表
+ * @param id
+ */
+const getDataSetIdListByLabelId = (id = '-1') => get(`/label/queryDataSetIdList/${id}`)
+
 export {
   getLabelList,
   labelList,
@@ -73,5 +80,6 @@ export {
   checkRepeatLabel,
   addOrUpdateLabel,
   getLabelDetail,
-  updateLabelType
+  updateLabelType,
+  getDataSetIdListByLabelId
 }
