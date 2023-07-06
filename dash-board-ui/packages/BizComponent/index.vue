@@ -131,12 +131,6 @@ export default {
     BizComponentPreview
   },
   props: {},
-  beforeRouteLeave (to, from, next) {
-  // 在离开当前页面之前执行逻辑
-    const data = { componentsManagementType: 'bizComponent' }
-    this.$router.app.$options.globalData = data // 将数据存储在全局变量中
-    next() // 继续导航
-  },
   data () {
     return {
       form: {
@@ -230,9 +224,10 @@ export default {
       }
     },
     backManagement () {
-      this.$router.push({
-        path: window.DS_CONFIG?.routers?.componentUrl || '/dashboard-components'
-      })
+      this.$router.push({ path: window.DS_CONFIG?.routers?.componentUrl || '/dashboard-components' })
+      // 在离开当前页面之前执行逻辑
+      const data = { componentsManagementType: 'bizComponent' }
+      this.$router.app.$options.globalData = data // 将数据存储在全局变量中
     },
     createdImg () {
       this.loading = true
