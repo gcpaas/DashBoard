@@ -38,7 +38,7 @@
               v-for="sourceType in sourceTypeList"
               :key="sourceType.id"
               :label="sourceType.name"
-              :value="sourceType.name"
+              :value="sourceType.code"
             />
           </el-select>
         </el-form-item>
