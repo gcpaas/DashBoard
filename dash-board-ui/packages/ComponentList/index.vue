@@ -201,7 +201,12 @@ import innerRemoteComponents, { getRemoteComponents } from 'dashPackages/RemoteC
 export default {
   name: 'BigScreenList',
   mixins: [pageMixins],
-  props: { },
+  props: {
+    catalogInfo: {
+      type: String,
+      default: 'component'
+    }
+  },
   components: { EditForm, CatalogEditForm },
   data () {
     return {
@@ -213,8 +218,7 @@ export default {
       defaultImg: require('./images/defaultImg.png'),
       loading: false,
       catalogList: [], // 分组列表
-      catalogCode: '',
-      catalogInfo: 'component' // 组件、业务组件、系统组件
+      catalogCode: ''
     }
   },
   computed: {
@@ -233,8 +237,7 @@ export default {
     }
   },
   watch: {
-    $route (val) {
-      this.catalogInfo = val.query.type || 'component'
+    catalogInfo (val) {
       this.init()
     },
     catalogCode (value) {
@@ -242,7 +245,6 @@ export default {
     }
   },
   mounted () {
-    this.catalogInfo = this.$route.query.type || 'component'
     this.init()
   },
   methods: {

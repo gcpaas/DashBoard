@@ -219,6 +219,9 @@ export default {
       this.$router.push({
         path: this.pageInfo.type === 'component' ? (window.DS_CONFIG?.routers?.componentUrl || '/dashboard-components') : (window.DS_CONFIG?.routers?.pageManagementUrl)
       })
+      // 在离开当前页面之前执行逻辑
+      const data = { componentsManagementType: 'component' }
+      this.$router.app.$options.globalData = data // 将数据存储在全局变量中
     },
     undo (isUndo) {
       this.undoTimeLine(isUndo)

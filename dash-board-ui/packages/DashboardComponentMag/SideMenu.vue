@@ -37,23 +37,19 @@ export default {
     }
   },
   created () {
-    const type = this.$route?.query?.type
-    if (type) {
-      this.componentHandle(this.componentList.find(item => item.type === type))
-    } else {
-      this.componentHandle(this.componentList[0])
+    const { globalData } = this.$router.app.$options
+    if (globalData?.componentsManagementType) {
+      this.activeType = globalData.componentsManagementType
+      this.$emit('getPageInfo', globalData.componentsManagementType)
+      // 清除this.$router.app.$options.globalData.componentsManagementType
+      delete globalData.componentsManagementType
     }
   },
   methods: {
     // 点击左侧组件
     componentHandle (com) {
       this.activeType = com.type
-      this.$router.push({
-        path: window.DS_CONFIG?.routers?.componentUrl || '/big-screen-components',
-        query: {
-          type: com.type
-        }
-      })
+      this.$emit('getPageInfo', com.type)
     }
   }
 }
