@@ -150,9 +150,15 @@
   }
 }
 
+.selectStyle{
+  /deep/.el-select-dropdown__wrap {
+    margin-bottom: 0px !important;
+  }
+}
+
 // select
 .db-el-select {
-  text-align: center;
+  // text-align: center;
   background-color: var(--db-el-background-1) !important;
 
   .el-tag.el-tag--info {

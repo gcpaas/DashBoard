@@ -179,8 +179,8 @@
                 >
                   <el-select
                     v-model="dataForm.fieldInfo"
-                    class="db-el-select"
-                    popper-class="db-el-select"
+                    class="selectStyle"
+                    popper-class='selectStyle'
                     placeholder="请选择字段（为空时默认选择全部字段）"
                     clearable
                     filterable
@@ -1118,5 +1118,7 @@ export default {
     border: none;
     background: var(--db-el-background-1);
   }
+
+
 }
 </style>
