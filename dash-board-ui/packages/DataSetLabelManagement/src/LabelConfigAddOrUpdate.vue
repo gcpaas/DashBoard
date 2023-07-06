@@ -68,10 +68,9 @@
           <el-table
             ref="mytable"
             v-loading="loading"
-            :data="datasetProcessData"
+            :data="datasetList"
             height="300"
-            @select="curSelect"
-            @selection-change="handleSelectionChange"
+            @select="handleSelect"
             @select-all="handleSelectionAll"
           >
             <el-table-column
@@ -100,7 +99,7 @@
 <script>
 import {pageMixins} from 'dashPackages/js/mixins/page'
 import Tree from './Tree'
-import {addOrUpdateLabel, checkRepeatLabel} from 'dashPackages/js/utils/LabelConfigService'
+import {addOrUpdateLabel, checkRepeatLabel, getDataSetIdListByLabelId} from 'dashPackages/js/utils/LabelConfigService'
 import {datasetList, getCategoryTree} from 'dashPackages/js/utils/datasetConfigService'
 
 export default {
@@ -109,7 +108,7 @@ export default {
   data() {
     return {
       loading: false,
-      datasetProcessData: [],
+      datasetList: [],
       typeId: '',
       dataForm: {
         id: '',
@@ -128,13 +127,13 @@ export default {
           {required: true, message: '标签类型不能为空', trigger: 'change'},
         ],
       },
+      // 分类树数据
       categoryData: [],
       relVisible: false,
-      multipleSelection: [],
+      // 标签分类列表
       labelTypeList: [],
-      flag: true,
-      idstr: '',
-      idsArr: [],
+      // 选中的数据集id列表
+      datasetIdList: []
     }
   },
   components: {
@@ -145,42 +144,79 @@ export default {
       if (val.length > 20) {
         this.dataForm.labelType = val.substring(0, 20);
       }
+    },
+    // datasetList变化时，根据datasetIdList设置其选中状态
+    datasetList: {
+      handler: function (val) {
+        this.$nextTick(() => {
+          this.$refs.mytable.clearSelection();
+          this.datasetList.forEach((item) => {
+            if (this.datasetIdList.includes(item.id)) {
+              this.$refs.mytable.toggleRowSelection(item, true);
+            }
+          })
+        })
+      },
+      deep: true
     }
   },
   methods: {
+    /**
+     * 初始化
+     * @param row 标签信息
+     */
+    init(row) {
+      this.dataForm.id = row ? row.id : '';
+      this.dialogFormVisible = true;
+      if (row) {
+        this.dataForm.id = row.id;
+        this.dataForm.labelName = row.labelName;
+        this.dataForm.labelType = row.labelType;
+        this.dataForm.labelDesc = row.labelDesc;
+        // 获取选中的数据集id列表
+        getDataSetIdListByLabelId(row.id).then((list) => {
+          this.datasetIdList = list;
+          this.buildRel();
+        })
+      }
+      this.$nextTick(() => {
+        this.getDataList();
+      })
+    },
+    /**
+     * 获取数据集列表
+     */
     getDataList() {
       this.loading = true;
-      this.multipleSelection = [];
       let params = {
-        current: this.current,
-        size: 1000,
-        typeId: this.typeId,
-        labelIdRel: this.dataForm.id
+        typeId: this.typeId
       };
-      datasetList(params).then((data) => {
-        this.totalCount = data.totalCount;
-        this.datasetProcessData = data.list;
-
-        if (this.relVisible) {
-          this.$nextTick(() => {
-            if (this.dataForm.id) {
-              for (let i = 0; i < this.datasetProcessData.length; i++) {
-                if (this.datasetProcessData[i].dataSetStatus === 1) {
-                  this.$refs.mytable.toggleRowSelection(this.datasetProcessData[i]);
-                }
-              }
-            } else {
-              this.datasetProcessData.filter(ds => this.idstr.split(',').includes(ds.id)).forEach(r => {
-                this.$refs.mytable.toggleRowSelection(r);
-              })
-            }
-          })
+      datasetList(params).then((list) => {
+        this.datasetList = list;
+        if (!this.relVisible) {
+          this.loading = false;
+          return
         }
         this.loading = false;
       }).catch(() => {
         this.loading = false;
       })
     },
+
+    /**
+     * 获取分类树
+     */
+    getTreeList() {
+      getCategoryTree({type: 'dataset'}).then((categoryTree) => {
+        this.categoryData = categoryTree;
+      })
+    },
+    /**
+     * 标签名称校验
+     * @param rule
+     * @param value
+     * @param callback
+     */
     validateLabelName(rule, value, callback) {
       checkRepeatLabel({'id': this.dataForm.id, 'labelName': this.dataForm.labelName}).then(repeat => {
         if (repeat) {
@@ -190,65 +226,122 @@ export default {
         }
       });
     },
-    handleSelectionChange(val) {
-      this.multipleSelection = val;
-    },
-    getTreeList() {
-      getCategoryTree({type: 'dataset'}).then((categoryTree) => {
-        this.categoryData = categoryTree;
-      })
-    },
-    //节点点击
+    /**
+     * 树节点点击事件
+     * @param row
+     * @param value
+     */
     handleNodeClick(row, value) {
-      if (this.dataForm.id) {
-        this.saveForm(false);
-      }
       this.$nextTick(() => {
         this.typeId = row.id;
         this.getDataList();
       })
     },
-    curSelect(selection, row) {
-      if (this.idsArr.length > 0) {
-        // 判断是否存在 若存在，删除  若未存在，则添加
-        const flag = this.idsArr.some((it) => row.id === it)
-        if (flag) { // 存在，再次点击则是取消选中
-          this.idsArr.map((it, index) => {
-            if (row.id === it) {
-              this.idsArr.splice(index, 1)
-            }
-          })
-        } else { // 不存在，添加至选中数组
-          this.idsArr.push(row.id)
+    /**
+     * 选中数据集
+     * @param selection 选中的数据集列表
+     * @param row 操作行
+     */
+    handleSelect(selection, row) {
+      console.log('选中单项')
+      // 如row.id存在于datasetIdList中，则将其从datasetIdList中删除
+      if (this.datasetIdList.includes(row.id)) {
+        const index = this.datasetIdList.indexOf(row.id);
+        if (index > -1) {
+          this.datasetIdList.splice(index, 1);
         }
-      } else { // 当选中数组为空时，直接添加
-        this.idsArr.push(row.id)
+        return
       }
-      this.idstr = this.idsArr.join(",")
-      // this.$parent.idstr = this.idstr
+      // 如row.id不存在于datasetIdList中，则将其添加到datasetIdList中
+      if (!this.datasetIdList.includes(row.id)) {
+        this.datasetIdList.push(row.id);
+      }
     },
+    /**
+     * 数据集全选
+     * @param selection
+     */
     handleSelectionAll(selection) {
-      let idsArrParent = this.idstr ? this.idstr.split(',') : []; // 已选择过的数组
-      // idsArrParent = this.$parent.idstr.split(',')
+      console.log('全选')
+      // 选中项为空，将datasetList中所有项从datasetIdList中删除
       if (selection.length === 0) {
-        // 若是全不选
-        this.datasetProcessData.forEach((item, index) => {
-          let i = idsArrParent.indexOf(item.id);
-          if (i > -1) {
-            idsArrParent.splice(i, 1)
+        this.datasetList.forEach((dataset) => {
+          const index = this.datasetIdList.indexOf(dataset.id);
+          if (index > -1) {
+            this.datasetIdList.splice(index, 1);
           }
         });
-        this.idsArr = idsArrParent
-        this.idstr = idsArrParent.join(',')
-      } else {
-        // 全选，将本次全选的数组与已选择过的数组合并去重
-        let selectedIdsArr = [] // 全选的数组
-        this.datasetProcessData.forEach(ds => {
-          selectedIdsArr.push(ds.id)
+        return
+      }
+      // 选中项不为空，将datasetList中所有项添加到datasetIdList中
+      if (selection.length > 0) {
+        this.datasetList.forEach((dataset) => {
+          if (!this.datasetIdList.includes(dataset.id)) {
+            this.datasetIdList.push(dataset.id);
+          }
         });
-        let idsArrCombined = [...new Set(selectedIdsArr.concat(idsArrParent))];
-        this.idsArr = idsArrCombined.filter(id => id);
-        this.idstr = this.idsArr.join(',')
+      }
+    },
+
+    /**
+     * 表单关闭
+     */
+    handleClose() {
+      this.$parent.addOrUpdateVisible = false
+    },
+    /**
+     * 取消按钮
+     */
+    cancel() {
+      this.dialogFormVisible = false;
+      this.$nextTick(() => {
+        this.handleClose();
+      })
+    },
+    /**
+     * 提交按钮
+     * @param formName
+     */
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.saveForm(true);
+        } else {
+          return false;
+        }
+      });
+    },
+    /**
+     * 保存标签信息
+     * @param flag
+     */
+    saveForm(flag) {
+      this.dataForm.relList = [];
+      this.datasetIdList.forEach(id => {
+        let param = {
+          'datasetId': id,
+          'labelId': this.dataForm.id
+        };
+        this.dataForm.relList.push(param);
+      });
+      addOrUpdateLabel(this.dataForm).then((r) => {
+        this.$message.success('保存成功');
+        this.cancel();
+        this.$parent.getDataList();
+        //更新一下类型
+        this.$parent.getLabelType();
+      })
+    },
+    /**
+     * 添加关联按钮
+     */
+    buildRel() {
+      this.relVisible = !this.relVisible;
+      if (this.relVisible) {
+        this.getTreeList();
+        this.$nextTick(() => {
+          this.getDataList();
+        })
       }
     },
     filterNode(value, data) {
@@ -261,76 +354,6 @@ export default {
         return value.slice(0, len) + '...'
       }
       return value
-    },
-    init(row) {
-      this.dataForm.id = row ? row.id : '';
-      this.dialogFormVisible = true;
-      if (row) {
-        this.dataForm.id = row.id;
-        this.dataForm.labelName = row.labelName;
-        this.dataForm.labelType = row.labelType;
-        this.dataForm.labelDesc = row.labelDesc;
-        this.buildRel();
-      }
-      this.$nextTick(() => {
-        this.getDataList();
-      })
-    },
-    handleClose() {
-      this.$parent.addOrUpdateVisible = false
-    },
-    cancel() {
-      this.dialogFormVisible = false;
-      this.$nextTick(() => {
-        this.handleClose();
-      })
-    },
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          this.saveForm(true);
-        } else {
-          return false;
-        }
-      });
-    },
-    saveForm(flag) {
-      this.dataForm.relList = [];
-
-      if (this.dataForm.id) {
-        this.multipleSelection.forEach(dataset => {
-          let datasetLabelRel = {
-            'datasetId': dataset.id,
-            'labelId': this.dataForm.id
-          }
-          this.dataForm.relList.push(datasetLabelRel);
-        })
-      } else {
-        this.idsArr.forEach(id => {
-          let param = {
-            'datasetId': id,
-            'labelId': this.dataForm.id
-          };
-          this.dataForm.relList.push(param);
-        });
-      }
-      addOrUpdateLabel(this.dataForm).then((r) => {
-        if (flag) {
-          this.$message.success('保存成功');
-          this.cancel();
-          this.$parent.getDataList();
-          //更新一下类型
-          this.$parent.getLabelType();
-        }
-      })
-    },
-    //建立关联
-    buildRel() {
-      this.relVisible = !this.relVisible;
-      this.getTreeList();
-      this.$nextTick(() => {
-        this.getDataList();
-      })
     },
     selectBlur(e) {
       this.dataForm.labelType = e.target.value
