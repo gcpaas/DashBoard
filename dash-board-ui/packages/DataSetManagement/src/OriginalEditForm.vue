@@ -585,7 +585,9 @@ export default {
             }
             fieldDescMap[item.columnName] = item.columnComment
           })
-          this.getPreViewData(fieldDescMap)
+          // 与this.dataForm.fieldDesc合并，columnName相同的，取this.dataForm.fieldDesc中的值
+          let fieldDescMapNew = { ...fieldDescMap, ...this.dataForm.fieldDesc }
+          this.getPreViewData(fieldDescMapNew)
         } catch (error) {
           console.error(error)
         }
@@ -868,7 +870,8 @@ export default {
           }
           return field
         })
-        this.getPreViewData(fieldDescMap)
+        let fieldDescMapNew = { ...fieldDescMap, ...this.dataForm.fieldDesc }
+        this.getPreViewData(fieldDescMapNew)
       }).catch(() => {
         this.fieldList = []
       })
