@@ -45,6 +45,7 @@
             :auto-upload="true"
             :limit="1"
             list-type="picture-card"
+            :on-error="handleUploadError"
             :on-success="handleUploadSuccess"
             :before-upload="beforeUpload"
           >
@@ -76,7 +77,6 @@
               class="upload-tip"
               placeholder="或输入链接地址"
               clearable
-              @change="handleUrlChange"
             />
           </el-upload>
         </el-form-item>
@@ -94,28 +94,15 @@
             :step="0.01"
           />
         </el-form-item>
-        <!-- <el-form-item
-          label="圆角"
-          label-width="100px"
-        >
-          <el-input-number
-            v-model="config.customize.radius"
-            class="db-el-input-number"
-            placeholder="请输入圆角大小"
-            :min="0"
-          />
-        </el-form-item> -->
       </div>
     </el-form>
   </div>
 </template>
 <script>
 import SettingTitle from 'dashPackages/SettingTitle/index.vue'
-import PosWhSetting from 'dashPackages/DashboardDesign/RightSetting/PosWhSetting.vue'
 export default {
   name: 'PicSetting',
   components: {
-    PosWhSetting,
     SettingTitle
   },
   data () {
@@ -164,7 +151,20 @@ export default {
       }
     }
   },
-  watch: {},
+  watch: {
+    'config.customize.url': function (val) {
+      if (val) {
+        this.fileList = [
+          {
+            name: this.config.title,
+            url: this.config.customize.url
+          }
+        ]
+      } else {
+        this.fileList = []
+      }
+    }
+  },
   mounted () {
     if (this.config.customize.url) {
       this.fileList = [
@@ -191,6 +191,9 @@ export default {
         this.$message.error(res.msg)
       }
     },
+    handleUploadError () {
+      this.$message.error('上传失败')
+    },
     handleRemove () {
       this.fileList = []
       this.config.customize.url = ''
@@ -201,9 +204,6 @@ export default {
         this.$message.error('上传图片大小不能超过 2MB!')
       }
       return isLt2M
-    },
-    handleUrlChange (val) {
-      this.config.customize.url = val
     }
   }
 }
