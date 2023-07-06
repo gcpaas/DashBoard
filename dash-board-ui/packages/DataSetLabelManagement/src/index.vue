@@ -1,6 +1,9 @@
 <template>
-  <div class="app-container">
-    <div v-if="labelVisible" class="inner-container">
+  <div class="db-container">
+    <div
+      v-if="labelVisible"
+      class="inner-container"
+    >
       <el-form
         ref="queryForm"
         :model="queryForm"
@@ -31,20 +34,32 @@
             placeholder="请选择标签类型"
             @change="reSearch()"
           >
-            <el-option key="all" label="全部" value=""></el-option>
+            <el-option
+              key="all"
+              label="全部"
+              value=""
+            />
             <el-option
               v-for="labelType in labelTypeList"
               :key="labelType"
               :label="labelType"
               :value="labelType"
             >
-               <span>
-                  {{ labelType }}
-                </span>
+              <span>
+                {{ labelType }}
+              </span>
               <span style="float: right;padding-right: 20px">
-                  <el-button icon="el-icon-edit" type="text" @click.stop="editLabelType(labelType)"></el-button>
-                  <el-button icon="el-icon-delete" type="text" @click.stop="deleteLabelType(labelType)"></el-button>
-                </span>
+                <el-button
+                  icon="el-icon-edit"
+                  type="text"
+                  @click.stop="editLabelType(labelType)"
+                />
+                <el-button
+                  icon="el-icon-delete"
+                  type="text"
+                  @click.stop="deleteLabelType(labelType)"
+                />
+              </span>
             </el-option>
           </el-select>
         </el-form-item>
@@ -69,16 +84,18 @@
           </el-button>
         </el-form-item>
       </el-form>
-
-      <div class="table-box">
+      <div class="db-table-box">
         <el-table
+          v-table
           v-loading="dataListLoading"
+          height="0"
           :data="tableData"
+          class="db-el-table db-scrollbar"
           :element-loading-text="loadingText"
           :header-cell-style="sortStyle"
           @sort-change="reSort"
         >
-          <el-empty slot="empty"/>
+          <el-empty slot="empty" />
           <el-table-column
             label="标签名称"
             prop="labelName"
@@ -100,21 +117,27 @@
             width="200"
           >
             <template slot-scope="scope">
-              <el-button @click="getDetail(scope.row)">详情</el-button>
+              <el-button @click="getDetail(scope.row)">
+                详情
+              </el-button>
               <el-button
                 @click="addOrUpdateLabel(scope.row)"
-              >编辑
+              >
+                编辑
               </el-button>
               <el-button
                 @click="handleDelete(scope.row.id)"
-              >删除
+              >
+                删除
               </el-button>
             </template>
           </el-table-column>
         </el-table>
       </div>
-      <div class="page-container">
+      <div class="db-pagination">
         <el-pagination
+          class="db-el-pagination"
+          popper-class="db-el-pagination"
           :current-page="current"
           :next-text="nextText"
           :page-size="size"
@@ -127,12 +150,7 @@
           @current-change="currentChangeHandle"
         />
       </div>
-
     </div>
-<!--    <LabelConfigDetails-->
-<!--      v-if="addOrUpdateDetailVisible"-->
-<!--      ref="LabelConfigDetails"-->
-<!--    />-->
     <label-config-add-or-update
       v-if="addOrUpdateVisible"
       ref="LabelConfigAddOrUpdate"
@@ -145,21 +163,25 @@
 </template>
 
 <script>
-import {pageMixins} from 'dashPackages/js/mixins/page'
-import LabelConfigAddOrUpdate from "./LabelConfigAddOrUpdate.vue"
+import table from 'dashPackages/js/utils/table.js'
+import { pageMixins } from 'dashPackages/js/mixins/page'
+import LabelConfigAddOrUpdate from './LabelConfigAddOrUpdate.vue'
 // import LabelConfigDetails from './LabelConfigDetails.vue'
-import LabelTypeEdit from "./LabelTypeEdit.vue"
-import {getLabelType, labelList, removeLabel, removeLabelByType} from 'dashPackages/js/utils/LabelConfigService'
+import LabelTypeEdit from './LabelTypeEdit.vue'
+import { getLabelType, labelList, removeLabel, removeLabelByType } from 'dashPackages/js/utils/LabelConfigService'
 
 export default {
   name: 'LabelConfig',
+  directives: {
+    table // 注册自定义指令
+  },
   mixins: [pageMixins],
   components: {
     // LabelConfigDetails,
     LabelConfigAddOrUpdate,
     LabelTypeEdit
   },
-  data() {
+  data () {
     return {
       tableData: [],
       addOrUpdateVisible: false,
@@ -176,35 +198,35 @@ export default {
     }
   },
   watch: {},
-  mounted() {
+  mounted () {
     this.getDataList()
     this.getLabelType()
   },
   methods: {
-    deleteLabelType(labelType) {
-      this.$confirm(`是否删除当前标签类型? `, '提示', {
+    deleteLabelType (labelType) {
+      this.$confirm('是否删除当前标签类型? ', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        removeLabelByType({'labelType': labelType}).then(() => {
+        removeLabelByType({ labelType: labelType }).then(() => {
           this.$nextTick(() => {
             this.reSearch()
             this.getLabelType()
-            this.$message.success("删除成功")
+            this.$message.success('删除成功')
           })
         })
       })
     },
-    editLabelType(labelType) {
+    editLabelType (labelType) {
       this.labelTypeEditVisible = true
       this.$nextTick(() => {
         this.$refs.LabelTypeEdit.dialogFormVisible = true
         this.$refs.LabelTypeEdit.init(labelType)
       })
     },
-    handleDelete(id) {
-      this.$confirm(`确定删除当前标签吗?`, '提示', {
+    handleDelete (id) {
+      this.$confirm('确定删除当前标签吗?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -217,38 +239,38 @@ export default {
       })
     },
     // 新增/编辑
-    addOrUpdateLabel(row) {
+    addOrUpdateLabel (row) {
       this.addOrUpdateVisible = true
       this.$nextTick(() => {
-        this.$refs['LabelConfigAddOrUpdate'].labelTypeList = this.labelTypeList
-        this.$refs['LabelConfigAddOrUpdate'].init(row)
+        this.$refs.LabelConfigAddOrUpdate.labelTypeList = this.labelTypeList
+        this.$refs.LabelConfigAddOrUpdate.init(row)
       })
     },
     // 查看详情
-    getDetail(row) {
+    getDetail (row) {
       this.addOrUpdateDetailVisible = true
       this.labelVisible = false
       this.$nextTick(() => {
-        this.$refs['LabelConfigDetails'].init(row)
+        this.$refs.LabelConfigDetails.init(row)
       })
     },
     // 获取标签列表
-    getLabelType() {
+    getLabelType () {
       getLabelType().then((data) => {
         this.labelTypeList = data
       })
     },
     // 获取列表方法
-    getDataList() {
+    getDataList () {
       this.dataListLoading = true
       this.loadingText = '正在查询数据...'
-      let params = {
+      const params = {
         current: this.current,
         size: this.size,
         ...this.queryForm
       }
       labelList(params).then((data) => {
-        this.totalCount = data.totalCount;
+        this.totalCount = data.totalCount
         this.tableData = data.list
         this.dataListLoading = false
       }).catch(() => {
@@ -256,7 +278,7 @@ export default {
       })
     },
     // 查询事件
-    reSearch() {
+    reSearch () {
       // 从第一页
       this.current = 1
       this.getDataList()
@@ -265,9 +287,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.app-container .inner-container .el-form .filter-item {
-  /deep/ .el-input__inner {
-    width: 200px;
-  }
+::v-deep .el-table{
+  border-color: var(--db-el-border) !important;
 }
 </style>
