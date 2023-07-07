@@ -64,6 +64,13 @@ function registerRouters (config, router) {
           }
         },
         {
+          path: config?.routers?.labelUrl,
+          component: () => import('dashPackages/DataSetLabelManagement'),
+          meta: {
+            title: '标签管理'
+          }
+        },
+        {
           path: config?.routers?.SourceUrl || '/dashboard-source',
           component: () => import('dashPackages/SourceManagement'),
           meta: {
@@ -159,6 +166,7 @@ export default function (config, router) {
     pageManagementUrl: '/dashboard/management',
     pageListUrl: '/dashboard-list',
     dataSourceUrl: '/dashboard-dataSource',
+    labelUrl:'/dashboard-label',
     dataSetUrl: '/dashboard-dataSet',
     SourceUrl: '/dashboard-source',
     componentUrl: '/dashboard-components',

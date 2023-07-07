@@ -6,6 +6,8 @@ import DashboardManagement from 'dashPackages/DashboardMag'
 import DashboardAppRun from 'dashPackages/DashboardAppRun'
 // 渲染整个dashboard的渲染引擎
 import DashboardRun from 'dashPackages/DashboardRun'
+
+import DataSetLabelManagement from 'dashPackages/DataSetLabelManagement'
 // 仪表盘设计引擎
 import DashboardDesign from 'dashPackages/DashboardDesign'
 // 数据源管理
@@ -33,7 +35,8 @@ const components = [
   DataSourceManagement,
   DashboardAppRun,
   DashboardSourceMag,
-  DashboardComponentMag
+  DashboardComponentMag,
+  DataSetLabelManagement
 ]
 
 const $dashboard = {
@@ -56,6 +59,7 @@ export {
   DashboardAppRun,
   DashboardSourceMag,
   DashboardComponentMag,
+  DataSetLabelManagement,
 
   $dashboard,
   registerConfig,
@@ -72,6 +76,7 @@ export default {
   DashboardAppRun,
   DashboardSourceMag,
   DashboardComponentMag,
+  DataSetLabelManagement,
 
   $dashboard,
   registerConfig,
