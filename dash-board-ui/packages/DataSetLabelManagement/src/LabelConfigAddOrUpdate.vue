@@ -149,7 +149,9 @@ export default {
     datasetList: {
       handler: function (val) {
         this.$nextTick(() => {
-          this.$refs.mytable.clearSelection();
+          if (this.$refs.mytable) {
+            this.$refs.mytable.clearSelection();
+          }
           this.datasetList.forEach((item) => {
             if (this.datasetIdList.includes(item.id)) {
               this.$refs.mytable.toggleRowSelection(item, true);
@@ -243,7 +245,6 @@ export default {
      * @param row 操作行
      */
     handleSelect(selection, row) {
-      console.log('选中单项')
       // 如row.id存在于datasetIdList中，则将其从datasetIdList中删除
       if (this.datasetIdList.includes(row.id)) {
         const index = this.datasetIdList.indexOf(row.id);
@@ -262,7 +263,6 @@ export default {
      * @param selection
      */
     handleSelectionAll(selection) {
-      console.log('全选')
       // 选中项为空，将datasetList中所有项从datasetIdList中删除
       if (selection.length === 0) {
         this.datasetList.forEach((dataset) => {

@@ -3,79 +3,140 @@
     v-if="dialogFormVisible"
     class="inner-container"
   >
-    <el-page-header style="padding-top: 8px" @back="goBack">
-    </el-page-header>
+    <el-page-header
+      style="padding-top: 8px"
+      @back="goBack"
+    />
 
-    <el-divider content-position="left">属性信息</el-divider>
+    <el-divider content-position="left">
+      属性信息
+    </el-divider>
 
     <el-row :gutter="5">
-      <el-col :span="8" class="attrInfo">
-        <el-tooltip v-if="dataForm.labelName.length > 20" :content="dataForm.labelName" class="item" effect="dark"
-                    placement="bottom-start">
+      <el-col
+        :span="8"
+        class="attrInfo"
+      >
+        <el-tooltip
+          v-if="dataForm.labelName.length > 20"
+          :content="dataForm.labelName"
+          class="item"
+          effect="dark"
+          placement="bottom-start"
+        >
           <span>标签名称： {{ ellipsis(dataForm.labelName, 20) }}</span>
         </el-tooltip>
         <span v-else>标签名称： {{ ellipsis(dataForm.labelName, 20) }}</span>
       </el-col>
-      <el-col :span="8" class="attrInfo">
-        <el-tooltip v-if="dataForm.labelType.length > 20" :content="dataForm.labelType" class="item" effect="dark"
-                    placement="bottom-start">
+      <el-col
+        :span="8"
+        class="attrInfo"
+      >
+        <el-tooltip
+          v-if="dataForm.labelType.length > 20"
+          :content="dataForm.labelType"
+          class="item"
+          effect="dark"
+          placement="bottom-start"
+        >
           <span>标签类型： {{ ellipsis(dataForm.labelType, 20) }}</span>
         </el-tooltip>
         <span v-else>标签类型： {{ ellipsis(dataForm.labelType, 20) }}</span>
       </el-col>
-      <el-col :span="8" class="attrInfo">
-        <el-tooltip v-if="dataForm.labelDesc.length > 20" :content="dataForm.labelDesc" class="item" effect="dark"
-                    placement="bottom-start">
+      <el-col
+        :span="8"
+        class="attrInfo"
+      >
+        <el-tooltip
+          v-if="dataForm.labelDesc.length > 20"
+          :content="dataForm.labelDesc"
+          class="item"
+          effect="dark"
+          placement="bottom-start"
+        >
           <span>标签说明： {{ ellipsis(dataForm.labelDesc, 20) }}</span>
         </el-tooltip>
         <span v-else>标签说明： {{ ellipsis(dataForm.labelDesc, 20) }}</span>
       </el-col>
-      <el-col :span="8" class="attrInfo">
-        <el-tooltip v-if="dataForm.createBy.length > 20" :content="dataForm.createBy" class="item" effect="dark"
-                    placement="bottom-start">
+      <el-col
+        :span="8"
+        class="attrInfo"
+      >
+        <el-tooltip
+          v-if="dataForm.createBy && dataForm.createBy.length > 20"
+          :content="dataForm.createBy"
+          class="item"
+          effect="dark"
+          placement="bottom-start"
+        >
           <span>创建人： {{ ellipsis(dataForm.createBy, 20) }}</span>
         </el-tooltip>
         <span v-else>创建人： {{ ellipsis(dataForm.createBy, 20) }}</span>
       </el-col>
-      <el-col :span="16" class="attrInfo">
-        <el-tooltip v-if="dataForm.createDate.length > 20" :content="dataForm.createDate" class="item" effect="dark"
-                    placement="bottom-start">
+      <el-col
+        :span="16"
+        class="attrInfo"
+      >
+        <el-tooltip
+          v-if="dataForm.createDate.length > 20"
+          :content="dataForm.createDate"
+          class="item"
+          effect="dark"
+          placement="bottom-start"
+        >
           <span>创建时间： {{ ellipsis(dataForm.createDate, 20) }}</span>
         </el-tooltip>
         <span v-else>创建时间： {{ ellipsis(dataForm.createDate, 20) }}</span>
       </el-col>
-      <el-col :span="8" class="attrInfo">
-        <el-tooltip v-if="dataForm.updateBy.length > 20" :content="dataForm.updateBy" class="item" effect="dark"
-                    placement="bottom-start">
+      <el-col
+        :span="8"
+        class="attrInfo"
+      >
+        <el-tooltip
+          v-if="dataForm.updateBy && dataForm.updateBy.length > 20"
+          :content="dataForm.updateBy"
+          class="item"
+          effect="dark"
+          placement="bottom-start"
+        >
           <span>修改人： {{ ellipsis(dataForm.updateBy, 20) }}</span>
         </el-tooltip>
         <span v-else>修改人： {{ ellipsis(dataForm.updateBy, 20) }}</span>
       </el-col>
-      <el-col :span="8" class="attrInfo">
-        <el-tooltip v-if="dataForm.updateDate.length > 20" :content="dataForm.updateDate" class="item" effect="dark"
-                    placement="bottom-start">
+      <el-col
+        :span="8"
+        class="attrInfo"
+      >
+        <el-tooltip
+          v-if="dataForm.updateDate.length > 20"
+          :content="dataForm.updateDate"
+          class="item"
+          effect="dark"
+          placement="bottom-start"
+        >
           <span>修改时间： {{ ellipsis(dataForm.updateDate, 20) }}</span>
         </el-tooltip>
         <span v-else>修改时间： {{ ellipsis(dataForm.updateDate, 20) }}</span>
       </el-col>
-
     </el-row>
 
-    <el-divider content-position="left">关联数据集信息</el-divider>
+    <el-divider content-position="left">
+      关联数据集信息
+    </el-divider>
 
-    <div id="container"/>
+    <div id="container" />
   </div>
 </template>
 
 <script>
 import G6 from '@antv/g6'
-import {getLabelDetail} from 'dashPackages/js/utils/LabelConfigService'
+import { getLabelDetail } from 'dashPackages/js/utils/LabelConfigService'
 
 export default {
-  name: "labelConfigDetails",
-  data() {
+  name: 'LabelConfigDetails',
+  data () {
     return {
-      dialogFormVisible: false,
+      dialogFormVisible: true,
       dataForm: {
         createBy: '',
         createDate: '',
@@ -83,7 +144,7 @@ export default {
         updateDate: '',
         labelDesc: '',
         labelName: '',
-        labelType: '',
+        labelType: ''
       },
       jsonData: {},
       chartHeight: 0,
@@ -91,75 +152,75 @@ export default {
     }
   },
   methods: {
-    ellipsis(value, len) {
-      if (!value) return '';
+    ellipsis (value, len) {
+      if (!value) return ''
       if (value.length > len) {
         return value.slice(0, len) + '...'
       }
       return value
     },
-    init(row) {
-      this.dialogFormVisible = true;
+    init (row) {
+      this.dialogFormVisible = true
       getLabelDetail(row.id).then((r) => {
-        this.jsonData = r.jsonData;
+        this.jsonData = r.jsonData
         if (r.jsonData.nodes.length > 1) {
-          this.chartHeight = r.jsonData.nodes.length * 100;
+          this.chartHeight = r.jsonData.nodes.length * 100
         } else {
-          this.chartHeight = 200;
+          this.chartHeight = 200
         }
-        this.dataForm = r;
+        this.dataForm = r
 
-        this.chartWidth = r.labelName.length * 20;
+        this.chartWidth = r.labelName.length * 20
 
         this.$nextTick(() => {
-          this.initG6(r.jsonData);
+          this.initG6(r.jsonData)
         })
-      });
-    },
-    goBack() {
-      this.dialogFormVisible = false;
-      this.$nextTick(() => {
-        this.$parent.labelVisible = true;
-        this.$parent.getDataList();
       })
     },
-    nodeEach(nodes) {
+    goBack () {
+      this.dialogFormVisible = false
+      this.$nextTick(() => {
+        this.$parent.labelVisible = true
+        this.$parent.getDataList()
+      })
+    },
+    nodeEach (nodes) {
       nodes.forEach(node => {
         if (!node.style) {
           node.style = {}
         }
         switch (node.class) {
           case 'c1': {
-            node.shape = 'circle';
-            node.size = 40;
-            break;
+            node.shape = 'circle'
+            node.size = 40
+            break
           }
           case 'c3': {
-            node.shape = 'rect';
+            node.shape = 'rect'
             // node.size = [80, 50];
             node.style = {
               stroke: '#FFFFFF',
               fill: '#DFE1E3'
-            };
-            break;
+            }
+            break
           }
           case 'c0': {
-            node.shape = 'ellipse';
-            node.size = [80, 40];
-            break;
+            node.shape = 'ellipse'
+            node.size = [80, 40]
+            break
           }
           case 'c2': {
-            node.shape = 'diamond';
-            node.size = [60, 60];
-            break;
+            node.shape = 'diamond'
+            node.size = [60, 60]
+            break
           }
         }
       })
     },
-    //初始化G6
-    initG6(json) {
-      const data = json;
-      const width = document.getElementById('container').scrollWidth;
+    // 初始化G6
+    initG6 (json) {
+      const data = json
+      const width = document.getElementById('container').scrollWidth
 
       this.nodeEach(data.nodes)
       const tooltip = new G6.Tooltip({
@@ -168,21 +229,21 @@ export default {
         fixToNode: [1, 0],
         itemTypes: ['node', 'edge'],
         getContent: (e) => {
-          const outDiv = document.createElement('div');
-          outDiv.style.width = 'fit-content';
-          outDiv.innerHTML = `<div style='width: 200px;'>${e.item.getModel()._label}</div>`;
-          return outDiv;
+          const outDiv = document.createElement('div')
+          outDiv.style.width = 'fit-content'
+          outDiv.innerHTML = `<div style='width: 200px;'>${e.item.getModel()._label}</div>`
+          return outDiv
         },
         shouldBegin: (e) => {
-          let res = true;
-          if (e.item.getModel()._label.length > 12) {
+          let res = true
+          if (e.item.getModel()._label && e.item.getModel()._label.length > 12) {
             res = true
           } else {
             res = false
           }
-          return res;
-        },
-      });
+          return res
+        }
+      })
 
       const graph = new G6.Graph({
         container: 'container',
@@ -210,15 +271,15 @@ export default {
             stroke: '#333'
           }
         }
-      });
+      })
       data.nodes.forEach(node => {
         node._label = node.label
         if (node.label.length > 12) {
           node.label = node.label.substr(0, 9) + '...'
         }
       })
-      graph.data(data);
-      graph.render();
+      graph.data(data)
+      graph.render()
     }
   }
 }

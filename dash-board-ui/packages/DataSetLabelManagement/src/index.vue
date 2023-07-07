@@ -159,6 +159,10 @@
       v-if="labelTypeEditVisible"
       ref="LabelTypeEdit"
     />
+    <label-config-details
+      ref="LabelConfigDetails"
+    >
+    </label-config-details>
   </div>
 </template>
 
@@ -166,7 +170,7 @@
 import table from 'dashPackages/js/utils/table.js'
 import { pageMixins } from 'dashPackages/js/mixins/page'
 import LabelConfigAddOrUpdate from './LabelConfigAddOrUpdate.vue'
-// import LabelConfigDetails from './LabelConfigDetails.vue'
+import LabelConfigDetails from './LabelConfigDetails.vue'
 import LabelTypeEdit from './LabelTypeEdit.vue'
 import { getLabelType, labelList, removeLabel, removeLabelByType } from 'dashPackages/js/utils/LabelConfigService'
 
@@ -177,7 +181,7 @@ export default {
   },
   mixins: [pageMixins],
   components: {
-    // LabelConfigDetails,
+    LabelConfigDetails,
     LabelConfigAddOrUpdate,
     LabelTypeEdit
   },

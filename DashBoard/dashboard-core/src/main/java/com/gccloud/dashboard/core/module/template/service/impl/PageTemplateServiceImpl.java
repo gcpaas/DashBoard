@@ -7,7 +7,7 @@ import com.gccloud.common.vo.PageVO;
 import com.gccloud.dashboard.core.module.basic.dto.BasePageDTO;
 import com.gccloud.dashboard.core.module.chart.components.datasource.DataSetDataSource;
 import com.gccloud.dashboard.core.module.manage.dto.DashboardPageDTO;
-import com.gccloud.dashboard.core.module.template.dao.PageTemplateDao;
+import com.gccloud.dashboard.core.module.template.dao.DashboardPageTemplateDao;
 import com.gccloud.dashboard.core.module.template.dto.PageTemplateSearchDTO;
 import com.gccloud.dashboard.core.module.template.entity.PageTemplateEntity;
 import com.gccloud.dashboard.core.module.template.service.IPageTemplateService;
@@ -21,8 +21,8 @@ import java.util.List;
  * @version 1.0
  * @date 2023/3/20 16:38
  */
-@Service
-public class PageTemplateServiceImpl extends ServiceImpl<PageTemplateDao, PageTemplateEntity> implements IPageTemplateService {
+@Service("dashboardPageTemplateService")
+public class PageTemplateServiceImpl extends ServiceImpl<DashboardPageTemplateDao, PageTemplateEntity> implements IPageTemplateService {
     @Override
     public PageVO<PageTemplateEntity> getPage(PageTemplateSearchDTO searchDTO) {
         LambdaQueryWrapper<PageTemplateEntity> queryWrapper = new LambdaQueryWrapper<>();
