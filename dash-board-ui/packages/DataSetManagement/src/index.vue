@@ -177,16 +177,14 @@
                 v-if="showOperate(scope.row.datasetType)"
                 slot-scope="scope"
               >
-                 <slot name="left" :item='scope.row'>
-                </slot>
-                <el-button
-                  class="db-el-button-default"
-                  :disabled="scope.row.editable === 1 && !appCode"
-                  @click="toEdit(scope.row.id, scope.row.datasetType, scope.row.name, scope.row.typeId)"
-                >
-                  编辑
-                </el-button>
-                 <slot name="right" :item='scope.row'>
+                 <slot :item='scope.row'>
+                  <el-button
+                    class="db-el-button-default"
+                    :disabled="scope.row.editable === 1 && !appCode"
+                    @click="toEdit(scope.row.id, scope.row.datasetType, scope.row.name, scope.row.typeId)"
+                  >
+                    编辑
+                  </el-button>
                    <el-button
                     class="db-el-button-default"
                     :disabled="scope.row.editable === 1 && !appCode"
