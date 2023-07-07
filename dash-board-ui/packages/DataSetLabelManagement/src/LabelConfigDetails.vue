@@ -124,7 +124,7 @@
       关联数据集信息
     </el-divider>
 
-    <div id="container" />
+    <div style="width:90%" id="container" />
   </div>
 </template>
 
@@ -136,7 +136,7 @@ export default {
   name: 'LabelConfigDetails',
   data () {
     return {
-      dialogFormVisible: true,
+      dialogFormVisible: false,
       dataForm: {
         createBy: '',
         createDate: '',
@@ -247,7 +247,7 @@ export default {
 
       const graph = new G6.Graph({
         container: 'container',
-        // width: 1000,
+        // width: '800',
         height: this.chartHeight,
         plugins: [tooltip],
         // modes: {
@@ -286,6 +286,9 @@ export default {
 </script>
 
 <style scoped>
+.inner-container{
+  overflow-x: hidden;
+}
 .el-col {
   height: 35px;
 }
