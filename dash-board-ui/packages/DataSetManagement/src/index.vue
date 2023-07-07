@@ -156,6 +156,8 @@
                 v-if="showOperate(scope.row.datasetType)"
                 slot-scope="scope"
               >
+                 <slot name="left" :item='scope.row'>
+                </slot>
                 <el-button
                   class="db-el-button-default"
                   :disabled="scope.row.editable === 1 && !appCode"
@@ -163,15 +165,14 @@
                 >
                   编辑
                 </el-button>
-                <el-button
-                  class="db-el-button-default"
-                  :disabled="scope.row.editable === 1 && !appCode"
-                  @click="delDataset(scope.row.id)"
-                >
-                  删除
-                </el-button>
-                 <slot :item='scope.row'>
-
+                 <slot name="right" :item='scope.row'>
+                   <el-button
+                    class="db-el-button-default"
+                    :disabled="scope.row.editable === 1 && !appCode"
+                    @click="delDataset(scope.row.id)"
+                  >
+                    删除
+                  </el-button>
                 </slot>
               </template>
             </el-table-column>
@@ -258,6 +259,10 @@ export default {
       type: [Array, Object],
       default: null
     },
+    dataSetList:{
+      type:[Array, Object],
+      default:()=>[]
+    },
     appCode: {
       type: String,
       default: ''
@@ -302,6 +307,11 @@ export default {
         config: null,
         key: new Date().getTime()
       }
+    }
+  },
+  computed:{
+    allType(){
+      return this.datasetTypeList.map(item=>item.datasetType).filter(item=>item!='')
     }
   },
   watch: {
@@ -460,22 +470,29 @@ export default {
         }
       }
       this.current = 1
-      this.getDataList()
-      this.datasetTypeList = [
-        { name: '全部', datasetType: '' },
-        { name: '原始数据集', datasetType: 'original', componentName: 'OriginalEditForm' },
-        { name: '自助数据集', datasetType: 'custom', componentName: 'CustomEditForm' },
-        { name: '存储过程数据集', datasetType: 'storedProcedure', componentName: 'StoredProcedureEditForm' },
-        { name: 'JSON数据集', datasetType: 'json', componentName: 'JsonEditForm' },
-        { name: '脚本数据集', datasetType: 'script', componentName: 'ScriptEditForm' },
-        { name: 'JS数据集', datasetType: 'js', componentName: 'JsDataSet' }
-      ]
+      const list=[
+          { name: '全部', datasetType: '' },
+          { name: '原始数据集', datasetType: 'original', componentName: 'OriginalEditForm' },
+          { name: '自助数据集', datasetType: 'custom', componentName: 'CustomEditForm' },
+          { name: '存储过程数据集', datasetType: 'storedProcedure', componentName: 'StoredProcedureEditForm' },
+          { name: 'JSON数据集', datasetType: 'json', componentName: 'JsonEditForm' },
+          { name: '脚本数据集', datasetType: 'script', componentName: 'ScriptEditForm' },
+          { name: 'JS数据集', datasetType: 'js', componentName: 'JsDataSet' }
+        ]
+      if(this.dataSetList.length!=0){
+        this.datasetTypeList=[{ name: '全部', datasetType: '' },...list.filter(item=>this.dataSetList.findIndex(x=>x===item.datasetType)!==-1)]
+      }else{
+        this.datasetTypeList = [
+          ...list
+        ]
+      }
       if (window.DS_CONFIG?.customDatasetComponents && window.DS_CONFIG?.customDatasetComponents.length > 0) {
         // 将获得到的远程数据集进行组装
         window.DS_CONFIG?.customDatasetComponents.forEach((item) => {
           this.datasetTypeList.push({ name: item.config.name, datasetType: item.config.datasetType, componentName: item.config.componentName })
         })
       }
+      this.getDataList()
     },
     // 新增数据集
     addDataset () {
@@ -493,7 +510,8 @@ export default {
         current: this.current,
         size: this.size,
         moduleCode: this.appCode,
-        ...this.queryForm
+        ...this.queryForm,
+        datasetType:this.queryForm.datasetType===''?[...this.allType]:[this.queryForm.datasetType]
       }).then((data) => {
         this.tableData = data.list
         if (this.isDialog) {
