@@ -250,6 +250,19 @@
                   />
                 </el-form-item>
               </el-col>
+              <el-col :span="12">
+                <el-form-item
+                  label="关联标签"
+                  prop="labelIds"
+                >
+                  <label-select
+                    :dataset-id="datasetId"
+                    :id-list="dataForm.labelIds"
+                    @commit="(ids) =>{dataForm.labelIds = ids}"
+                  >
+                  </label-select>
+                </el-form-item>
+              </el-col>
             </el-row>
           </el-form>
         </el-col>
@@ -467,6 +480,7 @@
 </template>
 
 <script>
+import LabelSelect from 'dashPackages/DataSetLabelManagement/src/LabelSelect.vue'
 import {
   getCategoryTree,
   nameCheckRepeat,
@@ -477,6 +491,9 @@ import { datasourceList, getSourceTable, getSourceView, getTableFieldList } from
 import _ from 'lodash'
 export default {
   name: 'OriginalEditForm',
+  components: {
+    LabelSelect
+  },
   props: {
     isEdit: {
       type: Boolean,
@@ -520,6 +537,8 @@ export default {
         typeId: '',
         datasetType: 'original',
         remark: '',
+        // 关联的标签id
+        labelIds: [],
         // 以下为config信息
         sourceId: '',
         repeatStatus: 1,
@@ -775,6 +794,7 @@ export default {
           remark: this.dataForm.remark,
           datasetType: 'original',
           sourceId: this.dataForm.sourceId,
+          labelIds: this.dataForm.labelIds,
           config: {
             className: 'com.gccloud.dataset.entity.config.OriginalDataSetConfig',
             sourceId: this.dataForm.sourceId,

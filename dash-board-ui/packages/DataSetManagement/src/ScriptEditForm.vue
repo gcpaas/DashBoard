@@ -124,6 +124,19 @@
                   />
                 </el-form-item>
               </el-col>
+              <el-col :span="12">
+                <el-form-item
+                  label="关联标签"
+                  prop="labelIds"
+                >
+                  <label-select
+                    :dataset-id="datasetId"
+                    :id-list="dataForm.labelIds"
+                    @commit="(ids) =>{dataForm.labelIds = ids}"
+                  >
+                  </label-select>
+                </el-form-item>
+              </el-col>
             </el-row>
           </el-form>
           <div
@@ -516,6 +529,7 @@
 </template>
 
 <script>
+import LabelSelect from 'dashPackages/DataSetLabelManagement/src/LabelSelect.vue'
 import {
   nameCheckRepeat,
   getCategoryTree,
@@ -532,7 +546,8 @@ import _ from 'lodash'
 export default {
   name: 'ScriptEditForm',
   components: {
-    codemirror
+    codemirror,
+    LabelSelect
   },
   props: {
     isEdit: {
@@ -577,6 +592,7 @@ export default {
         typeId: '',
         datasetType: 'script',
         remark: '',
+        labelIds: [],
         // 以下为config配置
         script: '',
         paramsList: [],
@@ -728,6 +744,7 @@ export default {
           sourceId: this.dataForm.sourceId,
           moduleCode: this.appCode,
           editable: this.appCode ? 1 : 0,
+          labelIds: this.dataForm.labelIds,
           config: {
             className: 'com.gccloud.dataset.entity.config.GroovyDataSetConfig',
             script: this.dataForm.script,

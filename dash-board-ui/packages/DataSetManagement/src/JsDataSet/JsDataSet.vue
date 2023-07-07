@@ -123,6 +123,19 @@
                   />
                 </el-form-item>
               </el-col>
+              <el-col :span="12">
+                <el-form-item
+                  label="关联标签"
+                  prop="labelIds"
+                >
+                  <label-select
+                    :dataset-id="datasetId"
+                    :id-list="dataForm.labelIds"
+                    @commit="(ids) =>{dataForm.labelIds = ids}"
+                  >
+                  </label-select>
+                </el-form-item>
+              </el-col>
             </el-row>
           </el-form>
           <div
@@ -350,6 +363,7 @@
 </template>
 
 <script>
+import LabelSelect from 'dashPackages/DataSetLabelManagement/src/LabelSelect.vue'
 import ParamsSettingDialog from './components/ParamsSettingDialog.vue'
 import OutputFieldDialog from './components/OutputFieldDialog.vue'
 import FieldFillDialog from './components/FieldFillDialog.vue'
@@ -364,7 +378,8 @@ export default {
     codemirror,
     FieldFillDialog,
     ParamsSettingDialog,
-    OutputFieldDialog
+    OutputFieldDialog,
+    LabelSelect
   },
   props: {
     config: {
@@ -408,6 +423,7 @@ export default {
         name: '',
         typeId: '',
         remark: '',
+        labelIds: [],
         config: {
           script: '',
           paramsList: []
@@ -514,6 +530,7 @@ export default {
             datasetType: 'js',
             moduleCode: appCode,
             editable: appCode ? 1 : 0,
+            labelIds: dataForm.labelIds,
             config: {
               className: 'com.gccloud.dataset.entity.config.JsDataSetConfig',
               script: dataForm.config.script,

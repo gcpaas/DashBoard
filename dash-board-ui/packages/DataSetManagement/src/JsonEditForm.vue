@@ -124,6 +124,19 @@
                   />
                 </el-form-item>
               </el-col>
+              <el-col :span="12">
+                <el-form-item
+                  label="关联标签"
+                  prop="labelIds"
+                >
+                  <label-select
+                    :dataset-id="datasetId"
+                    :id-list="dataForm.labelIds"
+                    @commit="(ids) =>{dataForm.labelIds = ids}"
+                  >
+                  </label-select>
+                </el-form-item>
+              </el-col>
             </el-row>
           </el-form>
           <div class="card-border">
@@ -322,6 +335,7 @@
 </template>
 
 <script>
+import LabelSelect from 'dashPackages/DataSetLabelManagement/src/LabelSelect.vue'
 import vueJsonEditor from 'vue-json-editor'
 import vueJsonViewer from 'vue-json-viewer'
 import { getCategoryTree, datasetAdd, datasetUpdate, getDataset, nameCheckRepeat } from 'dashPackages/js/utils/datasetConfigService'
@@ -331,7 +345,8 @@ export default {
   name: 'JsonEditForm',
   components: {
     vueJsonEditor,
-    vueJsonViewer
+    vueJsonViewer,
+    LabelSelect
   },
   props: {
     isEdit: {
@@ -376,6 +391,7 @@ export default {
         typeId: '',
         datasetType: 'json',
         remark: '',
+        labelIds: [],
         // 以下为config配置
         json: '',
         fieldDesc: {},
@@ -487,6 +503,7 @@ export default {
           remark: this.dataForm.remark,
           moduleCode: this.appCode,
           editable: this.appCode ? 1 : 0,
+          labelIds: this.dataForm.labelIds,
           config: {
             className: 'com.gccloud.dataset.entity.config.JsonDataSetConfig',
             json: JSON.stringify(this.dataForm.json),

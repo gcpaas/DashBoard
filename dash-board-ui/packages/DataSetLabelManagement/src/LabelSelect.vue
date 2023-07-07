@@ -161,7 +161,7 @@ export default {
     },
     isEdit: {
       type: Boolean,
-      default: false
+      default: true
     },
     datasetId: {
       type: String,
@@ -276,8 +276,16 @@ export default {
      * 移除选中的标签
      */
     handleCloseTag (label) {
-      // 从selectLabelList中移除项的id与label.id相同的
-      this.selectLabelList = this.selectLabelList.filter(item => item !== label.id)
+      this.selectLabelListInitial.forEach((item, index) => {
+        if (item.id === label.id) {
+          this.selectLabelListInitial.splice(index, 1)
+        }
+      })
+      this.selectLabelList.forEach((item, index) => {
+        if (item.id === label.id) {
+          this.selectLabelList.splice(index, 1)
+        }
+      })
     },
     /**
      * 点击添加标签按钮
