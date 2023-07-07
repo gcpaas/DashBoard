@@ -159,7 +159,10 @@
       v-if="labelTypeEditVisible"
       ref="LabelTypeEdit"
     />
-    <!-- <LabelConfigDetails /> -->
+    <label-config-details
+      ref="LabelConfigDetails"
+    >
+    </label-config-details>
   </div>
 </template>
 

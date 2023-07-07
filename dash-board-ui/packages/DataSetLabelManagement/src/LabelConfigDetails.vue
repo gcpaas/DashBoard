@@ -3,7 +3,6 @@
     v-if="dialogFormVisible"
     class="inner-container"
   >
-    11
     <el-page-header
       style="padding-top: 8px"
       @back="goBack"
@@ -64,7 +63,7 @@
         class="attrInfo"
       >
         <el-tooltip
-          v-if="dataForm.createBy.length > 20"
+          v-if="dataForm.createBy && dataForm.createBy.length > 20"
           :content="dataForm.createBy"
           class="item"
           effect="dark"
@@ -94,7 +93,7 @@
         class="attrInfo"
       >
         <el-tooltip
-          v-if="dataForm.updateBy.length > 20"
+          v-if="dataForm.updateBy && dataForm.updateBy.length > 20"
           :content="dataForm.updateBy"
           class="item"
           effect="dark"
@@ -237,7 +236,7 @@ export default {
         },
         shouldBegin: (e) => {
           let res = true
-          if (e.item.getModel()._label.length > 12) {
+          if (e.item.getModel()._label && e.item.getModel()._label.length > 12) {
             res = true
           } else {
             res = false
