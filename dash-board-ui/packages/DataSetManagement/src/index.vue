@@ -106,6 +106,7 @@
           </el-form-item>
           <el-form-item class="filter-item">
             <el-button
+              v-if="ToAdd"
               class="db-el-button-default"
               @click="addDataset"
             >
@@ -290,6 +291,10 @@ export default {
     isBorder: {
       type: Boolean,
       default: false
+    },
+    ToAdd:{
+      type: Boolean,
+      default: true
     }
 
   },

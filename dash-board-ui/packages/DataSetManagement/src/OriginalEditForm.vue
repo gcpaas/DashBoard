@@ -1104,7 +1104,7 @@ export default {
 
 /deep/ .db-table-box.is-Edit .el-table {
   max-height: calc(100vh - 600px) !important;
-  overflow-y: auto !important;
+  // overflow-y: auto !important;
 
   .el-table__body-wrapper {
     max-height: calc(100vh - 568px) !important;
