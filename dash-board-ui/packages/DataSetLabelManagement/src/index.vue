@@ -13,7 +13,6 @@
           class="filter-item"
           prop="labelName"
         >
-          标签名称
           <el-input
             v-model="queryForm.labelName"
             clearable
@@ -26,9 +25,10 @@
           class="filter-item"
           prop="labelType"
         >
-          标签类型
           <el-select
             v-model="queryForm.labelType"
+            class="db-el-select"
+            popper-class="db-el-select"
             clearable
             filterable
             placeholder="请选择标签类型"
@@ -161,8 +161,7 @@
     />
     <label-config-details
       ref="LabelConfigDetails"
-    >
-    </label-config-details>
+    />
   </div>
 </template>
 

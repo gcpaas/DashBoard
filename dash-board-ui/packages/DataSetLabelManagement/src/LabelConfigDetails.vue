@@ -3,11 +3,27 @@
     v-if="dialogFormVisible"
     class="inner-container"
   >
-    <el-page-header
+    <!-- <el-page-header
       style="padding-top: 8px"
       @back="goBack"
-    />
-
+    /> -->
+    <el-page-header class="db-el-page-header">
+      <template slot="content">
+        <div class="page-header">
+          <div class="page-header-left">
+            标签详情
+          </div>
+          <div class="page-header-right">
+            <el-button
+              class="back bs-el-button-default"
+              @click="goBack"
+            >
+              返回
+            </el-button>
+          </div>
+        </div>
+      </template>
+    </el-page-header>
     <el-divider content-position="left">
       属性信息
     </el-divider>
@@ -124,7 +140,10 @@
       关联数据集信息
     </el-divider>
 
-    <div style="width:90%" id="container" />
+    <div
+      id="container"
+      style="width:90%"
+    />
   </div>
 </template>
 
@@ -295,5 +314,15 @@ export default {
 
 .attrInfo {
   padding-left: 20px !important;
+}
+
+.page-header {
+  display: flex;
+  position: relative;
+
+  .page-header-right {
+    position: absolute;
+    right: 16px;
+  }
 }
 </style>
