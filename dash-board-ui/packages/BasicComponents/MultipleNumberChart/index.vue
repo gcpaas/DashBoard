@@ -94,7 +94,6 @@ export default {
       return intPartFormat + floatPart
     },
     dataFormatting (config, data) {
-      debugger
       const metricFieldList = config.dataSource.metricFieldList || []
       let multipleDataList = []
       // 当返回的数据状态为成功时
