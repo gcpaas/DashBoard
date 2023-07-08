@@ -66,7 +66,7 @@
             </div>
           </div>
           <metricSetting
-            :data-source-data-list="dataSourceDataList"
+            :data-source-data-list="numberCartDataList"
             :config="config"
           />
         </div>
@@ -627,6 +627,23 @@ export default {
         comment: item?.fieldDesc || item?.fieldName,
         name: item?.fieldName
       }))
+    },
+    // 数字卡片的指标列表
+    numberCartDataList () {
+      if (this.config.dataSource.businessKey) {
+        return this.fieldsList?.map(item => ({
+          ...item,
+          comment: item?.fieldDesc || item?.fieldName,
+          name: item?.fieldName
+        }))
+      } else {
+        return this.config.option.data.map(item => {
+          return {
+            comment: item?.label || item?.value,
+            name: item?.value
+          }
+        })
+      }
     },
     appCode: {
       get () {
