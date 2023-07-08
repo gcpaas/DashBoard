@@ -155,7 +155,8 @@ export default {
   },
   methods: {
     ...mapMutations('dashboard', [
-      'changeActiveCode'
+      'changeActiveCode',
+      'changeChartConfig'
     ]),
     // 拖拽结束
     onEnd () {
@@ -174,7 +175,14 @@ export default {
         item => item.metric === customize.metric
       )
       this.config.customize.customizeList[index] = customize
-      this.$store.commit('dashboard/changeActiveItemConfig', this.config)
+      this.config.option.data = this.config.customize.customizeList.map(item => {
+        return {
+          ...item,
+          label: item.descriptionField
+        }
+      })
+      this.$store.commit('dashboard/changeChartConfig', this.config)
+      // this.$store.commit('dashboard/changeActiveItemConfig', this.config)
     },
     /**
      * @description: 添加指标
