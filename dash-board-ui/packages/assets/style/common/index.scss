@@ -8,7 +8,7 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 .db-container {
   height: 100% !important;
   width: 100%;
-  // position: absolute;
+  position: relative;
   box-sizing: border-box;
   // padding: 0 16px 16px 16px;
   .inner-container {
@@ -299,14 +299,14 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
           font-size: 16px;
         }
       }
-      
+
       .el-dialog__title {
         display: inline-block;
         font-size: 16px;
         position: relative;
         padding-left: 20px;
       }
-      
+
       .el-dialog__title::before {
           content: "" !important;
           height: 16px !important;

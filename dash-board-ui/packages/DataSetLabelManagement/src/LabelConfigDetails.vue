@@ -7,6 +7,7 @@
       style="padding-top: 8px"
       @back="goBack"
     /> -->
+    <el-scrollbar class="data-set-scrollbar">
     <el-page-header class="db-el-page-header">
       <template slot="content">
         <div class="page-header">
@@ -28,7 +29,7 @@
       属性信息
     </el-divider>
 
-    <el-row :gutter="5">
+    <el-row >
       <el-col
         :span="8"
         class="attrInfo"
@@ -142,8 +143,8 @@
 
     <div
       id="container"
-      style="width:90%"
     />
+    </el-scrollbar>
   </div>
 </template>
 
@@ -304,7 +305,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
+@import '../../assets/style/bsTheme.scss';
+.data-set-scrollbar {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: none;
+}
 .inner-container{
   overflow-x: hidden;
 }
