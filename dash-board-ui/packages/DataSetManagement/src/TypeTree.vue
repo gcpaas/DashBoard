@@ -143,6 +143,7 @@
         v-if="editFormVisible"
         ref="editForm"
         :app-code="appCode"
+        @addOrUpdateNode="addOrUpdateNode"
       />
     </div>
   </div>
@@ -433,7 +434,10 @@ export default {
         categoryRemove(org.id).then((data) => {
           this.$message.success('操作成功')
           // this.ztreeObj.removeNode(org)
-          this.initLazyDatasetTypeTree()
+          // this.initLazyOrgTree()
+          const removeNode = this.ztreeObj.getNodeByParam('id', org.id, null)
+          this.ztreeObj.removeNode(removeNode)
+          this.redrawTree()
           // 刷新右侧表格
           this.$emit('refreshData', org)
         })
@@ -443,6 +447,34 @@ export default {
     refreshData (cbObj) {
       // 刷新右侧表格
       this.$emit('refreshData', cbObj)
+    },
+    // 新增或修改节点
+    addOrUpdateNode (params, isAdd) {
+      if (!isAdd) {
+        const editNode = this.ztreeObj.getNodeByParam('id', params.id, null)
+        editNode.name = params.name
+        this.ztreeObj.editName(editNode)
+        this.ztreeObj.setEditable(false)
+      } else {
+        // 新增
+        const parentNode = params.parentId === 0 ? null : this.ztreeObj.getNodeByParam('id', params.parentId, null)
+        this.ztreeObj.addNodes(parentNode, params)
+      }
+      this.redrawTree()
+    },
+    // 重新绘制树
+    redrawTree () {
+      // 重新绘制ztree
+      getCategoryTree({ type: 'dataset', moduleCode: this.appCode }).then((res) => {
+        this.categoryData = res.map((item) => {
+          return { isParent: item.hasChildren, ...item }
+        })
+        this.categoryData.unshift({ name: '全部', id: '', parentId: '0' })
+      }).then((e) => {
+        this.loading = false
+      }).catch((e) => {
+        this.loading = false
+      })
     }
   }
 }

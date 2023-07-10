@@ -132,6 +132,7 @@ CREATE TABLE `ds_datasource` (
   `port` int(16) DEFAULT NULL COMMENT '端口',
   `username` varchar(255) DEFAULT NULL COMMENT '用户名',
   `password` text COMMENT '密码',
+  `table_name` varchar(255) DEFAULT NULL COMMENT '表名',
   `module_code` varchar(255) DEFAULT NULL COMMENT '模块编码',
   `editable` tinyint(2) DEFAULT '0' COMMENT '是否可编辑，0 不可编辑 1 可编辑',
   `remark` varchar(255) DEFAULT NULL,
