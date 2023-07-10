@@ -42,7 +42,7 @@ function registerRouters (config, router) {
       children: [
         {
           path: config?.routers?.pageListUrl,
-          name: 'BigScreenList',
+          name: 'DashboardList',
           component: () =>
             require.ensure([], () => require('dashPackages/DashboardMag')),
           meta: {
