@@ -11,7 +11,7 @@
         @click="toggleNav(nav)"
       >
         <!-- <span class="nav-icon">
-          <i :class="['iconfont-bigscreen', nav.icon]" />
+          <i :class="['iconfont-dashboard', nav.icon]" />
         </span> -->
         {{ nav.name }}
       </a>
@@ -119,7 +119,7 @@ export default {
       // .nav-link{
       //   color: #fff !important;
       // }
-      // .iconfont-bigscreen {
+      // .iconfont-dashboard {
       //   color: #fff !important;
       // }
     }

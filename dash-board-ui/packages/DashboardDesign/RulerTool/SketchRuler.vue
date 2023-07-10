@@ -9,7 +9,7 @@
   >
     <i
       :class="{
-        'iconfont-bigscreen': true,
+        'iconfont-dashboard': true,
         'icon-eye': isShowReferLine,
         'icon-eye-close': !isShowReferLine
       }"
@@ -254,7 +254,7 @@ export default {
   box-sizing: border-box;
   position: absolute;
 
-  .iconfont-bigscreen {
+  .iconfont-dashboard {
     position: absolute;
     left: 0;
     top: 0;

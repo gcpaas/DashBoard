@@ -32,7 +32,7 @@
               @click="toggleSidebar"
             >
               <i
-                class="iconfont-bigscreen menu-icon"
+                class="iconfont-dashboard menu-icon"
                 :class="fold ? 'icon-zhankaicaidan' : 'icon-shouqicaidan'"
               />
               <span class="menu-title-span">{{ foldText }}</span>
@@ -53,7 +53,7 @@
               @dbclick.native="toggleSidebar"
             >
               <i
-                :class="['iconfont-bigscreen', menu.icon]"
+                :class="['iconfont-dashboard', menu.icon]"
                 class="menu-icon"
               />
               <span class="menu-title-span">{{ menu.title }}</span>
@@ -310,7 +310,7 @@ export default {
       color: #fff;
     }
 
-    .iconfont-bigscreen {
+    .iconfont-dashboard {
       color: var(--db-el-title);
     }
 
@@ -327,7 +327,7 @@ export default {
       overflow: visible;
 
       .is-active {
-        .iconfont-bigscreen {
+        .iconfont-dashboard {
           color: var(--db-el-color-primary);
         }
         .menu-title-span {

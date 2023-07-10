@@ -331,6 +331,7 @@ export default {
 }
 
 .description {
+  color: #36474f;
   display: block;
   margin-top: 8px;
   font-size: 12px;

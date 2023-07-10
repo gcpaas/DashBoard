@@ -299,6 +299,7 @@ export default {
       }
       /*菜单激活时的样式*/
       .active-catalog{
+        position: relative;
         // border-left: 4px solid var(--db-el-color-primary);
         background: var(--db-background-primary);
         color: var(--db-el-color-primary);

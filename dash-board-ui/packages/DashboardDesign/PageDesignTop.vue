@@ -46,13 +46,13 @@
         :disabled="undoDisabled"
         @click.native="undo(true)"
       >
-        <i class="iconfont-bigscreen icon-jiantouqianjin icon-reverse" />
+        <i class="iconfont-dashboard icon-jiantouqianjin icon-reverse" />
       </CusBtn>
       <CusBtn
         :disabled="redoDisabled"
         @click.native="undo(false)"
       >
-        <i class="iconfont-bigscreen icon-jiantouqianjin" />
+        <i class="iconfont-dashboard icon-jiantouqianjin" />
       </CusBtn>
       <CusBtn
         :loading="saveAndPreviewLoading"
@@ -80,7 +80,7 @@
       </CusBtn>
       <CusBtn @click="updateRightVisiable">
         <i
-          class="iconfont-bigscreen"
+          class="iconfont-dashboard"
           :class="rightFold ? 'icon-zhankaicaidan' : 'icon-shouqicaidan'"
         />
       </CusBtn>
@@ -428,7 +428,7 @@ export default {
   color: #ffffff;
   padding: 0 5px;
 
-  .iconfont-bigscreen {
+  .iconfont-dashboard {
     color: #fff;
   }
   .active-avg-box{
