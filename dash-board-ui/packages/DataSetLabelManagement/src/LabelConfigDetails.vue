@@ -16,7 +16,7 @@
           </div>
           <div class="page-header-right">
             <el-button
-              class="back bs-el-button-default"
+              class="back db-el-button-default"
               @click="goBack"
             >
               返回
