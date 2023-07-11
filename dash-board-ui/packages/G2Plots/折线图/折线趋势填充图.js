@@ -4,6 +4,8 @@
  * @Author: xing.heng
  */
 
+// 配置版本号
+const version = '2023071101'
 // 分类
 const category = 'Line'
 // 标题
@@ -125,7 +127,7 @@ const setting = [
     // 对应options中的字段
     optionField: 'animation.appear.duration',
     value: 5000,
-    max:10000,
+    max: 10000,
     tabName: 'custom',
     groupName: 'graph',
     step: 1
@@ -454,7 +456,7 @@ const setting = [
     groupName: 'yAxis'
   },
   // 边距 padding
-    {
+  {
     label: '图表边距',
     type: 'padding',
     field: 'appendPadding',
@@ -686,6 +688,7 @@ const option = {
 }
 
 export default {
+  version,
   category,
   title,
   chartType,

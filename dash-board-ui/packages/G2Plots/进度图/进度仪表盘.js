@@ -1,4 +1,6 @@
 
+// 配置版本号
+const version = '2023071101'
 // 分类
 const category = 'Gauge'
 // 标题
@@ -70,7 +72,7 @@ const setting = [
     // 对应options中的字段
     optionField: 'statistic.title.offsetY',
     value: -36,
-    min:-100,
+    min: -100,
     tabName: 'custom',
     groupName: 'graph'
   },
@@ -159,6 +161,7 @@ const option = {
   }
 }
 export default {
+  version,
   category,
   title,
   chartType,

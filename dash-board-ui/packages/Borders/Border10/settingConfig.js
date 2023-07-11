@@ -20,6 +20,7 @@ export const settingConfig = {
 const customConfig = {
   type: 'border10',
   root: {
+    version: '2023071101',
     contribution: false
   },
   customize: {

@@ -28,6 +28,7 @@ export const settingConfig = {
 const customConfig = {
   type: 'bigNumber',
   root: {
+    version: '2023071101',
     contribution: false
   },
   customize: {

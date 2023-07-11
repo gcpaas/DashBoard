@@ -4,6 +4,8 @@
  * @Author: xing.heng
  */
 
+// 配置版本号
+const version = '2023071101'
 // 分类
 const category = 'TinyLine'
 // 标题
@@ -89,8 +91,8 @@ const dataHandler = '// 取出所有指标的值 \ndata = data.map(item => item[
 
 // 图表配置 new Line('domName', option)
 const option = {
-  xField:'',
-  yField:'',
+  xField: '',
+  yField: '',
   data: [16, 95, 35, 27, 50, 36, 78, 99, 60, 62, 37],
   appendPadding: [16, 16, 16, 16], // 设置图标的边距
   height: 6,
@@ -103,6 +105,7 @@ const option = {
 }
 
 export default {
+  version,
   category,
   title,
   chartType,

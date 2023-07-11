@@ -14,6 +14,7 @@ export const settingConfig = {
 const customConfig = {
   type: 'timeCountDown',
   root: {
+    version: '2023071101',
     endTime: ''
   },
   customize: {

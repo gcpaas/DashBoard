@@ -17,6 +17,7 @@ export const settingConfig = {
 const customConfig = {
   type: 'iconLink',
   root: {
+    version: '2023071101',
     contribution: false
   },
   customize: {

@@ -4,6 +4,8 @@
  * @Author: xing.heng
  */
 
+// 配置版本号
+const version = '2023071101'
 // 分类
 const category = 'Bar'
 // 标题
@@ -451,7 +453,7 @@ const setting = [
     groupName: 'yAxis'
   },
   // 边距 padding
-    {
+  {
     label: '图表边距',
     type: 'padding',
     field: 'appendPadding',
@@ -597,10 +599,11 @@ const option = {
         lineWidth: 1
       }
     }
-  },
+  }
 }
 
 export default {
+  version,
   category,
   title,
   chartType,

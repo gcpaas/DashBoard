@@ -16,6 +16,7 @@ export const settingConfig = {
 const customConfig = {
   type: 'decoration4Reverse',
   root: {
+    version: '2023071101',
     contribution: false
   },
   customize: {

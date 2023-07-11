@@ -1,4 +1,6 @@
 
+// 配置版本号
+const version = '2023071101'
 // 分类
 const category = 'Pie'
 // 标题
@@ -262,6 +264,7 @@ const option = {
   interactions: [{ type: 'element-active' }]
 }
 export default {
+  version,
   category,
   title,
   chartType,

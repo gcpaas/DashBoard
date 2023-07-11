@@ -22,6 +22,7 @@ export const settingConfig = {
 const customConfig = {
   type: 'tables',
   root: {
+    version: '2023071101',
     contribution: false
   },
   customize: {

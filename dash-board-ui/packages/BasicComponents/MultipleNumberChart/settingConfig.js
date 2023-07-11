@@ -30,6 +30,7 @@ export const settingConfig = {
 const customConfig = {
   type: 'multipleNumberChart',
   root: {
+    version: '2023071101',
     contribution: false
   },
   customize: {

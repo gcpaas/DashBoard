@@ -29,6 +29,7 @@ export const settingConfig = {
 const customConfig = {
   type: 'superLinkChart',
   root: {
+    version: '2023071101',
     url: 'https://www.runoob.com/'
   },
   customize: {

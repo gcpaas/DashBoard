@@ -1,17 +1,13 @@
-/*
- * @Descripttion:
- * @Author: liu.shiyi
- * @Date: 2022-10-13 11:18:03
- * @LastEditTime: 2022-10-13 13:55:11
- */
 import { commonConfig, displayOption } from 'packages/js/config'
 
 export const settingConfig = {
-  theme: 'dark',
-  text: '文本标签占位符', // text内容
+  data: [],
   // 设置面板属性的显隐
   displayOption: {
     ...displayOption,
+    headerField: {
+      enable: true
+    },
     metricField: {
       // 指标
       label: '指标',
@@ -21,24 +17,27 @@ export const settingConfig = {
     dimensionField: {
       // 维度
       label: '维度', // 维度/查询字段
-      enable: false,
-      multiple: true // 是否多选
+      enable: true,
+      multiple: false // 是否多选
     }
   }
 }
 const customConfig = {
-  type: 'texts',
+  type: 'dashboardScrollRanking',
   root: {
     version: '2023071101',
-    url: 'https://www.runoob.com/'
+    contribution: false
   },
   customize: {
-    title: '文本标签占位符',
-    fontSize: 20,
-    fontWeight: 700,
-    color: 'left,#36474f,#36474f'
+    highlightNum: 4, // 高亮显示数量
+    highlightStyle: [
+      // 高亮显示自定义样式
+      { highlightColor: '#314659', mark: 0 },
+      { highlightColor: '#314659', mark: 1 },
+      { highlightColor: '#314659', mark: 2 },
+      { highlightColor: '#314659', mark: 3 }
+    ]
   }
-
 }
 export const dataConfig = {
   ...commonConfig(customConfig)
