@@ -1,7 +1,7 @@
 /*!
  * 数据集管理
  */
-import { get, post } from 'packages/js/utils/http'
+import { get, post } from 'dashPackages/js/utils/http'
 
 /**
  * 数据集分页查询
@@ -10,6 +10,14 @@ import { get, post } from 'packages/js/utils/http'
  * @returns {*}
  */
 const datasetPage = (params = {}, flag = false) => get('/dataset/page', params, flag)
+
+/**
+ * 数据集列表查询
+ * @param params
+ * @param flag
+ * @returns {*}
+ */
+const datasetList = (params = {}, flag = false) => get('/dataset/list', params, flag)
 
 /**
  * 数据集名称校验
@@ -94,6 +102,7 @@ const categoryRemove = (id = '-1', flag = false) => post(`/category/delete/${id}
 
 export {
   datasetPage,
+  datasetList,
   datasetAdd,
   datasetUpdate,
   datasetRemove,

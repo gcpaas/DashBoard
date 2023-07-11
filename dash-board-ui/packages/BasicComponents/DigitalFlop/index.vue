@@ -28,10 +28,10 @@
   </div>
 </template>
 <script>
-import { refreshComponentMixin } from 'packages/js/mixins/refreshComponent'
-import commonMixins from 'packages/js/mixins/commonMixins'
-import paramsMixins from 'packages/js/mixins/paramsMixins'
-import linkageMixins from 'packages/js/mixins/linkageMixins'
+import { refreshComponentMixin } from 'dashPackages/js/mixins/refreshComponent'
+import commonMixins from 'dashPackages/js/mixins/commonMixins'
+import paramsMixins from 'dashPackages/js/mixins/paramsMixins'
+import linkageMixins from 'dashPackages/js/mixins/linkageMixins'
 function formatter (number, format) {
   const numbers = number.toString().split('').reverse()
   const segs = []
@@ -59,6 +59,7 @@ export default {
   },
   computed: {
     option () {
+      let str=this.config.option.data
       if (!this.config.option.data) return { ...this.config.customize, data: [] }
       if (
         this.config.option.data.toString().split('').length <
@@ -69,16 +70,16 @@ export default {
           this.config.option.data.toString().split('').length
         for (let i = 0; i < len; i++) {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-          this.config.option.data =
+          str =
             (this.config.customize.placeHolder
               ? this.config.customize.placeHolder
-              : ' ') + this.config.option.data
+              : ' ') + str
         }
       }
       const a =
         this.config.customize.formatter === 0
-          ? this.config.option.data
-          : formatter(this.config.option.data, this.config.customize.formatter)
+          ? str
+          : formatter(str, this.config.customize.formatter)
       const arr = a.toString().split('')
 
       if (this.config.customize.slotRight !== '') {
@@ -95,10 +96,9 @@ export default {
   },
   watch: {},
   mounted () {
-    this.chartInit()
   },
   methods: {
-    buildOption (config, data) {
+    dataFormatting (config, data) {
       let dataList = ''
       if (data.data instanceof Array) {
         dataList = config.dataSource.dimensionField
@@ -112,21 +112,13 @@ export default {
         data: dataList
       }
       return config
-    },
-    updateData () {
-      this.getCurrentOption().then(({ data, config }) => {
-        if (data.success) {
-          const _config = this.buildOption(config, data)
-          this.config.option.data = _config.option.data
-        }
-      })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  @import '~packages/assets/style/chartStyle.scss';
+  @import '../../assets/style/chartStyle.scss';
 .db-design-wrap {
   .content {
     display: flex;

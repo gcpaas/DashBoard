@@ -340,11 +340,11 @@
   </el-dialog>
 </template>
 <script>
-import { get } from 'packages/js/utils/http'
-import { pageMixins } from 'packages/js/mixins/page'
+import { get } from 'dashPackages/js/utils/http'
+import { pageMixins } from 'dashPackages/js/mixins/page'
 import _ from 'lodash'
-import innerRemoteComponents, { getRemoteComponents, getRemoteComponentConfig } from 'packages/RemoteComponents/remoteComponentsList'
-import { getBizComponentPage } from 'packages/js/api/bigScreenApi'
+import innerRemoteComponents, { getRemoteComponents, getRemoteComponentConfig } from 'dashPackages/RemoteComponents/remoteComponentsList'
+import { getBizComponentPage } from 'dashPackages/js/api/bigScreenApi'
 export default {
   name: 'ComponentDialog',
   mixins: [pageMixins],
@@ -464,14 +464,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '~packages/assets/style/bsTheme.scss';
+  @import '../../assets/style/bsTheme.scss';
   .dashboard-list-wrap {
     position: relative;
     height: 100%;
-    padding: 16px;
+    // padding: 16px;
+    // margin: 16px;
     color: #9ea9b2;
-    border: 1px solid #e8e8e8;
-    background-color: var(--db-background-1) !important;
+    background-color: var(--db-background-2);
+    // border: 1px solid #e8e8e8;
+    // background-color: var(--db-background-1) !important;
 
     .top-search-wrap {
       display: flex;
@@ -499,6 +501,7 @@ export default {
       /* display: grid; */
       overflow: auto;
       // 间隙自适应
+      padding: 2px;
       justify-content: space-around;
       // max-height: calc(100vh - 270px);
       display: grid;
@@ -550,15 +553,17 @@ export default {
           height: 100%;
           cursor: pointer;
           background-color: var(--db-background-2);
-          box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
           color: var(--db-el-title);
-          border: 1px solid var(--db-background-2);
+          margin-bottom: 2px;
+          box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+          border: 1px solid transparent;
           &:hover {
             color: var(--db-el-text);
             border: 1px solid var(--db-el-color-primary);
           }
 
           .add-dashboard-card-text {
+            color: var(--db-el-color-primary);
             font-size: 24px;
           }
 
@@ -637,7 +642,7 @@ export default {
       align-items: center;
       justify-content: flex-end;
       width: 100%;
-      margin-top: 20px;
+      margin-top: 8px;
       padding: 0 20px;
     }
   }

@@ -1,17 +1,22 @@
 <template>
-  <div class="el-empty" :style="{ height: height}">
-      <div class="img-box">
-        <icon-svg
-          name="empty"
-          class="empty-svg"
-        />
-      </div>
-    <div class="empty-text">{{ text }}</div>
+  <div
+    class="el-empty"
+    :style="{ height: height}"
+  >
+    <div class="img-box">
+      <icon-svg
+        name="empty"
+        class="empty-svg"
+      />
+    </div>
+    <div class="empty-text">
+      {{ text }}
+    </div>
   </div>
 </template>
 
 <script>
-import IconSvg from 'packages/SvgIcon'
+import IconSvg from 'dashPackages/SvgIcon'
 export default {
   name: 'Empty',
   components: {
@@ -29,11 +34,11 @@ export default {
   },
   computed: {
   },
-  data(){
+  data () {
     return {
     }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
   .el-empty{

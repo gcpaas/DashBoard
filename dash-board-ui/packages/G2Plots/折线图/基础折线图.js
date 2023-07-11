@@ -56,9 +56,54 @@ const setting = [
     value: '',
     tabName: 'custom',
     options: [
-      { label: '圆形', value: 'circle' },
-      { label: '三角形', value: 'triangle' },
-      { label: '菱形', value: 'diamond' }
+      {
+        label: '无',
+        value: false
+      },
+      {
+        label: '空心圆',
+        value: 'hollow-circle'
+      },
+      {
+        label: '圆形',
+        value: 'circle'
+      },
+      {
+        label: '正方形',
+        value: 'square'
+      },
+      {
+        label: '菱形',
+        value: 'diamond'
+      },
+      {
+        label: '三角形',
+        value: 'triangle'
+      },
+      {
+        label: '六边形',
+        value: 'hexagon'
+      },
+      {
+        label: '菱形交叉',
+        value: 'bowtie'
+      },
+      {
+        label: '十字形',
+        value: 'cross'
+      },
+      {
+        label: 'I形',
+        value: 'tick'
+      },
+      {
+        label: '加号',
+        value: 'plus'
+      },
+      {
+        label: '连字号',
+        value: 'hyphen'
+      }
     ],
     groupName: 'graph'
   },
@@ -83,11 +128,11 @@ const setting = [
     groupName: 'graph'
   },
   {
-    label: '数据标签字体大小',
-    type: 'inputNumber',
-    field: 'label_style_fontSize',
-    optionField: 'label.style.fontSize',
-    value: 12,
+    label: '数据标签',
+    type: 'switchNumber', // 设置组件类型
+    field: 'label_style_opacity', // 字段
+    optionField: 'label.style.opacity', // 对应options中的字段
+    value: 0,
     tabName: 'custom',
     groupName: 'graph'
   },
@@ -96,7 +141,16 @@ const setting = [
     type: 'colorPicker',
     field: 'label_style_fill',
     optionField: 'label.style.fill',
-    value: 'rgba(255,255,255,0)',
+    value: '#000000',
+    tabName: 'custom',
+    groupName: 'graph'
+  },
+  {
+    label: '数据标签大小',
+    type: 'inputNumber',
+    field: 'label_style_fontSize',
+    optionField: 'label.style.fontSize',
+    value: 12,
     tabName: 'custom',
     groupName: 'graph'
   },
@@ -119,6 +173,17 @@ const setting = [
     groupName: 'graph'
   },
   // 网格线 grid
+  {
+    label: '虚线',
+    type: 'switchCustom',
+    field: 'yAxis_grid_line_style_lineDash',
+    optionField: 'yAxis.grid.line.style.lineDash',
+    value: 0,
+    active: 5,
+    inactive: 0,
+    tabName: 'custom',
+    groupName: 'grid'
+  },
   {
     label: '宽度',
     type: 'inputNumber',
@@ -405,7 +470,7 @@ const data = [
 ]
 
 // 配置处理脚本
-const optionHandler = ''
+const optionHandler = 'option.yAxis.grid.line.style.lineDash = [4,setting.find(settingItem=>settingItem.field === \'yAxis_grid_line_style_lineDash\').value]'
 
 // 数据处理脚本
 const dataHandler = ''
@@ -426,7 +491,8 @@ const option = {
   },
   label: {
     style: {
-      fill: '#fff',
+      fill: '#000',
+      opacity: 0,
       fontSize: 12
     }
   },
@@ -496,6 +562,7 @@ const option = {
         style: {
           stroke: '#d0d0d0',
           lineWidth: 1,
+          lineDash: [4, 5],
           strokeOpacity: 0.7
         }
       }
@@ -523,5 +590,6 @@ export default {
   name,
   option,
   setting,
-  dataHandler
+  dataHandler,
+  optionHandler
 }

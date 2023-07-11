@@ -124,6 +124,19 @@
                   />
                 </el-form-item>
               </el-col>
+              <el-col :span="12">
+                <el-form-item
+                  label="标签"
+                  prop="labelIds"
+                >
+                  <label-select
+                    :dataset-id="datasetId"
+                    :id-list="dataForm.labelIds"
+                    @commit="(ids) =>{dataForm.labelIds = ids}"
+                  >
+                  </label-select>
+                </el-form-item>
+              </el-col>
             </el-row>
           </el-form>
           <div
@@ -516,13 +529,14 @@
 </template>
 
 <script>
+import LabelSelect from 'dashPackages/DataSetLabelManagement/src/LabelSelect.vue'
 import {
   nameCheckRepeat,
   getCategoryTree,
   getDataset,
   datasetExecuteTest,
   datasetAdd, datasetUpdate
-} from 'packages/js/utils/datasetConfigService'
+} from 'dashPackages/js/utils/datasetConfigService'
 import { codemirror } from 'vue-codemirror'
 import 'codemirror/mode/groovy/groovy'
 
@@ -532,7 +546,8 @@ import _ from 'lodash'
 export default {
   name: 'ScriptEditForm',
   components: {
-    codemirror
+    codemirror,
+    LabelSelect
   },
   props: {
     isEdit: {
@@ -577,6 +592,7 @@ export default {
         typeId: '',
         datasetType: 'script',
         remark: '',
+        labelIds: [],
         // 以下为config配置
         script: '',
         paramsList: [],
@@ -728,6 +744,7 @@ export default {
           sourceId: this.dataForm.sourceId,
           moduleCode: this.appCode,
           editable: this.appCode ? 1 : 0,
+          labelIds: this.dataForm.labelIds,
           config: {
             className: 'com.gccloud.dataset.entity.config.GroovyDataSetConfig',
             script: this.dataForm.script,
@@ -742,6 +759,7 @@ export default {
           this.$parent.setType = null
           this.saveLoading = false
           this.saveText = ''
+          this.goBack()
         }).catch(() => {
           this.saveLoading = false
           this.saveText = ''
@@ -772,7 +790,6 @@ export default {
             }
           })
         }
-        console.log(this.structurePreviewList)
         if (this.structurePreviewList.length && this.dataForm.fieldDesc) {
           this.buildFieldDesc()
         }
@@ -780,7 +797,6 @@ export default {
         this.saveLoading = false
         this.passTest = true
       }).catch((e) => {
-        console.log(e)
         this.passTest = false
         this.saveLoading = false
       })
@@ -941,10 +957,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../../assets/style/bsTheme.scss';
 
 .data-set-scrollbar {
-  height: 100%;
+  height: calc(100vh - 190px);
   overflow-y: auto;
   overflow-x: none;
 

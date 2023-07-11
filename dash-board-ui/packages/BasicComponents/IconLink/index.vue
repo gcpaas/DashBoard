@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import IconSvg from 'packages/SvgIcon'
+import IconSvg from 'dashPackages/SvgIcon'
 export default {
   name: 'Link',
   components: { IconSvg },
@@ -57,14 +57,15 @@ export default {
   mounted () {
   },
   methods: {
+    // 由于静态组件没有混入公共函数，所以需要定义一个changeStyle方法，以免报错
+    changeStyle () {
+    },
     goToLink (link) {
-      if (link.target !== 'push' || link.url.indexOf('http://') > -1 || link.url.indexOf('https://') > -1) {
+      if (link.url.indexOf('http://') > -1 || link.url.indexOf('https://') > -1) {
         window.open(link.url, link.target)
       } else {
-        const { href } = this.$router.resolve({
-          path: '/'
-        })
-        window.open(href + link.url, '_self')
+        const { href } = this.$router.resolve({path:link.url})
+        window.open(href, link.target)
       }
     }
   }

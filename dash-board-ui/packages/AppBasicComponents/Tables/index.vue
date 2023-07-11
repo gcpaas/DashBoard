@@ -32,9 +32,9 @@
   </div>
 </template>
 <script>
-import commonMixins from 'packages/js/mixins/commonMixins'
-import paramsMixins from 'packages/js/mixins/paramsMixins'
-import linkageMixins from 'packages/js/mixins/linkageMixins'
+import commonMixins from 'dashPackages/js/mixins/commonMixins'
+import paramsMixins from 'dashPackages/js/mixins/paramsMixins'
+import linkageMixins from 'dashPackages/js/mixins/linkageMixins'
 import { Table, TableColumn } from 'element-ui'
 export default {
   name: 'TableChart',
@@ -118,7 +118,6 @@ export default {
   },
   created () { },
   mounted () {
-    this.chartInit()
     if (this.config.customize.evenRowBackgroundColor && !this.config.customize.oddRowBackgroundColor) {
       this.config.customize.oddRowBackgroundColor = this.config.customize.bodyBackgroundColor
       this.config.customize.bodyBackgroundColor = ''
@@ -153,7 +152,7 @@ export default {
         })
       })
     },
-    buildOption (config, data) {
+    dataFormatting (config, data) {
       config.option.tableData = data?.data
       const filteredData = {}
       const columnData = data?.columnData || {}
@@ -169,7 +168,7 @@ export default {
       } else {
         config.option.columnData = columnData
       }
-      // this.$set(this.headerCellStyleObj, "backgroundColor", config.customize.headerBackgroundColor)
+      this.updateKey = new Date().getTime()
       return config
     }
   }

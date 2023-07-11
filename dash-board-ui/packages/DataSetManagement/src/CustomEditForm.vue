@@ -149,6 +149,21 @@
                 </el-form-item>
               </el-col>
             </el-row>
+            <el-row :gutter="20">
+              <el-col :span="12">
+                <el-form-item
+                  label="标签"
+                  prop="labelIds"
+                >
+                  <label-select
+                    :dataset-id="datasetId"
+                    :id-list="dataForm.labelIds"
+                    @commit="(ids) =>{dataForm.labelIds = ids}"
+                  >
+                  </label-select>
+                </el-form-item>
+              </el-col>
+            </el-row>
           </el-form>
           <div
             v-if="isEdit"
@@ -733,6 +748,7 @@
 </template>
 
 <script>
+import LabelSelect from 'dashPackages/DataSetLabelManagement/src/LabelSelect.vue'
 import {
   nameCheckRepeat,
   datasetAdd,
@@ -740,8 +756,8 @@ import {
   datasetExecuteTest,
   getCategoryTree,
   getDataset
-} from 'packages/js/utils/datasetConfigService'
-import { datasourceList } from 'packages/js/utils/dataSourceService'
+} from 'dashPackages/js/utils/datasetConfigService'
+import { datasourceList } from 'dashPackages/js/utils/dataSourceService'
 import { codemirror } from 'vue-codemirror'
 import 'codemirror/mode/sql/sql.js'
 import 'codemirror/theme/eclipse.css'
@@ -750,7 +766,8 @@ import _ from 'lodash'
 export default {
   name: 'CustomEditForm',
   components: {
-    codemirror
+    codemirror,
+    LabelSelect
   },
   props: {
     isEdit: {
@@ -795,6 +812,7 @@ export default {
         typeId: '',
         datasetType: 'custom',
         remark: '',
+        labelIds: [],
         // 以下为config配置
         sourceId: '',
         sqlProcess: 'select ',
@@ -1036,7 +1054,7 @@ export default {
      */
     save (formName, noCheckToSave = false) {
       if (this.passTest === false) {
-        this.$message.error('请确保数据集SQL加工脚本不为空且测试通过')
+        this.$message.error('请确保数据集SQL加工脚本不为空且运行通过')
         return
       }
       if (!this.structurePreviewList.length) {
@@ -1075,6 +1093,7 @@ export default {
         })
       } else {
         this.saveFun(formName)
+
       }
     },
     /**
@@ -1116,6 +1135,7 @@ export default {
           sourceId: this.dataForm.sourceId,
           moduleCode: this.appCode,
           editable: this.appCode ? 1 : 0,
+          labelIds: this.dataForm.labelIds,
           config: {
             className: 'com.gccloud.dataset.entity.config.CustomDataSetConfig',
             sourceId: this.dataForm.sourceId,
@@ -1131,6 +1151,7 @@ export default {
           this.$parent.setType = null
           this.saveLoading = false
           this.saveText = ''
+          this.goBack()
         }).catch(() => {
           this.saveLoading = false
           this.saveText = ''
@@ -1250,14 +1271,13 @@ export default {
           this.$message.warning('参数名称不可以与字段名相同！')
           this.passTest = false
         } else {
-          if (val) this.$message.success('测试成功')
+          if (val) this.$message.success('运行成功')
           this.exception = ''
           this.msg = ''
           this.passTest = true
         }
         this.saveLoading = false
       }).catch((e) => {
-        console.log('测试失败', e)
         this.passTest = false
         this.saveLoading = false
       })
@@ -1317,7 +1337,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../../assets/style/bsTheme.scss';
 
 .data-set-scrollbar {
   height: 100%;
@@ -1467,6 +1487,9 @@ export default {
 }
 
 .db-pagination {
+  position: relative !important;
+  bottom: 0 !important;
+  padding: 0 12px 16px 16px !important;
   ::v-deep .el-input__inner {
     width: 110px !important;
     border: none;

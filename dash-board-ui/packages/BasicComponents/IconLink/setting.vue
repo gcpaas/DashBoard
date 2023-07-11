@@ -62,7 +62,6 @@
                     v-for="item in [
                       { label: '当前窗口', value: '_self' },
                       { label: '新窗口', value: '_blank' },
-                      { label: '本工程', value: 'push' }
                     ]"
                     :key="item.value"
                     :label="item.label"
@@ -118,7 +117,7 @@
 </template>
 <script>
 import IconSelect from './IconSelect/index.vue'
-import SettingTitle from 'packages/SettingTitle/index.vue'
+import SettingTitle from 'dashPackages/SettingTitle/index.vue'
 export default {
   name: 'BarSetting',
   components: {
@@ -133,7 +132,7 @@ export default {
         ],
         url: [
           { required: true, message: '请输入链接地址', trigger: 'blur' },
-          { type: 'url', message: '请输入正确的链接地址', trigger: 'blur' }
+          // { type: 'url', message: '请输入正确的链接地址', trigger: 'blur' }
         ]
       }
     }
@@ -204,7 +203,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../~packages/assets/style/settingWrap.scss';
+@import '../../assets/style/settingWrap.scss';
 .db-setting-wrap {
   /deep/ .el-form-item{
     margin-bottom: 14px!important

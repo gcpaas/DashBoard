@@ -12,8 +12,8 @@
   </div>
 </template>
 <script>
-import { refreshComponentMixin } from 'packages/js/mixins/refreshComponent'
-import { dataVMixins } from 'packages/js/mixins/dataVMixins'
+import { refreshComponentMixin } from 'dashPackages/js/mixins/refreshComponent'
+import { dataVMixins } from 'dashPackages/js/mixins/dataVMixins'
 import DvBorderBox9 from '@jiaminghi/data-view/lib/components/borderBox9/src/main.vue'
 import '@jiaminghi/data-view/lib/components/borderBox9/src/main.css'
 

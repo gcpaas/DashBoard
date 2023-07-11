@@ -117,7 +117,7 @@
   </div>
 </template>
 <script>
-import { get, post } from '../../packages/js/utils/http'
+import { get, post } from 'dashPackages/js/utils/http'
 import _ from 'lodash'
 
 export default {
@@ -285,24 +285,26 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../assets/style/bsTheme.scss';
 .side-catalog-wrap {
-  border-right : 1px solid #e8e8e8;
+  // border-right : 1px solid #e8e8e8;
+  // margin-top: 16px;
   padding-top: 16px;
   width: 220px;
-  height: 100%;
+  // height: 100%;
   box-sizing: border-box;
   color: var(--db-el-title);
   background-color: var(--db-background-2);
   .side-catalog-box {
-    height: calc(100% - 50px);
+    height: calc(100% - 66px);
     overflow-y: auto;
     .side-catalog-all {
       font-weight: bold;
     }
     .side-catalog-item {
       width: 100%;
-      padding: 8px 16px;
+      padding: 0 16px;
+      line-height: 36px;
       display: flex;
       justify-content: space-between;
       &:hover {
@@ -331,8 +333,18 @@ export default {
     }
     /*菜单激活时的样式*/
     .active-catalog {
-      background: rgba(0,122,255,.06274509803921569);
-      color: #007aff;
+      position: relative;
+      // border-left: 4px solid var(--db-el-color-primary);
+      background: var(--db-background-primary);
+      color: var(--db-el-color-primary);
+      &::after{
+          content: '';
+          position: absolute;
+          left: 0;
+          width: 4px;
+          height: 36px;
+          background-color: var(--db-el-color-primary);
+        }
       // background-image: linear-gradient(
       //   to right,
       //   var(--db-el-color-primary),

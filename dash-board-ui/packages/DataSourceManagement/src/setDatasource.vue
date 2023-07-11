@@ -32,13 +32,13 @@
             popper-class="db-el-select"
             clearable
             filterable
-            @change="sourceEdit"
+            @change="sourceTypeChange"
           >
             <el-option
               v-for="sourceType in sourceTypeList"
               :key="sourceType.id"
               :label="sourceType.name"
-              :value="sourceType.name"
+              :value="sourceType.code"
             />
           </el-select>
         </el-form-item>
@@ -208,7 +208,7 @@
 </template>
 
 <script>
-import { checkRepeat, sourceLinkTest, addOrUpdateDataSource } from 'packages/js/utils/dataSourceService'
+import { checkRepeat, sourceLinkTest, add, update } from 'dashPackages/js/utils/dataSourceService'
 export default {
   props: {
     appCode: {
@@ -231,10 +231,10 @@ export default {
         { code: 'mysqlDriver', name: 'com.mysql.jdbc.Driver' },
         { code: 'clickhouseDriver', name: 'ru.yandex.clickhouse.ClickHouseDriver' },
         { code: 'oracleDriver', name: 'oracle.jdbc.driver.OracleDriver' },
+        { code: 'postgresqlDriver', name: 'org.postgresql.Driver' },
         { code: 'hsqlDriver', name: 'org.hsqldb.jdbc.JDBCDriver' },
         { code: 'ibmdb2Driver', name: 'com.ibm.db2.jcc.DB2Driver' },
         { code: 'sqlserverDriver', name: 'com.microsoft.sqlserver.jdbc.SQLServerDriver' },
-        { code: 'postgresqlDriver', name: 'org.postgresql.Driver' },
         { code: 'hiveDriver', name: 'org.apache.hive.jdbc.HiveDriver' }
       ],
       dataForm: {
@@ -244,7 +244,6 @@ export default {
         driverClassName: 'com.mysql.jdbc.Driver',
         username: '',
         password: '',
-        coding: '自动',
         url: 'jdbc:mysql://localhost:3306/db_name?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useSSL=false&useOldAliasMetadataBehavior=true',
         advanceSettingFlag: 0,
         initConnNum: 0,
@@ -296,9 +295,6 @@ export default {
         ],
         url: [
           { required: true, message: '请输入连接url', trigger: 'blur' }
-        ],
-        coding: [
-          { required: true, message: '请选择编码', trigger: 'blur' }
         ]
       },
       updateRules: {
@@ -365,27 +361,22 @@ export default {
         moduleCode: this.appCode
       }).then(r => {
         if (r) {
-          callback(new Error(r))
+          callback(new Error('数据源名称已存在'))
         } else {
           callback()
         }
       })
     },
     // 数据源类型选择
-    sourceEdit (name) {
-      this.dataForm.coding = '自动'
-      if (!this.dataForm.id && name) {
-        let type = ''
-        type = name
-        this.sourceTypeList.forEach(r => {
-          if (type === r.name) {
-            const code = r.code + 'Driver'
-            this.driverCLassList.forEach(r => {
-              if (code === r.code) {
-                this.dataForm.driverClassName = r.name
-                this.queryDriverTemp(r.name)
-              }
-            })
+    sourceTypeChange (code) {
+      if (!this.dataForm.id && code) {
+        let driverName = ''
+        driverName = code + 'Driver'
+        // 从驱动列表中获取驱动的对应的jdbcUrl
+        this.driverCLassList.forEach(driver => {
+          if (driverName === driver.code) {
+            this.dataForm.driverClassName = driver.name
+            this.queryDriverTemp(driver.name)
           }
         })
       }
@@ -434,7 +425,6 @@ export default {
         driverClassName: 'com.mysql.jdbc.Driver',
         username: '',
         password: '',
-        coding: '自动',
         url: 'jdbc:mysql://localhost:3306/db_name?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useSSL=false&useOldAliasMetadataBehavior=true',
         advanceSettingFlag: 0,
         initConnNum: 0,
@@ -467,25 +457,39 @@ export default {
       // }
       this.$refs.dataForm.validate((valid) => {
         if (valid) {
-          addOrUpdateDataSource({
-            ...this.dataForm,
-            moduleCode: this.appCode,
-            editable: this.appCode ? 1 : 0
-          }).then(() => {
-            this.$message.success('保存成功')
-            // 刷新表格
-            this.$emit('refreshTable')
-            this.handleClose()
-          })
+          if (this.dataForm.id) {
+            update({
+              ...this.dataForm,
+              moduleCode: this.appCode,
+              editable: this.appCode ? 1 : 0
+            }).then(() => {
+              this.$message.success('保存成功')
+              // 刷新表格
+              this.$emit('refreshTable')
+              this.handleClose()
+            })
+          } else {
+            add({
+              ...this.dataForm,
+              moduleCode: this.appCode,
+              editable: this.appCode ? 1 : 0
+            }).then(() => {
+              this.$message.success('保存成功')
+              // 刷新表格
+              this.$emit('refreshTable')
+              this.handleClose()
+            })
+          }
+
         } else {
           return false
         }
       })
     }
+    }
   }
-}
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../../assets/style/bsTheme.scss';
 </style>

@@ -42,7 +42,7 @@
   </div>
 </template>
 <script>
-import SettingTitle from 'packages/SettingTitle/index.vue'
+import SettingTitle from 'dashPackages/SettingTitle/index.vue'
 export default {
   name: 'IframeChartSetting',
   components: {
@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../~packages/assets/style/settingWrap.scss";
+@import "../../assets/style/settingWrap.scss";
 .setting-wrap{
   padding: 12px 16px;
 }

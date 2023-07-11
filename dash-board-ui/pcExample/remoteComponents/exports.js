@@ -2,8 +2,8 @@
  * @description: 处理自定义远程的组件
  * @Date: 2023-06-02 10:18:46
  * @Author: xing.heng
- * @LastEditors: xing.heng
- * @LastEditTime: 2023-06-05 18:39:21
+ * @LastEditors: wujian
+ * @LastEditTime: 2023-06-25 21:00:44
  */
 
 const files = require.context('./', true, /index.vue$/)
@@ -21,6 +21,5 @@ files.keys().forEach(key => {
     img
   })
 })
-console.log(remoteComponents)
 
 export default remoteComponents

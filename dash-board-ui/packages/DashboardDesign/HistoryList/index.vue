@@ -108,8 +108,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/DashboardDesign/fonts/iconfont.css';
-@import '~packages/assets/style/bsTheme.scss';
+@import '../../DashboardDesign/fonts/iconfont.css';
+@import '../../assets/style/bsTheme.scss';
 .layer-list-wrap {
   /deep/ .choosed-row {
     .db-el-table-column {

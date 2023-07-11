@@ -84,9 +84,9 @@
   </div>
 </template>
 <script>
-import SettingTitle from 'packages/SettingTitle/index.vue'
-import RightSetting from 'packages/DashboardDesign/RightSetting/index.vue'
-import OverallSetting from 'packages/DashboardDesign/OverallSetting/index.vue'
+import SettingTitle from 'dashPackages/SettingTitle/index.vue'
+import RightSetting from 'dashPackages/DashboardDesign/RightSetting/index.vue'
+import OverallSetting from 'dashPackages/DashboardDesign/OverallSetting/index.vue'
 import { mapState } from 'vuex'
 export default {
   name: '',

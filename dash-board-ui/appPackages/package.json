@@ -38,7 +38,7 @@
     "set-commit-hook": "git config core.hooksPath hooks",
     "generate-changelog": "conventional-changelog -p -i CHANGELOG.md -s -r 0",
     "analyzer": "cross-env NODE_ENV=production npm_config_report=true npm run build",
-    "lib:app": "npm install && vue-cli-service build --no-lint  --target lib --name dashboardApp --dest dash-board-app-ui index.js"
+    "lib:app": "npm install && vue-cli-service build --no-lint  --target lib --name dashboardApp --dest libApp index.js"
   },
   "husky": {
     "hooks": {

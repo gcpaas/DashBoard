@@ -9,7 +9,10 @@
         :key="index"
         style="padding: 0;list-style: none;"
       >
-        <li class="chart-right-list">
+        <li
+          class="chart-right-list"
+          @click="linkage(item)"
+        >
           <span
             v-if="index < config.customize.highlightNum"
             class="list-serial-top"
@@ -31,9 +34,9 @@
 </template>
 <script>
 import _ from 'lodash'
-import commonMixins from 'packages/js/mixins/commonMixins'
-import paramsMixins from 'packages/js/mixins/paramsMixins'
-import linkageMixins from 'packages/js/mixins/linkageMixins'
+import commonMixins from 'dashPackages/js/mixins/commonMixins'
+import paramsMixins from 'dashPackages/js/mixins/paramsMixins'
+import linkageMixins from 'dashPackages/js/mixins/linkageMixins'
 import Empty from './Empty'
 export default {
   name: 'DashboardScrollRanking',
@@ -54,10 +57,9 @@ export default {
   watch: {
   },
   mounted () {
-    this.chartInit()
   },
   methods: {
-    buildOption (config, data) {
+    dataFormatting (config, data) {
       let _x = null
       let _y = null
       let dataList = []
@@ -95,14 +97,6 @@ export default {
       }
 
       return config
-    },
-    updateData () {
-      this.getCurrentOption().then(({ data, config }) => {
-        if (data.success) {
-          const _config = this.buildOption(config, data)
-          this.config.option.data = _config.option.data
-        }
-      })
     }
   }
 }

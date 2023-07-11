@@ -15,27 +15,27 @@
         label-width="100px"
       >
         <div class="top-search-wrap">
-        <el-input
-          v-model="searchKey"
-          class="db-el-input"
-          placeholder="请输入分组名称"
-          prefix-icon="el-icon-search"
-          clearable
-          @clear="reSearch"
-          @keyup.enter.native="reSearch"
-        />
-        <el-button
-          type="primary"
-          @click="reSearch"
-        >
-          搜索
-        </el-button>
-        <el-button
-          type="primary"
-          @click="addCatalog"
-        >
-          新增
-        </el-button>
+          <el-input
+            v-model="searchKey"
+            class="db-el-input"
+            placeholder="请输入分组名称"
+            prefix-icon="el-icon-search"
+            clearable
+            @clear="reSearch"
+            @keyup.enter.native="reSearch"
+          />
+          <el-button
+            type="primary"
+            @click="reSearch"
+          >
+            搜索
+          </el-button>
+          <el-button
+            type="primary"
+            @click="addCatalog"
+          >
+            新增
+          </el-button>
         </div>
         <el-table
           :key="randomKey"
@@ -135,7 +135,7 @@
 </template>
 
 <script>
-import { get, post } from 'packages/js/utils/http'
+import { get, post } from 'dashPackages/js/utils/http'
 import { randomString } from '../js/utils'
 import _ from 'lodash'
 export default {
@@ -146,7 +146,7 @@ export default {
     catalogType: {
       type: String,
       default: ''
-    },
+    }
   },
   data () {
     return {
@@ -258,7 +258,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../assets/style/bsTheme.scss';
 .catalog-edit-wrap{
   .el-input {
     width: 200px;

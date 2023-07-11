@@ -23,7 +23,7 @@ import java.util.Map;
  */
 @Service
 @Slf4j
-@ConditionalOnProperty(prefix = "gc.starter.component", name = "ISysFileService", havingValue = "DashboardFileServiceImpl", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "gc.starter.dashboard.component", name = "IDashboardFileService", havingValue = "DashboardFileServiceImpl", matchIfMissing = true)
 public class DashboardFileServiceImpl extends ServiceImpl<DashboardFileDao, DashboardFileEntity> implements IDashboardFileService {
 
     @Override

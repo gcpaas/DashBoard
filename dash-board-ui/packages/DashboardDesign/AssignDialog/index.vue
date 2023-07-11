@@ -65,7 +65,7 @@
   </el-dialog>
 </template>
 <script>
-import { pageMixins } from 'packages/js/mixins/page'
+import { pageMixins } from 'dashPackages/js/mixins/page'
 export default {
   name: 'ComponentDialog',
   mixins: [pageMixins],
@@ -90,7 +90,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../../assets/style/bsTheme.scss';
 .content {
   display: flex;
   flex-direction: column;

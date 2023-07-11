@@ -45,11 +45,11 @@
   </div>
 </template>
 <script>
-import { resolveComponentType } from 'packages/js/utils'
+import { resolveComponentType } from 'dashPackages/js/utils'
 import DataSetting from './DataSetting.vue'
-import rightSetting from 'packages/js/utils/rightSettingImport'
+import rightSetting from 'dashPackages/js/utils/rightSettingImport'
 import CustomComponent from './G2CustomSetting.vue'
-import Svgs from 'packages/Svgs/setting.vue'
+import Svgs from 'dashPackages/Svgs/setting.vue'
 import { mapState, mapMutations } from 'vuex'
 import _ from 'lodash'
 // 整体动态导入右侧设置组件，不用手动注册
@@ -115,7 +115,7 @@ export default {
     configStyle: {
       handler (val, oldValue) {
         if (!_.isEqual(val, oldValue)) {
-          this.$emit('updateSetting', {...val,type:this.config.type,code:this.config.code})
+          this.$emit('updateSetting', { ...val, type: this.config.type, code: this.config.code })
           this.saveTimeLine(`更新${val?.title}组件属性`)
         }
       },
@@ -209,7 +209,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/settingWrap.scss';
+@import '../../assets/style/settingWrap.scss';
 .add-filter-box {
   position: relative;
   .add-filter {

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.gccloud.common.exception.GlobalException;
 import com.gccloud.common.utils.BeanConvertUtils;
-import com.gccloud.dashboard.core.module.type.dao.TypeDao;
+import com.gccloud.dashboard.core.module.type.dao.DashboardTypeDao;
 import com.gccloud.dashboard.core.module.type.dto.TypeDTO;
 import com.gccloud.dashboard.core.module.type.entity.TypeEntity;
 import com.gccloud.dashboard.core.module.type.service.ITypeService;
@@ -22,8 +22,8 @@ import java.util.List;
  * @date 2023/5/26 9:42
  */
 @Slf4j
-@Service
-public class TypeServiceImpl extends ServiceImpl<TypeDao, TypeEntity> implements ITypeService {
+@Service("dashboardTypeService")
+public class TypeServiceImpl extends ServiceImpl<DashboardTypeDao, TypeEntity> implements ITypeService {
 
     @Override
     public String add(TypeDTO typeDTO) {

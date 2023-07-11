@@ -32,7 +32,7 @@
               @click="toggleSidebar"
             >
               <i
-                class="iconfont-bigscreen menu-icon"
+                class="iconfont-dashboard menu-icon"
                 :class="fold ? 'icon-zhankaicaidan' : 'icon-shouqicaidan'"
               />
               <span class="menu-title-span">{{ foldText }}</span>
@@ -53,7 +53,7 @@
               @dbclick.native="toggleSidebar"
             >
               <i
-                :class="['iconfont-bigscreen', menu.icon]"
+                :class="['iconfont-dashboard', menu.icon]"
                 class="menu-icon"
               />
               <span class="menu-title-span">{{ menu.title }}</span>
@@ -115,11 +115,11 @@
   </transition>
 </template>
 <script>
-import basicComponents from 'packages/js/config/basicComponentsConfig'
+import basicComponents from 'dashPackages/js/config/basicComponentsConfig'
 import g2PlotComponents, { getCustomPlots } from '../G2Plots/plotList'
 import LayerList from './LayerList/index.vue'
 import { mapMutations } from 'vuex'
-import IconSvg from 'packages/SvgIcon'
+import IconSvg from 'dashPackages/SvgIcon'
 export default {
   name: 'PageLeftPanel',
   components: {
@@ -278,7 +278,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/DashboardDesign/fonts/iconfont.css';
+@import '../DashboardDesign/fonts/iconfont.css';
 .db-left-panel {
   display: flex;
   background-color: var(--db-background-leftPanel);
@@ -310,7 +310,7 @@ export default {
       color: #fff;
     }
 
-    .iconfont-bigscreen {
+    .iconfont-dashboard {
       color: var(--db-el-title);
     }
 
@@ -327,7 +327,7 @@ export default {
       overflow: visible;
 
       .is-active {
-        .iconfont-bigscreen {
+        .iconfont-dashboard {
           color: var(--db-el-color-primary);
         }
         .menu-title-span {

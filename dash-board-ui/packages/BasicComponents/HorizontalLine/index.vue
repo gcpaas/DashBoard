@@ -17,7 +17,7 @@
   </div>
 </template>
 <script>
-import { refreshComponentMixin } from 'packages/js/mixins/refreshComponent'
+import { refreshComponentMixin } from 'dashPackages/js/mixins/refreshComponent'
 export default {
   name: 'HorizontalLine',
   components: {},
@@ -53,7 +53,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '~packages/assets/style/chartStyle.scss';
+  @import '../../assets/style/chartStyle.scss';
 .db-design-wrap {
   display: flex;
   flex-direction: column;

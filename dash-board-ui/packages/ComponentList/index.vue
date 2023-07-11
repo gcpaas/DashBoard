@@ -193,18 +193,18 @@
   </div>
 </template>
 <script>
-import { get, post } from 'packages/js/utils/http'
-import { pageMixins } from 'packages/js/mixins/page'
+import { get, post } from 'dashPackages/js/utils/http'
+import { pageMixins } from 'dashPackages/js/mixins/page'
 import EditForm from './EditForm.vue'
 import CatalogEditForm from './CatalogEditForm'
-import innerRemoteComponents, { getRemoteComponents } from 'packages/RemoteComponents/remoteComponentsList'
+import innerRemoteComponents, { getRemoteComponents } from 'dashPackages/RemoteComponents/remoteComponentsList'
 export default {
   name: 'BigScreenList',
   mixins: [pageMixins],
   props: {
     catalogInfo: {
       type: String,
-      default: ''
+      default: 'component'
     }
   },
   components: { EditForm, CatalogEditForm },
@@ -230,7 +230,6 @@ export default {
       }
     },
     code () {
-      // return this.catalogInfo?.page?.code
       return ''
     },
     gridComputed () {
@@ -238,7 +237,7 @@ export default {
     }
   },
   watch: {
-    catalogInfo () {
+    catalogInfo (val) {
       this.init()
     },
     catalogCode (value) {
@@ -285,13 +284,12 @@ export default {
           parentCode: this.catalogCode || null,
           current: this.current,
           size: this.size,
-          searchKey: this.searchKey,
+          searchKey: this.name,
           type: 'component'
         })
           .then((data) => {
             this.list = data.list
             this.totalCount = data.totalCount
-            console.log(this.list)
           })
           .finally(() => {
             this.loading = false
@@ -300,14 +298,12 @@ export default {
         get('/dashboard/bizComponent/page', {
           current: this.current,
           size: this.size,
-          searchKey: this.searchKey,
           name: this.name,
           type: this.catalogCode || null
         })
           .then((data) => {
             this.list = data.list
             this.totalCount = data.totalCount
-            console.log(this.list)
           })
           .finally(() => {
             this.loading = false
@@ -414,13 +410,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../assets/style/bsTheme.scss';
 .dashboard-list-wrap {
   position: relative;
-  height: 100%;
+  height: calc(100vh - 192px);
   padding: 16px;
+  margin-left: 16px;
   color: #9ea9b2;
-  background-color: var(--db-background-leftPanel) !important;
+  background-color: var(--db-background-2);
+
+  // background-color: var(--db-background-leftPanel) !important;
 
   .top-search-wrap {
     display: flex;
@@ -449,7 +448,8 @@ export default {
     overflow: auto;
     // 间隙自适应
     justify-content: space-around;
-    max-height: calc(100vh - 270px);
+    max-height: calc(100% - 100px);
+    padding: 2px 3px 10px 2px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 15px;
@@ -458,7 +458,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      height: calc(100vh - 260px) !important;
+      height: calc(100vh - 290px) !important;
       z-index: 999;
       top: 50px;
     }
@@ -467,6 +467,7 @@ export default {
       position: relative;
       height: 180px;
       cursor: pointer;
+      // box-sizing: border-box;
 
       &:hover {
         .screen-card__hover {
@@ -533,15 +534,17 @@ export default {
         height: 100%;
         cursor: pointer;
         background-color: var(--db-background-2);
-        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+        margin-bottom: 2px;
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+        border: 1px solid transparent;
         color: var(--db-el-title);
-        border: 1px solid var(--db-background-2);
         &:hover {
           color: var(--db-el-text);
           border: 1px solid var(--db-el-color-primary);
         }
 
         .add-dashboard-card-text {
+          color: var(--db-el-color-primary);
           font-size: 24px;
         }
 
@@ -628,11 +631,11 @@ export default {
   .footer-pagination-wrap {
     position: absolute;
     bottom: 10px;
+    right: 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     width: 100%;
-    margin-top: 20px;
     padding: 0 20px;
   }
 }

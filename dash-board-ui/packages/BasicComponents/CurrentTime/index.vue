@@ -29,7 +29,8 @@
 
 <script>
 import moment from 'moment'
-import paramsMixins from 'packages/js/mixins/paramsMixins'
+import paramsMixins from 'dashPackages/js/mixins/paramsMixins'
+import { mapMutations } from 'vuex'
 export default {
   name: 'CurrentTime',
   mixins: [paramsMixins],
@@ -56,6 +57,9 @@ export default {
     }
   },
   methods: {
+    changeStyle (config) {
+      this.getCurrentTime(config.dateFormat)
+    },
     // 实时显示当前系统时间
     getCurrentTime (dateFormat) {
       if (this.timer) {
@@ -77,7 +81,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~packages/BasicComponents/fonts/index.css";
+@import "../fonts/index.css";
 .db-design-wrap{
   width: 100%;
 }

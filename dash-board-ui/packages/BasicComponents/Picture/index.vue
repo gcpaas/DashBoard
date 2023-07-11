@@ -19,16 +19,6 @@
           加载中···
         </div>
       </el-image>
-      <!-- <img
-        :src="config.customize.url || noImageUrl"
-        :style="{
-          width: '100%',
-          height: '100%',
-          opacity: config.customize.opacity / 100,
-          borderRadius: config.customize.radius + 'px'
-        }"
-        draggable="false"
-      > -->
     </div>
   </div>
 </template>
@@ -44,18 +34,22 @@ export default {
   },
   data () {
     return {
-      noImageUrl: require('packages/BasicComponents/Picture/images/noImage.png')
+      noImageUrl: require('dashPackages/BasicComponents/Picture/images/noImage.png')
     }
   },
   computed: {},
   watch: {},
   mounted () {},
-  methods: {}
+  methods: {
+    // 由于静态组件没有混入公共函数，所以需要定义一个changeStyle方法，以免报错
+    changeStyle () {
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-  @import '~packages/assets/style/chartStyle.scss';
+  @import '../../assets/style/chartStyle.scss';
 .db-design-wrap {
   width: 100%;
   background-color: rgba(0, 0, 0, 0);

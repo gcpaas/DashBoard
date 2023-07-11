@@ -131,6 +131,17 @@ const setting = [
   },
   // 网格线 grid
   {
+    label: '虚线',
+    type: 'switchCustom',
+    field: 'yAxis_grid_line_style_lineDash',
+    optionField: 'yAxis.grid.line.style.lineDash',
+    value: 0,
+    active: 5,
+    inactive: 0,
+    tabName: 'custom',
+    groupName: 'grid'
+  },
+  {
     label: '宽度',
     type: 'inputNumber',
     field: 'xAxis_grid_line_style_lineWidth',
@@ -482,7 +493,8 @@ const optionHandler = 'const yFieldValue = setting.find(settingItem=>settingItem
   '\nconst radiusNum = setting.find(settingItem=>settingItem.field === \'radiusNum\').value; option.barStyle.radius = [radiusNum,radiusNum,0,0]' +
   '\nif (option.legendEnable) {\n' +
   '    option.legend.itemName = option.legendItemName\n' +
-  '  }'
+  '  };' +
+  'option.yAxis.grid.line.style.lineDash = [4,setting.find(settingItem=>settingItem.field === \'yAxis_grid_line_style_lineDash\').value]'
 
 // 数据处理脚本
 const dataHandler = ''

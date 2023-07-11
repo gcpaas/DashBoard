@@ -9,7 +9,7 @@
   >
     <i
       :class="{
-        'iconfont-bigscreen': true,
+        'iconfont-dashboard': true,
         'icon-eye': isShowReferLine,
         'icon-eye-close': !isShowReferLine
       }"
@@ -249,12 +249,12 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~packages/DashboardDesign/fonts/iconfont.css';
+@import '../../DashboardDesign/fonts/iconfont.css';
 .wrapper {
   box-sizing: border-box;
   position: absolute;
 
-  .iconfont-bigscreen {
+  .iconfont-dashboard {
     position: absolute;
     left: 0;
     top: 0;

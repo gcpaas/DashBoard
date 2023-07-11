@@ -1,11 +1,7 @@
 <template>
   <div class="db-manage-main-wrap">
-    <side-menu
-      @getPageInfo="getPageInfo"
-    />
-    <menu-content
-      :catalog-info="catalogInfo"
-    />
+    <side-menu @getPageInfo="getPageInfo" />
+    <menu-content :catalog-info="catalogInfo" />
   </div>
 </template>
 <script>
@@ -18,7 +14,7 @@ export default {
   components: { SideMenu, MenuContent },
   data () {
     return {
-      catalogInfo: ''
+      catalogInfo: 'component'
     }
   },
   mounted () {},
@@ -33,6 +29,7 @@ export default {
 <style lang="scss" scoped>
 .db-manage-main-wrap {
   display: flex;
-  height: 100%;
+  flex-direction: row;
+  // margin:16px 16px 16px 0
 }
 </style>

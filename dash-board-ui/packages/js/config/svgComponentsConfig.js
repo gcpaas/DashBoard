@@ -1,3 +1,3 @@
-import Icon from 'packages/Svgs/export'
+import Icon from 'dashPackages/Svgs/export'
 const svgList = Icon.getSvgList()
 export default svgList

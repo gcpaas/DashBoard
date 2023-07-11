@@ -2,7 +2,7 @@
   <div>
     <el-dialog
       :close-on-click-modal="false"
-      title="分组管理"
+      title="分组管11理"
       :visible.sync="formVisible"
       :append-to-body="true"
       destroy-on-close
@@ -132,8 +132,8 @@
 </template>
 
 <script>
-import { get, post } from 'packages/js/utils/http'
-import Icon from 'packages/assets/images/dataSourceIcon/export'
+import { get, post } from 'dashPackages/js/utils/http'
+import Icon from 'dashPackages/assets/images/dataSourceIcon/export'
 import _ from 'lodash'
 export default {
   name: 'CatalogEditForm',
@@ -258,7 +258,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../../assets/style/bsTheme.scss';
 .catalog-edit-wrap{
   .el-input {
     width: 200px;

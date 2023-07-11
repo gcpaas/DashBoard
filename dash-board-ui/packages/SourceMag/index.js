@@ -1,7 +1,7 @@
-import BigScreenManagement from './index.vue'
+import DashboardSourceMag from './index.vue'
 
-BigScreenManagement.install = function (Vue) {
-  Vue.component(BigScreenManagement.name, BigScreenManagement)
+DashboardSourceMag.install = function (Vue) {
+  Vue.component(DashboardSourceMag.name, DashboardSourceMag)
 }
 
-export default BigScreenManagement
+export default DashboardSourceMag

@@ -10,5 +10,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2023/6/5 11:39
  */
 @Mapper
-public interface BizComponentDao extends BaseMapper<BizComponentEntity> {
+public interface DashboardBizComponentDao extends BaseMapper<BizComponentEntity> {
 }

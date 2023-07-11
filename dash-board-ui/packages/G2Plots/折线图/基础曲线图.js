@@ -66,6 +66,17 @@ const setting = [
   },
   // 网格线 grid
   {
+    label: '虚线',
+    type: 'switchCustom',
+    field: 'yAxis_grid_line_style_lineDash',
+    optionField: 'yAxis.grid.line.style.lineDash',
+    value: 0,
+    active: 5,
+    inactive: 0,
+    tabName: 'custom',
+    groupName: 'grid'
+  },
+  {
     label: '宽度',
     type: 'inputNumber',
     field: 'yAxis_grid_line_style_lineWidth',
@@ -351,7 +362,7 @@ const data = [
 ]
 
 // 配置处理脚本
-const optionHandler = ''
+const optionHandler = 'option.yAxis.grid.line.style.lineDash = [4,setting.find(settingItem=>settingItem.field === \'yAxis_grid_line_style_lineDash\').value]'
 
 // 数据处理脚本
 const dataHandler = ''
@@ -417,6 +428,7 @@ const option = {
         style: {
           stroke: '#d0d0d0',
           lineWidth: 1,
+          lineDash: [4, 5],
           strokeOpacity: 0.7
         }
       }
@@ -444,5 +456,6 @@ export default {
   name,
   option,
   setting,
-  dataHandler
+  dataHandler,
+  optionHandler
 }

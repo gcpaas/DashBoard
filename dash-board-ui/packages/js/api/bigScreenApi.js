@@ -1,5 +1,5 @@
 
-import { get, post } from 'packages/js/utils/http'
+import { get, post } from 'dashPackages/js/utils/http'
 
 // 仪表盘详情
 export function getScreenInfo (code) {

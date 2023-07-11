@@ -140,6 +140,7 @@ export default {
       'changeActiveCode',
       'changeChartConfig',
       'changeActiveItemWH',
+      'changeActiveItemConfig',
       'addItem',
       'delItem',
       'resetPresetLine',

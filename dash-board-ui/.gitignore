@@ -368,6 +368,9 @@ bh_unicode_properties.cache
 # https://packagecontrol.io/packages/sublime-github
 GitHub.sublime-settings
 
-dash-board-ui
+dashboard
 gc-starter-lowcode-ui
-dash-board-app-ui
+dash-board-ui
+dashboard-app
+lib
+libApp

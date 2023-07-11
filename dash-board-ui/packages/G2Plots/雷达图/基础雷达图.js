@@ -87,9 +87,54 @@ const setting = [
     value: 'circle',
     tabName: 'custom',
     options: [
-      { label: '圆形', value: 'circle' },
-      { label: '三角形', value: 'triangle' },
-      { label: '菱形', value: 'diamond' }
+      {
+        label: '无',
+        value: false
+      },
+      {
+        label: '空心圆',
+        value: 'hollow-circle'
+      },
+      {
+        label: '圆形',
+        value: 'circle'
+      },
+      {
+        label: '正方形',
+        value: 'square'
+      },
+      {
+        label: '菱形',
+        value: 'diamond'
+      },
+      {
+        label: '三角形',
+        value: 'triangle'
+      },
+      {
+        label: '六边形',
+        value: 'hexagon'
+      },
+      {
+        label: '菱形交叉',
+        value: 'bowtie'
+      },
+      {
+        label: '十字形',
+        value: 'cross'
+      },
+      {
+        label: 'I形',
+        value: 'tick'
+      },
+      {
+        label: '加号',
+        value: 'plus'
+      },
+      {
+        label: '连字号',
+        value: 'hyphen'
+      }
     ],
     groupName: 'graph'
   },

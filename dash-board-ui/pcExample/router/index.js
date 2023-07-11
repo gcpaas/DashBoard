@@ -2,10 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
-export const baseRoutes = [
+const baseRoutes = [
   {
     path: '/notPermission',
-    component: () => import('packages/NotPermission/index.vue')
+    component: () => import('dashPackages/NotPermission/index.vue')
   }
 ]
 

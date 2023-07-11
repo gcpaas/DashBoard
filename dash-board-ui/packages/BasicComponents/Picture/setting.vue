@@ -45,6 +45,7 @@
             :auto-upload="true"
             :limit="1"
             list-type="picture-card"
+            :on-error="handleUploadError"
             :on-success="handleUploadSuccess"
             :before-upload="beforeUpload"
           >
@@ -62,13 +63,13 @@
                 alt=""
               >
               <span class="el-upload-list__item-actions">
-                  <span
-                    class="el-upload-list__item-delete"
-                    @click="handleRemove(file)"
-                  >
-                    <i class="el-icon-delete" />
-                  </span>
+                <span
+                  class="el-upload-list__item-delete"
+                  @click="handleRemove(file)"
+                >
+                  <i class="el-icon-delete" />
                 </span>
+              </span>
             </div>
             <el-input
               slot="tip"
@@ -76,7 +77,6 @@
               class="upload-tip"
               placeholder="或输入链接地址"
               clearable
-              @change="handleUrlChange"
             />
           </el-upload>
         </el-form-item>
@@ -84,7 +84,7 @@
           label="不透明度"
           label-width="100px"
         >
-         <el-input-number
+          <el-input-number
             v-model="config.customize.opacity"
             class="db-el-input-number"
             placeholder="请输入不透明度"
@@ -94,28 +94,15 @@
             :step="0.01"
           />
         </el-form-item>
-        <!-- <el-form-item
-          label="圆角"
-          label-width="100px"
-        >
-          <el-input-number
-            v-model="config.customize.radius"
-            class="db-el-input-number"
-            placeholder="请输入圆角大小"
-            :min="0"
-          />
-        </el-form-item> -->
       </div>
     </el-form>
   </div>
 </template>
 <script>
-import SettingTitle from 'packages/SettingTitle/index.vue'
-import PosWhSetting from 'packages/DashboardDesign/RightSetting/PosWhSetting.vue'
+import SettingTitle from 'dashPackages/SettingTitle/index.vue'
 export default {
   name: 'PicSetting',
   components: {
-    PosWhSetting,
     SettingTitle
   },
   data () {
@@ -133,14 +120,14 @@ export default {
       hideUpload: false,
       rules: {
         'customize.url': [
-          { required: true, message: '请输入链接地址', trigger: 'blur' },
+          { required: true, message: '请输入URL地址', trigger: 'blur' },
           // 地址校验
           {
             validator: (rule, value, callback) => {
               if (value) {
                 const reg = /^(http|https):\/\/([\w.]+\/?)\S*/
                 if (!reg.test(value)) {
-                  callback(new Error('请输入正确的链接地址'))
+                  callback(new Error('请输入正确的URL地址'))
                 } else {
                   callback()
                 }
@@ -164,7 +151,20 @@ export default {
       }
     }
   },
-  watch: {},
+  watch: {
+    'config.customize.url': function (val) {
+      if (val) {
+        this.fileList = [
+          {
+            name: this.config.title,
+            url: this.config.customize.url
+          }
+        ]
+      } else {
+        this.fileList = []
+      }
+    }
+  },
   mounted () {
     if (this.config.customize.url) {
       this.fileList = [
@@ -189,7 +189,11 @@ export default {
         ]
       } else {
         this.$message.error(res.msg)
+        this.fileList = []
       }
+    },
+     handleUploadError () {
+      this.$message.error('上传失败')
     },
     handleRemove () {
       this.fileList = []
@@ -202,15 +206,13 @@ export default {
       }
       return isLt2M
     },
-    handleUrlChange (val) {
-      this.config.customize.url = val
-    }
+
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/settingWrap.scss';
+@import '../../assets/style/settingWrap.scss';
 .db-slider {
   .el-input-number__decrease {
     background: var(--db-el-background-1);

@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import commonMixins from 'packages/js/mixins/commonMixins'
-import linkageMixins from 'packages/js/mixins/linkageMixins'
+import commonMixins from 'dashPackages/js/mixins/commonMixins'
+import linkageMixins from 'dashPackages/js/mixins/linkageMixins'
 export default {
   name: 'BasicComponentInput',
   mixins: [commonMixins, linkageMixins],
@@ -70,7 +70,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '~packages/assets/style/chartStyle.scss';
+  @import '../../assets/style/chartStyle.scss';
 .db-design-wrap {
   width: 100%;
   height: 100%;

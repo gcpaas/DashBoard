@@ -15,6 +15,7 @@
       :header-cell-style="headerCellStyle"
       :cell-style="cellStyle"
       :row-class-name="tableRowClassName"
+      @row-click="rowClick"
     >
       <el-table-column
         v-for="(col, index) in config.option.columnData"
@@ -28,9 +29,9 @@
   </div>
 </template>
 <script>
-import commonMixins from 'packages/js/mixins/commonMixins'
-import paramsMixins from 'packages/js/mixins/paramsMixins'
-import linkageMixins from 'packages/js/mixins/linkageMixins'
+import commonMixins from 'dashPackages/js/mixins/commonMixins'
+import paramsMixins from 'dashPackages/js/mixins/paramsMixins'
+import linkageMixins from 'dashPackages/js/mixins/linkageMixins'
 export default {
   name: 'TableChart',
   mixins: [paramsMixins, commonMixins, linkageMixins],
@@ -79,7 +80,6 @@ export default {
 
   },
   mounted () {
-    this.chartInit()
     if (this.config.customize.evenRowBackgroundColor && !this.config.customize.oddRowBackgroundColor) {
       this.config.customize.oddRowBackgroundColor = this.config.customize.bodyBackgroundColor
       this.config.customize.bodyBackgroundColor = ''
@@ -92,6 +92,10 @@ export default {
     this.tableRowStyle()
   },
   methods: {
+    // 表格点击事件
+    rowClick (row) {
+      this.linkage(row)
+    },
     // 表格行样式
     tableRowClassName ({ row, rowIndex }) {
       this.tableRowStyle()
@@ -108,7 +112,7 @@ export default {
         })
       })
     },
-    buildOption (config, data) {
+    dataFormatting (config, data) {
       config.option.tableData = data?.data
       const filteredData = {}
       const columnData = data?.columnData || {}
@@ -124,23 +128,15 @@ export default {
       } else {
         config.option.columnData = columnData
       }
+      this.updateKey = new Date().getTime()
       return config
-    },
-    updateData () {
-      this.getCurrentOption().then(({ data, config }) => {
-        if (data.success) {
-          this.config.option.tableData = data?.data
-          this.config.option.columnData = data?.columnData || {}
-          this.$refs[config.code].doLayout()
-        }
-      })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  @import '~packages/assets/style/chartStyle.scss';
+  @import '../../assets/style/chartStyle.scss';
 
 ::v-deep .el-table {
   height: 100%;

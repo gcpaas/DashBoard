@@ -44,13 +44,15 @@
                 <el-select
                   v-model="customize.metric"
                   clearable
+                  class="db-el-select"
+                  popper-class="db-el-select"
                   @change="chooseMetric($event,index)"
                 >
                   <el-option
                     v-for="(field, i) in dataSourceDataList"
+                    :key="i"
                     :label="field.comment"
                     :value="field.name"
-                    :key="i"
                   >
                     <div class="source-key-option">
                       <div>
@@ -69,7 +71,11 @@
                 class="select-line-icon option-add"
                 @click="setMetric(customize)"
               >
-                <el-tooltip effect="dark" content="指标设置" placement="top">
+                <el-tooltip
+                  effect="dark"
+                  content="指标设置"
+                  placement="top"
+                >
                   <i class="el-icon-setting" />
                 </el-tooltip>
               </div>
@@ -84,10 +90,20 @@
         </template>
       </draggable>
 
-      <el-button type="primary" v-block @click="addMetric">新增指标</el-button>
+      <el-button
+        v-block
+        type="primary"
+        @click="addMetric"
+      >
+        新增指标
+      </el-button>
     </div>
     <!-- </el-collapse-item> -->
-  <metric-config :setting-visible.sync="settingVisible"  :customizeConfig="currentCustomizeConfig" @updateCustomizeConfig="updateCustomizeConfig"></metric-config>
+    <metric-config
+      :setting-visible.sync="settingVisible"
+      :customize-config="currentCustomizeConfig"
+      @updateCustomizeConfig="updateCustomizeConfig"
+    />
   </div>
 </template>
 <script>
@@ -102,7 +118,7 @@ export default {
   },
   directives: {
     block: {
-      bind(el, binding) {
+      bind (el, binding) {
         el.style.width = binding.value || '100%'
       }
     }
@@ -115,82 +131,90 @@ export default {
     dataSourceDataList: {
       type: Array,
       default: () => []
-    },
+    }
   },
-  data() {
+  data () {
     return {
       settingVisible: false, // 指标设置弹窗
-      currentCustomizeConfig:{},
+      currentCustomizeConfig: {},
       rules: {
         metric: [
-          { required: true, trigger: "change", message: "请选择指标" },]
+          { required: true, trigger: 'change', message: '请选择指标' }]
       }
     }
   },
   computed: {
     // 当前已经关联的组件key
-    currentLinkComponentKey() {
+    currentLinkComponentKey () {
       return this.config.linkage.components?.map(item => item.componentKey) || []
     }
   },
-  mounted() {},
-  beforeDestroy() {
+  mounted () {},
+  beforeDestroy () {
     this.changeActiveCode('')
   },
   methods: {
     ...mapMutations('dashboard', [
-      'changeActiveCode'
+      'changeActiveCode',
+      'changeChartConfig'
     ]),
     // 拖拽结束
-    onEnd() {
+    onEnd () {
       this.config.dataSource.metricFieldList = this.config.customize.customizeList.map(customize => customize.metric)
     },
     // 选择指标时
-    chooseMetric(e,index) {
-      const i = this.dataSourceDataList.findIndex((item)=> e === item.name)
+    chooseMetric (e, index) {
+      const i = this.dataSourceDataList.findIndex((item) => e === item.name)
       this.config.customize.customizeList[index].descriptionField = this.dataSourceDataList[i]?.comment
-      this.config.dataSource.metricFieldList[index]=e
+      this.config.dataSource.metricFieldList[index] = e
       this.$store.commit('dashboard/changeActiveItemConfig', this.config)
     },
     // 更新指标配置
-    updateCustomizeConfig(customize) {
+    updateCustomizeConfig (customize) {
       const index = this.config.customize.customizeList.findIndex(
         item => item.metric === customize.metric
-      );
+      )
       this.config.customize.customizeList[index] = customize
-      this.$store.commit('dashboard/changeActiveItemConfig', this.config)
+      this.config.option.data = this.config.customize.customizeList.map(item => {
+        return {
+          ...item,
+          label: item.descriptionField
+        }
+      })
+      this.$store.commit('dashboard/changeChartConfig', this.config)
+      // this.$store.commit('dashboard/changeActiveItemConfig', this.config)
     },
     /**
      * @description: 添加指标
      */
     addMetric () {
       this.config.customize.customizeList.push({
-        metric:'',//指标
-        descriptionField:'',//指标名称
-        metricFontSize: 30,//指标字体大小
-        metricFontWeight: 700,//指标字体权重
-        metricColor:'',//指标字体颜色
-        descriptionFontSize: 16,//描述字体大小
-        descriptionWeight: 400,//描述字体权重
-        descriptionColor:'',//描述字体颜色
-        numberFormat: "kilobit",//指标格式
-      });
+        metric: '', // 指标
+        descriptionField: '', // 指标名称
+        metricFontSize: 30, // 指标字体大小
+        metricFontWeight: 700, // 指标字体权重
+        metricColor: '', // 指标字体颜色
+        descriptionFontSize: 16, // 描述字体大小
+        descriptionWeight: 400, // 描述字体权重
+        descriptionColor: '', // 描述字体颜色
+        numberFormat: 'kilobit' // 指标格式
+      })
       this.config.dataSource.metricFieldList.push('')
     },
     /**
      * @description: 删除指标
      */
-    deleteMetric(index) {
-      this.config.customize.customizeList.splice(index, 1);
-      this.config.dataSource.metricFieldList.splice(index, 1);
+    deleteMetric (index) {
+      this.config.customize.customizeList.splice(index, 1)
+      this.config.dataSource.metricFieldList.splice(index, 1)
     },
     /**
      * @description: 设置指标弹窗打开
      */
-    setMetric(customize) {
+    setMetric (customize) {
       this.currentCustomizeConfig = customize
       this.settingVisible = true
-    },
+    }
   }
 }
 </script>

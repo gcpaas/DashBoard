@@ -12,13 +12,13 @@
   </div>
 </template>
 <script>
-import linkageMixins from 'packages/js/mixins/linkageMixins'
-import commonMixins from 'packages/js/mixins/commonMixins'
+import linkageMixins from 'dashPackages/js/mixins/linkageMixins'
+import commonMixins from 'dashPackages/js/mixins/commonMixins'
 import remoteVueLoader from 'remote-vue2-loader'
 import { mapMutations, mapState } from 'vuex'
 import _ from 'lodash'
-import innerRemoteComponents, { getRemoteComponents } from 'packages/RemoteComponents/remoteComponentsList'
-import { getBizComponentInfo } from 'packages/js/api/bigScreenApi'
+import innerRemoteComponents, { getRemoteComponents } from 'dashPackages/RemoteComponents/remoteComponentsList'
+import { getBizComponentInfo } from 'dashPackages/js/api/bigScreenApi'
 export default {
   name: 'LcdpRemoteComponent',
   mixins: [linkageMixins, commonMixins],
@@ -76,7 +76,7 @@ export default {
           const settingContent = data.settingContent
           if ((!this.config?.option?.data) || (!this.config?.data?.length)) {
             this.resolveStrSetting(settingContent)
-            this.config = this.buildOption(this.config, { success: false })
+            this.config = this.dataFormatting(this.config, { success: false })
           }
           this.remoteComponent = remoteVueLoader('data:text/plain,' + encodeURIComponent(vueContent))
         }).finally(() => {
@@ -84,11 +84,22 @@ export default {
         })
       }
     },
-    chartInit () {
-      // key和code相等，说明是一进来刷新，调用/chart/data/list
-      if (this.config.code === this.config.key) {
-        // 再根据数据更新组件
-        this.updateChart()
+    async chartInit () {
+      let config = this.config
+      // key和code相等，说明是一进来刷新，调用list接口
+      if (this.config.code === this.config.key || this.isPreview) {
+        // 改变样式
+        config = this.changeStyle(config) ? this.changeStyle(config) : config
+        // 改变数据
+        config = await this.changeDataByCode(config)
+      } else {
+        // 否则说明是更新，这里的更新只指更新数据（改变样式时是直接调取changeStyle方法），因为更新数据会改变key,调用chart接口
+        // TODO 直接改变prop控制台会报错，待优化
+        try {
+          this.config = await this.changeData(config)
+        } catch (e) {
+          console.error(e)
+        }
       }
     },
     linkEvent (formData) {
@@ -122,32 +133,13 @@ export default {
       }
     },
     /**
-     * @description: 只更新数据
-     */
-    updateData () {
-      this.updateChart()
-    },
-    /**
      * 更新组件
      */
-    updateChart () {
-      if (this.isPreview) {
-        this.getCurrentOption().then(({ data, config }) => {
-          if (data.success) {
-            // 成功后更新数据
-            config = this.buildOption(config, data)
-            this.changeChartConfig(config)
-          }
-        })
-      } else {
-        this.updateChartData(this.config)
-      }
-    },
     /**
      * 组件的配置
      * @returns {Promise<unknown>}
      */
-    buildOption (config, data) {
+    dataFormatting (config, data) {
       config = _.cloneDeep(config)
       // 遍历config.setting，将config.setting中的值赋值给config.option中对应的optionField
       config.setting.forEach(set => {
@@ -178,7 +170,6 @@ export default {
       }
       return config
     },
-
     // 同步配置
     synchConfig (option, setting) {
       // 对比this.config.setting 和 setting，进行合并，数据以this.config.option对象的value为准

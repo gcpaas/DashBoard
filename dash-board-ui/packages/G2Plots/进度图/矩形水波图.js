@@ -102,18 +102,18 @@ const setting = [
     tabName: 'custom',
     groupName: 'graph'
   },
-  {
-    label: '边框间距',
-    // 设置组件类型
-    type: 'inputNumber',
-    // 字段
-    field: 'outline_distance',
-    // 对应options中的字段
-    optionField: 'outline.distance',
-    value: 1,
-    tabName: 'custom',
-    groupName: 'graph'
-  },
+  // {
+  //   label: '边框间距',
+  //   // 设置组件类型
+  //   type: 'inputNumber',
+  //   // 字段
+  //   field: 'outline_distance',
+  //   // 对应options中的字段
+  //   optionField: 'outline.distance',
+  //   value: 1,
+  //   tabName: 'custom',
+  //   groupName: 'graph'
+  // },
   {
     label: '边框颜色',
     // 设置组件类型

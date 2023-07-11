@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { categoryAdd, categoryUpdate } from 'packages/js/utils/datasetConfigService'
+import { categoryAdd, categoryUpdate } from 'dashPackages/js/utils/datasetConfigService'
 export default {
   name: 'CategroyEditForm',
   props: {
@@ -134,20 +134,24 @@ export default {
           }
           if (id) {
             categoryUpdate(params).then((r) => {
+              params.id = r
               this.$message.success('保存成功')
               this.cancel()
               try {
-                this.$parent.init()
+                // this.$parent.init()
+                this.$emit('addOrUpdateNode', params, this.nodeFlag)
               } catch (error) {
                 this.$parent.initLazyDatasetTypeTree()
               }
             })
           } else {
             categoryAdd(params).then((r) => {
+              params.id = r
               this.$message.success('保存成功')
               this.cancel()
               try {
-                this.$parent.init()
+                // this.$parent.init()
+                this.$emit('addOrUpdateNode', params, this.nodeFlag)
               } catch (error) {
                 this.$parent.initLazyDatasetTypeTree()
               }

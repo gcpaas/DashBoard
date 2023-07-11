@@ -62,7 +62,7 @@
   </div>
 </template>
 <script>
-import SettingTitle from 'packages/SettingTitle/index.vue'
+import SettingTitle from 'dashPackages/SettingTitle/index.vue'
 export default {
   name: 'BarSetting',
   components: {
@@ -93,7 +93,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../~packages/assets/style/settingWrap.scss';
+@import '../../assets/style/settingWrap.scss';
 .lc-field-body {
   padding: 12px 16px;
 }

@@ -66,7 +66,7 @@
             </div>
           </div>
           <metricSetting
-            :data-source-data-list="dataSourceDataList"
+            :data-source-data-list="numberCartDataList"
             :config="config"
           />
         </div>
@@ -571,14 +571,14 @@
   </div>
 </template>
 <script>
-import metricSetting from 'packages/DashboardDesign/metricSetting/index.vue'
+import metricSetting from 'dashPackages/DashboardDesign/metricSetting/index.vue'
 import ElDragSelect from './ElDragSelect.vue'
 import { isEmpty, cloneDeep } from 'lodash'
-import ComponentRelation from 'packages/DashboardDesign/RightSetting/ComponentRelation/index.vue'
-import ComponentBinding from 'packages/DashboardDesign/RightSetting/ComponentBinding/index.vue'
-import dataSetSelect from 'packages/DataSetSetting/index.vue'
+import ComponentRelation from 'dashPackages/DashboardDesign/RightSetting/ComponentRelation/index.vue'
+import ComponentBinding from 'dashPackages/DashboardDesign/RightSetting/ComponentBinding/index.vue'
+import dataSetSelect from 'dashPackages/DataSetSetting/index.vue'
 import { mapState } from 'vuex'
-import { getDataSetDetails } from 'packages/js/api/bigScreenApi'
+import { getDataSetDetails } from 'dashPackages/js/api/bigScreenApi'
 export default {
   name: 'DataSetting',
   components: {
@@ -627,6 +627,23 @@ export default {
         comment: item?.fieldDesc || item?.fieldName,
         name: item?.fieldName
       }))
+    },
+    // 数字卡片的指标列表
+    numberCartDataList () {
+      if (this.config.dataSource.businessKey) {
+        return this.fieldsList?.map(item => ({
+          ...item,
+          comment: item?.fieldDesc || item?.fieldName,
+          name: item?.fieldName
+        }))
+      } else {
+        return this.config.option.data.map(item => {
+          return {
+            comment: item?.label || item?.value,
+            name: item?.value
+          }
+        })
+      }
     },
     appCode: {
       get () {
@@ -700,9 +717,11 @@ export default {
     clearVerify () {
       this.config.dataSource.metricField = ''
       this.config.dataSource.dimensionField = ''
+      this.config.dataSource.metricFieldList = []
       this.config.dataSource.dimensionFieldList = []
       this.config.dataSource.seriesField = ''
       this.config.dataSource.params = {}
+      this.config.customize.customizeList = []
     },
     // 根据数据集来获取数据集详情
     getDataSetDetailsById (id, type) {
@@ -799,7 +818,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "~packages/assets/style/settingWrap.scss";
+  @import "../../assets/style/settingWrap.scss";
   .add-filter-box {
     position: relative;
     .add-filter {

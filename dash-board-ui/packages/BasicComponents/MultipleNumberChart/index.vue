@@ -34,10 +34,10 @@
   </div>
 </template>
 <script>
-import { refreshComponentMixin } from 'packages/js/mixins/refreshComponent'
-import commonMixins from 'packages/js/mixins/commonMixins'
-import paramsMixins from 'packages/js/mixins/paramsMixins'
-import linkageMixins from 'packages/js/mixins/linkageMixins'
+import { refreshComponentMixin } from 'dashPackages/js/mixins/refreshComponent'
+import commonMixins from 'dashPackages/js/mixins/commonMixins'
+import paramsMixins from 'dashPackages/js/mixins/paramsMixins'
+import linkageMixins from 'dashPackages/js/mixins/linkageMixins'
 
 export default {
   name: 'MultipleNumberChart',
@@ -69,7 +69,6 @@ export default {
   },
   watch: {},
   mounted () {
-    this.chartInit()
   },
   methods: {
     numberToCurrencyNo (value) {
@@ -94,7 +93,7 @@ export default {
       }
       return intPartFormat + floatPart
     },
-    buildOption (config, data) {
+    dataFormatting (config, data) {
       const metricFieldList = config.dataSource.metricFieldList || []
       let multipleDataList = []
       // 当返回的数据状态为成功时
@@ -114,24 +113,25 @@ export default {
         }
       } else {
         // 返回的模拟数据
-        config.customize.customizeList = []
         for (const col in data.columnData) {
           const val = data.columnData[col]
           multipleDataList.push({
             label: val.remark || val.alias,
             value: data.data[0][val.alias]
           })
-          config.customize.customizeList.push({
-            metric: data.data[0][val.alias], // 指标
-            descriptionField: val.remark || val.alias, // 指标名称
-            metricFontSize: 30, // 指标字体大小
-            metricFontWeight: 700, // 指标字体权重
-            metricColor: '', // 指标字体颜色
-            descriptionFontSize: 16, // 描述字体大小
-            descriptionWeight: 400, // 描述字体权重
-            descriptionColor: '', // 描述字体颜色
-            numberFormat: 'kilobit' // 指标格式
-          })
+          if (config.code === config.key) {
+            config.customize.customizeList.push({
+              metric: data.data[0][val.alias], // 指标
+              descriptionField: val.remark || val.alias, // 指标名称
+              metricFontSize: 30, // 指标字体大小
+              metricFontWeight: 700, // 指标字体权重
+              metricColor: '', // 指标字体颜色
+              descriptionFontSize: 16, // 描述字体大小
+              descriptionWeight: 400, // 描述字体权重
+              descriptionColor: '', // 描述字体颜色
+              numberFormat: 'kilobit' // 指标格式
+            })
+          }
         }
       }
       // 对返回的数据进行统一处理

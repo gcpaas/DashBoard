@@ -158,8 +158,8 @@
   </div>
 </template>
 <script>
-import { get, post } from 'packages/js/utils/http'
-import { pageMixins } from 'packages/js/mixins/page'
+import { get, post } from 'dashPackages/js/utils/http'
+import { pageMixins } from 'dashPackages/js/mixins/page'
 import EditForm from './EditForm.vue'
 export default {
   name: 'BigScreenList',
@@ -311,14 +311,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../assets/style/bsTheme.scss';
 .dashboard-list-wrap {
   position: relative;
-  height: 100%;
+  height: calc(100vh - 192px);
   padding: 16px;
+  margin-left: 16px;
+  // margin: 16px;
   color: #9ea9b2;
-  border: 1px solid #e8e8e8;
-  background-color: var(--db-background-3) !important;
+  background-color: var(--db-background-2);
+  // border: 1px solid #e8e8e8;
+  // background-color: var(--db-background-3) !important;
 
   .top-search-wrap {
     display: flex;
@@ -340,7 +343,8 @@ export default {
     overflow: auto;
     // 间隙自适应
     justify-content: space-around;
-    max-height: calc(100vh - 270px);
+    max-height: calc(100% - 100px);
+    padding: 2px 3px 10px 2px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 15px;
@@ -349,7 +353,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      height: calc(100vh - 260px) !important;
+      height: calc(100vh - 290px) !important;
       z-index: 999;
       top: 50px;
     }
@@ -422,17 +426,19 @@ export default {
         overflow: hidden;
         width: 100%;
         height: 100%;
+        margin-bottom: 2px;
         cursor: pointer;
         background-color: var(--db-background-2);
-        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
         color: var(--db-el-title);
-        border: 1px solid var(--db-background-2);
+        border: 1px solid transparent;
         &:hover {
           color: var(--db-el-text);
           border: 1px solid var(--db-el-color-primary);
         }
 
         .add-dashboard-card-text {
+          color: var(--db-el-color-primary);
           font-size: 24px;
         }
 
@@ -519,11 +525,12 @@ export default {
   .footer-pagination-wrap {
     position: absolute;
     bottom: 10px;
+    right: 0;
+    //  margin-top: 10px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     width: 100%;
-    margin-top: 20px;
     padding: 0 20px;
   }
 }

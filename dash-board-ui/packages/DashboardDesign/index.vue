@@ -29,7 +29,7 @@
         v-loading="pageLoading"
         class="grid-wrap-box"
         :style="{
-          height: 'calc(100vh - 48px)'
+          height: 'calc(100vh - 40px)'
         }"
         tabindex="1000"
         @keydown="designKeydown"
@@ -92,26 +92,26 @@
 <script>
 import SourceDialog from './SourceDialog/index.vue'
 import ComponentDialog from './ComponentDialog/index.vue'
-import iframeDialog from 'packages/BasicComponents/SuperLinkChart/iframeDialog'
+import iframeDialog from 'dashPackages/BasicComponents/SuperLinkChart/iframeDialog'
 import {
   dataConfig,
   settingConfig
-} from 'packages/BasicComponents/Picture/settingConfig'
+} from 'dashPackages/BasicComponents/Picture/settingConfig'
 import LeftPanel from './LeftPanel.vue'
 import SettingPanel from './SettingPanel.vue'
 import PageTopSetting from './PageDesignTop.vue'
 import Render from '../Render'
 import { mapActions, mapMutations, mapState } from 'vuex'
 import { G2 } from '@antv/g2plot'
-import multipleSelectMixin from 'packages/js/mixins/multipleSelectMixin'
-import { getThemeConfig, getScreenInfo } from 'packages/js/api/bigScreenApi'
+import multipleSelectMixin from 'dashPackages/js/mixins/multipleSelectMixin'
+import { getThemeConfig, getScreenInfo } from 'dashPackages/js/api/bigScreenApi'
 import _ from 'lodash'
-import { get } from 'packages/js/utils/http'
+import { get } from 'dashPackages/js/utils/http'
 import { randomString } from '../js/utils'
-import { isFirefox } from 'packages/js/utils/userAgent'
-import { handleResData } from 'packages/js/store/actions.js'
-import AppDashBoard from '../../appPackages/DashboardAppRun/index.vue'
-import { EventBus } from 'packages/js/utils/eventBus'
+import { isFirefox } from 'dashPackages/js/utils/userAgent'
+import { handleResData } from 'dashPackages/js/store/actions.js'
+import AppDashBoard from 'dashPackages/DashboardAppRun/index.vue'
+import { EventBus } from 'dashPackages/js/utils/eventBus'
 export default {
   name: 'BigScreenDesign',
   components: {
@@ -373,32 +373,18 @@ export default {
     },
     // 自定义属性更新
     updateSetting (config) {
-      if (config.type === 'customComponent') {
-        if (
-          this.$refs.Render?.$refs['RenderCard' + config.code][0] &&
-          this.$refs.Render?.$refs['RenderCard' + config.code][0]?.$refs[config.code] &&
-          this.$refs.Render?.$refs['RenderCard' + config.code][0]?.$refs[config.code]?.changeStyle
-        ) {
-          this.$refs.Render?.$refs['RenderCard' + config.code][0]?.$refs[
-            config.code
-          ]?.changeStyle(_.cloneDeep(config))
-        }
-      } else {
+      if (config.type === 'map') {
         config.key = new Date().getTime()
-        this.changeChartConfig(_.cloneDeep(config))
       }
+      this.changeChartConfig(_.cloneDeep(config))
+      this.$refs.Render?.$refs['RenderCard' + config.code][0]?.$refs[
+        config.code
+      ]?.changeStyle(_.cloneDeep(config))
     },
     // 动态属性更新
     updateDataSetting (config) {
-      if (
-        this.$refs.Render?.$refs['RenderCard' + config.code][0] &&
-        this.$refs.Render?.$refs['RenderCard' + config.code][0]?.$refs[config.code] &&
-        this.$refs.Render?.$refs['RenderCard' + config.code][0]?.$refs[config.code]?.updateChartData
-      ) {
-        this.$refs.Render?.$refs['RenderCard' + config.code][0]?.$refs[
-          config.code
-        ]?.updateChartData(_.cloneDeep(config))
-      }
+      config.key = new Date().getTime()
+      this.changeChartConfig(config)
     },
     changeStart ({ x, y }) {
       this.ruleStartX = x
@@ -487,23 +473,22 @@ export default {
         position: relative;
         top: 0;
         bottom: 0;
-        margin: auto;
-        width: 300px;
-        height: 80%;
-        min-height: 600px;
-        max-height: 630px;
-        background: url(packages/DashboardDesign/images/iphone.png) no-repeat center 0;
+        margin: 16px 0;
+        width: 375px;
+        height: calc(100% - 32px);
         background-size: 100% 100%;
-
+        box-shadow: 0px 0px 10px #dddddd;
+        box-sizing: border-box;
         .app-design-wrap {
           // 缩放比例
           position: absolute;
-          top: 4rem;
-          left: 1.6rem;
-          right: 1.6rem;
-          bottom: 30px;
+          top: 1rem;
+          left: .6rem;
+          right: .6rem;
+          bottom: -2rem;
           overflow: auto;
           border-radius: 0 0 35px 35px;
+          box-sizing: border-box;
         }
       }
     }

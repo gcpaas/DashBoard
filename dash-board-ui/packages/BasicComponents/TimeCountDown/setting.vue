@@ -71,8 +71,8 @@
   </div>
 </template>
 <script>
-import SettingTitle from 'packages/SettingTitle/index.vue'
-import PosWhSetting from 'packages/DashboardDesign/RightSetting/PosWhSetting.vue'
+import SettingTitle from 'dashPackages/SettingTitle/index.vue'
+import PosWhSetting from 'dashPackages/DashboardDesign/RightSetting/PosWhSetting.vue'
 export default {
   name: 'TimeCountDownSetting',
   components: {
@@ -122,7 +122,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../~packages/assets/style/settingWrap.scss";
+@import "../../assets/style/settingWrap.scss";
 .setting-wrap {
   padding-top: 16px;
 }

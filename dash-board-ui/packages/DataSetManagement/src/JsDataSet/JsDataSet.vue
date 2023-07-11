@@ -123,15 +123,27 @@
                   />
                 </el-form-item>
               </el-col>
+              <el-col :span="12">
+                <el-form-item
+                  label="标签"
+                  prop="labelIds"
+                >
+                  <label-select
+                    :dataset-id="datasetId"
+                    :id-list="dataForm.labelIds"
+                    @commit="(ids) =>{dataForm.labelIds = ids}"
+                  >
+                  </label-select>
+                </el-form-item>
+              </el-col>
             </el-row>
           </el-form>
           <div
             v-if="isEdit"
-            class="sql-config"
+            class="javascript-config"
           >
             <div>
               <codemirror
-                ref="targetInSql"
                 v-model="dataForm.config.script"
                 :options="codemirrorOption"
                 style="margin-top: 2px;border: 1px solid rgb(232, 232, 232);"
@@ -154,7 +166,7 @@
           <div class="right-setting">
             <div class="paramConfig">
               <div class="title-style db-title-style">
-                方法参数
+                动态参数
                 <el-button
                   type="text"
                   style="float: right;border: none;margin-top: -4px;"
@@ -351,10 +363,11 @@
 </template>
 
 <script>
+import LabelSelect from 'dashPackages/DataSetLabelManagement/src/LabelSelect.vue'
 import ParamsSettingDialog from './components/ParamsSettingDialog.vue'
 import OutputFieldDialog from './components/OutputFieldDialog.vue'
 import FieldFillDialog from './components/FieldFillDialog.vue'
-import { nameCheckRepeat, datasetAdd, datasetUpdate, getDataset, getCategoryTree } from 'packages/js/utils/datasetConfigService'
+import { nameCheckRepeat, datasetAdd, datasetUpdate, getDataset, getCategoryTree } from 'dashPackages/js/utils/datasetConfigService'
 import { codemirror } from 'vue-codemirror'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/lib/codemirror.css'
@@ -365,7 +378,8 @@ export default {
     codemirror,
     FieldFillDialog,
     ParamsSettingDialog,
-    OutputFieldDialog
+    OutputFieldDialog,
+    LabelSelect
   },
   props: {
     config: {
@@ -409,6 +423,7 @@ export default {
         name: '',
         typeId: '',
         remark: '',
+        labelIds: [],
         config: {
           script: '',
           paramsList: []
@@ -515,6 +530,7 @@ export default {
             datasetType: 'js',
             moduleCode: appCode,
             editable: appCode ? 1 : 0,
+            labelIds: dataForm.labelIds,
             config: {
               className: 'com.gccloud.dataset.entity.config.JsDataSetConfig',
               script: dataForm.config.script,
@@ -530,6 +546,7 @@ export default {
             this.$parent.setType = null
             this.saveloading = false
             this.saveText = ''
+            this.goBack()
           }).catch(() => {
             this.saveloading = false
             this.saveText = ''
@@ -640,19 +657,37 @@ export default {
             }
           })
         }
-        // 如果脚本有变化，生成的keys和outputFieldList的长度不一致，就重新生成outputFieldList，仅添加变化的那个字段，其余的不变化
+        // 如果脚本有变化，生成的keys和outputFieldList的长度不一致，就重新生成outputFieldList，仅删除或添加变化的那个字段，其余的不变化
         if (this.outputFieldList.length !== keys.length) {
-          const newKeys = keys.filter(item => {
-            return !this.outputFieldList.some(key => {
-              return key.fieldName === item
-            })
+          const newOutputFieldList = []
+          keys.forEach(key => {
+            const field = this.outputFieldList.find(item => item.fieldName === key)
+            if (field) {
+              newOutputFieldList.push(field)
+            } else {
+              newOutputFieldList.push({
+                fieldName: key,
+                fieldDesc: ''
+              })
+            }
           })
-          newKeys.forEach(item => {
-            this.outputFieldList.push({
-              fieldName: item,
-              fieldDesc: ''
-            })
+          this.outputFieldList = newOutputFieldList
+        }
+        // 如果脚本有变化，生成的keys和outputFieldList的长度一致，仅字段名变化了，就重新生成outputFieldList
+        if (this.outputFieldList.length === keys.length) {
+          const newOutputFieldList = []
+          keys.forEach(key => {
+            const field = this.outputFieldList.find(item => item.fieldName === key)
+            if (field) {
+              newOutputFieldList.push(field)
+            } else {
+              newOutputFieldList.push({
+                fieldName: key,
+                fieldDesc: ''
+              })
+            }
           })
+          this.outputFieldList = newOutputFieldList
         }
         if (this.outputFieldList.length && this.fieldDesc && !isInit) {
           this.buildFieldDesc()
@@ -721,10 +756,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../../../assets/style/bsTheme.scss';
 
 .data-set-scrollbar {
-  height: 100%;
+  height: calc(100vh - 190px);
   overflow-y: auto;
   overflow-x: none;
 
@@ -747,7 +782,7 @@ export default {
   }
 }
 
-.sql-config {
+.javascript-config {
   padding: 0 16px;
 }
 

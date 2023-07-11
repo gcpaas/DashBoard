@@ -150,9 +150,15 @@
   }
 }
 
+.selectStyle{
+  /deep/.el-select-dropdown__wrap {
+    margin-bottom: 0px !important;
+  }
+}
+
 // select
 .db-el-select {
-  text-align: center;
+  // text-align: center;
   background-color: var(--db-el-background-1) !important;
 
   .el-tag.el-tag--info {
@@ -314,10 +320,10 @@
 
     &:after {
       content: "" !important;
-      height: 14px !important;
+      height: 16px !important;
       position: absolute !important;
       left: 0 !important;
-      top: 50% !important;
+      top: calc(50% - 4px) !important;
       transform: translateY(-50%) !important;
       border-left: 4px solid var(--db-el-color-primary) !important;
     }

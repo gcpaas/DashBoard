@@ -3,7 +3,6 @@
  * @Date: 2023-03-24 17:10:43
  * @Author: xing.heng
  */
-import _ from 'lodash'
 import { mapMutations, mapState } from 'vuex'
 import { getChatInfo, getUpdateChartInfo } from '../api/bigScreenApi'
 export default {
@@ -23,6 +22,7 @@ export default {
     }
   },
   mounted () {
+    this.chartInit()
   },
   methods: {
     ...mapMutations({
@@ -33,36 +33,25 @@ export default {
      * 初始化组件
      */
     chartInit () {
-      // 初始化组件和数据，若自己的组件的初始化和数据处理不一样，可重写该方法
-      // 如果key和code相等，说明是一进来刷新，调用/chart/data/list，否则是更新，调用 chart/data/chart
-      // 或者是组件联动,也需要调用/chart/data/list更新
-      if (this.config.code === this.config.key || this.isPreview) {
-        // 根据数据集初始化的组件
-        if (this.isPreview) {
-          this.getCurrentOption().then(({ config, data }) => {
-            config = this?.buildOption(config, data)
-            if (config) {
-              this.changeChartConfig(config)
-              this?.newChart(config.option)
-            }
-          })
-        } else {
-          this.updateChartData(this.config)
-        }
+      let config = this.config
+      // key和code相等，说明是一进来刷新，调用list接口
+      if (this.isPreview) {
+        // 改变样式
+        config = this.changeStyle(config) ? this.changeStyle(config) : config
+        // 改变数据
+        config = this.changeDataByCode(config)
       } else {
-        this?.newChart(this.config.option)
+        // 否则说明是更新，这里的更新只指更新数据（改变样式时是直接调取changeStyle方法），因为更新数据会改变key,调用chart接口
+        // eslint-disable-next-line no-unused-vars
+        config = this.changeData(config)
       }
     },
     /**
-     * 初始化组件时获取后端返回的数据, 返回数据和当前组件的配置
+     * 初始化组件时获取后端返回的数据, 返回数据和当前组件的配置_list
      * @param settingConfig 设置时的配置。不传则为当前组件的配置
      * @returns {Promise<unknown>}
      */
-    getCurrentOption (settingConfig) {
-      const pageCode = this.pageCode
-      const chartCode = this.config.code
-      const type = this.config.type
-      const config = _.cloneDeep(settingConfig || this.config)
+    changeDataByCode (config) {
       let currentPage = 1
       let size = 10
       if (config?.option?.pagination) {
@@ -70,50 +59,41 @@ export default {
         size = config.option.pagination.pageSize
       }
       return new Promise((resolve, reject) => {
-        this.getDataByCode(pageCode, chartCode, type, currentPage, size).then((data) => {
-          resolve({
-            config, data
-          })
+        getChatInfo({
+          // innerChartCode: this.pageCode ? config.code : undefined,
+          chartCode: config.code,
+          current: currentPage,
+          pageCode: this.pageCode,
+          size: size,
+          type: config.type
+        }).then((data) => {
+          if (data.executionByFrontend) {
+            try {
+              const scriptAfterReplacement = data.data.replace(/\${(.*?)}/g, (match, p) => {
+                // 根据parmas的key获取value
+                return `'${this.config.dataSource?.params[p]}' || '${p}'`
+              })
+              // eslint-disable-next-line no-new-func
+              const scriptMethod = new Function(scriptAfterReplacement)
+              data.data = scriptMethod()
+            } catch (error) {
+              console.error('数据集脚本执行失败', error)
+            }
+          }
+          config = this.dataFormatting(config, data)
+          this.changeChartConfig(config)
         }).catch((err) => {
-          reject(err)
+          console.log(err)
+        }).finally(() => {
+          resolve(config)
         })
       })
     },
     /**
-     *  根据 chatCode 获取后端返回的数据
-     * @param pageCode
-     * @param chartCode
-     * @param type
-     * @param current
-     * @param size
-     * @returns {Promise<*>}
-     */
-    async getDataByCode (
-      pageCode,
-      chartCode,
-      type,
-      current = 1,
-      size = 10
-    ) {
-      let parentCode
-      const data = await getChatInfo({
-        innerChartCode: parentCode ? chartCode : undefined,
-        chartCode: parentCode || chartCode,
-        current: current,
-        pageCode: pageCode,
-        size: size,
-        type: type
-      })
-      return data
-    },
-
-    /**
      * @description: 更新chart
      * @param {Object} config
      */
-    updateChartData(config) {
-
-      const filterList = this.filterList
+    changeData (config, filterList) {
       const params = {
         chart: {
           ...config,
@@ -122,40 +102,49 @@ export default {
         current: 1,
         pageCode: this.pageCode,
         type: config.type,
-        filterList
+        filterList: filterList || this.filterList
       }
-      getUpdateChartInfo(params).then((res) => {
-        if (res.executionByFrontend) {
-          try {
-            const scriptAfterReplacement = res.data.replace(/\${(.*?)}/g, (match, p) => {
-              // 根据parmas的key获取value
-              return `'${this.config.dataSource?.params[p]}' || '${p}'`
-            })
-            // eslint-disable-next-line no-new-func
-            const scriptMethod = new Function(scriptAfterReplacement)
-            res.data = scriptMethod()
-          } catch (error) {
-            console.error('数据集脚本执行失败', error)
+      return new Promise((resolve, reject) => {
+        getUpdateChartInfo(params).then((data) => {
+          if (data.executionByFrontend) {
+            try {
+              const scriptAfterReplacement = data.data.replace(/\${(.*?)}/g, (match, p) => {
+                // 根据parmas的key获取value
+                return `'${this.config.dataSource?.params[p]}' || '${p}'`
+              })
+              // eslint-disable-next-line no-new-func
+              const scriptMethod = new Function(scriptAfterReplacement)
+              data.data = scriptMethod()
+            } catch (error) {
+              console.error('数据集脚本执行失败', error)
+            }
           }
-        }
-        // 获取数据后更新组件配置
-        config = this.buildOption(config, res)
-        if (config) {
-          config.key = new Date().getTime()
-          this.changeChartConfig(config)
-          // this.changeActiveItemConfig(config)
-        }
-        // this.$message.success('更新成功')
-      }).catch((err) => {
-        console.error(err)
-        // this.$message.error('更新失败')
+          config = this.dataFormatting(config, data)
+          // this.changeChartConfig(config)
+          if (this.chart) {
+            // 单指标组件和多指标组件的changeData传参不同
+            if (['Liquid', 'Gauge', 'RingProgress'].includes(config.chartType)) {
+              this.chart.changeData(config.option.percent)
+            } else {
+              this.chart.changeData(config.option.data)
+            }
+          }
+        }).catch(err => {
+          console.log(err)
+        }).finally(() => {
+          resolve(config)
+        })
       })
     },
-    buildOption (config, data) {
+    dataFormatting (config, data) {
       // 覆盖
     },
     newChart (option) {
       // 覆盖
+    },
+    changeStyle (config) {
+      // this.changeChartConfig(config)
+      // return config
     }
   }
 }

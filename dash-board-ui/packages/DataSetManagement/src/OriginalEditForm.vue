@@ -179,8 +179,8 @@
                 >
                   <el-select
                     v-model="dataForm.fieldInfo"
-                    class="db-el-select"
-                    popper-class="db-el-select"
+                    class="selectStyle"
+                    popper-class='selectStyle'
                     placeholder="请选择字段（为空时默认选择全部字段）"
                     clearable
                     filterable
@@ -248,6 +248,19 @@
                     class="db-el-input"
                     :disabled="!isEdit"
                   />
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item
+                  label="标签"
+                  prop="labelIds"
+                >
+                  <label-select
+                    :dataset-id="datasetId"
+                    :id-list="dataForm.labelIds"
+                    @commit="(ids) =>{dataForm.labelIds = ids}"
+                  >
+                  </label-select>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -467,16 +480,20 @@
 </template>
 
 <script>
+import LabelSelect from 'dashPackages/DataSetLabelManagement/src/LabelSelect.vue'
 import {
   getCategoryTree,
   nameCheckRepeat,
   datasetExecuteTest,
   getDataset, datasetUpdate, datasetAdd
-} from 'packages/js/utils/datasetConfigService'
-import { datasourceList, getSourceTable, getSourceView, getTableFieldList } from 'packages/js/utils/dataSourceService'
+} from 'dashPackages/js/utils/datasetConfigService'
+import { datasourceList, getSourceTable, getSourceView, getTableFieldList } from 'dashPackages/js/utils/dataSourceService'
 import _ from 'lodash'
 export default {
   name: 'OriginalEditForm',
+  components: {
+    LabelSelect
+  },
   props: {
     isEdit: {
       type: Boolean,
@@ -520,6 +537,8 @@ export default {
         typeId: '',
         datasetType: 'original',
         remark: '',
+        // 关联的标签id
+        labelIds: [],
         // 以下为config信息
         sourceId: '',
         repeatStatus: 1,
@@ -585,7 +604,9 @@ export default {
             }
             fieldDescMap[item.columnName] = item.columnComment
           })
-          this.getPreViewData(fieldDescMap)
+          // 与this.dataForm.fieldDesc合并，columnName相同的，取this.dataForm.fieldDesc中的值
+          let fieldDescMapNew = { ...fieldDescMap, ...this.dataForm.fieldDesc }
+          this.getPreViewData(fieldDescMapNew)
         } catch (error) {
           console.error(error)
         }
@@ -773,6 +794,7 @@ export default {
           remark: this.dataForm.remark,
           datasetType: 'original',
           sourceId: this.dataForm.sourceId,
+          labelIds: this.dataForm.labelIds,
           config: {
             className: 'com.gccloud.dataset.entity.config.OriginalDataSetConfig',
             sourceId: this.dataForm.sourceId,
@@ -794,6 +816,7 @@ export default {
           this.$parent.setType = null
           this.saveLoading = false
           this.saveText = ''
+          this.goBack()
         }).catch(() => {
           this.$message.error('保存失败')
           this.saveLoading = false
@@ -867,7 +890,8 @@ export default {
           }
           return field
         })
-        this.getPreViewData(fieldDescMap)
+        let fieldDescMapNew = { ...fieldDescMap, ...this.dataForm.fieldDesc }
+        this.getPreViewData(fieldDescMapNew)
       }).catch(() => {
         this.fieldList = []
       })
@@ -945,7 +969,6 @@ export default {
         this.currentCount = data.data.currentCount
         this.tableLoading = false
       }).catch((e) => {
-        console.log(e)
         this.dataPreviewList = []
         this.structurePreviewList = []
         this.structurePreviewListCopy = []
@@ -1014,10 +1037,10 @@ export default {
 <style lang="scss"></style>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../../assets/style/bsTheme.scss';
 
 .data-set-scrollbar {
-  height: 100%;
+  height: calc(100vh - 190px);
   overflow-y: auto;
   overflow-x: none;
 }
@@ -1080,10 +1103,12 @@ export default {
 }
 
 /deep/ .db-table-box.is-Edit .el-table {
-  max-height: calc(100vh - 532px) !important;
+  max-height: calc(100vh - 600px) !important;
+  // overflow-y: auto !important;
 
   .el-table__body-wrapper {
     max-height: calc(100vh - 568px) !important;
+    overflow-y: auto !important;
   }
 }
 
@@ -1118,5 +1143,7 @@ export default {
     border: none;
     background: var(--db-el-background-1);
   }
+
+
 }
 </style>

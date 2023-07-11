@@ -149,6 +149,21 @@
                 </el-form-item>
               </el-col>
             </el-row>
+            <el-row :gutter="20">
+              <el-col :span="12">
+                <el-form-item
+                  label="标签"
+                  prop="labelIds"
+                >
+                  <label-select
+                    :dataset-id="datasetId"
+                    :id-list="dataForm.labelIds"
+                    @commit="(ids) =>{dataForm.labelIds = ids}"
+                  >
+                  </label-select>
+                </el-form-item>
+              </el-col>
+            </el-row>
           </el-form>
           <div
             v-if="isEdit"
@@ -250,7 +265,7 @@
                   </el-button>
                 </div>
               </div>
-              </divclass="field-wrap>
+              <!-- </divclass="field-wrap> -->
             </div>
           </div>
         </el-col>
@@ -554,6 +569,7 @@
 </template>
 
 <script>
+import LabelSelect from 'dashPackages/DataSetLabelManagement/src/LabelSelect.vue'
 import {
   nameCheckRepeat,
   datasetAdd,
@@ -561,19 +577,20 @@ import {
   getCategoryTree,
   datasetExecuteTest,
   getDataset
-} from 'packages/js/utils/datasetConfigService'
-import { datasourceList } from 'packages/js/utils/dataSourceService'
+} from 'dashPackages/js/utils/datasetConfigService'
+import { datasourceList } from 'dashPackages/js/utils/dataSourceService'
 import { codemirror } from 'vue-codemirror'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/nord.css'
 import 'codemirror/mode/sql/sql.js'
 import _ from 'lodash'
-import { datasetMixins } from 'packages/js/mixins/datasetMixin'
+import { datasetMixins } from 'dashPackages/js/mixins/datasetMixin'
 
 export default {
   name: 'StoredProcedureEditForm',
   components: {
-    codemirror
+    codemirror,
+    LabelSelect
   },
   mixins: [datasetMixins],
   data () {
@@ -597,6 +614,7 @@ export default {
         typeId: '',
         datasetType: 'storedProcedure',
         remark: '',
+        labelIds: [],
         // 以下为config配置
         sourceId: '',
         sqlProcess: 'call ',
@@ -774,7 +792,7 @@ export default {
      */
     save (formName, noCheckToSave = false) {
       if (this.passTest === false) {
-        this.$message.error('请确保数据集SQL加工脚本不为空且测试通过')
+        this.$message.error('请确保数据集SQL加工脚本不为空且运行通过')
         return
       }
       if (!this.structurePreviewList.length) {
@@ -824,6 +842,7 @@ export default {
           sourceId: this.dataForm.sourceId,
           moduleCode: this.appCode,
           editable: this.appCode ? 1 : 0,
+          labelIds: this.dataForm.labelIds,
           config: {
             className: 'com.gccloud.dataset.entity.config.StoredProcedureDataSetConfig',
             sourceId: this.dataForm.sourceId,
@@ -839,6 +858,7 @@ export default {
           this.$parent.setType = null
           this.saveLoading = false
           this.saveText = ''
+          this.goBack()
         }).catch(() => {
           this.saveLoading = false
           this.saveText = ''
@@ -878,6 +898,10 @@ export default {
       } else {
         this.datasetTest()
       }
+    },
+
+    goBack () {
+      this.$emit('back')
     },
     /**
      * 执行测试
@@ -959,14 +983,13 @@ export default {
           this.$message.warning('参数名称不可以与字段名相同！')
           this.passTest = false
         } else {
-          if (val) this.$message.success('测试成功')
+          if (val) this.$message.success('运行成功')
           this.exception = ''
           this.msg = ''
           this.passTest = true
         }
         this.saveLoading = false
       }).catch((e) => {
-        console.log('测试失败', e)
         this.passTest = false
         this.saveLoading = false
       })
@@ -976,10 +999,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
+@import '../../assets/style/bsTheme.scss';
 
 .data-set-scrollbar {
-  height: 100%;
+  height: calc(100vh - 190px);
   overflow-y: auto;
   overflow-x: none;
 }

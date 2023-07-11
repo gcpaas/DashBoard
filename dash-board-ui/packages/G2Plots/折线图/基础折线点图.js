@@ -57,9 +57,54 @@ const setting = [
     value: 'circle',
     tabName: 'custom',
     options: [
-      { label: '圆形', value: 'circle' },
-      { label: '三角形', value: 'triangle' },
-      { label: '菱形', value: 'diamond' }
+      {
+        label: '无',
+        value: false
+      },
+      {
+        label: '空心圆',
+        value: 'hollow-circle'
+      },
+      {
+        label: '圆形',
+        value: 'circle'
+      },
+      {
+        label: '正方形',
+        value: 'square'
+      },
+      {
+        label: '菱形',
+        value: 'diamond'
+      },
+      {
+        label: '三角形',
+        value: 'triangle'
+      },
+      {
+        label: '六边形',
+        value: 'hexagon'
+      },
+      {
+        label: '菱形交叉',
+        value: 'bowtie'
+      },
+      {
+        label: '十字形',
+        value: 'cross'
+      },
+      {
+        label: 'I形',
+        value: 'tick'
+      },
+      {
+        label: '加号',
+        value: 'plus'
+      },
+      {
+        label: '连字号',
+        value: 'hyphen'
+      }
     ],
     groupName: 'graph'
   },
@@ -120,6 +165,17 @@ const setting = [
     groupName: 'graph'
   },
   // 网格线 grid
+  {
+    label: '虚线',
+    type: 'switchCustom',
+    field: 'yAxis_grid_line_style_lineDash',
+    optionField: 'yAxis.grid.line.style.lineDash',
+    value: 0,
+    active: 5,
+    inactive: 0,
+    tabName: 'custom',
+    groupName: 'grid'
+  },
   {
     label: '宽度',
     type: 'inputNumber',
@@ -403,6 +459,8 @@ const data = [
   { year: '1998', value: 9 },
   { year: '1999', value: 13 }
 ]
+// 配置处理脚本
+const optionHandler = 'option.yAxis.grid.line.style.lineDash = [4,setting.find(settingItem=>settingItem.field === \'yAxis_grid_line_style_lineDash\').value]'
 
 // 数据处理脚本
 const dataHandler = ''
@@ -491,6 +549,7 @@ const option = {
         style: {
           stroke: '#d0d0d0',
           lineWidth: 1,
+          lineDash: [4, 5],
           strokeOpacity: 0.7
         }
       }

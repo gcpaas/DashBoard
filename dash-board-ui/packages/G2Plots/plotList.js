@@ -4,7 +4,7 @@
  * @Author: xing.heng
  */
 import { dataConfig, settingConfig } from '../PlotRender/settingConfig'
-import { mapData } from 'packages/BasicComponents/Map/settingConfig'
+import { mapData } from 'dashPackages/BasicComponents/Map/settingConfig'
 import _ from 'lodash'
 import sortList from './plotListSort'
 // 遍历 当前文件夹下的所有文件，找到中文.js文件，然后导出
@@ -31,7 +31,7 @@ function getPlotList (files) {
       title: config.title,
       version: config.version,
       icon: null,
-      img: require(`packages/G2Plots/images/componentLogo/${config.title}.png`),
+      img: require(`dashPackages/G2Plots/images/componentLogo/${config.title}.png`),
       className:
         'com.gccloud.dashboard.core.module.chart.components.CustomComponentChart',
       w: 12,

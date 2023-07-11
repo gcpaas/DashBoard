@@ -15,7 +15,7 @@
 import { videoPlayer } from 'vue-video-player'
 import 'video.js/dist/video-js.css'
 import 'videojs-contrib-hls'
-import { refreshComponentMixin } from 'packages/js/mixins/refreshComponent'
+import { refreshComponentMixin } from 'dashPackages/js/mixins/refreshComponent'
 export default {
   name: 'Video',
   components: { videoPlayer },
@@ -76,13 +76,21 @@ export default {
   },
 
   watch: {},
-  mounted () {},
-  methods: {}
+  mounted () {
+  },
+  methods: {
+    // 由于静态组件没有混入公共函数，所以需要定义一个changeStyle方法，以免报错
+    changeStyle (config) {
+      this.videoOptions.sources.type = config.customize.videoType
+      this.videoOptions.sources.type = config.customize.videoUrl
+      this.videoOptions.poster = config.customize.posterUrl
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-  @import '~packages/assets/style/chartStyle.scss';
+  @import '../../assets/style/chartStyle.scss';
 .db-design-wrap {
   background-color: transparent;
   overflow-y: hidden;

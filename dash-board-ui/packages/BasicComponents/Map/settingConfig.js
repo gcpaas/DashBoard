@@ -1,5 +1,5 @@
-import { commonConfig, displayOption } from 'packages/js/config'
-import Icon from 'packages/assets/images/bigScreenIcon/export'
+import { commonConfig, displayOption } from 'dashPackages/js/config'
+import Icon from 'dashPackages/assets/images/bigScreenIcon/export'
 import _ from 'lodash'
 
 export const settingConfig = {

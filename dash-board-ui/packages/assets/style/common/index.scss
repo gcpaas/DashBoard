@@ -8,9 +8,9 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 .db-container {
   height: 100% !important;
   width: 100%;
-  position: absolute;
+  position: relative;
   box-sizing: border-box;
-  padding: 16px;
+  // padding: 0 16px 16px 16px;
   .inner-container {
     height: 100% !important;
     background-color: var(--db-background-2);
@@ -39,7 +39,10 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
     // page页样式
     .db-pagination {
-      // padding: 0 0 4px 16px;
+      position: absolute;
+      right: 0;
+      bottom: 16px;
+      padding: 0 10px 0px 16px;
     }
 
     //输入框样式
@@ -85,12 +88,12 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 //表格样式
 
 .db-table-box {
-  padding: 0 16px;
+  padding: 0 16px 4px 16px;
   // height: calc(100vh - 340px);
   // margin-bottom: 16px;
   .el-table {
     // height: 100%;
-    overflow-y: auto !important;
+    // overflow-y: auto !important;
     background-color: transparent !important;
     border: 1px solid #e4e4e4 !important;
 
@@ -286,7 +289,7 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
         .el-dialog__headerbtn {
           position: absolute;
-          top: 10px;
+          top: 0px;
           right: 20px;
           padding: 0;
           background: 0 0;
@@ -300,8 +303,25 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
       .el-dialog__title {
         display: inline-block;
         font-size: 16px;
-        border-left: 4px solid var(--db-el-color-primary);
-        padding-left: 16px;
+        position: relative;
+        padding-left: 20px;
       }
+
+      .el-dialog__title::before {
+          content: "" !important;
+          height: 16px !important;
+          position: absolute !important;
+          left: 0 !important;
+          top: 50% !important;
+          transform: translateY(-50%) !important;
+          border-left: 4px solid var(--db-el-color-primary) !important;
+        }
+
+      // .el-dialog__title {
+      //   display: inline-block;
+      //   font-size: 16px;
+      //   border-left: 4px solid var(--db-el-color-primary);
+      //   padding-left: 16px;
+      // }
     }
 

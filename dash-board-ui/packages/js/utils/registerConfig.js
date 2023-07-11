@@ -38,41 +38,41 @@ function registerRouters (config, router) {
     {
       path: config?.routers?.pageManagementUrl,
       redirect: config?.routers?.pageListUrl,
-      component: () => import('packages/Layout/BigScreenHomeLayout'),
+      component: () => import('dashPackages/Layout/BigScreenHomeLayout'),
       children: [
         {
           path: config?.routers?.pageListUrl,
-          name: 'BigScreenList',
+          name: 'DashboardList',
           component: () =>
-            require.ensure([], () => require('packages/DashboardMag')),
+            require.ensure([], () => require('dashPackages/DashboardMag')),
           meta: {
             title: '仪表盘管理'
           }
         },
         {
           path: config?.routers?.dataSourceUrl,
-          component: () => import('packages/DataSourceManagement'),
+          component: () => import('dashPackages/DataSourceManagement'),
           meta: {
             title: '数据源管理'
           }
         },
         {
           path: config?.routers?.dataSetUrl,
-          component: () => import('packages/DataSetManagement'),
+          component: () => import('dashPackages/DataSetManagement'),
           meta: {
             title: '数据集管理'
           }
         },
         {
           path: config?.routers?.SourceUrl || '/dashboard-source',
-          component: () => import('packages/SourceManagement'),
+          component: () => import('dashPackages/SourceManagement'),
           meta: {
             title: '资源库'
           }
         },
         {
           path: config?.routers?.componentUrl,
-          component: () => import('packages/DashboardComponentMag'),
+          component: () => import('dashPackages/DashboardComponentMag'),
           meta: {
             title: '资源管理'
           }
@@ -83,30 +83,30 @@ function registerRouters (config, router) {
       path: config?.routers?.designUrl,
       name: 'Design',
       component: () =>
-        require.ensure([], () => require('packages/DashboardDesign'))
+        require.ensure([], () => require('dashPackages/DashboardDesign'))
     },
     {
       path: config?.routers?.previewUrl,
       name: 'Preview',
       component: () =>
-        require.ensure([], () => require('packages/DashboardRun'))
+        require.ensure([], () => require('dashPackages/DashboardRun'))
     },
     {
       path: config?.routers?.appPreviewUrl,
       name: 'AppPreview',
       component: () =>
-        require.ensure([], () => require('app/DashboardAppRun'))
+        require.ensure([], () => require('dashPackages/AppDashboardRun'))
     },
     {
       path: config?.routers?.bizComponentDesignUrl,
-      component: () => import('packages/BizComponent'),
+      component: () => import('dashPackages/BizComponent'),
       meta: {
         title: '业务组件'
       }
     },
     {
       path: config?.routers?.bizComponentPreviewUrl,
-      component: () => import('packages/BizComponent/Preview.vue'),
+      component: () => import('dashPackages/BizComponent/Preview.vue'),
       meta: {
         title: '业务组件预览'
       }
@@ -128,6 +128,7 @@ function registerRouters (config, router) {
 function registerTheme (config) {
   const defaultTheme = {
     '--db-background-header': '#007aff', // 头部颜色
+    '--db-background-primary': 'rgba(64,158,255,0.1)', // elment-ui主题色对应的背景色
     '--db-background-1': '#fff', // 整体背景色
     '--db-background-2': '#fff', // 布局背景色
     '--db-el-background-1': '#fff', // 组件背景色，输入框...

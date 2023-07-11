@@ -23,10 +23,10 @@ import java.util.Objects;
  */
 @Slf4j
 @Aspect
-@Component
+@Component("dashboardLoginRequiredAspect")
 public class LoginRequiredAspect {
     @Resource
-    private PermissionClient tokenClient;
+    private DashboardPermissionClient tokenClient;
 
     @Before("@annotation(loginRequired) || @within(loginRequired)")
     public void doBefore(JoinPoint joinPoint, DashboardPermission loginRequired) {

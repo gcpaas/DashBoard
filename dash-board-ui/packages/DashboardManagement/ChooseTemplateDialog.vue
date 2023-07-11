@@ -2,6 +2,7 @@
   <el-dialog
     :title="hasCreate ? '新建' : '模板'"
     :visible.sync="dialogVisible"
+    :append-to-body="true"
     width="50%"
     class="db-dialog-wrap db-el-dialog"
     :before-close="handleClose"
@@ -19,7 +20,7 @@
 </template>
 
 <script>
-import TemplateList from 'packages/TemplateList'
+import TemplateList from 'dashPackages/TemplateList'
 export default {
   name: 'ChooseTemplistDialog',
   components: {

@@ -12,8 +12,8 @@
   </div>
 </template>
 <script>
-import commonMixins from 'packages/js/mixins/commonMixins'
-import paramsMixins from 'packages/js/mixins/paramsMixins'
+import commonMixins from 'dashPackages/js/mixins/commonMixins'
+import paramsMixins from 'dashPackages/js/mixins/paramsMixins'
 export default {
   name: 'Texts',
   components: {},
@@ -33,10 +33,9 @@ export default {
   watch: {
   },
   mounted () {
-    this.chartInit()
   },
   methods: {
-    buildOption (config, data) {
+    dataFormatting (config, data) {
       // 文本数据配置原则：选择数据集则以后端返回的数据为主，否则以设置面板中标题设置为准
       if (config.dataSource.businessKey) {
         config.customize.title = data && data.data && data.data.length ? data.data[0][config.dataSource.metricField] : '暂无数据'
@@ -48,7 +47,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '~packages/assets/style/chartStyle.scss';
+  @import '../../assets/style/chartStyle.scss';
   .content-box{
     text-align: center;
     /* 将背景设为渐变 */

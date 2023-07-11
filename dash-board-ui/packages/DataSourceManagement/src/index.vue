@@ -101,6 +101,7 @@
               >
                 删除
               </el-button>
+              <slot :item="scope.row" />
             </template>
           </el-table-column>
         </el-table>
@@ -132,12 +133,12 @@
 </template>
 
 <script>
-import table from 'packages/js/utils/table.js'
+import table from 'dashPackages/js/utils/table.js'
 import '../style/index.scss'
-import { sourceLinkTest, datasourcePage, sourceRemove } from 'packages/js/utils/dataSourceService'
+import { sourceLinkTest, datasourcePage, sourceRemove } from 'dashPackages/js/utils/dataSourceService'
 import setDatasource from './setDatasource.vue'
 import _ from 'lodash'
-import { pageMixins } from 'packages/js/mixins/page'
+import { pageMixins } from 'dashPackages/js/mixins/page'
 export default {
   name: 'DataSource',
   directives: {
@@ -280,14 +281,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
-
-// .db-pagination {
-//   ::v-deep .el-input__inner {
-
-//     width: 110px !important;
-//     border: none;
-//     background: var(--db-el-background-2);
-//   }
-// }
+@import '../../assets/style/bsTheme.scss';
+.inner-container{
+  position: relative;
+  .db-pagination {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+  }
+}
 </style>

@@ -73,6 +73,29 @@
               @clear="handleSearch()"
             />
           </el-form-item>
+          <el-form-item
+            class="filter-item"
+            prop="labelIds"
+          >
+            <el-select
+              v-model="queryForm.labelIds"
+              clearable
+              filterable
+              class="db-el-select"
+              popper-class="db-el-select"
+              multiple
+              collapse-tags
+              placeholder="请选择数据集关联标签"
+              @clear="handleSearch()"
+            >
+              <el-option
+                v-for="labelItem in labelList"
+                :key="labelItem.id"
+                :label="labelItem.labelName"
+                :value="labelItem.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
           <el-form-item class="filter-item">
             <el-button
               :loading="dataListLoading"
@@ -85,6 +108,7 @@
           </el-form-item>
           <el-form-item class="filter-item">
             <el-button
+              v-if="ToAdd"
               class="db-el-button-default"
               @click="addDataset"
             >
@@ -97,9 +121,9 @@
             ref="userTable"
             v-table
             v-loading="dataListLoading"
-            height="100%"
             class="db-el-table db-scrollbar"
             :element-loading-text="loadingText"
+            height="100%"
             :data="tableData"
             :header-cell-style="sortStyle"
             @sort-change="reSort"
@@ -137,7 +161,7 @@
               show-overflow-tooltip
             >
               <template slot-scope="scope">
-                <span>{{ datasetTypeList.find(type=>type.datasetType===scope.row.datasetType).name || '其他' }}</span>
+                <span>{{ datasetTypeList.find(type=>type.datasetType===scope.row.datasetType) ? datasetTypeList.find(type=>type.datasetType===scope.row.datasetType).name : '其他' }}</span>
               </template>
             </el-table-column>
             <el-table-column
@@ -156,20 +180,22 @@
                 v-if="showOperate(scope.row.datasetType)"
                 slot-scope="scope"
               >
-                <el-button
-                  class="db-el-button-default"
-                  :disabled="scope.row.editable === 1 && !appCode"
-                  @click="toEdit(scope.row.id, scope.row.datasetType, scope.row.name, scope.row.typeId)"
-                >
-                  编辑
-                </el-button>
-                <el-button
-                  class="db-el-button-default"
-                  :disabled="scope.row.editable === 1 && !appCode"
-                  @click="delDataset(scope.row.id)"
-                >
-                  删除
-                </el-button>
+                 <slot :item='scope.row'>
+                  <el-button
+                    class="db-el-button-default"
+                    :disabled="scope.row.editable === 1 && !appCode"
+                    @click="toEdit(scope.row.id, scope.row.datasetType, scope.row.name, scope.row.typeId)"
+                  >
+                    编辑
+                  </el-button>
+                   <el-button
+                    class="db-el-button-default"
+                    :disabled="scope.row.editable === 1 && !appCode"
+                    @click="delDataset(scope.row.id)"
+                  >
+                    删除
+                  </el-button>
+                </slot>
               </template>
             </el-table-column>
           </el-table>
@@ -218,15 +244,15 @@
 import TypeTree from './TypeTree.vue'
 import JsDataSet from './JsDataSet/JsDataSet.vue'
 import JsonEditForm from './JsonEditForm.vue'
-import table from 'packages/js/utils/table.js'
+import table from 'dashPackages/js/utils/table.js'
 import ScriptEditForm from './ScriptEditForm.vue'
 import CustomEditForm from './CustomEditForm.vue'
-import { pageMixins } from 'packages/js/mixins/page'
+import { pageMixins } from 'dashPackages/js/mixins/page'
 import OriginalEditForm from './OriginalEditForm.vue'
 import DatasetTypeDialog from './DatasetTypeDialog.vue'
-// import remoteComponents from '@/customDatasetComponents/exports.js'
 import StoredProcedureEditForm from './StoredProcedureEditForm.vue'
-import { datasetPage, datasetRemove } from 'packages/js/utils/datasetConfigService'
+import { datasetPage, datasetRemove } from 'dashPackages/js/utils/datasetConfigService'
+import { getLabelList } from 'dashPackages/js/utils/LabelConfigService'
 export default {
   name: 'DataSetManagement',
   directives: {
@@ -256,6 +282,10 @@ export default {
       type: [Array, Object],
       default: null
     },
+    dataSetList:{
+      type:[Array, Object],
+      default:()=>[]
+    },
     appCode: {
       type: String,
       default: ''
@@ -263,6 +293,10 @@ export default {
     isBorder: {
       type: Boolean,
       default: false
+    },
+    ToAdd:{
+      type: Boolean,
+      default: true
     }
 
   },
@@ -275,10 +309,12 @@ export default {
       queryForm: {
         name: '',
         datasetType: '',
-        typeId: '' // 分类id
+        typeId: '', // 分类id
+        labelIds: []
       }, // 查询条件
       // 数据集类型
       datasetTypeList: [],
+      labelList: [],
       isPackUpTree: false,
       transition: 0.1,
       loadingText: '正在加载数据',
@@ -300,6 +336,11 @@ export default {
         config: null,
         key: new Date().getTime()
       }
+    }
+  },
+  computed:{
+    allType(){
+      return this.datasetTypeList.map(item=>item.datasetType).filter(item=>item!='')
     }
   },
   watch: {
@@ -412,7 +453,7 @@ export default {
     toEdit (id, type, name, typeId) {
       this.datasetId = id
       this.datasetType = type
-      this.componentData = this.getComponents(this.datasetTypeList.find(item => item?.datasetType === type).componentName)
+      this.componentData = this.getComponents(this.datasetTypeList.find(item => item?.datasetType === type)?.componentName ?? '')
       this.datasetName = name
       this.typeId = typeId
       this.isEdit = true
@@ -430,7 +471,7 @@ export default {
       this.isEdit = true
     },
     showOperate (datasetType) {
-      return this.getComponents(this.datasetTypeList.find(type => type.datasetType === datasetType).componentName)?.config?.showOperate ?? true
+      return this.getComponents(this.datasetTypeList.find(type => type.datasetType === datasetType)?.componentName)?.config?.showOperate ?? true
     },
     getComponents (componentName) {
       const components = Object.values(this.$options.components)
@@ -458,19 +499,31 @@ export default {
         }
       }
       this.current = 1
+      const list=[
+          { name: '全部', datasetType: '' },
+          { name: '原始数据集', datasetType: 'original', componentName: 'OriginalEditForm' },
+          { name: '自助数据集', datasetType: 'custom', componentName: 'CustomEditForm' },
+          { name: '存储过程数据集', datasetType: 'storedProcedure', componentName: 'StoredProcedureEditForm' },
+          { name: 'JSON数据集', datasetType: 'json', componentName: 'JsonEditForm' },
+          { name: '脚本数据集', datasetType: 'script', componentName: 'ScriptEditForm' },
+          { name: 'JS数据集', datasetType: 'js', componentName: 'JsDataSet' }
+        ]
+      if(this.dataSetList.length!=0){
+        this.datasetTypeList=[{ name: '全部', datasetType: '' },...list.filter(item=>this.dataSetList.findIndex(x=>x===item.datasetType)!==-1)]
+      }else{
+        this.datasetTypeList = [
+          ...list
+        ]
+      }
+      if (window.DS_CONFIG?.customDatasetComponents && window.DS_CONFIG?.customDatasetComponents.length > 0) {
+        // 将获得到的远程数据集进行组装
+        window.DS_CONFIG?.customDatasetComponents.forEach((item) => {
+          this.datasetTypeList.push({ name: item.config.name, datasetType: item.config.datasetType, componentName: item.config.componentName })
+        })
+      }
       this.getDataList()
-      this.datasetTypeList = [
-        { name: '全部', datasetType: '' },
-        { name: '原始数据集', datasetType: 'original', componentName: 'OriginalEditForm' },
-        { name: '自助数据集', datasetType: 'custom', componentName: 'CustomEditForm' },
-        { name: '存储过程数据集', datasetType: 'storedProcedure', componentName: 'StoredProcedureEditForm' },
-        { name: 'JSON数据集', datasetType: 'json', componentName: 'JsonEditForm' },
-        { name: '脚本数据集', datasetType: 'script', componentName: 'ScriptEditForm' },
-        { name: 'JS数据集', datasetType: 'js', componentName: 'JsDataSet' }
-      ]
-      // 将获得到的远程数据集进行组装
-      window.BS_CONFIG?.customDatasetComponents.forEach((item) => {
-        this.datasetTypeList.push({ name: item.config.name, datasetType: item.config.datasetType, componentName: item.config.componentName })
+      getLabelList().then(res => {
+        this.labelList = res
       })
     },
     // 新增数据集
@@ -489,7 +542,8 @@ export default {
         current: this.current,
         size: this.size,
         moduleCode: this.appCode,
-        ...this.queryForm
+        ...this.queryForm,
+        datasetType:this.queryForm.datasetType===''?[...this.allType]:[this.queryForm.datasetType]
       }).then((data) => {
         this.tableData = data.list
         if (this.isDialog) {
@@ -603,8 +657,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~packages/assets/style/bsTheme.scss';
-@import '~packages/assets/style/zTree/treePackUp.scss';
+@import '../../assets/style/bsTheme.scss';
+@import '../../assets/style/zTree/treePackUp.scss';
 
 .db-pagination {
   ::v-deep .el-input__inner {
@@ -621,7 +675,7 @@ export default {
 }
 
 .right-box {
-  margin-left: 20px;
+  // margin-left: 20px;
 
   // ::v-deep .ztreeNodeMenu {
   //   ul {

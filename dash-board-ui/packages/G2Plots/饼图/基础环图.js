@@ -313,7 +313,8 @@ const data = [
 const optionHandler = 'option.legend = option.legendEnable ? {position: setting.find(settingItem=>settingItem.field === \'legendPosition\').value} : false;' +
   '\n  if (option.legendEnable) {\n' +
   '    option.legend.itemName = option.legendItemName\n' +
-  '  }'
+  '  };' +
+  'option.yAxis.grid.line.style.lineDash = [4,setting.find(settingItem=>settingItem.field === \'yAxis_grid_line_style_lineDash\').value]'
 
 // 数据处理脚本
 const dataHandler = ''
