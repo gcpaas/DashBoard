@@ -65,6 +65,8 @@ export function handleResData (data) {
     chart.key = chart.code
     chart.i = chart.code
   })
+  // 存储修改后的配置
+  localStorage.setItem('pageInfo', JSON.stringify(pageInfo))
   return pageInfo
 }
 // 组件属性兼容
