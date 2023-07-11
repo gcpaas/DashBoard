@@ -29,6 +29,7 @@ function getPlotList (files) {
       category: configMapKey,
       name: config.name,
       title: config.title,
+      version: config.version,
       icon: null,
       img: require(`dashPackages/G2Plots/images/componentLogo/${config.title}.png`),
       className:
