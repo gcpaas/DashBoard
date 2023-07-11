@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="!pageLoading"
+    v-if="(!pageLoading) && hasPermission"
     class="db-page-design-wrap"
   >
     <PageTopSetting
@@ -88,6 +88,7 @@
       />
     </div>
   </div>
+  <NotPermission v-else-if="!hasPermission" />
 </template>
 <script>
 import SourceDialog from './SourceDialog/index.vue'
@@ -112,6 +113,7 @@ import { isFirefox } from 'dashPackages/js/utils/userAgent'
 import { handleResData } from 'dashPackages/js/store/actions.js'
 import AppDashBoard from 'dashPackages/DashboardAppRun/index.vue'
 import { EventBus } from 'dashPackages/js/utils/eventBus'
+import NotPermission from 'dashPackages/NotPermission'
 export default {
   name: 'BigScreenDesign',
   components: {
@@ -122,7 +124,8 @@ export default {
     SourceDialog,
     ComponentDialog,
     iframeDialog,
-    AppDashBoard
+    AppDashBoard,
+    NotPermission
   },
   mixins: [multipleSelectMixin],
   props: {
@@ -141,6 +144,7 @@ export default {
   },
   data () {
     return {
+      hasPermission: true,
       terminal: 'pc', // 终端
       rightVisiable: false,
       pageInfoVisiable: false,
@@ -199,26 +203,26 @@ export default {
       }
     }
   },
-  beforeRouteEnter (to, from, next) {
-    // 判断进入设计页面前是否有访问权限
-    const code = to.query.code
-    get(`/dashboard/permission/check/${code}`).then((res) => {
-      if (res) {
-        next((vm) => {
-          // 重置仪表盘的vuex store
-          vm.$store.commit('dashboard/resetStoreData')
-        })
-      } else {
-        next('/notPermission')
-      }
-    })
-  },
+  // beforeRouteEnter (to, from, next) {
+  //   // 判断进入设计页面前是否有访问权限
+  //   const code = to.query.code
+  //   get(`/dashboard/permission/check/${code}`).then((res) => {
+  //     if (res) {
+  //       next((vm) => {
+  //         // 重置仪表盘的vuex store
+  //         vm.$store.commit('dashboard/resetStoreData')
+  //       })
+  //     } else {
+  //       next('/notPermission')
+  //     }
+  //   })
+  // },
   created () {
-    this.init()
+    this.permission()
     /**
-     * 以下是为了解决在火狐浏览器上推拽时弹出tab页到搜索问题
-     * @param event
-     */
+       * 以下是为了解决在火狐浏览器上推拽时弹出tab页到搜索问题
+       * @param event
+       */
     if (isFirefox()) {
       document.body.ondrop = function (event) {
         event.preventDefault()
@@ -249,6 +253,15 @@ export default {
       'saveTimeLine',
       'changeIframeDialog'
     ]),
+    // 判断页面权限
+    permission () {
+      get(`/dashboard/permission/check/${this.$route.query.code}`).then(res => {
+        this.hasPermission = res
+        if (res) {
+          this.init()
+        }
+      })
+    },
     // 切换终端
     chooseTerminal (terminal) {
       this.terminal = terminal
@@ -301,7 +314,7 @@ export default {
           name: val.originalName,
           icon: null,
           className:
-            'com.gccloud.dashboard.core.module.chart.components.DashboardPictureChart',
+              'com.gccloud.dashboard.core.module.chart.components.DashboardPictureChart',
           w: 300,
           h: 300,
           x: 0,
@@ -353,8 +366,8 @@ export default {
       this.pageInfoVisiable = false
     },
     /**
-     * @description: 清空页面
-     */
+       * @description: 清空页面
+       */
     empty () {
       this.$confirm('确定清空页面吗？', '提示', {
         confirmButtonText: '确定',
@@ -417,91 +430,91 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.db-page-design-wrap {
-  overflow: auto;
+  .db-page-design-wrap {
+    overflow: auto;
 
-  .drag-wrap {
-    display: flex;
-    background-color: #F5F7FA;
-    height: calc(100vh - 40px);
-    overflow: hidden;
-
-    .grid-wrap-box {
-      flex: 1;
-      overflow: hidden;
-      position: relative;
-      // margin: 8px 0 0 8px;
-
-      .footer-tools-bar {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 30px;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        z-index: 1000;
-        background-color: var(--db-background-2);
-
-        .db-select-wrap {
-          margin-right: 16px;
-        }
-
-        .select-zoom-text {
-          color: var(--db-el-title);
-          margin-right: 16px;
-        }
-
-        /deep/ .el-select {
-          width: 150px !important;
-        }
-      }
-    }
-
-    /deep/ .el-loading-mask {
-      background-color: transparent !important;
-    }
-    // 移动端样式
-    .app-wrap-box{
-      position: relative;
-      width: 100%;
-      height: 100%;
-      overflow-y: auto;
+    .drag-wrap {
       display: flex;
-      justify-content: center;
-      .app-display-wrapper {
+      background-color: #F5F7FA;
+      height: calc(100vh - 40px);
+      overflow: hidden;
+
+      .grid-wrap-box {
+        flex: 1;
+        overflow: hidden;
         position: relative;
-        top: 0;
-        bottom: 0;
-        margin: 16px 0;
-        width: 375px;
-        height: calc(100% - 32px);
-        background-size: 100% 100%;
-        box-shadow: 0px 0px 10px #dddddd;
-        box-sizing: border-box;
-        .app-design-wrap {
-          // 缩放比例
+        // margin: 8px 0 0 8px;
+
+        .footer-tools-bar {
           position: absolute;
-          top: 1rem;
-          left: .6rem;
-          right: .6rem;
-          bottom: -2rem;
-          overflow: auto;
-          border-radius: 0 0 35px 35px;
-          box-sizing: border-box;
+          bottom: 0;
+          width: 100%;
+          height: 30px;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          z-index: 1000;
+          background-color: var(--db-background-2);
+
+          .db-select-wrap {
+            margin-right: 16px;
+          }
+
+          .select-zoom-text {
+            color: var(--db-el-title);
+            margin-right: 16px;
+          }
+
+          /deep/ .el-select {
+            width: 150px !important;
+          }
         }
       }
-    }
-    /deep/::-webkit-scrollbar {
-      width: 8px;
-      border-radius: 8px;
-      height: 8px;
-    }
-    /deep/::-webkit-scrollbar-thumb {
-      background: #dddddd;
-      border-radius: 10px;
-    }
 
+      /deep/ .el-loading-mask {
+        background-color: transparent !important;
+      }
+      // 移动端样式
+      .app-wrap-box{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        display: flex;
+        justify-content: center;
+        .app-display-wrapper {
+          position: relative;
+          top: 0;
+          bottom: 0;
+          margin: 16px 0;
+          width: 375px;
+          height: calc(100% - 32px);
+          background-size: 100% 100%;
+          box-shadow: 0px 0px 10px #dddddd;
+          box-sizing: border-box;
+          .app-design-wrap {
+            // 缩放比例
+            position: absolute;
+            top: 1rem;
+            left: .6rem;
+            right: .6rem;
+            bottom: -2rem;
+            overflow: auto;
+            border-radius: 0 0 35px 35px;
+            box-sizing: border-box;
+          }
+        }
+      }
+      /deep/::-webkit-scrollbar {
+        width: 8px;
+        border-radius: 8px;
+        height: 8px;
+      }
+      /deep/::-webkit-scrollbar-thumb {
+        background: #dddddd;
+        border-radius: 10px;
+      }
+
+    }
   }
-}
 </style>

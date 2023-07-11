@@ -5,6 +5,7 @@
     :style="previewWrapStyle"
   >
     <div
+      v-if="hasPermission"
       class="db-render-wrap render-theme-wrap db-scrollbar"
       :style="renderStyle"
     >
@@ -42,6 +43,7 @@
         </grid-item>
       </grid-layout>
     </div>
+    <NotPermission v-else />
   </div>
 </template>
 <script>
@@ -52,12 +54,14 @@ import { getThemeConfig } from 'dashPackages/js/api/bigScreenApi'
 import { compile } from 'tiny-sass-compiler/dist/tiny-sass-compiler.esm-browser.prod.js'
 import { G2 } from '@antv/g2plot'
 import VueGridLayout from 'vue-grid-layout'
+import NotPermission from 'dashPackages/NotPermission'
 export default {
   name: 'DashboardRun',
   components: {
     RenderCard,
     GridLayout: VueGridLayout.GridLayout,
-    GridItem: VueGridLayout.GridItem
+    GridItem: VueGridLayout.GridItem,
+    NotPermission
   },
   props: {
     config: {
@@ -74,7 +78,8 @@ export default {
       innerHeight: window.innerHeight,
       innerWidth: window.innerWidth,
       // 定时器
-      timer: null
+      timer: null,
+      hasPermission: true
     }
   },
   computed: {
@@ -95,8 +100,8 @@ export default {
       const iframeCode = this.getIframeCode()
       // 兼容外部网页上的code,iframe上的code以及传入的code
       return this.$route.query.code ||
-             iframeCode ||
-             this.config.code
+          iframeCode ||
+          this.config.code
     },
     fitMode () {
       return this.config.fitMode || this.stateFitMode
@@ -153,31 +158,33 @@ export default {
       }
     }
   },
-  beforeRouteEnter (to, from, next) {
-    // 判断进入预览页面前是否有访问权限
-    const code = to.query.code
-    get(`/dashboard/permission/check/${code}`).then(res => {
-      if (res) {
-        next(vm => {
-          // 重置仪表盘的vuex store
-          vm.$store.commit('dashboard/resetStoreData')
-        })
-      } else {
-        next('/notPermission')
-      }
-    })
-  },
+  // beforeRouteEnter (to, from, next) {
+  //   // 判断进入预览页面前是否有访问权限
+  //   const code = to.query.code
+  //   get(`/dashboard/permission/check/${code}`).then(res => {
+  //     console.log('路由跳转',res)
+  //     if (res) {
+  //       next(vm => {
+  //         // 重置仪表盘的vuex store
+  //         vm.$store.commit('dashboard/resetStoreData')
+  //       })
+  //     } else {
+  //       next('/notPermission')
+  //     }
+  //   })
+  // },
   beforeRouteLeave (to, from, next) {
     // 离开的时候 重置仪表盘的vuex store
     this.$store.commit('dashboard/resetStoreData')
     next()
   },
   created () {
-    this.init()
     this.getParentWH()
     this.windowSize()
+    this.permission()
   },
   mounted () {
+    // console.log('路由信息',)
     this.$nextTick(() => {
       this.startTimer()
     })
@@ -194,6 +201,14 @@ export default {
       'changePageLoading',
       'changePageConfig'
     ]),
+    permission () {
+      get(`/dashboard/permission/check/${this.pageCode}`).then(res => {
+        this.hasPermission = res
+        if (res) {
+          this.init()
+        }
+      })
+    },
     init () {
       if (!this.pageCode) { return }
       this.changePageLoading(true)
@@ -370,22 +385,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.db-preview-wrap {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
+  .db-preview-wrap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
 
-  .db-render-wrap {
-    position: relative;
-    background-size: cover;
-    overflow: auto
+    .db-render-wrap {
+      position: relative;
+      background-size: cover;
+      overflow: auto
+    }
+    .grid-item-box{
+      border: 1px solid #e8e8e8
+    }
   }
-  .grid-item-box{
-    border: 1px solid #e8e8e8
+  /deep/.vue-grid-placeholder {
+    background: #C6C8CA !important;
   }
-}
-/deep/.vue-grid-placeholder {
-  background: #C6C8CA !important;
-}
 </style>
