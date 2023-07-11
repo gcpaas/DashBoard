@@ -119,6 +119,7 @@ export default {
   }
   @media (min-width: 600px) {
     .app-display-wrapper {
+      padding: 8px;
       position: relative;
       top: 0;
       bottom: 0;
@@ -130,13 +131,14 @@ export default {
       box-sizing: border-box;
       .app-design-wrap {
         // 缩放比例
-        position: absolute;
+      /*  position: absolute;
         top: 1rem;
         left: .6rem;
         right: .6rem;
-        bottom: -1rem;
+        bottom: -1rem;*/
+        height: 100%;
         overflow: auto;
-        border-radius: 0 0 35px 35px;
+        /*border-radius: 0 0 35px 35px;*/
         box-sizing: border-box;
       }
     }

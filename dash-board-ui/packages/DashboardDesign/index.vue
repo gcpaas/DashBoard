@@ -471,6 +471,7 @@ export default {
       justify-content: center;
       .app-display-wrapper {
         position: relative;
+        padding: 8px;
         top: 0;
         bottom: 0;
         margin: 16px 0;
@@ -481,13 +482,14 @@ export default {
         box-sizing: border-box;
         .app-design-wrap {
           // 缩放比例
-          position: absolute;
+      /*    position: absolute;
           top: 1rem;
           left: .6rem;
           right: .6rem;
-          bottom: -2rem;
+          bottom: -2rem;*/
+          height: 100%;
           overflow: auto;
-          border-radius: 0 0 35px 35px;
+          /*border-radius: 0 0 35px 35px;*/
           box-sizing: border-box;
         }
       }

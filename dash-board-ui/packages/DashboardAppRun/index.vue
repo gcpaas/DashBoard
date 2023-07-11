@@ -204,7 +204,7 @@ export default {
 </script>
 <style lang="scss" scoped>
   .render-wrap {
-    height: calc(100% - 46px);
+    /*height: calc(100% - 46px);*/
     overflow-y: auto;
     background-color: #f5f7fa;
     box-sizing: border-box;
