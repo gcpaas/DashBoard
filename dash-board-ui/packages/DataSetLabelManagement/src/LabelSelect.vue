@@ -14,7 +14,7 @@
       class="item"
       content="添加关联标签"
       effect="dark"
-      placement="right"
+      placement="bottom"
     >
       <el-button
         circle
