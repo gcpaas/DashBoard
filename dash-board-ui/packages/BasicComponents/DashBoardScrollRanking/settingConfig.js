@@ -1,4 +1,4 @@
-import { commonConfig, displayOption } from 'packages/js/config'
+import { commonConfig, displayOption } from 'dashPackages/js/config'
 
 export const settingConfig = {
   data: [],
@@ -6,7 +6,7 @@ export const settingConfig = {
   displayOption: {
     ...displayOption,
     headerField: {
-      enable: true
+      enable: false
     },
     metricField: {
       // 指标
@@ -25,7 +25,6 @@ export const settingConfig = {
 const customConfig = {
   type: 'dashboardScrollRanking',
   root: {
-    version: '2023071101',
     contribution: false
   },
   customize: {
