@@ -81,15 +81,17 @@ export default {
       { type: 'v', site: x || 0 }
     ]
   },
-  changeActiveItemConfig(state, config) {
+  changeActiveItemConfig (state, config) {
     const index = state.pageInfo.chartList.findIndex(
       item => item.code === config.code
     )
-    state.activeItemConfig = _.cloneDeep({...state.pageInfo.chartList[index],
-      ...config})
+    state.activeItemConfig = _.cloneDeep({
+      ...state.pageInfo.chartList[index],
+      ...config
+    })
   },
   // 改变当前组件的xywh
-  changeActiveItemWH(state, chart) {
+  changeActiveItemWH (state, chart) {
     if (chart.code === state.activeItemConfig.code) {
       state.activeItemConfig = {
         ...state.activeItemConfig,
@@ -232,6 +234,12 @@ export default {
         state.pageInfo.chartList = _.cloneDeep(currentStore?.chartList || [])
       }
     }
+    state.pageInfo.chartList = state.pageInfo.chartList.map(chart => {
+      return {
+        ...chart,
+        key: chart.code + new Date().getTime()
+      }
+    })
   },
   clearTimeline (state) {
     // 最后一个状态
