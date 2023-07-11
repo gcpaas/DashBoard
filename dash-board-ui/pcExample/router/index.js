@@ -6,10 +6,6 @@ const baseRoutes = [
   {
     path: '/notPermission',
     component: () => import('dashPackages/NotPermission/index.vue')
-  },
-  {
-    path: '/test',
-    component: () => import('dashPackages/DataSetLabelManagement/src/index.vue')
   }
 ]
 

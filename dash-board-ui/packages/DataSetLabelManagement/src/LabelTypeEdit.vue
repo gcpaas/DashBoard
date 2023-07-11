@@ -3,9 +3,9 @@
     :append-to-body="true"
     :before-close="handleClose"
     :visible.sync="dialogFormVisible"
+    class="db-dialog-wrap db-el-dialog"
     title="标签类型修改"
     width="500px"
-    class="db-dialog-wrap db-el-dialog"
   >
     <div style="margin: 20px;">
       <el-form
@@ -14,12 +14,16 @@
         :rules="rules"
         label-position="left"
         label-width="90px"
+        class="db-el-form"
       >
         <el-form-item
           label="标签类型"
           prop="labelType"
         >
-          <el-input v-model="dataForm.labelType" />
+          <el-input
+            v-model="dataForm.labelType"
+            class="db-el-input"
+          />
         </el-form-item>
       </el-form>
     </div>
@@ -28,7 +32,10 @@
       slot="footer"
       class="dialog-footer"
     >
-      <el-button @click="cancel">取消</el-button>
+      <el-button
+        class="db-el-button-default"
+        @click="cancel"
+      >取消</el-button>
       <el-button
         type="primary"
         @click="submitForm('ruleForm')"
@@ -72,20 +79,15 @@ export default {
     },
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
-        if (valid) {
-          updateLabelType(this.dataForm).then(() => {
-            if (this.$parent.queryForm.labelType !== '') {
-              this.$parent.queryForm.labelType = this.dataForm.labelType
-            }
-            this.$parent.reSearch()
-            this.$parent.getLabelType()
-
-            this.cancel()
-            this.$message.success('保存成功')
-          })
-        } else {
+        if (!valid) {
           return false
         }
+        updateLabelType(this.dataForm).then(() => {
+          this.$emit('afterEdit')
+          this.cancel()
+          this.$message.success('保存成功')
+        })
+
       })
     }
   }
@@ -93,5 +95,4 @@ export default {
 </script>
 
 <style>
-
 </style>

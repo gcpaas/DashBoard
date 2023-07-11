@@ -81,6 +81,8 @@
               v-model="queryForm.labelIds"
               clearable
               filterable
+              class="db-el-select"
+              popper-class="db-el-select"
               multiple
               collapse-tags
               placeholder="请选择数据集关联标签"
