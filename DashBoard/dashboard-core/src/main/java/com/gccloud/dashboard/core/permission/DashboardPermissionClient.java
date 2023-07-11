@@ -14,21 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 public class DashboardPermissionClient {
 
     @Autowired(required = false)
-    private IDashboardPermissionService tokenService;
-
-    public boolean verifyApiPermission(HttpServletRequest request, String... permissions) {
-        boolean verify = true;
-        if (tokenService != null) {
-            verify = tokenService.verifyApiPermission(request, permissions);
-        }
-        return verify;
-    }
+    private IDashboardPermissionService permissionService;
 
 
     public boolean verifyDataPermission(HttpServletRequest request, String pageCode) {
         boolean verify = true;
-        if (tokenService != null) {
-            verify = tokenService.verifyDataPermission(request, pageCode);
+        if (permissionService != null) {
+            verify = permissionService.verifyDataPermission(request, pageCode);
         }
         return verify;
     }

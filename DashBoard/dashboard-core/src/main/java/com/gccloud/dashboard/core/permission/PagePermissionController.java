@@ -20,14 +20,14 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @RestController("dashboardPagePermissionController")
 @RequestMapping("/dashboard/permission")
-@Api(tags = "大屏页权限控制器")
+@Api(tags = "仪表盘页面权限控制器")
 public class PagePermissionController {
 
     @Resource
     private DashboardPermissionClient permissionClient;
 
     @GetMapping("/check/{code}")
-    @ApiOperation(value = "校验大屏页权限")
+    @ApiOperation(value = "校验仪表盘页面访问权限")
     public R<Boolean> checkPermission(HttpServletRequest request, @PathVariable("code") String code) {
         boolean access = permissionClient.verifyDataPermission(request, code);
         return R.success(access);

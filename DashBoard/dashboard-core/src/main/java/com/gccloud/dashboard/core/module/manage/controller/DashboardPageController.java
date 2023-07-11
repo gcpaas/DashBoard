@@ -15,7 +15,7 @@ import com.gccloud.dashboard.core.module.manage.dto.DashboardPageDTO;
 import com.gccloud.dashboard.core.module.manage.dto.DashboardSearchDTO;
 import com.gccloud.dashboard.core.module.manage.service.IDashboardPageService;
 import com.gccloud.dashboard.core.module.manage.vo.StaticFileVO;
-import com.gccloud.dashboard.core.permission.DashboardPermission;
+import com.gccloud.common.permission.ApiPermission;
 import com.gccloud.dashboard.core.permission.Permission;
 import com.gccloud.dashboard.core.utils.Webjars;
 import com.google.common.collect.Lists;
@@ -45,7 +45,7 @@ public class DashboardPageController {
     @Resource
     private DashboardConfig dashboardConfig;
 
-    @DashboardPermission(permissions = {Permission.Screen.VIEW})
+    @ApiPermission(permissions = {Permission.Dashboard.VIEW})
     @GetMapping("/info/code/{code}")
     @ApiOperation(value = "大屏页/组件详情", position = 10, produces = MediaType.APPLICATION_JSON_VALUE)
     public MixinsResp<DashboardPageDTO> info(@PathVariable("code") String code) {
@@ -57,7 +57,7 @@ public class DashboardPageController {
         return resp;
     }
 
-    @DashboardPermission(permissions = {Permission.Screen.VIEW})
+    @ApiPermission(permissions = {Permission.Dashboard.VIEW})
     @GetMapping("/page")
     @ApiOperation(value = "大屏/组件分页列表", position = 10, produces = MediaType.APPLICATION_JSON_VALUE)
     public MixinsResp<PageVO<PageEntity>> page(DashboardSearchDTO searchDTO) {
@@ -68,7 +68,7 @@ public class DashboardPageController {
     }
 
 
-    @DashboardPermission(permissions = {Permission.Screen.EDIT})
+    @ApiPermission(permissions = {Permission.Dashboard.ADD})
     @PostMapping("/add")
     @ApiOperation(value = "从空白新增大屏/组件", position = 20, produces = MediaType.APPLICATION_JSON_VALUE)
     public R<String> add(@RequestBody DashboardPageDTO dashboardPageDTO) {
@@ -80,7 +80,7 @@ public class DashboardPageController {
         return R.success(dashboardPageDTO.getCode());
     }
 
-    @DashboardPermission(permissions = {Permission.Screen.EDIT})
+    @ApiPermission(permissions = {Permission.Dashboard.UPDATE})
     @PostMapping("/update")
     @ApiOperation(value = "修改大屏/组件", position = 30, produces = MediaType.APPLICATION_JSON_VALUE)
     public R<String> update(@RequestBody DashboardPageDTO dashboardPageDTO) {
@@ -92,7 +92,7 @@ public class DashboardPageController {
         return R.success(dashboardPageDTO.getCode());
     }
 
-    @DashboardPermission(permissions = {Permission.Screen.DELETE})
+    @ApiPermission(permissions = {Permission.Dashboard.DELETE})
     @PostMapping("/delete/{code}")
     @ApiOperation(value = "删除大屏/组件", position = 40, produces = MediaType.APPLICATION_JSON_VALUE)
     public R<Void> delete(@PathVariable String code) {
@@ -104,7 +104,7 @@ public class DashboardPageController {
         return R.success();
     }
 
-    @DashboardPermission(permissions = {Permission.Screen.EDIT})
+    @ApiPermission(permissions = {Permission.Dashboard.ADD})
     @PostMapping("/copy/{code}")
     @ApiOperation(value = "复制大屏/组件", position = 50, produces = MediaType.APPLICATION_JSON_VALUE)
     public R<String> copy(@PathVariable String code) {
@@ -116,7 +116,7 @@ public class DashboardPageController {
         return R.success(newCode);
     }
 
-    @DashboardPermission(permissions = {Permission.Screen.EDIT})
+    @ApiPermission(permissions = {Permission.Dashboard.ADD})
     @PostMapping("/add/template")
     @ApiOperation(value = "从模板新增大屏页", position = 20, produces = MediaType.APPLICATION_JSON_VALUE)
     public R<String> addByTemplate(@RequestBody DashboardPageDTO dashboardPageDTO) {
@@ -127,7 +127,7 @@ public class DashboardPageController {
         return R.success(code);
     }
 
-    @DashboardPermission(permissions = {Permission.Screen.TEMPLATE_VIEW})
+
     @PostMapping("/get/template")
     @ApiOperation(value = "根据模板获取配置", position = 20, produces = MediaType.APPLICATION_JSON_VALUE)
     public MixinsResp<DashboardPageDTO> getByTemplate(@RequestBody DashboardPageDTO dashboardPageDTO) {
@@ -138,7 +138,7 @@ public class DashboardPageController {
     }
 
 
-    @DashboardPermission
+    @ApiPermission
     @GetMapping("/bg/list")
     @ApiOperation(value = "背景图片列表", position = 60, produces = MediaType.APPLICATION_JSON_VALUE)
     public R<List<StaticFileVO>> getBgList() {
@@ -154,7 +154,7 @@ public class DashboardPageController {
         return R.success(bgList);
     }
 
-    @DashboardPermission
+    @ApiPermission
     @GetMapping("/map/list/{level}")
     @ApiOperation(value = "地图数据列表", position = 60, produces = MediaType.APPLICATION_JSON_VALUE)
     public R<List<StaticFileVO>> getMapJsonList(@PathVariable("level") String level) {
