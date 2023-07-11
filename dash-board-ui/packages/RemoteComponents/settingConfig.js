@@ -4,6 +4,7 @@ export const settingConfig = {
 }
 const customConfig = {
   root: {
+    version: '2023071001',
     contribution: false
   },
   customize: {

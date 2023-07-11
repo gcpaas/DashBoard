@@ -1,4 +1,5 @@
-
+// 配置版本号
+const version = '2023071001'
 // 分类
 const category = 'Treemap'
 // 标题
@@ -223,6 +224,7 @@ const option = {
 }
 
 export default {
+  version,
   category,
   title,
   chartType,

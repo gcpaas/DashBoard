@@ -37,6 +37,7 @@ export const settingConfig = {
 const customConfig = {
   type: 'map',
   root: {
+    version: '2023071001',
     contribution: false
   },
   customize: {

@@ -1,4 +1,5 @@
-
+// 配置版本号
+const version = '2023071001'
 // 分类
 const category = 'Rose'
 // 标题
@@ -215,6 +216,7 @@ const option = {
   appendPadding: [16, 16, 16, 16] // 设置图标的边距
 }
 export default {
+  version,
   category,
   title,
   chartType,

@@ -1,4 +1,6 @@
 
+// 配置版本号
+const version = '2023071101'
 // 分类
 const category = 'Line'
 // 标题
@@ -560,6 +562,7 @@ const option = {
 }
 
 export default {
+  version,
   category,
   title,
   chartType,

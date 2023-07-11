@@ -1,42 +1,42 @@
 import { commonConfig, displayOption } from 'dashPackages/js/config'
 
 export const settingConfig = {
-  data: null,
+  data: [],
   // 设置面板属性的显隐
   displayOption: {
     ...displayOption,
-    params: {
-      enable: false
-    },
     headerField: {
       enable: false
-    },
-    dimensionField: {
-      // 维度
-      label: '维度', // 维度/查询字段
-      enable: false,
-      multiple: false // 是否多选
     },
     metricField: {
       // 指标
       label: '指标',
       enable: true,
       multiple: false // 是否多选
+    },
+    dimensionField: {
+      // 维度
+      label: '维度', // 维度/查询字段
+      enable: true,
+      multiple: false // 是否多选
     }
   }
 }
 const customConfig = {
-  type: 'bigNumber',
+  type: 'dashboardScrollRanking',
   root: {
     version: '2023071001',
     contribution: false
   },
   customize: {
-    fontSize: 30,
-    fontWeight: 700,
-    subHeaderFontSize: null,
-    numberFormat: 'kilobit',
-    dateFormat: null
+    highlightNum: 4, // 高亮显示数量
+    highlightStyle: [
+      // 高亮显示自定义样式
+      { highlightColor: '#314659', mark: 0 },
+      { highlightColor: '#314659', mark: 1 },
+      { highlightColor: '#314659', mark: 2 },
+      { highlightColor: '#314659', mark: 3 }
+    ]
   }
 }
 export const dataConfig = {

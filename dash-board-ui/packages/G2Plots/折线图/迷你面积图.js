@@ -3,7 +3,8 @@
  * @Date: 2023-03-27 14:38:23
  * @Author: xing.heng
  */
-
+// 配置版本号
+const version = '2023071001'
 // 分类
 const category = 'TinyArea'
 // 标题
@@ -88,9 +89,9 @@ const setting = [
     value: 0.3,
     tabName: 'custom',
     groupName: 'graph',
-    step:0.01,
-    max:1,
-    min:0
+    step: 0.01,
+    max: 1,
+    min: 0
   },
   // 边距 padding
   {
@@ -113,8 +114,8 @@ const dataHandler = '// 取出所有指标的值 \ndata = data.map(item => item[
 // 图表配置 new Line('domName', option)
 const option = {
   data: [16, 95, 35, 27, 50, 36, 78, 99, 60, 62, 37],
-  xField:'',
-  yField:'',
+  xField: '',
+  yField: '',
   appendPadding: [16, 16, 16, 16], // 设置图标的边距
   height: 6,
   autoFit: true,
@@ -130,6 +131,7 @@ const option = {
 }
 
 export default {
+  version,
   category,
   title,
   chartType,

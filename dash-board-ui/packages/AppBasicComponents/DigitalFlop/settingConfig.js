@@ -31,6 +31,7 @@ export const settingConfig = {
 const customConfig = {
   type: 'digitalFlop',
   root: {
+    version: '2023071001',
     contribution: false
   },
   customize: {

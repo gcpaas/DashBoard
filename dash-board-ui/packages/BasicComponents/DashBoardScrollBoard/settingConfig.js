@@ -28,6 +28,7 @@ export const settingConfig = {
 const customConfig = {
   type: 'dashBoardScrollBoard',
   root: {
+    version: '2023071001',
     contribution: false
   },
   customize: {

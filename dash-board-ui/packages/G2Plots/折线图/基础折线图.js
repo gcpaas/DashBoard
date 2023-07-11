@@ -3,7 +3,8 @@
  * @Date: 2023-03-27 14:38:23
  * @Author: xing.heng
  */
-
+// 配置版本号
+const version = '2023071101'
 // 分类
 const category = 'Line'
 // 标题
@@ -581,6 +582,7 @@ const option = {
   }
 }
 export default {
+  version,
   category,
   title,
   chartType,

@@ -3,7 +3,8 @@
  * @Date: 2023-03-27 14:38:23
  * @Author: xing.heng
  */
-
+// 配置版本号
+const version = '2023071001'
 // 分类
 const category = 'Area'
 // 标题
@@ -686,6 +687,7 @@ const option = {
 }
 
 export default {
+  version,
   category,
   title,
   chartType,
