@@ -10,6 +10,7 @@
     <img alt="GitHub forks" src="https://img.shields.io/github/forks/gcpaas/DashBoard?style=social">
     <img alt="GitHub license" src="https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg">
     <img alt="npm" src="https://img.shields.io/npm/v/@gcpaas/dash-board-ui">
+    <img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.gccloud/dataroom-core">
     <img alt="Company" src="https://img.shields.io/badge/Author-科大国创云网科技有限公司-blue.svg">
     <img alt="QQ" src="https://img.shields.io/badge/QQ-322302395-blue.svg">
 </p>
