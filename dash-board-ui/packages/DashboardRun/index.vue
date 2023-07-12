@@ -188,7 +188,7 @@ export default {
     ]),
     permission () {
       get(`/dashboard/permission/check/${this.pageCode}`).then(res => {
-        this.hasPermission = !res
+        this.hasPermission = res
         if (res) {
           this.init()
         }
