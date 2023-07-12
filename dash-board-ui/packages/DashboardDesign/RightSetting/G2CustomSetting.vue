@@ -123,16 +123,6 @@
                 <el-switch
                   v-else-if="setting.type === 'switch'"
                   v-model="setting.value"
-                />
-                <el-switch
-                  v-else-if="setting.type === 'switchNumber'"
-                  v-model="setting.value"
-                  :active-value="1"
-                  :inactive-value="0"
-                />
-                <el-switch
-                  v-else-if="setting.type === 'switchCustom'"
-                  v-model="setting.value"
                   :active-value="setting.active"
                   :inactive-value="setting.inactive"
                 />
@@ -163,8 +153,6 @@ import ColorSelect from 'dashPackages/ColorMultipleSelect/index.vue'
 // import ColorPicker from 'dashPackages/ColorPicker/index.vue'
 import PaddingSetting from 'dashPackages/DashboardDesign/RightSetting/PaddingSetting/index.vue'
 import GradualSetting from 'dashPackages/DashboardDesign/RightSetting/GradualSetting/index.vue'
-import PosWhSetting from 'dashPackages/DashboardDesign/RightSetting/PosWhSetting.vue'
-import _ from 'lodash'
 export default {
   name: 'CustomComponentSetting',
   components: {
@@ -172,7 +160,6 @@ export default {
     // ColorPicker,
     PaddingSetting,
     GradualSetting,
-    PosWhSetting,
     SettingTitle
   },
   mixins: [chartSettingMixins],
