@@ -1,48 +1,51 @@
 <template>
-  <div
-    v-if="!pageLoading"
-    class="db-preview-wrap"
-    :style="previewWrapStyle"
-  >
+  <div v-if="hasPermission">
     <div
-      class="db-render-wrap render-theme-wrap db-scrollbar"
-      :style="renderStyle"
+      v-loading="pageLoading"
+      class="db-preview-wrap"
+      :style="previewWrapStyle"
     >
-      <grid-layout
-        ref="gridlayout"
-        :layout.sync="chartList"
-        :col-num="24"
-        :row-height="10"
-        :responsive="true"
-        :is-resizable="false"
-        :vertical-compact="true"
-        :use-css-transforms="true"
-        :is-draggable="false"
-        :margin="[20, 20]"
-        :cols="{ lg: 24, md: 24, sm: 24, xs: 12, xxs: 12 }"
+      <div
+        class="db-render-wrap render-theme-wrap db-scrollbar"
+        :style="renderStyle"
       >
-        <grid-item
-          v-for="(card) in chartList"
-          :id="`${card.code}`"
-          :ref="`layoutItem_${card.code}`"
-          :key="card.code"
-          class="grid-item-box"
-          :min-w="1"
-          :min-h="2"
-          :x="card.x"
-          :y="card.y"
-          :w="card.w"
-          :h="card.h"
-          :i="card.i"
+        <grid-layout
+          ref="gridlayout"
+          :layout.sync="chartList"
+          :col-num="24"
+          :row-height="10"
+          :responsive="true"
+          :is-resizable="false"
+          :vertical-compact="true"
+          :use-css-transforms="true"
+          :is-draggable="false"
+          :margin="[20, 20]"
+          :cols="{ lg: 24, md: 24, sm: 24, xs: 12, xxs: 12 }"
         >
-          <RenderCard
-            :ref="'RenderCard' + card.code"
-            :config="card"
-          />
-        </grid-item>
-      </grid-layout>
+          <grid-item
+            v-for="(card) in chartList"
+            :id="`${card.code}`"
+            :ref="`layoutItem_${card.code}`"
+            :key="card.code"
+            class="grid-item-box"
+            :min-w="1"
+            :min-h="2"
+            :x="card.x"
+            :y="card.y"
+            :w="card.w"
+            :h="card.h"
+            :i="card.i"
+          >
+            <RenderCard
+              :ref="'RenderCard' + card.code"
+              :config="card"
+            />
+          </grid-item>
+        </grid-layout>
+      </div>
     </div>
   </div>
+  <NotPermission v-else />
 </template>
 <script>
 import { get } from 'dashPackages/js/utils/http'
@@ -52,12 +55,14 @@ import { getThemeConfig } from 'dashPackages/js/api/bigScreenApi'
 import { compile } from 'tiny-sass-compiler/dist/tiny-sass-compiler.esm-browser.prod.js'
 import { G2 } from '@antv/g2plot'
 import VueGridLayout from 'vue-grid-layout'
+import NotPermission from 'dashPackages/NotPermission'
 export default {
   name: 'DashboardRun',
   components: {
     RenderCard,
     GridLayout: VueGridLayout.GridLayout,
-    GridItem: VueGridLayout.GridItem
+    GridItem: VueGridLayout.GridItem,
+    NotPermission
   },
   props: {
     config: {
@@ -74,7 +79,8 @@ export default {
       innerHeight: window.innerHeight,
       innerWidth: window.innerWidth,
       // 定时器
-      timer: null
+      timer: null,
+      hasPermission: true
     }
   },
   computed: {
@@ -153,27 +159,13 @@ export default {
       }
     }
   },
-  beforeRouteEnter (to, from, next) {
-    // 判断进入预览页面前是否有访问权限
-    const code = to.query.code
-    get(`/dashboard/permission/check/${code}`).then(res => {
-      if (res) {
-        next(vm => {
-          // 重置仪表盘的vuex store
-          vm.$store.commit('dashboard/resetStoreData')
-        })
-      } else {
-        next('/notPermission')
-      }
-    })
-  },
   beforeRouteLeave (to, from, next) {
     // 离开的时候 重置仪表盘的vuex store
     this.$store.commit('dashboard/resetStoreData')
     next()
   },
   created () {
-    this.init()
+    this.permission()
     this.getParentWH()
     this.windowSize()
   },
@@ -194,6 +186,14 @@ export default {
       'changePageLoading',
       'changePageConfig'
     ]),
+    permission () {
+      get(`/dashboard/permission/check/${this.pageCode}`).then(res => {
+        this.hasPermission = !res
+        if (res) {
+          this.init()
+        }
+      })
+    },
     init () {
       if (!this.pageCode) { return }
       this.changePageLoading(true)

@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="!pageLoading"
+    v-if="hasPermission"
     class="db-page-design-wrap"
   >
     <PageTopSetting
@@ -88,6 +88,7 @@
       />
     </div>
   </div>
+  <NotPermission v-else-if="!hasPermission" />
 </template>
 <script>
 import SourceDialog from './SourceDialog/index.vue'
@@ -112,6 +113,7 @@ import { isFirefox } from 'dashPackages/js/utils/userAgent'
 import { handleResData } from 'dashPackages/js/store/actions.js'
 import AppDashBoard from 'dashPackages/DashboardAppRun/index.vue'
 import { EventBus } from 'dashPackages/js/utils/eventBus'
+import NotPermission from 'dashPackages/NotPermission'
 export default {
   name: 'BigScreenDesign',
   components: {
@@ -122,7 +124,8 @@ export default {
     SourceDialog,
     ComponentDialog,
     iframeDialog,
-    AppDashBoard
+    AppDashBoard,
+    NotPermission
   },
   mixins: [multipleSelectMixin],
   props: {
@@ -141,6 +144,7 @@ export default {
   },
   data () {
     return {
+      hasPermission: true,
       terminal: 'pc', // 终端
       rightVisiable: false,
       pageInfoVisiable: false,
@@ -192,6 +196,9 @@ export default {
       fitZoom: (state) => state.dashboard.fitZoom,
       iframeDialog: (state) => state.dashboard.iframeDialog
     }),
+    pageCode () {
+      return this.code || this.$route.query.code
+    },
     offset () {
       return {
         x: 220 + 50 - this.ruleStartX,
@@ -199,22 +206,23 @@ export default {
       }
     }
   },
-  beforeRouteEnter (to, from, next) {
-    // 判断进入设计页面前是否有访问权限
-    const code = to.query.code
-    get(`/dashboard/permission/check/${code}`).then((res) => {
-      if (res) {
-        next((vm) => {
-          // 重置仪表盘的vuex store
-          vm.$store.commit('dashboard/resetStoreData')
-        })
-      } else {
-        next('/notPermission')
-      }
-    })
-  },
+  // beforeRouteEnter (to, from, next) {
+  //   // 判断进入设计页面前是否有访问权限
+  //   const code = to.query.code
+  //   get(`/dashboard/permission/check/${code}`).then((res) => {
+  //     if (res) {
+  //       next((vm) => {
+  //         // 重置仪表盘的vuex store
+  //         vm.$store.commit('dashboard/resetStoreData')
+  //       })
+  //     } else {
+  //       next('/notPermission')
+  //     }
+  //   })
+  // },
   created () {
-    this.init()
+    this.changePageLoading(true)
+    this.permission()
     /**
      * 以下是为了解决在火狐浏览器上推拽时弹出tab页到搜索问题
      * @param event
@@ -249,6 +257,15 @@ export default {
       'saveTimeLine',
       'changeIframeDialog'
     ]),
+    // 判断页面权限
+    permission () {
+      get(`/dashboard/permission/check/${this.pageCode}`).then(res => {
+        this.hasPermission = res
+        if (res) {
+          this.init()
+        }
+      })
+    },
     // 切换终端
     chooseTerminal (terminal) {
       this.terminal = terminal
