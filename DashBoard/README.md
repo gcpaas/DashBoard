@@ -20,7 +20,7 @@
 
 ## 快速开始
 
-[快速开始](https://www.yuque.com/chuinixiongkou/bigscreen/xd78cw7t12q7kfbl#ff0RA)
+[快速开始](https://www.yuque.com/chuinixiongkou/bigscreen/xd78cw7t12q7kfbl#norVs)
 
 ## 演示DEMO
 
