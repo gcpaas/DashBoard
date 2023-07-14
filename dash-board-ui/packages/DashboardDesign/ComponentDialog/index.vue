@@ -340,7 +340,7 @@
   </el-dialog>
 </template>
 <script>
-import { get } from 'dashPackages/js/utils/http'
+// import { get } from 'dashPackages/js/utils/http'
 import { pageMixins } from 'dashPackages/js/mixins/page'
 import _ from 'lodash'
 import innerRemoteComponents, { getRemoteComponents, getRemoteComponentConfig } from 'dashPackages/RemoteComponents/remoteComponentsList'
@@ -423,7 +423,7 @@ export default {
     },
     getDataList () {
       this.loading = true
-      get('/dashboard/design/page', {
+      this.$dashboardAxios.get('/dashboard/design/page', {
         parentCode: this.code || null,
         current: this.current,
         size: this.size,
@@ -453,7 +453,7 @@ export default {
     // 获取目录的列表
     getCatalogList () {
       const url = this.activeName === 'combination' ? '/dashboard/type/list/componentCatalog' : '/dashboard/type/list/bizComponentCatalog'
-      get(url)
+      this.$dashboardAxios.get(url)
         .then((data) => {
           this.options = data
         })

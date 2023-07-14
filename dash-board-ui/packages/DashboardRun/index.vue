@@ -48,7 +48,7 @@
   <NotPermission v-else />
 </template>
 <script>
-import { get } from 'dashPackages/js/utils/http'
+// import { get } from 'dashPackages/js/utils/http'
 import RenderCard from 'dashPackages/Render/RenderCard.vue'
 import { mapActions, mapMutations, mapState } from 'vuex'
 import { getThemeConfig } from 'dashPackages/js/api/bigScreenApi'
@@ -187,7 +187,7 @@ export default {
       'changePageConfig'
     ]),
     permission () {
-      get(`/dashboard/permission/check/${this.pageCode}`).then(res => {
+      this.$dashboardAxios.get(`/dashboard/permission/check/${this.pageCode}`).then(res => {
         this.hasPermission = res
         if (res) {
           this.init()

@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import { get, post } from 'dashPackages/js/utils/http'
+// import { get, post } from 'dashPackages/js/utils/http'
 import Icon from 'dashPackages/assets/images/dataSourceIcon/export'
 export default {
   name: 'EditForm',
@@ -194,7 +194,7 @@ export default {
       this.formVisible = true
       this.$nextTick(() => {
         if (code) {
-          get(`/dashboard/bizComponent/info/${code}`).then((resp) => {
+          this.$dashboardAxios.get(`/dashboard/bizComponent/info/${code}`).then((resp) => {
             this.$set(this, 'title', resp.name)
             this.$set(this.dataForm, 'name', resp.name)
             this.$set(this.dataForm, 'code', resp.code)
@@ -217,7 +217,7 @@ export default {
       this.formVisible = true
       this.$nextTick(() => {
         if (code) {
-          get(`/dashboard/design/info/code/${code}`).then((resp) => {
+          this.$dashboardAxios.get(`/dashboard/design/info/code/${code}`).then((resp) => {
             this.$set(this, 'title', resp.name)
             this.$set(this.dataForm, 'name', resp.name)
             this.$set(this.dataForm, 'chartList', resp.chartList)
@@ -279,8 +279,8 @@ export default {
           return
         }
         const addOrUpdateHandel = !this.dataForm.code
-          ? (form) => post('/dashboard/bizComponent/add', form)
-          : (form) => post('/dashboard/bizComponent/update', form)
+          ? (form) => this.$dashboardAxios.post('/dashboard/bizComponent/add', form)
+          : (form) => this.$dashboardAxios.post('/dashboard/bizComponent/update', form)
         const form = {
           className: 'com.gccloud.dashboard.core.module.manage.dto.DashboardPageDTO',
           id: this.dataForm.id,
@@ -327,8 +327,8 @@ export default {
           return
         }
         const addOrUpdateHandel = !this.dataForm.code
-          ? (form) => post('/dashboard/design/add', form)
-          : (form) => post('/dashboard/design/update', form)
+          ? (form) => this.$dashboardAxios.post('/dashboard/design/add', form)
+          : (form) => this.$dashboardAxios.post('/dashboard/design/update', form)
         const form = {
           className: 'com.gccloud.dashboard.core.module.manage.dto.DashboardPageDTO',
           chartList: this.dataForm.chartList,

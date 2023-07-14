@@ -193,7 +193,7 @@
   </div>
 </template>
 <script>
-import { get, post } from 'dashPackages/js/utils/http'
+// import { get, post } from 'dashPackages/js/utils/http'
 import { pageMixins } from 'dashPackages/js/mixins/page'
 import EditForm from './EditForm.vue'
 import CatalogEditForm from './CatalogEditForm'
@@ -275,12 +275,12 @@ export default {
     },
     // 获取分组列表
     async getCatalogList () {
-      this.catalogList = await get(`/dashboard/type/list/${this.catalogType}`)
+      this.catalogList = await this.$dashboardAxios.get(`/dashboard/type/list/${this.catalogType}`)
     },
     getDataList () {
       this.loading = true
       if (this.catalogInfo === 'component') {
-        get('/dashboard/design/page', {
+        this.$dashboardAxios.get('/dashboard/design/page', {
           parentCode: this.catalogCode || null,
           current: this.current,
           size: this.size,
@@ -295,7 +295,7 @@ export default {
             this.loading = false
           })
       } else {
-        get('/dashboard/bizComponent/page', {
+        this.$dashboardAxios.get('/dashboard/bizComponent/page', {
           current: this.current,
           size: this.size,
           name: this.name,
@@ -360,7 +360,7 @@ export default {
       })
         .then(async () => {
           const url = this.catalogInfo === 'component' ? `/dashboard/design/delete/${screen.code}` : `/dashboard/bizComponent/delete/${screen.id}`
-          post(url)
+          this.$dashboardAxios.post(url)
             .then(() => {
               this.$message({
                 type: 'success',
@@ -386,7 +386,7 @@ export default {
         customClass: 'db-el-message-box'
       })
         .then(async () => {
-          post(url)
+          this.$dashboardAxios.post(url)
             .then(() => {
               this.$message({
                 type: 'success',

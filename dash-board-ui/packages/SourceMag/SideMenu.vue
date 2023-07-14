@@ -117,7 +117,7 @@
   </div>
 </template>
 <script>
-import { get, post } from 'dashPackages/js/utils/http'
+// import { get, post } from 'dashPackages/js/utils/http'
 import _ from 'lodash'
 
 export default {
@@ -209,7 +209,7 @@ export default {
           return
         }
         if (!this.currentCatalog.id) {
-          post('/dashboard/type/add', {
+          this.$dashboardAxios.post('/dashboard/type/add', {
             ...this.currentCatalog,
             type: 'resourceCatalog'
           })
@@ -222,7 +222,7 @@ export default {
             })
             .catch(() => {})
         } else {
-          post('/dashboard/type/update', {
+          this.$dashboardAxios.post('/dashboard/type/update', {
             ...this.currentCatalog,
             type: 'resourceCatalog'
           })
@@ -254,7 +254,7 @@ export default {
         customClass: 'db-el-message-box'
       })
         .then(async () => {
-          post(`/dashboard/type/delete/${catalog.id}`)
+          this.$dashboardAxios.post(`/dashboard/type/delete/${catalog.id}`)
             .then(() => {
               this.$message({
                 type: 'success',
@@ -274,7 +274,7 @@ export default {
     // 获取目录的列表
     getCatalogList () {
       this.pageLoading = true
-      get('/dashboard/type/list/resourceCatalog')
+      this.$dashboardAxios.get('/dashboard/type/list/resourceCatalog')
         .then((data) => {
           this.catalogList = data
         })

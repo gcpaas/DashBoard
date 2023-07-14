@@ -165,7 +165,7 @@
   </div>
 </template>
 <script>
-import { get, post, download } from 'dashPackages/js/utils/http'
+// import { get, post, download } from 'dashPackages/js/utils/http'
 import { pageMixins } from 'dashPackages/js/mixins/page'
 import EditForm from './EditForm.vue'
 export default {
@@ -250,13 +250,13 @@ export default {
     handlePreview (file) {
     },
     getOptions () {
-      get('/dashboard/file/getAllFileSuffix').then((data) => {
+      this.$dashboardAxios.get('/dashboard/file/getAllFileSuffix').then((data) => {
         data.forEach((item) => this.options.push({ label: item, value: item }))
       })
     },
     getDataList () {
       this.loading = true
-      get('/dashboard/file', {
+      this.$dashboardAxios.get('/dashboard/file', {
         module: this.catalogInfo.page.id,
         current: this.current,
         size: this.size,
@@ -275,7 +275,7 @@ export default {
       window.open(screen.url, '_blank')
     },
     downLoad (screen) {
-      download(`/dashboard/file/download/${screen.id}`)
+      this.$dashboardAxios.download(`/dashboard/file/download/${screen.id}`)
     },
     del (screen) {
       this.$confirm('确定删除该资源？', '提示', {
@@ -285,7 +285,7 @@ export default {
         customClass: 'db-el-message-box'
       })
         .then(async () => {
-          post(`/dashboard/file/delete/${screen.id}`)
+          this.$dashboardAxios.post(`/dashboard/file/delete/${screen.id}`)
             .then(() => {
               this.$message({
                 type: 'success',

@@ -102,7 +102,7 @@
 </template>
 
 <script>
-import { get, post } from 'dashPackages/js/utils/http'
+// import { get, post } from 'dashPackages/js/utils/http'
 import Icon from 'dashPackages/assets/images/dataSourceIcon/export'
 export default {
   name: 'EditForm',
@@ -229,7 +229,7 @@ export default {
     },
     // 获取所有的目录
     openCascader () {
-      post('/dashboard/category/tree', { searchKey: '', typeList: ['catalog'], sort: false }).then(data => {
+      this.$dashboardAxios.post('/dashboard/category/tree', { searchKey: '', typeList: ['catalog'], sort: false }).then(data => {
         const list = [{ name: '根目录', code: '', children: data }]
         this.catalogList = list
       }).catch(() => {
@@ -251,7 +251,7 @@ export default {
       this.$nextTick(() => {
         if (this.dataForm.type === 'dashboard') {
           if (code) {
-            get(`/${this.dataForm.type}/design/info/code/${code}`).then((resp) => {
+            this.$dashboardAxios.get(`/${this.dataForm.type}/design/info/code/${code}`).then((resp) => {
               this.$set(this, 'title', resp.name)
               this.$set(this.dataForm, 'name', resp.name)
               this.$set(this.dataForm, 'chartList', resp.chartList)
@@ -308,8 +308,8 @@ export default {
           return
         }
         const addOrUpdateHandel = !this.dataForm.code
-          ? (form) => post('/dashboard/design/add', form)
-          : (form) => post('/dashboard/design/update', form)
+          ? (form) => this.$dashboardAxios.post('/dashboard/design/add', form)
+          : (form) => this.$dashboardAxios.post('/dashboard/design/update', form)
         const form = {
           className: 'com.gccloud.dashboard.core.module.manage.dto.DashboardPageDTO',
           chartList: this.dataForm.chartList,

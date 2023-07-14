@@ -15,7 +15,7 @@ import * as echarts from 'echarts'
 import commonMixins from 'dashPackages/js/mixins/commonMixins.js'
 import paramsMixins from 'dashPackages/js/mixins/paramsMixins'
 import linkageMixins from 'dashPackages/js/mixins/linkageMixins'
-import { get } from 'dashPackages/js/utils/http'
+// import { get } from 'dashPackages/js/utils/http'
 export default {
   name: 'MapCharts',
   mixins: [paramsMixins, commonMixins, linkageMixins],
@@ -267,7 +267,7 @@ export default {
         }
       }
       const mapUrl = `${window.DS_CONFIG?.httpConfigs?.baseURL}/static/chinaMap/${config.customize.level}/${config.customize.dataMap}`
-      const map = await get(decodeURI(mapUrl), {}, true)
+      const map = await this.$dashboardAxios.get(decodeURI(mapUrl), {}, true)
       echarts.registerMap(config.customize.scope, map)
       this.charts.setOption(option)
       // this.charts.on('click', (params) => {

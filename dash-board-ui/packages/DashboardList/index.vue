@@ -158,7 +158,7 @@
   </div>
 </template>
 <script>
-import { get, post } from 'dashPackages/js/utils/http'
+// import { get, post } from 'dashPackages/js/utils/http'
 import { pageMixins } from 'dashPackages/js/mixins/page'
 import EditForm from './EditForm.vue'
 export default {
@@ -210,7 +210,7 @@ export default {
   methods: {
     getDataList () {
       this.loading = true
-      get('/dashboard/design/page', {
+      this.$dashboardAxios.get('/dashboard/design/page', {
         parentCode: this.code || null,
         current: this.current,
         size: this.size,
@@ -262,7 +262,7 @@ export default {
         customClass: 'db-el-message-box'
       })
         .then(async () => {
-          post(`/dashboard/design/delete/${screen.code}`)
+          this.$dashboardAxios.post(`/dashboard/design/delete/${screen.code}`)
             .then(() => {
               this.$message({
                 type: 'success',
@@ -287,7 +287,7 @@ export default {
         customClass: 'db-el-message-box'
       })
         .then(async () => {
-          post(`/dashboard/design/copy/${screen.code}`)
+          this.$dashboardAxios.post(`/dashboard/design/copy/${screen.code}`)
             .then(() => {
               this.$message({
                 type: 'success',

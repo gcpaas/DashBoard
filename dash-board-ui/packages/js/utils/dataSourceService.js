@@ -1,7 +1,8 @@
 /*!
  * 数据源管理
  */
-import { get, post } from 'dashPackages/js/utils/http'
+// import { get, post } from 'dashPackages/js/utils/http'
+import Vue from 'vue';
 
 /**
  * 修改数据源
@@ -9,7 +10,7 @@ import { get, post } from 'dashPackages/js/utils/http'
  * @param flag
  * @returns {*}
  */
-const add = (params = {}, flag = false) => post('/datasource/add', params, flag)
+const add = (params = {}, flag = false) => Vue.prototype.$dashboardAxios.post('/datasource/add', params, flag)
 
 /**
  * 修改数据源
@@ -17,7 +18,7 @@ const add = (params = {}, flag = false) => post('/datasource/add', params, flag)
  * @param flag
  * @returns {*}
  */
-const update = (params = {}, flag = false) => post('/datasource/update', params, flag)
+const update = (params = {}, flag = false) => Vue.prototype.$dashboardAxios.post('/datasource/update', params, flag)
 
 /**
  * 数据源名称校验
@@ -25,7 +26,7 @@ const update = (params = {}, flag = false) => post('/datasource/update', params,
  * @param flag
  * @returns {*}
  */
-const checkRepeat = (params = {}, flag = false) => post('/datasource/checkRepeat', params, flag)
+const checkRepeat = (params = {}, flag = false) => Vue.prototype.$dashboardAxios.post('/datasource/checkRepeat', params, flag)
 
 /**
  * 数据源连接测试
@@ -33,7 +34,7 @@ const checkRepeat = (params = {}, flag = false) => post('/datasource/checkRepeat
  * @param flag
  * @returns {*}
  */
-const sourceLinkTest = (params = {}, flag = false) => post('/datasource/testConnect', params, flag)
+const sourceLinkTest = (params = {}, flag = false) => Vue.prototype.$dashboardAxios.post('/datasource/testConnect', params, flag)
 
 /**
  * 获取数据源列表
@@ -41,7 +42,7 @@ const sourceLinkTest = (params = {}, flag = false) => post('/datasource/testConn
  * @param flag
  * @returns {*}
  */
-const datasourcePage = (params = {}, flag = false) => get('/datasource/page', params, flag)
+const datasourcePage = (params = {}, flag = false) => Vue.prototype.$dashboardAxios.get('/datasource/page', params, flag)
 
 /**
  * 获取数据源列表
@@ -49,7 +50,7 @@ const datasourcePage = (params = {}, flag = false) => get('/datasource/page', pa
  * @param flag
  * @returns {*}
  */
-const datasourceList = (params = {}, flag = false) => get('/datasource/list', params, flag)
+const datasourceList = (params = {}, flag = false) => Vue.prototype.$dashboardAxios.get('/datasource/list', params, flag)
 
 /**
  * 删除数据源
@@ -57,7 +58,7 @@ const datasourceList = (params = {}, flag = false) => get('/datasource/list', pa
  * @param flag
  * @returns {*}
  */
-const sourceRemove = (id = '-1', flag = false) => post(`/datasource/delete/${id}`, {}, flag)
+const sourceRemove = (id = '-1', flag = false) => Vue.prototype.$dashboardAxios.post(`/datasource/delete/${id}`, {}, flag)
 
 /**
  * 获取数据源下表列表
@@ -65,7 +66,7 @@ const sourceRemove = (id = '-1', flag = false) => post(`/datasource/delete/${id}
  * @param flag
  * @returns {*}
  */
-const getSourceTable = (id = '-1', flag = false) => get(`/datasource/getTableList/${id}`, {}, flag)
+const getSourceTable = (id = '-1', flag = false) => Vue.prototype.$dashboardAxios.get(`/datasource/getTableList/${id}`, {}, flag)
 
 /**
  * 获取数据源下视图列表
@@ -73,7 +74,7 @@ const getSourceTable = (id = '-1', flag = false) => get(`/datasource/getTableLis
  * @param flag
  * @returns {*}
  */
-const getSourceView = (id = '-1', flag = false) => get(`/datasource/getViewList/${id}`, {}, flag)
+const getSourceView = (id = '-1', flag = false) => Vue.prototype.$dashboardAxios.get(`/datasource/getViewList/${id}`, {}, flag)
 
 /**
  * 获取数据源下表字段列表
@@ -82,7 +83,7 @@ const getSourceView = (id = '-1', flag = false) => get(`/datasource/getViewList/
  * @param flag
  * @returns {Promise<*>}
  */
-const getTableFieldList = (sourceId = '-1', tableName = '', flag = false) => get(`/datasource//getFieldList/table/${sourceId}/${tableName}`, {}, flag)
+const getTableFieldList = (sourceId = '-1', tableName = '', flag = false) => Vue.prototype.$dashboardAxios.get(`/datasource//getFieldList/table/${sourceId}/${tableName}`, {}, flag)
 
 export {
   add,

@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { get, post } from 'dashPackages/js/utils/http'
+// import { get, post } from 'dashPackages/js/utils/http'
 export default {
   name: 'TemplateList',
   model: {
@@ -98,7 +98,7 @@ export default {
     // 得到模板列表
     getTemplateList (type) {
       this.type = type
-      get('/dashboard/template/list', {
+      this.$dashboardAxios.get('/dashboard/template/list', {
         type
       }).then((list) => {
         this.templateList = list
@@ -126,7 +126,7 @@ export default {
         }).then(() => {
           const className = this.type === 'com.gccloud.dashboard.core.module.manage.dto.DashboardPageDTO'
           this.innerLoading = true
-          post(`/dashboard/${this.type}/design/get/template`, {
+          this.$dashboardAxios.post(`/dashboard/${this.type}/design/get/template`, {
             pageTemplateId: id,
             name: this.pageInfo.name,
             code: this.pageInfo.code,

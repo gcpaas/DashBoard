@@ -179,6 +179,7 @@ export default {
       const temp = this.config.customize.linkList[index]
       this.config.customize.linkList[index] = this.config.customize.linkList[index - 1]
       this.config.customize.linkList[index - 1] = temp
+      // this.config.key=
       this.$forceUpdate()
     },
     handleClick (val) {

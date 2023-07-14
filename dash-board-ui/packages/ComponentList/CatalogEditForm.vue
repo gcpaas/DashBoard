@@ -135,7 +135,7 @@
 </template>
 
 <script>
-import { get, post } from 'dashPackages/js/utils/http'
+// import { get, post } from 'dashPackages/js/utils/http'
 import { randomString } from '../js/utils'
 import _ from 'lodash'
 export default {
@@ -181,7 +181,7 @@ export default {
     },
     // 获取分组列表
     getCatalogList () {
-      get(`/dashboard/type/list/${this.catalogType}`)
+      this.$dashboardAxios.get(`/dashboard/type/list/${this.catalogType}`)
         .then((data) => {
           this.tableList = data
           this.dataList = data
@@ -196,7 +196,7 @@ export default {
           return
         }
         if (!this.currentCatalog.id) {
-          post('/dashboard/type/add',
+          this.$dashboardAxios.post('/dashboard/type/add',
             {
               ...this.currentCatalog,
               type: this.catalogType
@@ -206,7 +206,7 @@ export default {
           }).catch(() => {
           })
         } else {
-          post('/dashboard/type/update', { ...this.currentCatalog, type: this.catalogType }).then(data => {
+          this.$dashboardAxios.post('/dashboard/type/update', { ...this.currentCatalog, type: this.catalogType }).then(data => {
             this.catalogVisible = false
             this.getCatalogList()
           }).catch(() => {
@@ -234,7 +234,7 @@ export default {
         type: 'warning',
         customClass: 'db-el-message-box'
       }).then(async () => {
-        post(`/dashboard/type/delete/${catalog.id}`).then(() => {
+        this.$dashboardAxios.post(`/dashboard/type/delete/${catalog.id}`).then(() => {
           this.$message({
             type: 'success',
             message: '删除成功'

@@ -140,7 +140,7 @@
   </el-dialog>
 </template>
 <script>
-import { get } from 'dashPackages/js/utils/http'
+// import { get } from 'dashPackages/js/utils/http'
 import { pageMixins } from 'dashPackages/js/mixins/page'
 import _ from 'lodash'
 export default {
@@ -186,7 +186,7 @@ export default {
     },
     getDataList () {
       this.loading = true
-      get('/dashboard/file', {
+      this.$dashboardAxios.get('/dashboard/file', {
         module: this.code,
         current: this.current,
         size: this.size,
@@ -203,7 +203,7 @@ export default {
     },
     // 获取目录的列表
     getCatalogList () {
-      get('/dashboard/type/list/resourceCatalog')
+      this.$dashboardAxios.get('/dashboard/type/list/resourceCatalog')
         .then((data) => {
           this.options = data
         })

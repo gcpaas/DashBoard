@@ -107,7 +107,7 @@ import { G2 } from '@antv/g2plot'
 import multipleSelectMixin from 'dashPackages/js/mixins/multipleSelectMixin'
 import { getThemeConfig, getScreenInfo } from 'dashPackages/js/api/bigScreenApi'
 import _ from 'lodash'
-import { get } from 'dashPackages/js/utils/http'
+// import { get } from 'dashPackages/js/utils/http'
 import { randomString } from '../js/utils'
 import { isFirefox } from 'dashPackages/js/utils/userAgent'
 import { handleResData } from 'dashPackages/js/store/actions.js'
@@ -259,7 +259,7 @@ export default {
     ]),
     // 判断页面权限
     permission () {
-      get(`/dashboard/permission/check/${this.pageCode}`).then(res => {
+      this.$dashboardAxios.get(`/dashboard/permission/check/${this.pageCode}`).then(res => {
         this.hasPermission = res
         if (res) {
           this.init()

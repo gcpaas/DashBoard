@@ -223,7 +223,7 @@ import SettingTitle from 'dashPackages/SettingTitle/index.vue'
 import { chartSettingMixins } from 'dashPackages/js/mixins/chartSettingMixins'
 import ColorSelect from 'dashPackages/ColorMultipleSelect/index.vue'
 import ColorPicker from 'dashPackages/ColorPicker/index.vue'
-import { get } from 'dashPackages/js/utils/http'
+// import { get } from 'dashPackages/js/utils/http'
 import PosWhSetting from 'dashPackages/DashboardDesign/RightSetting/PosWhSetting.vue'
 export default {
   name: 'BarSetting',
@@ -267,7 +267,7 @@ export default {
   },
   methods: {
     getMapList () {
-      get(
+      this.$dashboardAxios.get(
         `${window.DS_CONFIG?.httpConfigs?.baseURL}/dashboard/design/map/list/${this.config.customize.level}`
       ).then((res) => {
         this.mapList = res

@@ -82,7 +82,7 @@
   </el-dialog>
 </template>
 <script>
-import { get } from 'dashPackages/js/utils/http'
+// import { get } from 'dashPackages/js/utils/http'
 export default {
   name: 'BgImgDialog',
   props: {
@@ -122,7 +122,7 @@ export default {
           }]
         : []
       this.hideUploadImgBtn = this.fileList.length !== 0
-      get('/dashboard/design/bg/list').then(list => {
+      this.$dashboardAxios.get('/dashboard/design/bg/list').then(list => {
         this.bgImgList = list
       })
     },

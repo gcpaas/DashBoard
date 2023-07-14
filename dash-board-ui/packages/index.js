@@ -1,5 +1,9 @@
 import 'dashPackages/assets/style/common/index.scss'
 import 'dashPackages/assets/style/bsTheme.scss'
+
+import * as $dashboardAxios from 'dashPackages/js/utils/http.js'
+
+import $dashboardStore from 'dashPackages/js/store'
 // 仪表盘管理页面
 import DashboardManagement from 'dashPackages/DashboardMag'
 
@@ -14,7 +18,7 @@ import DataSourceManagement from 'dashPackages/DataSourceManagement'
 import DataSetManagement from 'dashPackages/DataSetManagement'
 
 // 仪表盘 vuex store数据
-import dashboardStore from 'dashPackages/js/store'
+// import dashboardStore from 'dashPackages/js/store'
 // 注册基础配置
 import registerConfig from 'dashPackages/js/utils/registerConfig'
 // 更新主题
@@ -36,10 +40,6 @@ const components = [
   DashboardComponentMag
 ]
 
-const $dashboard = {
-  dashboardStore
-}
-
 function install (Vue) {
   components.map(component => {
     Vue.component(component.name, component)
@@ -56,8 +56,9 @@ export {
   DashboardAppRun,
   DashboardSourceMag,
   DashboardComponentMag,
+  $dashboardAxios,
+  $dashboardStore,
 
-  $dashboard,
   registerConfig,
   updateTheme
 }
@@ -72,8 +73,9 @@ export default {
   DashboardAppRun,
   DashboardSourceMag,
   DashboardComponentMag,
+  $dashboardAxios,
+  $dashboardStore,
 
-  $dashboard,
   registerConfig,
   updateTheme
 }

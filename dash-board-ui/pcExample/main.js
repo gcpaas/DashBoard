@@ -10,6 +10,7 @@ import router from './router'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/styles/index.scss'
 import { registerConfig } from '@gcpaas/dash-board-ui'
+import * as $dashboardAxios from 'dashPackages/js/utils/http.js'
 import remoteComponents from '@/remoteComponents/exports.js'
 import customDatasetComponents from '@/customDatasetComponents/exports.js'
 Vue.use(ElementUI, { size: 'mini' })
@@ -47,6 +48,7 @@ registerConfig(
 promise.polyfill()
 // 自定义指令
 Vue.use(ElementUI, { size: 'mini' })
+Vue.prototype.$dashboardAxios = $dashboardAxios
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({

@@ -117,6 +117,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.db-el-dialog{
+  /deep/.el-dialog__body{
+    overflow-y: hidden !important;
+  }
+
+}
 .render-item-wrap {
   width: 100%;
   height: 100%;
