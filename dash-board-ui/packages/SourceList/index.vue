@@ -345,6 +345,7 @@ export default {
     }
 
     .el-select {
+      width: 200px !important;
       margin-right: 20px;
       /deep/.el-input__inner {
         // background-color: #232832 !important;

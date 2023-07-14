@@ -86,16 +86,16 @@
               <div class="opt-wrap">
                 <el-button
                   type="default"
+                  @click="addLinkIcon(index)"
+                >
+                  新增
+                </el-button>
+                <el-button
+                  type="default"
                   :disabled="config.customize.linkList.length === 1"
                   @click="delLink(index)"
                 >
                   删除
-                </el-button>
-                <el-button
-                  type="default"
-                  @click="addLinkIcon(index)"
-                >
-                  新增
                 </el-button>
                 <el-button
                   type="default"
