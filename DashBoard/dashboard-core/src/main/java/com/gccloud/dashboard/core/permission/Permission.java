@@ -11,27 +11,27 @@ import com.gccloud.dataset.constant.DatasetConstant;
 public interface Permission extends DatasetConstant.Permission {
 
     /**
-     * 大屏页面的权限
+     * 仪表盘页面的权限
      */
     interface Dashboard {
 
         /**
-         * 大屏页面/组件的查询接口权限
+         * 仪表盘页面/组件的查询接口权限
          */
         String VIEW = "dashboard:view";
 
         /**
-         * 大屏页面/组件的编辑接口权限
+         * 仪表盘页面/组件的编辑接口权限
          */
         String ADD = "dashboard:add";
 
         /**
-         * 大屏页面/组件的编辑接口权限
+         * 仪表盘页面/组件的编辑接口权限
          */
         String UPDATE = "dashboard:update";
 
         /**
-         * 大屏页面/组件的删除接口权限
+         * 仪表盘页面/组件的删除接口权限
          */
         String DELETE = "dashboard:delete";
 

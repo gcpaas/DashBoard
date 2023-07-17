@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
- * 大屏页面
+ * 仪表盘页面
  * @author hongyang
  * @version 1.0
  * @date 2023/3/13 10:49
@@ -25,20 +25,20 @@ public class DashboardPageDTO extends BasePageDTO {
     private String id;
 
     @NotBlank(message = "名称不能为空", groups = {Update.class, Insert.class})
-    @ApiModelProperty(notes = "大屏名称")
+    @ApiModelProperty(notes = "仪表盘名称")
     private String name;
 
     @NotBlank(message = "编码不能为空", groups = {Update.class})
-    @ApiModelProperty(notes = "大屏唯一标识符")
+    @ApiModelProperty(notes = "仪表盘唯一标识符")
     private String code;
 
-    @ApiModelProperty(notes = "大屏页图标")
+    @ApiModelProperty(notes = "仪表盘页图标")
     private String icon;
 
-    @ApiModelProperty(notes = "大屏首页封面")
+    @ApiModelProperty(notes = "仪表盘首页封面")
     private String coverPicture;
 
-    @ApiModelProperty(notes = "大屏页颜色")
+    @ApiModelProperty(notes = "仪表盘页颜色")
     private String iconColor;
 
     @ApiModelProperty(notes = "排序")
@@ -47,7 +47,7 @@ public class DashboardPageDTO extends BasePageDTO {
     @ApiModelProperty(notes = "备注")
     private String remark;
 
-    @ApiModelProperty(notes = "大屏整体样式")
+    @ApiModelProperty(notes = "仪表盘整体样式")
     private String style;
 
     @ApiModelProperty(notes = "父节点编码")

@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Webjars {
     /**
-     * 大屏背景图
+     * 仪表盘背景图
      */
     public static final List<String> DASHBOARD_BG = Lists.newArrayList("bg1.jpg", "bg2.jpg", "bg3.jpg", "bg4.jpg", "bg5.jpg", "bg6.jpg");
 

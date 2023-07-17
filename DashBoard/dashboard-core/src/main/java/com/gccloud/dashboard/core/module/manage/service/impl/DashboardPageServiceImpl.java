@@ -113,7 +113,7 @@ public class DashboardPageServiceImpl extends ServiceImpl<DashboardPageDao, Page
             FileOutputStream outputStream = new FileOutputStream(filePath);
             outputStream.write(imageBytes);
             outputStream.close();
-            log.info("大屏封面保存至：{}", filePath);
+            log.info("仪表盘封面保存至：{}", filePath);
         } catch (IOException e) {
             log.error(ExceptionUtils.getStackTrace(e));
         }

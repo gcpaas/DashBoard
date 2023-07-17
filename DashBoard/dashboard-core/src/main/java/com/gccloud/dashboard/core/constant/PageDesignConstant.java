@@ -19,12 +19,12 @@ public interface PageDesignConstant {
 
     interface CategoryType {
         /**
-         * 大屏目录
+         * 仪表盘目录
          */
         String DASHBOARD = "dashboardCatalog";
 
         /**
-         * 大屏模板目录
+         * 仪表盘模板目录
          */
         String DASHBOARD_TEMPLATE = "dashboardTemplateCatalog";
 

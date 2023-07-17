@@ -48,7 +48,7 @@ public class DashboardTablesChart extends Chart {
         private Integer pageSize;
 
         /**
-         * 大屏表格属性
+         * 仪表盘表格属性
          */
 
         @ApiModelProperty(notes = "表格主题")

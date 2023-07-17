@@ -49,11 +49,11 @@ public class SwaggerBootstrapConfig implements WebMvcConfigurer {
     @Bean
     public Docket dashboardDocket() {
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("大屏")
+                .title("仪表盘")
                 .version("1.0.0")
                 .build();
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("大屏")
+                .groupName("仪表盘")
                 .apiInfo(apiInfo)
                 .useDefaultResponseMessages(false)
                 .globalResponseMessage(RequestMethod.GET, RESPONSE_MESSAGES)

@@ -14,7 +14,7 @@ import com.gccloud.dashboard.core.module.manage.dto.DashboardSearchDTO;
 public interface IDashboardPageService extends IBasePageService {
 
     /**
-     * 从空白新增大屏页
+     * 从空白新增仪表盘页
      *
      * @param dashboardPageDTO
      * @return
@@ -23,7 +23,7 @@ public interface IDashboardPageService extends IBasePageService {
 
 
     /**
-     * 从模板新增大屏页
+     * 从模板新增仪表盘页
      *
      * @param dashboardPageDTO
      * @return
@@ -31,7 +31,7 @@ public interface IDashboardPageService extends IBasePageService {
     String addByTemplate(DashboardPageDTO dashboardPageDTO);
 
     /**
-     * 根据编码获取大屏页配置
+     * 根据编码获取仪表盘页配置
      *
      * @param dashboardPageDTO
      * @return
@@ -47,14 +47,14 @@ public interface IDashboardPageService extends IBasePageService {
     PageVO<PageEntity> getByCategory(DashboardSearchDTO searchDTO);
 
     /**
-     * 更新大屏页
+     * 更新仪表盘页
      *
      * @param dashboardPageDTO
      */
     void update(DashboardPageDTO dashboardPageDTO);
 
     /**
-     * 复制大屏页
+     * 复制仪表盘页
      * @param dashboardEntity
      * @return
      */
