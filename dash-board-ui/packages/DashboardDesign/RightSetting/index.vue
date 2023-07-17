@@ -72,7 +72,8 @@ export default {
   },
   data () {
     return {
-      activeName: 'data'
+      activeName: 'data',
+       timeout: null,
     }
   },
   computed: {
@@ -114,7 +115,8 @@ export default {
     // 只更新样式部分，不调用接口
     configStyle: {
       handler (val, oldValue) {
-        this.handleConfigChange(val, oldValue, 'configStyle')
+
+           this.handleConfigChange(val, oldValue, 'configStyle')
       },
       deep: true
     },
@@ -131,10 +133,22 @@ export default {
     ...mapMutations('dashboard', [
       'saveTimeLine'
     ]),
+    debounce (delay,obj) {
+      if (this.timeout) {
+        clearTimeout(this.timeout)
+      }
+      this.timeout = setTimeout(() => {
+        this.$emit('updateSetting', { ...obj })
+      }, delay)
+    },
     handleConfigChange (val, oldValue, type) {
       if (!_.isEqual(val, oldValue)) {
         if (type === 'configStyle') {
-          this.$emit('updateSetting', { ...val, type: this.config.type, code: this.config.code })
+          if(this.config.type==='iframeChart'){
+            this.debounce(500,{ ...val, type: this.config.type, code: this.config.code })
+          }else{
+            this.$emit('updateSetting', { ...val, type: this.config.type, code: this.config.code })
+          }
         } else {
           this.$emit('updateDataSetting', this.config)
         }

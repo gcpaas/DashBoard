@@ -55,6 +55,8 @@
               >
                 <el-select
                   v-model="link.target"
+                  class="db-el-select"
+                  popper-class="db-el-select"
                   placeholder="请选择打开方式"
                   clearable
                 >
@@ -170,6 +172,8 @@ export default {
       const temp = this.config.customize.linkList[index]
       this.config.customize.linkList[index] = this.config.customize.linkList[index + 1]
       this.config.customize.linkList[index + 1] = temp
+      this.config.customize.linkList.push({id:1})
+      this.config.customize.linkList.pop()
       this.$forceUpdate()
     },
     up (index) {
@@ -179,7 +183,8 @@ export default {
       const temp = this.config.customize.linkList[index]
       this.config.customize.linkList[index] = this.config.customize.linkList[index - 1]
       this.config.customize.linkList[index - 1] = temp
-      // this.config.key=
+      this.config.customize.linkList.push({id:1})
+      this.config.customize.linkList.pop()
       this.$forceUpdate()
     },
     handleClick (val) {
