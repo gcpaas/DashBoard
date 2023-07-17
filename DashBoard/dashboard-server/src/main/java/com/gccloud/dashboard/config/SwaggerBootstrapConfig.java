@@ -1,7 +1,9 @@
 package com.gccloud.dashboard.config;
 
 import com.gccloud.dashboard.core.constant.DashboardConst;
+import com.gccloud.dataset.constant.DatasetConstant;
 import com.github.xiaoymin.swaggerbootstrapui.annotations.EnableSwaggerBootstrapUI;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -47,11 +49,11 @@ public class SwaggerBootstrapConfig implements WebMvcConfigurer {
     @Bean
     public Docket dashboardDocket() {
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("大屏")
+                .title("仪表盘")
                 .version("1.0.0")
                 .build();
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("大屏")
+                .groupName("仪表盘")
                 .apiInfo(apiInfo)
                 .useDefaultResponseMessages(false)
                 .globalResponseMessage(RequestMethod.GET, RESPONSE_MESSAGES)
@@ -60,7 +62,10 @@ public class SwaggerBootstrapConfig implements WebMvcConfigurer {
                 .globalResponseMessage(RequestMethod.DELETE, RESPONSE_MESSAGES)
                 .select()
                 // 包扫描路径
-                .apis(RequestHandlerSelectors.basePackage(DashboardConst.ScanPackage.COMPONENT))
+                .apis(Predicates.or(
+                        RequestHandlerSelectors.basePackage(DashboardConst.ScanPackage.COMPONENT),
+                        RequestHandlerSelectors.basePackage(DatasetConstant.ScanPackage.COMPONENT)
+                        ))
                 .paths(PathSelectors.any())
                 .build();
     }

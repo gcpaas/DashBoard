@@ -37,7 +37,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/dashboard/design")
-@Api(tags = "大屏页以及大屏组件设计")
+@Api(tags = "仪表盘页以及仪表盘组件设计")
 public class DashboardPageController {
 
     @Resource
@@ -47,7 +47,7 @@ public class DashboardPageController {
 
     @ApiPermission(permissions = {Permission.Dashboard.VIEW})
     @GetMapping("/info/code/{code}")
-    @ApiOperation(value = "大屏页/组件详情", position = 10, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "仪表盘页/组件详情", position = 10, produces = MediaType.APPLICATION_JSON_VALUE)
     public MixinsResp<DashboardPageDTO> info(@PathVariable("code") String code) {
         PageEntity dashboard = dashboardPageService.getByCode(code);
         DashboardPageDTO dashboardConfig = (DashboardPageDTO) dashboard.getConfig();
@@ -59,7 +59,7 @@ public class DashboardPageController {
 
     @ApiPermission(permissions = {Permission.Dashboard.VIEW})
     @GetMapping("/page")
-    @ApiOperation(value = "大屏/组件分页列表", position = 10, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "仪表盘/组件分页列表", position = 10, produces = MediaType.APPLICATION_JSON_VALUE)
     public MixinsResp<PageVO<PageEntity>> page(DashboardSearchDTO searchDTO) {
         PageVO<PageEntity> page = dashboardPageService.getByCategory(searchDTO);
         MixinsResp<PageVO<PageEntity>> resp = new MixinsResp<PageVO<PageEntity>>().setData(page);
@@ -70,7 +70,7 @@ public class DashboardPageController {
 
     @ApiPermission(permissions = {Permission.Dashboard.ADD})
     @PostMapping("/add")
-    @ApiOperation(value = "从空白新增大屏/组件", position = 20, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "从空白新增仪表盘/组件", position = 20, produces = MediaType.APPLICATION_JSON_VALUE)
     public R<String> add(@RequestBody DashboardPageDTO dashboardPageDTO) {
         ValidatorUtils.validateEntity(dashboardPageDTO, Insert.class);
         dashboardPageService.add(dashboardPageDTO);
@@ -82,7 +82,7 @@ public class DashboardPageController {
 
     @ApiPermission(permissions = {Permission.Dashboard.UPDATE})
     @PostMapping("/update")
-    @ApiOperation(value = "修改大屏/组件", position = 30, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "修改仪表盘/组件", position = 30, produces = MediaType.APPLICATION_JSON_VALUE)
     public R<String> update(@RequestBody DashboardPageDTO dashboardPageDTO) {
         ValidatorUtils.validateEntity(dashboardPageDTO, Update.class);
         if (StringUtils.isBlank(dashboardPageDTO.getParentCode())) {
@@ -94,7 +94,7 @@ public class DashboardPageController {
 
     @ApiPermission(permissions = {Permission.Dashboard.DELETE})
     @PostMapping("/delete/{code}")
-    @ApiOperation(value = "删除大屏/组件", position = 40, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "删除仪表盘/组件", position = 40, produces = MediaType.APPLICATION_JSON_VALUE)
     public R<Void> delete(@PathVariable String code) {
         PageEntity dashboardEntity = dashboardPageService.getByCode(code);
         if (dashboardEntity == null) {
@@ -106,11 +106,11 @@ public class DashboardPageController {
 
     @ApiPermission(permissions = {Permission.Dashboard.ADD})
     @PostMapping("/copy/{code}")
-    @ApiOperation(value = "复制大屏/组件", position = 50, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "复制仪表盘/组件", position = 50, produces = MediaType.APPLICATION_JSON_VALUE)
     public R<String> copy(@PathVariable String code) {
         PageEntity dashboardPage = dashboardPageService.getByCode(code);
         if (dashboardPage == null) {
-            throw new GlobalException("大屏页不存在");
+            throw new GlobalException("仪表盘页不存在");
         }
         String newCode = dashboardPageService.copy(dashboardPage);
         return R.success(newCode);
@@ -118,7 +118,7 @@ public class DashboardPageController {
 
     @ApiPermission(permissions = {Permission.Dashboard.ADD})
     @PostMapping("/add/template")
-    @ApiOperation(value = "从模板新增大屏页", position = 20, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "从模板新增仪表盘页", position = 20, produces = MediaType.APPLICATION_JSON_VALUE)
     public R<String> addByTemplate(@RequestBody DashboardPageDTO dashboardPageDTO) {
         String code = dashboardPageService.addByTemplate(dashboardPageDTO);
         if (StringUtils.isBlank(dashboardPageDTO.getParentCode())) {
