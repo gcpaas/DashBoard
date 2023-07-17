@@ -71,7 +71,11 @@
         @updateSetting="updateSetting"
         @updateDataSetting="updateDataSetting"
         @updatePage="updatePage"
-      />
+      >
+        <template #dataSetSelect>
+          <slot name="dataSetSelect" />
+        </template>
+      </SettingPanel>
       <!-- 添加资源面板 -->
       <SourceDialog
         ref="SourceDialog"
@@ -107,7 +111,6 @@ import { G2 } from '@antv/g2plot'
 import multipleSelectMixin from 'dashPackages/js/mixins/multipleSelectMixin'
 import { getThemeConfig, getScreenInfo } from 'dashPackages/js/api/bigScreenApi'
 import _ from 'lodash'
-// import { get } from 'dashPackages/js/utils/http'
 import { randomString } from '../js/utils'
 import { isFirefox } from 'dashPackages/js/utils/userAgent'
 import { handleResData } from 'dashPackages/js/store/actions.js'

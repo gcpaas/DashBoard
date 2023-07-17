@@ -19,7 +19,11 @@
       :ds-value="dsValue"
       @getDsId="getDsId"
       @getSelectDs="getSelectDs"
-    />
+    >
+      <template #dataSetSelect>
+        <slot name="dataSetSelect" />
+      </template>
+    </data-set-dialog>
   </div>
 </template>
 

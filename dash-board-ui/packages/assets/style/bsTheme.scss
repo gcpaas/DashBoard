@@ -515,3 +515,17 @@
    background: var(--db-el-background-1);
  }
 }
+
+.db-el-tabs{
+  .el-tabs__item{
+    color: var(--db-el-text) !important;
+  }
+  .is-active{
+    color: var(--db-el-color-primary) !important;
+  }
+  .el-tabs__nav-wrap{
+    &:after{
+      background-color: var(--db-background-1) !important;
+    }
+  }
+}

@@ -15,7 +15,11 @@
         <DataSetting
           ref="dataSetting"
           :key="config.code"
-        />
+        >
+          <template #dataSetSelect>
+            <slot name="dataSetSelect" />
+          </template>
+        </DataSetting>
       </el-tab-pane>
       <el-tab-pane
         label="样式"
