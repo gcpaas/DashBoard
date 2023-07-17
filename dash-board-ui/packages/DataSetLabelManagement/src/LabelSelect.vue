@@ -103,7 +103,6 @@
           <el-form-item>
             <el-button
               v-show="isManage"
-              type="primary"
               class="db-el-button-default"
               @click="insertLabel"
             >
