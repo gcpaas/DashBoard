@@ -335,6 +335,10 @@
   text-align: right;
   .el-select-dropdown__wrap{
     text-align: center;
+    .el-select-dropdown__list {
+      padding: 0 0 6px 0;
+      margin-bottom: 10px !important;
+    }
   }
 }
 
@@ -403,6 +407,7 @@
       display: none !important;
     }
   }
+
 }
 
 .db-slider-wrap {

@@ -197,21 +197,22 @@ export default {
     init () {
       if (!this.pageCode) { return }
       this.changePageLoading(true)
+      this.changePageLoading(false)
       this.initLayout(this.pageCode).then(() => {
         const themeName = this.pageConfig.customTheme
         if (this.pageConfig.customTheme === 'custom') {
-          getThemeConfig().then((res) => {
-            // 初始化时如果就是自定义主题则统一注册
-            const { registerTheme } = G2
-            registerTheme(themeName, { ...res.chart })
-            const pageConfig = this.pageConfig
-            pageConfig.themeJson = res
-            this.changePageConfig(pageConfig)
-            this.styleSet()
-            this.changePageLoading(false)
-          })
+          // getThemeConfig().then((res) => {
+          //   // 初始化时如果就是自定义主题则统一注册
+          //   const { registerTheme } = G2
+          //   registerTheme(themeName, { ...res.chart })
+          //   const pageConfig = this.pageConfig
+          //   pageConfig.themeJson = res
+            // this.changePageConfig(pageConfig)
+          //   this.styleSet()
+          //   this.changePageLoading(false)
+          // })
         } else {
-          this.changePageLoading(false)
+          // this.changePageLoading(false)
         }
         this.getParentWH()
       })

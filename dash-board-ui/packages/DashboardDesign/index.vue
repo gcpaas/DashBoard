@@ -224,7 +224,8 @@ export default {
   //   })
   // },
   created () {
-    this.changePageLoading(true)
+    // this.changePageLoading(true)
+    this.changePageLoading(false)
     this.permission()
     /**
      * 以下是为了解决在火狐浏览器上推拽时弹出tab页到搜索问题
@@ -343,22 +344,22 @@ export default {
       )
     },
     init () {
-      this.changePageLoading(true)
+      // this.changePageLoading(true)
       this.initLayout(this.$route.query.code || this.code)
         .then(() => {
           const themeName = this.pageConfig.customTheme
           if (!['dark', 'light', 'auto'].includes(themeName)) {
-            getThemeConfig().then((res) => {
-              // 初始化时如果就是自定义主题则统一注册
-              const { registerTheme } = G2
-              registerTheme(themeName, { ...res.chart })
-              const pageConfig = this.pageConfig
-              pageConfig.themeJson = res
-              this.changePageConfig(pageConfig)
-              this.changePageLoading(false)
-            })
+            // getThemeConfig().then((res) => {
+            //   // 初始化时如果就是自定义主题则统一注册
+            //   const { registerTheme } = G2
+            //   registerTheme(themeName, { ...res.chart })
+            //   const pageConfig = this.pageConfig
+            //   pageConfig.themeJson = res
+            //   this.changePageConfig(pageConfig)
+            //   this.changePageLoading(false)
+            // })
           } else {
-            this.changePageLoading(false)
+            // this.changePageLoading(false)
           }
         })
         .finally(() => {

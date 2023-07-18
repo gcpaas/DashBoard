@@ -476,7 +476,7 @@ export default {
     getComponents (componentName) {
       const components = Object.values(this.$options.components)
       let remoteComponentData = null
-      if (window.BS_CONFIG?.customDatasetComponents.length > 0) {
+      if (window.BS_CONFIG?.customDatasetComponents&&window.BS_CONFIG?.customDatasetComponents.length > 0) {
         // 获取远程组件
         remoteComponentData = window.BS_CONFIG?.customDatasetComponents.find(item => item.config.componentName === componentName)
       }
