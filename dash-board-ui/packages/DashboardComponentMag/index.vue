@@ -28,8 +28,10 @@ export default {
 
 <style lang="scss" scoped>
 .db-manage-main-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: row;
-  // margin:16px 16px 16px 0
+  background:var(--db-el-background-2) ;
 }
 </style>

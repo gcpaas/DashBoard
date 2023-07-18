@@ -1,160 +1,162 @@
 <template>
   <div class="dashboard-list-wrap">
-    <div class="top-search-wrap">
-      <el-input
-        v-model="searchKey"
-        class="db-el-input"
-        placeholder="请输入图片名称"
-        prefix-icon="el-icon-search"
-        clearable
-        @clear="reSearch"
-        @keyup.enter.native="reSearch"
-      />
-      <el-select
-        v-model="extend"
-        class="db-el-select"
-        popper-class="db-el-select"
-        placeholder="请选择图片格式"
-        clearable
-        @change="reSearch"
-      >
-        <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
+    <div class="internal-box">
+      <div class="top-search-wrap">
+        <el-input
+          v-model="searchKey"
+          class="db-el-input"
+          placeholder="请输入图片名称"
+          prefix-icon="el-icon-search"
+          clearable
+          @clear="reSearch"
+          @keyup.enter.native="reSearch"
         />
-      </el-select>
-      <el-button
-        size="small"
-        style="margin-right: 20px"
-        type="primary"
-        @click="reSearch"
-      >
-        搜索
-      </el-button>
-      <el-upload
-        accept="image/*, video/*"
-        class="upload-demo"
-        :action="upLoadUrl"
-        :headers="headers"
-        :data="{ module: code }"
-        :before-upload="beforeUpload"
-        :on-success="uploadSuccess"
-        :on-error="uploadError"
-        multiple
-        :file-list="fileList"
-        :show-file-list="false"
-      >
+        <el-select
+          v-model="extend"
+          class="db-el-select"
+          popper-class="db-el-select"
+          placeholder="请选择图片格式"
+          clearable
+          @change="reSearch"
+        >
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
         <el-button
           size="small"
+          style="margin-right: 20px"
           type="primary"
+          @click="reSearch"
         >
-          上传资源
+          搜索
         </el-button>
-      </el-upload>
-    </div>
-    <div
-      v-if="list.length !== 0"
-      v-loading="loading"
-      class="list-wrap db-scrollbar"
-      element-loading-text="加载中"
-      :style="{
-        display: gridComputed ? 'grid' : 'flex',
-        justifyContent: gridComputed ? 'space-around' : 'flex-start'
-      }"
-    >
-      <!-- <div v-if="list.length !== 0"> -->
+        <el-upload
+          accept="image/*, video/*"
+          class="upload-demo"
+          :action="upLoadUrl"
+          :headers="headers"
+          :data="{ module: code }"
+          :before-upload="beforeUpload"
+          :on-success="uploadSuccess"
+          :on-error="uploadError"
+          multiple
+          :file-list="fileList"
+          :show-file-list="false"
+        >
+          <el-button
+            size="small"
+            type="primary"
+          >
+            上传资源
+          </el-button>
+        </el-upload>
+      </div>
       <div
-        v-for="screen in list"
-        :key="screen.id"
-        class="dashboard-card-wrap"
+        v-if="list.length !== 0"
+        v-loading="loading"
+        class="list-wrap db-scrollbar"
+        element-loading-text="加载中"
         :style="{
-          width: gridComputed ? 'auto' : '290px'
+          display: gridComputed ? 'grid' : 'flex',
+          justifyContent: gridComputed ? 'space-around' : 'flex-start'
         }"
       >
-        <div class="dashboard-card-inner">
-          <div class="screen-card__hover">
-            <div class="screen-card__hover-box">
-              <div class="preview">
-                <div
-                  class="screen-card__oper-label circle"
-                  @click="preview(screen)"
-                >
-                  <span>预览</span>
-                </div>
-                <div
-                  class="circle"
-                  @click="downLoad(screen)"
-                >
-                  <span>下载</span>
-                </div>
-                <div
-                  class="circle"
-                  @click="del(screen)"
-                >
-                  <span>删除</span>
-                </div>
-                <div
-                  class="circle"
-                  @click="copy(screen)"
-                >
-                  <span>链接</span>
+        <!-- <div v-if="list.length !== 0"> -->
+        <div
+          v-for="screen in list"
+          :key="screen.id"
+          class="dashboard-card-wrap"
+          :style="{
+            width: gridComputed ? 'auto' : '290px'
+          }"
+        >
+          <div class="dashboard-card-inner">
+            <div class="screen-card__hover">
+              <div class="screen-card__hover-box">
+                <div class="preview">
+                  <div
+                    class="screen-card__oper-label circle"
+                    @click="preview(screen)"
+                  >
+                    <span>预览</span>
+                  </div>
+                  <div
+                    class="circle"
+                    @click="downLoad(screen)"
+                  >
+                    <span>下载</span>
+                  </div>
+                  <div
+                    class="circle"
+                    @click="del(screen)"
+                  >
+                    <span>删除</span>
+                  </div>
+                  <div
+                    class="circle"
+                    @click="copy(screen)"
+                  >
+                    <span>链接</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="dashboard-card-img">
-            <el-image
-              :src="screen.url"
-              fit="contain"
-              style="width: 100%; height: 100%"
-            >
-              <div
-                slot="placeholder"
-                class="image-slot"
+            <div class="dashboard-card-img">
+              <el-image
+                :src="screen.url"
+                fit="contain"
+                style="width: 100%; height: 100%"
               >
-                加载中···
+                <div
+                  slot="placeholder"
+                  class="image-slot"
+                >
+                  加载中···
+                </div>
+              </el-image>
+            </div>
+            <div class="dashboard-bottom">
+              <div
+                class="left-bigscreen-title"
+                :title="screen.originalName"
+              >
+                {{ screen.originalName }}
               </div>
-            </el-image>
-          </div>
-          <div class="dashboard-bottom">
-            <div
-              class="left-bigscreen-title"
-              :title="screen.originalName"
-            >
-              {{ screen.originalName }}
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div
-      v-else
-      class="empty"
-    >
-      暂无数据
-    </div>
+      <div
+        v-else
+        class="empty"
+      >
+        暂无数据
+      </div>
 
-    <div class="footer-pagination-wrap">
-      <!-- <div class="footer-pagination-wrap-text">
-        总共 {{ totalCount }} 个项目
-      </div> -->
-      <div class="db-pagination">
-        <el-pagination
-          class="db-el-pagination"
-          popper-class="db-el-pagination"
-          background
-          layout="total, prev, pager, next, sizes"
-          :page-size="size"
-          prev-text="上一页"
-          next-text="下一页"
-          :total="totalCount"
-          :page-sizes="[10, 20, 50, 100]"
-          :current-page="current"
-          @current-change="currentChangeHandle"
-          @size-change="sizeChangeHandle"
-        />
+      <div class="footer-pagination-wrap">
+        <!-- <div class="footer-pagination-wrap-text">
+          总共 {{ totalCount }} 个项目
+        </div> -->
+        <div class="db-pagination">
+          <el-pagination
+            class="db-el-pagination"
+            popper-class="db-el-pagination"
+            background
+            layout="total, prev, pager, next, sizes"
+            :page-size="size"
+            prev-text="上一页"
+            next-text="下一页"
+            :total="totalCount"
+            :page-sizes="[10, 20, 50, 100]"
+            :current-page="current"
+            @current-change="currentChangeHandle"
+            @size-change="sizeChangeHandle"
+          />
+        </div>
       </div>
     </div>
     <!-- 新增或编辑弹窗 -->
@@ -323,12 +325,16 @@ export default {
 @import '../assets/style/bsTheme.scss';
 .dashboard-list-wrap {
   position: relative;
-  height: calc(100vh - 192px);
-  padding: 16px;
+  height: 100%;
   margin-left: 16px;
   color: #9ea9b2;
   background-color: var(--db-background-2);
   // background-color: var(--db-background-leftPanel) !important;
+
+  .internal-box {
+    height: calc(100% - 32px);
+    padding: 16px;
+  }
 
   .top-search-wrap {
     display: flex;
@@ -358,7 +364,7 @@ export default {
     overflow: auto;
     // 间隙自适应
     justify-content: space-around;
-    max-height: calc(100% - 100px);
+    max-height: calc(100% - 90px);
     padding: 2px 3px 10px 2px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

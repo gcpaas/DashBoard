@@ -79,7 +79,7 @@ export default {
     color: var(--db-el-title);
     background-color: var(--db-background-2);
     .side-catalog-box{
-      height: calc(100% - 66px);
+      height: calc(100% - 50px);
       overflow-y: auto;
       .side-catalog-all{
         font-weight: bold;
