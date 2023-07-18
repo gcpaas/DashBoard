@@ -16,8 +16,11 @@
           ref="dataSetting"
           :key="config.code"
         >
-          <template #dataSetSelect>
-            <slot name="dataSetSelect" />
+          <template #dataSetSelect="{value}">
+            <slot
+              name="dataSetSelect"
+              :value="value"
+            />
           </template>
         </DataSetting>
       </el-tab-pane>
@@ -77,7 +80,7 @@ export default {
   data () {
     return {
       activeName: 'data',
-       timeout: null,
+      timeout: null
     }
   },
   computed: {
@@ -119,8 +122,7 @@ export default {
     // 只更新样式部分，不调用接口
     configStyle: {
       handler (val, oldValue) {
-
-           this.handleConfigChange(val, oldValue, 'configStyle')
+        this.handleConfigChange(val, oldValue, 'configStyle')
       },
       deep: true
     },
@@ -137,7 +139,7 @@ export default {
     ...mapMutations('dashboard', [
       'saveTimeLine'
     ]),
-    debounce (delay,obj) {
+    debounce (delay, obj) {
       if (this.timeout) {
         clearTimeout(this.timeout)
       }
@@ -148,9 +150,9 @@ export default {
     handleConfigChange (val, oldValue, type) {
       if (!_.isEqual(val, oldValue)) {
         if (type === 'configStyle') {
-          if(this.config.type==='iframeChart'){
-            this.debounce(500,{ ...val, type: this.config.type, code: this.config.code })
-          }else{
+          if (this.config.type === 'iframeChart') {
+            this.debounce(500, { ...val, type: this.config.type, code: this.config.code })
+          } else {
             this.$emit('updateSetting', { ...val, type: this.config.type, code: this.config.code })
           }
         } else {
