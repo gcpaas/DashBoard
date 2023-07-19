@@ -57,10 +57,12 @@
         <el-form
           ref="queryForm"
           :model="queryForm"
+          :inline="true"
           class="filter-container"
           @submit.native.prevent
         >
           <el-form-item
+            label='数据集名称'
             class="filter-item"
             prop="name"
           >
@@ -74,6 +76,7 @@
             />
           </el-form-item>
           <el-form-item
+            label='标签'
             class="filter-item"
             prop="labelIds"
           >
@@ -104,6 +107,14 @@
               @click="handleSearch()"
             >
               查询
+            </el-button>
+          </el-form-item>
+          <el-form-item class="filter-item">
+            <el-button
+              :loading="dataListLoading"
+              @click="clearSearch()"
+            >
+              重置
             </el-button>
           </el-form-item>
           <el-form-item class="filter-item">
@@ -162,6 +173,16 @@
             >
               <template slot-scope="scope">
                 <span>{{ datasetTypeList.find(type=>type.datasetType===scope.row.datasetType) ? datasetTypeList.find(type=>type.datasetType===scope.row.datasetType).name : '其他' }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column
+              prop="labelIds"
+              label="标签"
+              align="center"
+              show-overflow-tooltip
+            >
+              <template slot-scope="scope">
+                <span>{{getLabels(scope.row.labelIds).join(',')}}</span>
               </template>
             </el-table-column>
             <el-table-column
@@ -352,7 +373,7 @@ export default {
       }
     }
   },
-  mounted () {
+  created () {
     this.init()
     if (/Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)) {
       // 当前浏览器为Safari浏览器
@@ -365,6 +386,13 @@ export default {
     }
   },
   methods: {
+    getLabels(list){
+      const arr=[]
+      list?.forEach((item)=>{
+        arr.push(this.labelList.filter(x=>x.id==item)[0].labelName)
+      })
+      return arr
+    },
     toggleRowSelection () {
       this.$nextTick(() => {
         const dsIds = this.multipleSelection.map(ds => ds.id)
@@ -522,9 +550,7 @@ export default {
         })
       }
       this.getDataList()
-      getLabelList().then(res => {
-        this.labelList = res
-      })
+
     },
     // 新增数据集
     addDataset () {
@@ -537,6 +563,9 @@ export default {
     },
     // 获取表格数据
     getDataList () {
+      getLabelList().then(res => {
+        this.labelList = res
+      })
       this.dataListLoading = true
       datasetPage({
         current: this.current,
@@ -589,6 +618,15 @@ export default {
       this.queryForm.typeId = ''
       // 清除左侧机构树的选中状态
       this.$refs.datasetsTypeTree.ztreeObj.cancelSelectedNode()
+      this.getDataList()
+    },
+    clearSearch(){
+      this.current = 1
+      this.queryForm.typeId = ''
+      // 清除左侧机构树的选中状态
+      this.$refs.datasetsTypeTree.ztreeObj.cancelSelectedNode()
+      this.queryForm.labelIds=[]
+      this.queryForm.name=''
       this.getDataList()
     },
     // 拖拽修改div宽度
