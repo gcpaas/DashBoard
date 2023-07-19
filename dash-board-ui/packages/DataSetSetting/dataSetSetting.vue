@@ -129,7 +129,7 @@ export default {
     },
     sure () {
       this.dataSetVisible = false
-      const getSelectDs = this.$refs.dataSetSetting.getSelectDs()
+      const getSelectDs = this.componentInstance.getSelectDs()
       if (Object.prototype.hasOwnProperty.call(getSelectDs, 'id')) {
         this.dataSetId = getSelectDs.id
       }
