@@ -76,7 +76,7 @@ export default {
   },
   methods: {
     init () {
-      const arr = this.newColors.split(',') || []
+      const arr = this.newColors.split(',').map(data => data.trim()) || []
       this.position = arr[0] || 'left'
       const s = arr[1] || '#ffffff'
       const e = arr[2] || '#ffffff'
