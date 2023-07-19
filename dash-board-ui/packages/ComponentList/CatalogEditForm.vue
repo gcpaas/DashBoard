@@ -223,7 +223,7 @@ export default {
       this.catalogVisible = true
     },
     editCatalog (row) {
-      this.currentCatalog = row
+      this.currentCatalog = _.cloneDeep(row)
       this.catalogVisible = true
     },
     // 删除目录

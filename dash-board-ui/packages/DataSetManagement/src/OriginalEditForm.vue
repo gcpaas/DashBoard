@@ -224,6 +224,7 @@
                 >
                   <el-radio-group
                     v-model="dataForm.repeatStatus"
+                    @input="initData"
                     class="db-radio-wrap"
                     :disabled="!isEdit"
                   >
@@ -619,6 +620,9 @@ export default {
     this.init()
   },
   methods: {
+    initData(){
+      this.getData()
+    },
     /**
      * 初始化
      * 1.获取分类树
@@ -1138,12 +1142,14 @@ export default {
 }
 
 .db-pagination {
+  position: relative !important;
+  bottom: 0 !important;
+  padding: 0 12px 16px 16px !important;
   ::v-deep .el-input__inner {
     width: 110px !important;
     border: none;
     background: var(--db-el-background-1);
   }
-
-
 }
+
 </style>

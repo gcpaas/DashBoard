@@ -198,13 +198,13 @@
           >
             确定
           </el-button>
-          <el-button
+          <!-- <el-button
             v-show="isManage"
             class="db-el-button-default"
             @click="handleClose"
           >
             返回
-          </el-button>
+          </el-button> -->
         </div>
         <label-edit
           v-if="editFormVisible"
