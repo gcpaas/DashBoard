@@ -159,8 +159,7 @@
                     :dataset-id="datasetId"
                     :id-list="dataForm.labelIds"
                     @commit="(ids) =>{dataForm.labelIds = ids}"
-                  >
-                  </label-select>
+                  />
                 </el-form-item>
               </el-col>
             </el-row>
@@ -698,6 +697,8 @@
                   clearable
                   class="db-el-input"
                   placeholder="请输入备注"
+                  rows="2"
+                  maxlength="200"
                 />
               </template>
             </el-table-column>
@@ -1093,7 +1094,6 @@ export default {
         })
       } else {
         this.saveFun(formName)
-
       }
     },
     /**
