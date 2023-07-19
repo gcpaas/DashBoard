@@ -107,6 +107,8 @@
                 clearable
                 class="db-el-input"
                 placeholder="请输入备注"
+                rows="2"
+                maxlength="200"
               />
             </template>
           </el-table-column>
