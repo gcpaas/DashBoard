@@ -389,7 +389,7 @@ export default {
     getLabels(list){
       const arr=[]
       list?.forEach((item)=>{
-        arr.push(this.labelList.filter(x=>x.id==item)[0].labelName)
+        arr.push(this.labelList.filter(x=>x.id==item)[0]?.labelName)
       })
       return arr
     },
