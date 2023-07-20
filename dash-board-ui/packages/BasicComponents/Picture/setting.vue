@@ -119,25 +119,25 @@ export default {
       accept: 'image/*',
       hideUpload: false,
       rules: {
-        'customize.url': [
-          { required: true, message: '请输入URL地址', trigger: 'blur' },
-          // 地址校验
-          {
-            validator: (rule, value, callback) => {
-              if (value) {
-                const reg = /^(http|https):\/\/([\w.]+\/?)\S*/
-                if (!reg.test(value)) {
-                  callback(new Error('请输入正确的URL地址'))
-                } else {
-                  callback()
-                }
-              } else {
-                callback()
-              }
-            },
-            trigger: 'blur'
-          }
-        ]
+        // 'customize.url': [
+        //   { required: true, message: '请输入URL地址', trigger: 'blur' },
+        //   // 地址校验
+        //   {
+        //     validator: (rule, value, callback) => {
+        //       if (value) {
+        //         const reg = /^(http|https):\/\/([\w.]+\/?)\S*/
+        //         if (!reg.test(value)) {
+        //           callback(new Error('请输入正确的URL地址'))
+        //         } else {
+        //           callback()
+        //         }
+        //       } else {
+        //         callback()
+        //       }
+        //     },
+        //     trigger: 'blur'
+        //   }
+        // ]
       }
     }
   },

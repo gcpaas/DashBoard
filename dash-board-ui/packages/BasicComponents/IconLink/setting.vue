@@ -129,13 +129,13 @@ export default {
   data () {
     return {
       rules: {
-        name: [
-          { required: true, message: '请输入名称', trigger: 'blur' }
-        ],
-        url: [
-          { required: true, message: '请输入链接地址', trigger: 'blur' },
-          // { type: 'url', message: '请输入正确的链接地址', trigger: 'blur' }
-        ]
+        // name: [
+        //   { required: true, message: '请输入名称', trigger: 'blur' }
+        // ],
+        // url: [
+        //   { required: true, message: '请输入链接地址', trigger: 'blur' },
+        //   // { type: 'url', message: '请输入正确的链接地址', trigger: 'blur' }
+        // ]
       }
     }
   },
