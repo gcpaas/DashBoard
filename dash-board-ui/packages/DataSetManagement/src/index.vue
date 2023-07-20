@@ -211,8 +211,9 @@
                   </el-button>
                    <el-button
                     class="db-el-button-default"
+                    :loading="scope.row.loading"
                     :disabled="scope.row.editable === 1 && !appCode"
-                    @click="delDataset(scope.row.id)"
+                    @click="delDataset(scope.row)"
                   >
                     删除
                   </el-button>
@@ -330,6 +331,7 @@ export default {
   data () {
     return {
       reasonList:[],
+       deling:false,
       datasetType: null,
       isEdit: false,
       categoryData: [],
@@ -463,9 +465,10 @@ export default {
       this.curRow = currentRow
     },
     // 删除数据集
-    delDataset (id) {
-      datasetCheck(id).then((res)=>{
-        console.log(res)
+    delDataset (row) {
+       row.loading=true
+      datasetCheck(row.id).then((res)=>{
+        row.loading=false
         if(res.canDelete){
           this.$confirm('确定删除当前数据集吗?', '提示', {
             confirmButtonText: '确定',
@@ -473,7 +476,7 @@ export default {
             type: 'warning',
             customClass: 'db-el-message-box'
           }).then(() => {
-            datasetRemove(id).then(res => {
+            datasetRemove(row.id).then(res => {
               this.init(false)
               this.$message.success('删除成功')
             })
@@ -591,6 +594,9 @@ export default {
         datasetType:this.queryForm.datasetType===''?[...this.allType]:[this.queryForm.datasetType]
       }).then((data) => {
         this.tableData = data.list
+        this.tableData.forEach(r => {
+          this.$set(r, 'loading', false)
+        })
         if (this.isDialog) {
           if (this.multiple && this.multipleSelection.length) {
             this.toggleRowSelection()

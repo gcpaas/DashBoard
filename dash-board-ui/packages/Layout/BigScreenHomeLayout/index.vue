@@ -39,12 +39,29 @@ export default {
   },
   computed: {
     title () {
+      if (this.$route.query.edit) return '智能报表平台'
       return window?.DS_CONFIG?.starter?.title
     },
     logo () {
       return window?.DS_CONFIG?.starter?.logo || require('./images/logo.png')
     },
     tabList () {
+      if (this.$route.query.edit) {
+        return [
+          {
+            id: 1,
+            name: '资源库',
+            path: window?.DS_CONFIG?.routers?.sourceUrl || '/dashboard-source',
+            icon: 'icon-tupian'
+          },
+          {
+            id: 2,
+            name: '组件库',
+            path: window?.DS_CONFIG?.routers?.componentUrl || '/dashboard-components',
+            icon: 'icon-zujian1'
+          }
+        ]
+      }
       return [
         {
           id: 0,
@@ -89,10 +106,18 @@ export default {
   },
   created () {},
   methods: {
+
     changeTab (tab) {
+      if (this.$route.query.edit) {
+        this.$router.push({
+          path: tab.path,
+          query: { edit: 1 }
+        })
+      }else{
       this.$router.push({
         path: tab.path
       })
+      }
     }
   }
 }

@@ -336,6 +336,12 @@
       >
         确定
       </el-button>
+      <el-button
+        type='primary'
+        @click="jumpto"
+      >
+        组件管理
+      </el-button>
     </div>
   </el-dialog>
 </template>
@@ -385,6 +391,10 @@ export default {
     this.remoteComponentlist = [...innerRemoteComponents, ...getRemoteComponents()]
   },
   methods: {
+    jumpto(){
+      let {href} = this.$router.resolve(`/dashboard-components?edit=1`)
+      window.open(href,'_blank')
+    },
     chooseComponent (component) {
       this.focus = _.cloneDeep(component)
     },

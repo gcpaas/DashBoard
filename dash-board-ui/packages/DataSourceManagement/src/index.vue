@@ -96,6 +96,7 @@
               </el-button>
               <el-button
                 class="db-el-button-default"
+                :loading="scope.row.loading"
                 :disabled="scope.row.editable == 1 && !appCode"
                 @click="handleDelete(scope.row)"
               >
@@ -172,6 +173,7 @@ export default {
       reasonList:[],
       testBtnLoading: [],
       loadingText: '',
+      deling:false,
       searchLoading: false,
       dataSourceList: [],
       searchForm: {
@@ -234,6 +236,7 @@ export default {
         this.dataSourceList = data.list
         this.dataSourceList.forEach(r => {
           r.status = 0
+          this.$set(r, 'loading', false)
           if (r.id === this.sourceId) {
             this.curRow = r
           }
@@ -258,8 +261,10 @@ export default {
     handleDelete (row) {
       // eslint-disable-next-line eqeqeq
       if (row.editable == 1 && !this.appCode) return
+      row.loading=true
+      console.log(row.loading)
       dataSourceCheck(row.id).then((res)=>{
-        console.log(res)
+        row.loading=false
         if(res.canDelete){
           this.$confirm('确定删除当前数据源吗?', '提示', {
             confirmButtonText: '确定',

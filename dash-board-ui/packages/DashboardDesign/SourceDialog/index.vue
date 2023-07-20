@@ -136,6 +136,12 @@
       >
         确定
       </el-button>
+      <el-button
+        type='primary'
+        @click="jumpto"
+      >
+        资源管理
+      </el-button>
     </div>
   </el-dialog>
 </template>
@@ -165,6 +171,10 @@ export default {
   },
   mounted () {},
   methods: {
+     jumpto(){
+      let {href} = this.$router.resolve(`/dashboard-source?edit=1`)
+      window.open(href,'_blank')
+    },
     chooseImg (img) {
       this.focus = _.cloneDeep(img)
     },
