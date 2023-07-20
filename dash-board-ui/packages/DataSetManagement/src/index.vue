@@ -245,6 +245,10 @@
       :dataset-type-list="datasetTypeList"
       @openAddForm="openAddForm"
     />
+    <checkDatasource
+      ref="checkDatasource"
+      :reasonList="reasonList"
+      />
     <component
       :is="componentData.component"
       v-if="datasetType"
@@ -269,10 +273,11 @@ import table from 'dashPackages/js/utils/table.js'
 import ScriptEditForm from './ScriptEditForm.vue'
 import CustomEditForm from './CustomEditForm.vue'
 import { pageMixins } from 'dashPackages/js/mixins/page'
+import checkDatasource from 'dashPackages/DataSourceManagement/src/checkDatasource.vue'
 import OriginalEditForm from './OriginalEditForm.vue'
 import DatasetTypeDialog from './DatasetTypeDialog.vue'
 import StoredProcedureEditForm from './StoredProcedureEditForm.vue'
-import { datasetPage, datasetRemove } from 'dashPackages/js/utils/datasetConfigService'
+import { datasetPage, datasetRemove ,datasetCheck} from 'dashPackages/js/utils/datasetConfigService'
 import { getLabelList } from 'dashPackages/js/utils/LabelConfigService'
 export default {
   name: 'DataSetManagement',
@@ -287,7 +292,8 @@ export default {
     JsonEditForm,
     StoredProcedureEditForm,
     ScriptEditForm,
-    JsDataSet
+    JsDataSet,
+    checkDatasource
   },
   mixins: [pageMixins],
   props: {
@@ -323,6 +329,7 @@ export default {
   },
   data () {
     return {
+      reasonList:[],
       datasetType: null,
       isEdit: false,
       categoryData: [],
@@ -457,18 +464,27 @@ export default {
     },
     // 删除数据集
     delDataset (id) {
-      this.$confirm('确定删除当前数据集吗?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning',
-        customClass: 'db-el-message-box'
-      }).then(() => {
-        datasetRemove(id).then(res => {
-          this.init(false)
-          this.$message.success('删除成功')
-        })
-      }).catch(() => {
+      datasetCheck(id).then((res)=>{
+        console.log(res)
+        if(res.canDelete){
+          this.$confirm('确定删除当前数据集吗?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning',
+            customClass: 'db-el-message-box'
+          }).then(() => {
+            datasetRemove(id).then(res => {
+              this.init(false)
+              this.$message.success('删除成功')
+            })
+          }).catch(() => {
+          })
+        }else{
+          this.reasonList=res.reasons
+          this.$refs.checkDatasource.checkDatasourceVisible = true
+        }
       })
+
     },
     // 详情
     toPreview (id, type, name, typeId) {

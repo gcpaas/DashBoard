@@ -69,6 +69,14 @@ const sourceRemove = (id = '-1', flag = false) => Vue.prototype.$dashboardAxios.
 const getSourceTable = (id = '-1', flag = false) => Vue.prototype.$dashboardAxios.get(`/datasource/getTableList/${id}`, {}, flag)
 
 /**
+ * 删除数据源前查询是否使用
+ * @param params
+ * @param flag
+ * @returns {*}
+ */
+const dataSourceCheck = (id='-1', flag = false) => Vue.prototype.$dashboardAxios.post(`/datasource/deleteCheck/${id}`, {}, flag)
+
+/**
  * 获取数据源下视图列表
  * @param id
  * @param flag
@@ -95,5 +103,6 @@ export {
   sourceRemove,
   getSourceTable,
   getSourceView,
-  getTableFieldList
+  getTableFieldList,
+  dataSourceCheck
 }

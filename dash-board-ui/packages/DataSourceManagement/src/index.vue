@@ -129,14 +129,19 @@
       :app-code="appCode"
       @refreshTable="init"
     />
+    <checkDatasource
+      ref="checkDatasource"
+      :reasonList="reasonList"
+      />
   </div>
 </template>
 
 <script>
 import table from 'dashPackages/js/utils/table.js'
 import '../style/index.scss'
-import { sourceLinkTest, datasourcePage, sourceRemove } from 'dashPackages/js/utils/dataSourceService'
+import { sourceLinkTest, datasourcePage, sourceRemove, dataSourceCheck } from 'dashPackages/js/utils/dataSourceService'
 import setDatasource from './setDatasource.vue'
+import checkDatasource from './checkDatasource.vue'
 import _ from 'lodash'
 import { pageMixins } from 'dashPackages/js/mixins/page'
 export default {
@@ -145,7 +150,7 @@ export default {
     table // 注册自定义指令
   },
   components: {
-    setDatasource
+    setDatasource,checkDatasource
   },
   mixins: [pageMixins],
   props: {
@@ -164,6 +169,7 @@ export default {
   },
   data () {
     return {
+      reasonList:[],
       testBtnLoading: [],
       loadingText: '',
       searchLoading: false,
@@ -252,17 +258,26 @@ export default {
     handleDelete (row) {
       // eslint-disable-next-line eqeqeq
       if (row.editable == 1 && !this.appCode) return
-      this.$confirm('确定删除当前数据源吗?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning',
-        customClass: 'db-el-message-box'
-      }).then(() => {
-        sourceRemove(row.id).then((r) => {
-          this.$message.success('删除成功')
-          this.init()
-        })
+      dataSourceCheck(row.id).then((res)=>{
+        console.log(res)
+        if(res.canDelete){
+          this.$confirm('确定删除当前数据源吗?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning',
+            customClass: 'db-el-message-box'
+          }).then(() => {
+            sourceRemove(row.id).then((r) => {
+              this.$message.success('删除成功')
+              this.init()
+            })
+          })
+        }else{
+          this.reasonList=res.reasons
+          this.$refs.checkDatasource.checkDatasourceVisible = true
+        }
       })
+
     },
     sourceLinkTest (row) {
       this.testBtnLoading.push(row.id)
@@ -290,4 +305,6 @@ export default {
     right: 0;
   }
 }
+
+
 </style>
