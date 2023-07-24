@@ -43,18 +43,18 @@
         />
       </el-form-item>
       <el-form-item
-        label="指标字体颜色"
+        label="指标颜色"
         label-width="100px"
       >
         <el-color-picker v-model="customizeConfig.metricColor" />
       </el-form-item>
       <el-form-item
-        label="指标描述字体大小"
+        label="描述字体大小"
         label-width="100px"
       >
         <el-input
           v-model="customizeConfig.descriptionFontSize"
-          placeholder="请输入指标描述字体大小"
+          placeholder="请输入描述字体大小"
         >
           <template slot="append">
             px
@@ -62,16 +62,16 @@
         </el-input>
       </el-form-item>
       <el-form-item
-        label="指标描述字体权重"
+        label="描述字体权重"
         label-width="100px"
       >
         <el-input-number
           v-model="customizeConfig.descriptionWeight"
-          placeholder="请输入指标字体权重"
+          placeholder="请输入字体权重"
         />
       </el-form-item>
       <el-form-item
-        label="指标描述字体颜色"
+        label="描述字体颜色"
         label-width="100px"
       >
         <el-color-picker v-model="customizeConfig.descriptionColor" />

@@ -36,6 +36,7 @@ registerConfig(
       '--db-el-color-primary': '#409EFF', // elment-ui主题色，激活
       '--db-el-border': 'transparent' // 边框颜色
     },
+    // datasetTypeList: ['original','custom'],
     customPlots: [],
     // 远程组件列表
     remoteComponents,

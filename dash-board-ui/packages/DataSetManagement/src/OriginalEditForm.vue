@@ -49,7 +49,7 @@
             <el-row :gutter="20">
               <el-col :span="12">
                 <el-form-item
-                  label="名称"
+                  label="数据集名称"
                   prop="name"
                 >
                   <el-input
@@ -70,6 +70,7 @@
                     v-model="dataForm.typeId"
                     class="db-el-select"
                     popper-class="db-el-select"
+                    placeholder="请选择分组"
                     clearable
                     :disabled="!isEdit"
                     @clear="clearType"
@@ -142,6 +143,8 @@
                 >
                   <el-select
                     v-model="dataForm.tableName"
+                    v-loading="selectorLoading"
+                    element-loading-spinner="el-icon-loading"
                     class="db-el-select"
                     popper-class="db-el-select"
                     clearable
@@ -180,7 +183,7 @@
                   <el-select
                     v-model="dataForm.fieldInfo"
                     class="selectStyle"
-                    popper-class='selectStyle'
+                    popper-class="selectStyle"
                     placeholder="请选择字段（为空时默认选择全部字段）"
                     clearable
                     filterable
@@ -224,9 +227,9 @@
                 >
                   <el-radio-group
                     v-model="dataForm.repeatStatus"
-                    @input="initData"
                     class="db-radio-wrap"
                     :disabled="!isEdit"
+                    @input="initData"
                   >
                     <el-radio :label="1">
                       是
@@ -260,8 +263,7 @@
                     :dataset-id="datasetId"
                     :id-list="dataForm.labelIds"
                     @commit="(ids) =>{dataForm.labelIds = ids}"
-                  >
-                  </label-select>
+                  />
                 </el-form-item>
               </el-col>
             </el-row>
@@ -561,6 +563,9 @@ export default {
         ],
         repeatStatus: [
           { required: true, message: '请选择是否去重', trigger: 'blur' }
+        ],
+        typeId: [
+          { required: true, message: '请选择分组', trigger: 'blur' }
         ]
       },
       typeName: '',
@@ -590,7 +595,8 @@ export default {
       totalCount: 0,
       currentCount: 0,
       current: 1,
-      size: 10
+      size: 10,
+      selectorLoading: false
     }
   },
   watch: {
@@ -606,7 +612,7 @@ export default {
             fieldDescMap[item.columnName] = item.columnComment
           })
           // 与this.dataForm.fieldDesc合并，columnName相同的，取this.dataForm.fieldDesc中的值
-          let fieldDescMapNew = { ...fieldDescMap, ...this.dataForm.fieldDesc }
+          const fieldDescMapNew = { ...fieldDescMap, ...this.dataForm.fieldDesc }
           this.getPreViewData(fieldDescMapNew)
         } catch (error) {
           console.error(error)
@@ -620,7 +626,7 @@ export default {
     this.init()
   },
   methods: {
-    initData(){
+    initData () {
       this.getData()
     },
     /**
@@ -713,7 +719,7 @@ export default {
         sql += ' DISTINCT '
       }
       if (this.dataForm.fieldInfo.length > 0) {
-        sql += this.dataForm.fieldInfo.join(',')
+       sql += this.dataForm.fieldInfo.join(',')
       } else {
         sql += '*'
       }
@@ -864,9 +870,12 @@ export default {
       }).catch(() => {
         this.tableList = []
       })
+      this.selectorLoading = true
       getSourceView(this.dataForm.sourceId).then(res => {
+        this.selectorLoading = false
         this.viewList = res
       }).catch(() => {
+        this.selectorLoading = false
         this.viewList = []
       })
     },
@@ -887,6 +896,7 @@ export default {
       getTableFieldList(this.dataForm.sourceId, this.dataForm.tableName).then((data) => {
         const fieldDescMap = {}
         this.fieldList = data.map(field => {
+          field.columnName="`"+field.columnName+"`"
           fieldDescMap[field.columnName] = field.columnComment
           field.isCheck = false
           if (this.dataForm.fieldInfo.includes(field.columnName)) {
@@ -894,7 +904,7 @@ export default {
           }
           return field
         })
-        let fieldDescMapNew = { ...fieldDescMap, ...this.dataForm.fieldDesc }
+        const fieldDescMapNew = { ...fieldDescMap, ...this.dataForm.fieldDesc }
         this.getPreViewData(fieldDescMapNew)
       }).catch(() => {
         this.fieldList = []
@@ -1150,6 +1160,11 @@ export default {
     border: none;
     background: var(--db-el-background-1);
   }
+}
+
+// 修改el-select样式 loading 位置
+::v-deep .el-loading-spinner{
+  top: 75%;
 }
 
 </style>

@@ -5,7 +5,7 @@
  */
 
 // 配置版本号
-const version = '2023071101'
+const version = '2023072401'
 // 分类
 const category = 'Line'
 // 标题
@@ -31,6 +31,7 @@ const setting = [
     // tab页。 data: 数据， custom: 自定义
     tabName: 'data'
   },
+
   {
     label: '指标',
     // 设置组件类型
@@ -462,7 +463,18 @@ const setting = [
     value: [16, 16, 16, 16],
     tabName: 'custom',
     groupName: 'padding'
-  }
+  },
+  {
+    label: '平滑',
+    type: 'switch',
+    field: 'smooth',
+    optionField: 'smooth',
+    value: false,
+    active: true,
+    inactive: false,
+    tabName: 'custom',
+    groupName: 'graph'
+  },
 ]
 
 // 模拟数据
@@ -489,6 +501,7 @@ const dataHandler = ''
 const option = {
   // 数据将要放入到哪个字段中
   dataKey: 'data',
+  smooth: false,
   data,
   color: '',
   appendPadding: [16, 16, 16, 16], // 设置图标的边距
