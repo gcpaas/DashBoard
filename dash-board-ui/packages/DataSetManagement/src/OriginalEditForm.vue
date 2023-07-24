@@ -142,6 +142,8 @@
                 >
                   <el-select
                     v-model="dataForm.tableName"
+                    v-loading="selectorLoading"
+                    element-loading-spinner="el-icon-loading"
                     class="db-el-select"
                     popper-class="db-el-select"
                     clearable
@@ -180,7 +182,7 @@
                   <el-select
                     v-model="dataForm.fieldInfo"
                     class="selectStyle"
-                    popper-class='selectStyle'
+                    popper-class="selectStyle"
                     placeholder="请选择字段（为空时默认选择全部字段）"
                     clearable
                     filterable
@@ -224,9 +226,9 @@
                 >
                   <el-radio-group
                     v-model="dataForm.repeatStatus"
-                    @input="initData"
                     class="db-radio-wrap"
                     :disabled="!isEdit"
+                    @input="initData"
                   >
                     <el-radio :label="1">
                       是
@@ -260,8 +262,7 @@
                     :dataset-id="datasetId"
                     :id-list="dataForm.labelIds"
                     @commit="(ids) =>{dataForm.labelIds = ids}"
-                  >
-                  </label-select>
+                  />
                 </el-form-item>
               </el-col>
             </el-row>
@@ -590,7 +591,8 @@ export default {
       totalCount: 0,
       currentCount: 0,
       current: 1,
-      size: 10
+      size: 10,
+      selectorLoading: false
     }
   },
   watch: {
@@ -606,7 +608,7 @@ export default {
             fieldDescMap[item.columnName] = item.columnComment
           })
           // 与this.dataForm.fieldDesc合并，columnName相同的，取this.dataForm.fieldDesc中的值
-          let fieldDescMapNew = { ...fieldDescMap, ...this.dataForm.fieldDesc }
+          const fieldDescMapNew = { ...fieldDescMap, ...this.dataForm.fieldDesc }
           this.getPreViewData(fieldDescMapNew)
         } catch (error) {
           console.error(error)
@@ -620,7 +622,7 @@ export default {
     this.init()
   },
   methods: {
-    initData(){
+    initData () {
       this.getData()
     },
     /**
@@ -864,9 +866,12 @@ export default {
       }).catch(() => {
         this.tableList = []
       })
+      this.selectorLoading = true
       getSourceView(this.dataForm.sourceId).then(res => {
+        this.selectorLoading = false
         this.viewList = res
       }).catch(() => {
+        this.selectorLoading = false
         this.viewList = []
       })
     },
@@ -894,7 +899,7 @@ export default {
           }
           return field
         })
-        let fieldDescMapNew = { ...fieldDescMap, ...this.dataForm.fieldDesc }
+        const fieldDescMapNew = { ...fieldDescMap, ...this.dataForm.fieldDesc }
         this.getPreViewData(fieldDescMapNew)
       }).catch(() => {
         this.fieldList = []
