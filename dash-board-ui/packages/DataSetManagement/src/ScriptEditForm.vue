@@ -70,6 +70,7 @@
                     v-model="dataForm.typeId"
                     class="db-el-select"
                     popper-class="db-el-select"
+                    placeholder="请选择分组"
                     clearable
                     :disabled="!isEdit"
                     @clear="clearType"
@@ -604,6 +605,9 @@ export default {
         name: [
           { required: true, message: '请输入数据集名称', trigger: 'blur' },
           { validator: validateName, trigger: 'blur' }
+        ],
+        typeId: [
+          { required: true, message: '请选择分组', trigger: 'blur' }
         ]
       },
       cOptions: {
