@@ -214,7 +214,6 @@
           </div>
         </el-form-item>
       </div>
-
     </el-form>
   </div>
 </template>
@@ -282,6 +281,7 @@ export default {
       }
     },
     delColor () {
+      this.colors = []
       this.config.customize.rangeColor = []
     },
     addColor () {
