@@ -192,7 +192,7 @@
                   clearable
                   :multiple="setting.multiple"
                   :placeholder="`请选择${setting.label}`"
-                  @change="changeCustomProps(...arguments, index)"
+                  @change="changeCustomProps(...arguments, setting)"
                 >
                   <el-option
                     v-for="(field, fieldIndex) in dataSourceDataList"
@@ -214,7 +214,7 @@
                   v-else
                   :value="setting.value"
                   :placeholder="`请输入${setting.label}`"
-                  @change="changeCustomProps(...arguments, index)"
+                  @change="changeCustomProps(...arguments, setting)"
                 />
               </el-form-item>
             </template>
@@ -817,8 +817,13 @@ export default {
       this.config.customize.columnConfig = cloneDeep(this.headerList)
       this.$store.commit('dashboard/changeActiveItemConfig', this.config)
     },
-    changeCustomProps (value, index) {
-      this.$set(this.config.setting[index], 'value', value)
+    changeCustomProps (value, setting) {
+      this.config.setting = this.config.setting.map(item => {
+        if (item.field === setting.field) {
+          item.value = value
+        }
+        return item
+      })
     }
   }
 }
