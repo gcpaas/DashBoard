@@ -25,9 +25,13 @@
             :name="link.icon"
           />
         </div>
-        <div class="link-name">
-          {{ link.name }}
-        </div>
+        <el-tooltip placement="bottom">
+          <div slot="content">{{ link.name }}</div>
+          <div class="link-name">
+            {{ link.name }}
+          </div>
+        </el-tooltip>
+
       </div>
     </div>
   </div>

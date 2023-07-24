@@ -1157,4 +1157,9 @@ export default {
   }
 }
 
+// 修改el-select样式 loading 位置
+::v-deep .el-loading-spinner{
+  top: 75%;
+}
+
 </style>

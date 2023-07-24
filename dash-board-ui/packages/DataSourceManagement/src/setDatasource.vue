@@ -394,17 +394,17 @@ export default {
     },
     // 连接测试
     sourceLinkCheck () {
-      let flag = 0
-      this.$refs.dataForm.validate((valid) => {
-        if (!valid) {
-          flag = 1
-          return false
-        } else {
-          if (flag === 0) {
+      // let flag = 0
+      // this.$refs.dataForm.validate((valid) => {
+      //   if (!valid) {
+      //     flag = 1
+      //     return false
+      //   } else {
+      //     if (flag === 0) {
             this.sourceLinkTest(this.dataForm)
-          }
-        }
-      })
+      //     }
+      //   }
+      // })
     },
     sourceLinkTest (row) {
       this.linkLoading = true

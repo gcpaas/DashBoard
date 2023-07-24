@@ -102,6 +102,15 @@ const categoryAdd = (params = {}, flag = false) => Vue.prototype.$dashboardAxios
 const categoryUpdate = (params = {}, flag = false) => Vue.prototype.$dashboardAxios.post('/category/update', params, flag)
 
 /**
+ * 验证节点是否可删除
+ * @param params
+ * @param flag
+ * @returns {*}
+ */
+const categoryDele = (id = '-1', flag = false) => Vue.prototype.$dashboardAxios.get(`/dataset/getCountByType/${id}`, {}, flag)
+
+
+/**
  * 删除分类树节点
  * @param id
  * @param flag
@@ -118,6 +127,7 @@ export {
   nameCheckRepeat,
   datasetExecuteTest,
   getDataset,
+  categoryDele,
 
   getCategoryTree,
   categoryAdd,
