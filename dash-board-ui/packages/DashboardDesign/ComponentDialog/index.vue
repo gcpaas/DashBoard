@@ -43,7 +43,6 @@
               </el-select>
               <el-button
                 size="small"
-                style="margin-right: 20px"
                 type="primary"
                 @click="reSearch"
               >
@@ -682,4 +681,7 @@ export default {
     text-overflow: ellipsis;
     -o-text-overflow:ellipsis;
   }
+  /deep/ .el-dialog__footer{
+  padding-right: 30px !important;
+}
 </style>

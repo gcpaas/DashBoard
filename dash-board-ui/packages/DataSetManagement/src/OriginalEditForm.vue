@@ -49,7 +49,7 @@
             <el-row :gutter="20">
               <el-col :span="12">
                 <el-form-item
-                  label="名称"
+                  label="数据集名称"
                   prop="name"
                 >
                   <el-input
@@ -715,7 +715,7 @@ export default {
         sql += ' DISTINCT '
       }
       if (this.dataForm.fieldInfo.length > 0) {
-        sql += this.dataForm.fieldInfo.join(',')
+       sql += this.dataForm.fieldInfo.join(',')
       } else {
         sql += '*'
       }
@@ -892,6 +892,7 @@ export default {
       getTableFieldList(this.dataForm.sourceId, this.dataForm.tableName).then((data) => {
         const fieldDescMap = {}
         this.fieldList = data.map(field => {
+          field.columnName="`"+field.columnName+"`"
           fieldDescMap[field.columnName] = field.columnComment
           field.isCheck = false
           if (this.dataForm.fieldInfo.includes(field.columnName)) {
