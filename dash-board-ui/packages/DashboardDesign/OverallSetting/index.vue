@@ -322,7 +322,7 @@ export default {
   top: 10px;
   font-size: 24px;
   cursor: pointer;
-  color: #ffffff;
+  color: #007aff;
   position: absolute;
 }
 

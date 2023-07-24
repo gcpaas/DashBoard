@@ -146,6 +146,7 @@
                     popper-class="db-el-select"
                     clearable
                     filterable
+                    :loading='searching'
                     :disabled="!isEdit"
                     @change="setTable"
                   >
@@ -532,6 +533,7 @@ export default {
       })
     }
     return {
+      searching:false,
       dataForm: {
         id: '',
         name: '',
@@ -713,7 +715,11 @@ export default {
         sql += ' DISTINCT '
       }
       if (this.dataForm.fieldInfo.length > 0) {
-        sql += this.dataForm.fieldInfo.join(',')
+        const list=[]
+        this.dataForm.fieldInfo.forEach((item)=>{
+          list.push("`"+item+"`")
+        })
+        sql += list.join(',')
       } else {
         sql += '*'
       }
@@ -859,15 +865,15 @@ export default {
      * 2.获取视图列表
      */
     queryAllTable () {
-      getSourceTable(this.dataForm.sourceId).then(res => {
-        this.tableList = res
-      }).catch(() => {
+      this.searching=true
+      Promise.all([getSourceTable(this.dataForm.sourceId),getSourceView(this.dataForm.sourceId)]).then((res)=>{
+        this.tableList=res[0]
+        this.viewList = res[1]
+        this.searching=false
+      }).catch(()=>{
         this.tableList = []
-      })
-      getSourceView(this.dataForm.sourceId).then(res => {
-        this.viewList = res
-      }).catch(() => {
         this.viewList = []
+        this.searching=false
       })
     },
     /**
@@ -1111,7 +1117,7 @@ export default {
   // overflow-y: auto !important;
 
   .el-table__body-wrapper {
-    max-height: calc(100vh - 568px) !important;
+    max-height: calc(100vh - 637px) !important;
     overflow-y: auto !important;
   }
 }

@@ -6,6 +6,7 @@
     :visible.sync="dataSetVisible"
     width="80%"
     class="db-dialog-wrap data-set-wrap db-el-dialog"
+    :class="isUseSlot? 'tabHeight':'commonHeight'"
     @opened="openedInit"
   >
     <el-tabs
@@ -15,7 +16,7 @@
       @tab-click="handleClickTabs"
     >
       <el-tab-pane
-        label="数据集选择"
+        label="数据集"
         name="dataSet"
       >
         <DataSetManagement
@@ -147,11 +148,24 @@ export default {
 ::v-deep .el-tabs__header{
   margin-bottom: 0;
 }
+
+.commonHeight{
+   /deep/ .el-dialog__body {
+    min-height: 535px;
+  }
+}
+
+.tabHeight{
+   /deep/ .el-dialog__body {
+    min-height: 575px;
+  }
+}
+
 .data-set-wrap {
   /deep/ .el-dialog__body {
     position: relative;
     padding: 0 !important;
-    min-height: 535px;
+    // min-height: 575px;
     overflow: hidden;
   }
 
