@@ -142,11 +142,12 @@
                 >
                   <el-select
                     v-model="dataForm.tableName"
+                    v-loading="selectorLoading"
+                    element-loading-spinner="el-icon-loading"
                     class="db-el-select"
                     popper-class="db-el-select"
                     clearable
                     filterable
-                    :loading='searching'
                     :disabled="!isEdit"
                     @change="setTable"
                   >
@@ -181,7 +182,7 @@
                   <el-select
                     v-model="dataForm.fieldInfo"
                     class="selectStyle"
-                    popper-class='selectStyle'
+                    popper-class="selectStyle"
                     placeholder="请选择字段（为空时默认选择全部字段）"
                     clearable
                     filterable
@@ -225,14 +226,14 @@
                 >
                   <el-radio-group
                     v-model="dataForm.repeatStatus"
-                    @input="initData"
                     class="db-radio-wrap"
                     :disabled="!isEdit"
+                    @input="initData"
                   >
-                    <el-radio :label="0">
+                    <el-radio :label="1">
                       是
                     </el-radio>
-                    <el-radio :label="1">
+                    <el-radio :label="0">
                       否
                     </el-radio>
                   </el-radio-group>
@@ -261,8 +262,7 @@
                     :dataset-id="datasetId"
                     :id-list="dataForm.labelIds"
                     @commit="(ids) =>{dataForm.labelIds = ids}"
-                  >
-                  </label-select>
+                  />
                 </el-form-item>
               </el-col>
             </el-row>
@@ -533,7 +533,6 @@ export default {
       })
     }
     return {
-      searching:false,
       dataForm: {
         id: '',
         name: '',
@@ -592,7 +591,8 @@ export default {
       totalCount: 0,
       currentCount: 0,
       current: 1,
-      size: 10
+      size: 10,
+      selectorLoading: false
     }
   },
   watch: {
@@ -608,7 +608,7 @@ export default {
             fieldDescMap[item.columnName] = item.columnComment
           })
           // 与this.dataForm.fieldDesc合并，columnName相同的，取this.dataForm.fieldDesc中的值
-          let fieldDescMapNew = { ...fieldDescMap, ...this.dataForm.fieldDesc }
+          const fieldDescMapNew = { ...fieldDescMap, ...this.dataForm.fieldDesc }
           this.getPreViewData(fieldDescMapNew)
         } catch (error) {
           console.error(error)
@@ -622,7 +622,7 @@ export default {
     this.init()
   },
   methods: {
-    initData(){
+    initData () {
       this.getData()
     },
     /**
@@ -711,15 +711,11 @@ export default {
      */
     getSql () {
       let sql = 'SELECT '
-      if (this.dataForm.repeatStatus === 0) {
+      if (this.dataForm.repeatStatus === 1) {
         sql += ' DISTINCT '
       }
       if (this.dataForm.fieldInfo.length > 0) {
-        const list=[]
-        this.dataForm.fieldInfo.forEach((item)=>{
-          list.push("`"+item+"`")
-        })
-        sql += list.join(',')
+        sql += this.dataForm.fieldInfo.join(',')
       } else {
         sql += '*'
       }
@@ -865,15 +861,18 @@ export default {
      * 2.获取视图列表
      */
     queryAllTable () {
-      this.searching=true
-      Promise.all([getSourceTable(this.dataForm.sourceId),getSourceView(this.dataForm.sourceId)]).then((res)=>{
-        this.tableList=res[0]
-        this.viewList = res[1]
-        this.searching=false
-      }).catch(()=>{
+      getSourceTable(this.dataForm.sourceId).then(res => {
+        this.tableList = res
+      }).catch(() => {
         this.tableList = []
+      })
+      this.selectorLoading = true
+      getSourceView(this.dataForm.sourceId).then(res => {
+        this.selectorLoading = false
+        this.viewList = res
+      }).catch(() => {
+        this.selectorLoading = false
         this.viewList = []
-        this.searching=false
       })
     },
     /**
@@ -900,7 +899,7 @@ export default {
           }
           return field
         })
-        let fieldDescMapNew = { ...fieldDescMap, ...this.dataForm.fieldDesc }
+        const fieldDescMapNew = { ...fieldDescMap, ...this.dataForm.fieldDesc }
         this.getPreViewData(fieldDescMapNew)
       }).catch(() => {
         this.fieldList = []
@@ -1117,7 +1116,7 @@ export default {
   // overflow-y: auto !important;
 
   .el-table__body-wrapper {
-    max-height: calc(100vh - 637px) !important;
+    max-height: calc(100vh - 568px) !important;
     overflow-y: auto !important;
   }
 }
@@ -1156,6 +1155,11 @@ export default {
     border: none;
     background: var(--db-el-background-1);
   }
+}
+
+// 修改el-select样式 loading 位置
+::v-deep .el-loading-spinner{
+  top: 75%;
 }
 
 </style>
