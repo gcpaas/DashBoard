@@ -341,7 +341,7 @@ export default {
           code: screen.code
         }
       })
-      window.open(href, '_self')
+      window.open(href, '_ablank')
     },
     add () {
       const page = {

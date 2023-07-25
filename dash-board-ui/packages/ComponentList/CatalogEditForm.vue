@@ -40,13 +40,12 @@
         <el-table
           :key="randomKey"
           class="db-el-table"
-          height="100%"
           :data="tableList"
         >
           <el-empty />
           <el-table-column
             show-overflow-tooltip
-            label="名称"
+            label="分组名称"
             prop="name"
             align="center"
           />
@@ -58,18 +57,20 @@
           />
           <el-table-column
             label="操作"
-            width="105"
+            width="120"
             align="center"
           >
             <template slot-scope="scope">
               <el-button
                 type="text"
+                class="button"
                 @click="editCatalog(scope.row)"
               >
                 编辑
               </el-button>
               <el-button
                 type="text"
+                class="button"
                 @click="catalogDel(scope.row)"
               >
                 删除
@@ -218,7 +219,8 @@ export default {
       this.currentCatalog = {
         name: '',
         id: '',
-        code: ''
+        code: '',
+        orderNum:0
       }
       this.catalogVisible = true
     },
@@ -228,7 +230,7 @@ export default {
     },
     // 删除目录
     catalogDel (catalog) {
-      this.$confirm('确定删除该目录？', '提示', {
+      this.$confirm('确定删除该分组？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
@@ -282,4 +284,7 @@ export default {
     // }
   }
 }
+// /deep/.el-dialog__body{
+//   min-height: 300px !important;
+// }
 </style>

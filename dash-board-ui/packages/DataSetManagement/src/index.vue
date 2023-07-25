@@ -119,7 +119,7 @@
           </el-form-item>
           <el-form-item class="filter-item">
             <el-button
-              v-if="ToAdd"
+              v-if="ToAdd&&isAdd"
               class="db-el-button-default"
               @click="addDataset"
             >
@@ -193,6 +193,7 @@
             />
             <!--操作栏-->
             <el-table-column
+              v-if="doEdit||isDelete"
               label="操作"
               width="200"
               align="center"
@@ -203,6 +204,7 @@
               >
                  <slot :item='scope.row'>
                   <el-button
+                    v-if="doEdit"
                     class="db-el-button-default"
                     :disabled="scope.row.editable === 1 && !appCode"
                     @click="toEdit(scope.row.id, scope.row.datasetType, scope.row.name, scope.row.typeId)"
@@ -210,6 +212,7 @@
                     编辑
                   </el-button>
                    <el-button
+                    v-if="isDelete"
                     class="db-el-button-default"
                     :loading="scope.row.loading"
                     :disabled="scope.row.editable === 1 && !appCode"
@@ -367,6 +370,39 @@ export default {
   computed:{
     allType(){
       return this.datasetTypeList.map(item=>item.datasetType).filter(item=>item!='')
+    },
+    isAdd(){
+      let a=-1
+      if(window.DS_CONFIG?.datasetAuth) {
+       a=window.DS_CONFIG?.datasetAuth.findIndex(item=>item=='unAdd')
+      }
+      if(a==-1){
+        return true
+      }else{
+        return false
+      }
+    },
+    doEdit(){
+      let a=-1
+      if(window.DS_CONFIG?.datasetAuth) {
+       a=window.DS_CONFIG?.datasetAuth.findIndex(item=>item=='unEdit')
+      }
+      if(a==-1){
+        return true
+      }else{
+        return false
+      }
+    },
+    isDelete(){
+      let a=-1
+      if(window.DS_CONFIG?.datasetAuth) {
+       a=window.DS_CONFIG?.datasetAuth.findIndex(item=>item=='unDelete')
+      }
+      if(a==-1){
+        return true
+      }else{
+        return false
+      }
     }
   },
   watch: {
@@ -519,9 +555,9 @@ export default {
     getComponents (componentName) {
       const components = Object.values(this.$options.components)
       let remoteComponentData = null
-      if (window.BS_CONFIG?.customDatasetComponents&&window.BS_CONFIG?.customDatasetComponents.length > 0) {
+      if (window.DS_CONFIG?.customDatasetComponents&&window.DS_CONFIG?.customDatasetComponents.length > 0) {
         // 获取远程组件
-        remoteComponentData = window.BS_CONFIG?.customDatasetComponents.find(item => item.config.componentName === componentName)
+        remoteComponentData = window.DS_CONFIG?.customDatasetComponents.find(item => item.config.componentName === componentName)
       }
       return {
         component: components.find(component => component.name === componentName) || remoteComponentData?.vueFile,

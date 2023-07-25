@@ -39,7 +39,7 @@ export default {
   },
   computed: {
     title () {
-      if (this.$route.query.edit) return '智能报表平台'
+      if (this.$route.query.edit) return '仪表盘设计器'
       return window?.DS_CONFIG?.starter?.title
     },
     logo () {

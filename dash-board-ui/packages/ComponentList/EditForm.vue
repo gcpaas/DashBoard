@@ -385,7 +385,7 @@ export default {
           code: form.code
         }
       })
-      window.open(bigScreenHref, '_self')
+      window.open(bigScreenHref, '_ablank')
     }
   }
 }
