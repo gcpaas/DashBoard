@@ -72,6 +72,8 @@
                     placeholder="请选择分组"
                     clearable
                     :disabled="!isEdit"
+                    filterable
+                    :filter-method="selectorFilter"
                     @clear="clearType"
                     @visible-change="setCurrentNode"
                   >
@@ -91,6 +93,7 @@
                           :highlight-current="true"
                           :expand-on-click-node="false"
                           class="db-el-tree"
+                          :filter-node-method="treeFilter"
                           @node-click="selectParentCategory"
                         >
                           <span
@@ -753,6 +756,13 @@ export default {
     },
     openNewWindow (url) {
       window.open(url, '_blank')
+    },
+    selectorFilter (value) {
+      this.$refs.categorySelectTree.filter(value)
+    },
+    treeFilter (value, data) {
+      if (!value) return true
+      return data.name.indexOf(value) !== -1
     }
   }
 }

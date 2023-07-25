@@ -73,6 +73,8 @@
                     placeholder="请选择分组"
                     clearable
                     :disabled="!isEdit"
+                    filterable
+                    :filter-method="selectorFilter"
                     @clear="clearType"
                     @visible-change="setCurrentNode"
                   >
@@ -92,6 +94,7 @@
                           :highlight-current="true"
                           :expand-on-click-node="false"
                           class="db-el-tree"
+                          :filter-node-method="treeFilter"
                           @node-click="selectParentCategory"
                         >
                           <span
@@ -719,7 +722,7 @@ export default {
         sql += ' DISTINCT '
       }
       if (this.dataForm.fieldInfo.length > 0) {
-       sql += this.dataForm.fieldInfo.join(',')
+        sql += this.dataForm.fieldInfo.join(',')
       } else {
         sql += '*'
       }
@@ -896,7 +899,7 @@ export default {
       getTableFieldList(this.dataForm.sourceId, this.dataForm.tableName).then((data) => {
         const fieldDescMap = {}
         this.fieldList = data.map(field => {
-          field.columnName="`"+field.columnName+"`"
+          field.columnName = '`' + field.columnName + '`'
           fieldDescMap[field.columnName] = field.columnComment
           field.isCheck = false
           if (this.dataForm.fieldInfo.includes(field.columnName)) {
@@ -1043,6 +1046,13 @@ export default {
     },
     openNewWindow (url) {
       window.open(url, '_blank')
+    },
+    selectorFilter (value) {
+      this.$refs.categorySelectTree.filter(value)
+    },
+    treeFilter (value, data) {
+      if (!value) return true
+      return data.name.indexOf(value) !== -1
     }
   }
 }
