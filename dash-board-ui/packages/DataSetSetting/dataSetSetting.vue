@@ -190,13 +190,13 @@ export default {
 
 .commonHeight{
    /deep/ .el-dialog__body {
-    min-height: 535px;
+    min-height: 500px;
   }
 }
 
 .tabHeight{
    /deep/ .el-dialog__body {
-    min-height: 575px;
+    min-height: 512px;
   }
 }
 
@@ -210,7 +210,7 @@ export default {
 
   ::v-deep .db-container {
     padding: 0;
-    min-height: 535px;
+    min-height: 480px;
 
     .el-table {
       max-height: calc(90vh - 350px);
@@ -241,6 +241,8 @@ export default {
 
     ::v-deep .db-el-pagination {
       right: 6px !important;
+       position: relative !important;
+       margin-top:10px !important;
     }
 
     // ::v-deep .data-set-scrollbar {
@@ -250,5 +252,9 @@ export default {
        height: 515px !important;
     }
   }
+}
+/deep/.db-pagination{
+  position: relative !important;
+  margin-top:16px !important;
 }
 </style>

@@ -123,6 +123,19 @@ import _ from 'lodash'
 export default {
   components: {},
   data () {
+     const validateName = (rule, value, callback) => {
+      this.$dashboardAxios.post('/dashboard/type/nameRepeat', {
+        name: value,
+        type: 'resourceCatalog'
+      }, true).then((r) => {
+        console.log(r)
+        if (r.data) {
+          callback(new Error('分组名称已存在'))
+        } else {
+          callback()
+        }
+      })
+    }
     return {
       showDropdown: false,
       hoverItem: null,
@@ -164,7 +177,8 @@ export default {
         orderNum: 0
       },
       formRules: {
-        name: [{ required: true, message: '分组名称不能为空', trigger: 'blur' }]
+        name: [{ required: true, message: '分组名称不能为空', trigger: 'blur' },
+        { validator: validateName, trigger: 'blur' }]
       }
     }
   },
@@ -172,6 +186,8 @@ export default {
     this.getCatalogList()
   },
   methods: {
+
+
     catalogAdd () {
       this.catalogVisible = true
       this.currentCatalog = {
@@ -247,7 +263,7 @@ export default {
     },
     // 删除目录
     catalogDel (catalog) {
-      this.$confirm('确定删除该目录？', '提示', {
+      this.$confirm('确定删除该分组？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',

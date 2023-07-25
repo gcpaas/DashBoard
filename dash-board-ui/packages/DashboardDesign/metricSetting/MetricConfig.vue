@@ -4,7 +4,8 @@
     :visible.sync="settingVisible"
     :close-on-click-modal="false"
     :before-close="handleClose"
-    width="800px"
+    class="db-dialog-wrap db-el-dialog"
+    width="400px"
     append-to-body
   >
     <el-form
@@ -173,5 +174,11 @@ export default {
 <style lang="scss" scoped>
   .config-map-table {
     border-bottom: 1px solid #e6ebf5;
+  }
+  /deep/ .el-input{
+    width: 150px !important;
+  }
+  /deep/.el-input-number--mini{
+    width: 150px !important;
   }
 </style>
