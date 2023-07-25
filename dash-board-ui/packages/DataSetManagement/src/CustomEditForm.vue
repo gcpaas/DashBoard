@@ -1234,7 +1234,9 @@ export default {
       datasetExecuteTest(executeParams).then(res => {
         this.dataPreviewList = res.data.list
         this.structurePreviewList = res.structure
-        // 输出字段描述合并
+        if (this.dataForm.fieldList == null) {
+          this.dataForm.fieldList = _.cloneDeep(res.structure)
+        }
         this.structurePreviewList.forEach(field => {
           const fieldInfo = this.dataForm.fieldList.find(item => item.fieldName === field.fieldName)
           if (fieldInfo) {

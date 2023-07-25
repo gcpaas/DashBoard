@@ -24,7 +24,8 @@
           class="db-data-set-management"
           theme-class="db-"
           :ToAdd='isAdd'
-
+          :doEdit='doEdit'
+          :isDelete='isDelete'
           :is-border="true"
           :is-dialog="true"
           :ds-id="dataSetId"
