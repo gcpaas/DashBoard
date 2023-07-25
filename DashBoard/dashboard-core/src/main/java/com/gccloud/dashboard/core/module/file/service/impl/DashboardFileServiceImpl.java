@@ -31,6 +31,7 @@ public class DashboardFileServiceImpl extends ServiceImpl<DashboardFileDao, Dash
         LambdaQueryWrapper<DashboardFileEntity> queryWrapper = QueryWrapperUtils.wrapperLike(new LambdaQueryWrapper(), searchDTO.getSearchKey(), DashboardFileEntity::getOriginalName);
         queryWrapper.eq(StringUtils.isNotBlank(searchDTO.getModule()), DashboardFileEntity::getModule, searchDTO.getModule());
         queryWrapper.eq(StringUtils.isNotBlank(searchDTO.getExtension()), DashboardFileEntity::getExtension, searchDTO.getExtension());
+        queryWrapper.orderByDesc(DashboardFileEntity::getCreateDate);
         Map<String, String> aliasMap = Maps.newHashMap();
         aliasMap.put("space", "size");
         QueryWrapperUtils.wrapperSort(null, DashboardFileEntity.class, queryWrapper, searchDTO, aliasMap, DashboardFileEntity::getOriginalName, DashboardFileEntity::getCreateDate, DashboardFileEntity::getSize, DashboardFileEntity::getDownloadCount);
