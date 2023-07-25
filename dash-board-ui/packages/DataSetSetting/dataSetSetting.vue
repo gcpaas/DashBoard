@@ -23,6 +23,8 @@
           ref="dataSetSetting"
           class="db-data-set-management"
           theme-class="db-"
+          :ToAdd='isAdd'
+
           :is-border="true"
           :is-dialog="true"
           :ds-id="dataSetId"
@@ -40,6 +42,9 @@
       ref="dataSetSetting"
       class="db-data-set-management"
       theme-class="db-"
+      :ToAdd='isAdd'
+      :doEdit='doEdit'
+      :isDelete='isDelete'
       :is-border="true"
       :is-dialog="true"
       :ds-id="dataSetId"
@@ -107,6 +112,39 @@ export default {
         return {
           id: this.dsId
         }
+      }
+    },
+    isAdd(){
+      let a=-1
+      if(window.DS_CONFIG?.datasetAuth) {
+       a=window.DS_CONFIG?.datasetAuth.findIndex(item=>item=='unAdd')
+      }
+      if(a==-1){
+        return true
+      }else{
+        return false
+      }
+    },
+    doEdit(){
+      let a=-1
+      if(window.DS_CONFIG?.datasetAuth) {
+       a=window.DS_CONFIG?.datasetAuth.findIndex(item=>item=='unEdit')
+      }
+      if(a==-1){
+        return true
+      }else{
+        return false
+      }
+    },
+    isDelete(){
+      let a=-1
+      if(window.DS_CONFIG?.datasetAuth) {
+       a=window.DS_CONFIG?.datasetAuth.findIndex(item=>item=='unDelete')
+      }
+      if(a==-1){
+        return true
+      }else{
+        return false
       }
     }
   },

@@ -119,7 +119,7 @@
           </el-form-item>
           <el-form-item class="filter-item">
             <el-button
-              v-if="ToAdd&&isAdd"
+              v-if="ToAdd"
               class="db-el-button-default"
               @click="addDataset"
             >
@@ -324,6 +324,14 @@ export default {
     ToAdd:{
       type: Boolean,
       default: true
+    },
+    doEdit:{
+      type: Boolean,
+      default: true
+    },
+    isDelete:{
+      type: Boolean,
+      default: true
     }
 
   },
@@ -371,39 +379,8 @@ export default {
     allType(){
       return this.datasetTypeList.map(item=>item.datasetType).filter(item=>item!='')
     },
-    isAdd(){
-      let a=-1
-      if(window.DS_CONFIG?.datasetAuth) {
-       a=window.DS_CONFIG?.datasetAuth.findIndex(item=>item=='unAdd')
-      }
-      if(a==-1){
-        return true
-      }else{
-        return false
-      }
-    },
-    doEdit(){
-      let a=-1
-      if(window.DS_CONFIG?.datasetAuth) {
-       a=window.DS_CONFIG?.datasetAuth.findIndex(item=>item=='unEdit')
-      }
-      if(a==-1){
-        return true
-      }else{
-        return false
-      }
-    },
-    isDelete(){
-      let a=-1
-      if(window.DS_CONFIG?.datasetAuth) {
-       a=window.DS_CONFIG?.datasetAuth.findIndex(item=>item=='unDelete')
-      }
-      if(a==-1){
-        return true
-      }else{
-        return false
-      }
-    }
+
+
   },
   watch: {
     datasetType (value) {
