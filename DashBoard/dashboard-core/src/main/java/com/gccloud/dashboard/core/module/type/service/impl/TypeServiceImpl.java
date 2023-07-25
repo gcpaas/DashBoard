@@ -71,6 +71,7 @@ public class TypeServiceImpl extends ServiceImpl<DashboardTypeDao, TypeEntity> i
         LambdaQueryWrapper<TypeEntity> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(TypeEntity::getType, type);
         queryWrapper.orderByAsc(TypeEntity::getOrderNum);
+        queryWrapper.orderByDesc(TypeEntity::getCreateDate);
         return this.list(queryWrapper);
     }
 
