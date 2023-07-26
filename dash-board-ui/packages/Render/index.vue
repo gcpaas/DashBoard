@@ -335,4 +335,8 @@ export default {
   background: #C6C8CA !important;
 }
 
+/deep/.vue-resizable-handle{
+  z-index: 999;
+}
+
 </style>

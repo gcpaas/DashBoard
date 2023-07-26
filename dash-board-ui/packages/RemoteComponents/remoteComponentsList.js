@@ -38,8 +38,8 @@ export function getRemoteComponents (comList) {
       y: 0,
       type: 'remoteComponent',
       option: {
-        ...config.option,
-        ..._.cloneDeep(settingConfig)
+        ..._.cloneDeep(settingConfig),
+        ...config.option
       },
       // 右侧面板自定义配置
       setting: config.setting,
