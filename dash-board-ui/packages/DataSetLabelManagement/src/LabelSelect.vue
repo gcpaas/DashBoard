@@ -276,15 +276,7 @@ export default {
   mounted () {
     // 根据数据集id获取关联的标签列表
     if (this.datasetId) {
-      getLabelListByDatasetId(this.datasetId).then((data) => {
-        this.selectLabelListInitial = _.cloneDeep(data)
-        this.selectLabelList = _.cloneDeep(data)
-        let idList = []
-        data.forEach((item) => {
-          idList.push(item.id)
-        })
-        this.$emit('commit', idList)
-      })
+      this.getData()
     }
   },
   watch: {
@@ -316,6 +308,17 @@ export default {
     }
   },
   methods: {
+    getData(){
+      getLabelListByDatasetId(this.datasetId).then((data) => {
+        this.selectLabelListInitial = _.cloneDeep(data)
+        this.selectLabelList = _.cloneDeep(data)
+        let idList = []
+        data.forEach((item) => {
+          idList.push(item.id)
+        })
+        this.$emit('commit', idList)
+      })
+    },
     /**
      * 初始化方法
      */
@@ -417,6 +420,7 @@ export default {
      * 移除选中的标签
      */
     handleCloseTag (label) {
+      this.idListCopy=[]
       this.selectLabelListInitial.forEach((item, index) => {
         if (item.id === label.id) {
           this.selectLabelListInitial.splice(index, 1)
@@ -427,6 +431,10 @@ export default {
           this.selectLabelList.splice(index, 1)
         }
       })
+      this.selectLabelList.forEach(item=>{
+        this.idListCopy.push(item.id)
+      })
+      this.$emit('commit', this.idListCopy)
     },
     /**
      * 点击添加标签关联按钮
@@ -498,8 +506,30 @@ export default {
       if (cleanType) {
         this.searchForm.labelType = ''
       }
-      this.getDataList()
-      this.getLabelType()
+       this.labelCheckLoading = true
+        const params = {
+          current: this.current,
+          size: this.sizeLabel,
+          labelName: this.searchForm.labelName,
+          labelType: this.searchForm.labelType
+        }
+        labelList(params).then((data) => {
+          this.totalCount = data.totalCount
+          this.labelList = data.list
+          this.labelCheckLoading = false
+          this.selectLabelList.forEach((item)=>{
+          const a =this.labelList.findIndex((x)=>x.id===item.id)
+          item.labelName=this.labelList[a].labelName
+        })
+        this.selectLabelListInitial.forEach((item)=>{
+          const a =this.labelList.findIndex((x)=>x.id===item.id)
+          item.labelName=this.labelList[a].labelName
+        })
+        }).catch(() => {
+          this.labelCheckLoading = false
+        })
+       this.getLabelType()
+
     }
   }
 }

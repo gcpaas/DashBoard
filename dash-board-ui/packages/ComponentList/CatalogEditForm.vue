@@ -40,6 +40,7 @@
         <el-table
           :key="randomKey"
           class="db-el-table"
+           max-height="450"
           :data="tableList"
         >
           <el-empty />
@@ -151,7 +152,7 @@ export default {
   },
   data () {
      const validateName = (rule, value, callback) => {
-      this.$dataRoomAxios.post('/bigScreen/type/nameRepeat', {
+      this.$dashboardAxios.post('/dashboard/type/nameRepeat', {
         name: value,
         type: 'resourceCatalog'
       }, true).then((r) => {
