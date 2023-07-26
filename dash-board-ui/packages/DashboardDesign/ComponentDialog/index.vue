@@ -56,7 +56,8 @@
               element-loading-text="加载中"
               :style="{
                 display: gridComputed ? 'grid' : 'flex',
-                justifyContent: gridComputed ? 'space-around' : 'flex-start'
+                justifyContent: gridComputed ? 'space-around' : 'flex-start',
+                height:'calc(100vh - 430px)'
               }"
             >
               <!-- <div v-if="list.length !== 0"> -->
@@ -179,7 +180,8 @@
               element-loading-text="加载中"
               :style="{
                 display: bizFridComputed ? 'grid' : 'flex',
-                justifyContent: bizFridComputed ? 'space-around' : 'flex-start'
+                justifyContent: bizFridComputed ? 'space-around' : 'flex-start',
+                height:'calc(100vh - 430px)'
               }"
             >
               <!-- <div v-if="list.length !== 0"> -->
@@ -268,7 +270,8 @@
               element-loading-text="加载中"
               :style="{
                 display: remoteComponentsGridComputed ? 'grid' : 'flex',
-                justifyContent: remoteComponentsGridComputed ? 'space-around' : 'flex-start'
+                justifyContent: remoteComponentsGridComputed ? 'space-around' : 'flex-start',
+                height:'calc(100vh - 430px)'
               }"
             >
               <div
@@ -336,7 +339,7 @@
         确定
       </el-button>
       <el-button
-        type='primary'
+        type="primary"
         @click="jumpto"
       >
         组件管理
@@ -390,9 +393,9 @@ export default {
     this.remoteComponentlist = [...innerRemoteComponents, ...getRemoteComponents()]
   },
   methods: {
-    jumpto(){
-      let {href} = this.$router.resolve(`/dashboard-components?edit=1`)
-      window.open(href,'_blank')
+    jumpto () {
+      const { href } = this.$router.resolve('/dashboard-components?edit=1')
+      window.open(href, '_blank')
     },
     chooseComponent (component) {
       this.focus = _.cloneDeep(component)
@@ -474,6 +477,9 @@ export default {
 
 <style lang="scss" scoped>
   @import '../../assets/style/bsTheme.scss';
+  .content{
+    height: calc(100vh - 290px);
+  }
   .dashboard-list-wrap {
     position: relative;
     height: 100%;
