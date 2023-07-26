@@ -21,7 +21,7 @@ export default {
   mixins: [paramsMixins, commonMixins, linkageMixins],
   props: {
     id: {
-      type: String,
+      type: String||Number,
       default: ''
     },
     config: {

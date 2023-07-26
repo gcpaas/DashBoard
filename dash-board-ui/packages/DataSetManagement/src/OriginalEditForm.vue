@@ -1131,7 +1131,7 @@ export default {
   // overflow-y: auto !important;
 
   .el-table__body-wrapper {
-    max-height: calc(100vh - 568px) !important;
+    max-height: calc(100vh - 636px) !important;
     overflow-y: auto !important;
   }
 }

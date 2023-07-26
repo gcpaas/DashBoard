@@ -32,12 +32,14 @@
       :title="config.title"
       class="db-dialog-wrap db-el-dialog"
       width="50%"
+      destroy-on-close
     >
       <div
         class="dialog-box"
         style="height: 500px"
       >
         <component
+          v-if="formVisible"
           :is="resolveComponentType(config.type)"
           :id="`${config.code}${config.key}`"
           :ref="config.code"
