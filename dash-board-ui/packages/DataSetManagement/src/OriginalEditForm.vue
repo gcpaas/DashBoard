@@ -698,7 +698,7 @@ export default {
     getData () {
       const executeParams = {
         dataSourceId: this.dataForm.sourceId,
-        script: this.getSql(),
+        script: this.dataForm.fieldInfo.join(','),
         // 原始表数据集没有数据集参数
         params: [],
         dataSetType: 'original',
@@ -716,23 +716,23 @@ export default {
         this.tableLoading = false
       })
     },
-    /**
-     * 组装sql
-     * @returns {string}
-     */
-    getSql () {
-      let sql = 'SELECT '
-      if (this.dataForm.repeatStatus === 1) {
-        sql += ' DISTINCT '
-      }
-      if (this.dataForm.fieldInfo.length > 0) {
-        sql += this.dataForm.fieldInfo.join(',')
-      } else {
-        sql += '*'
-      }
-      sql += ` FROM ${this.dataForm.tableName}`
-      return sql
-    },
+    // /**
+    //  * 组装sql
+    //  * @returns {string}
+    //  */
+    // getSql () {
+    //   let sql = 'SELECT '
+    //   if (this.dataForm.repeatStatus === 1) {
+    //     sql += ' DISTINCT '
+    //   }
+    //   if (this.dataForm.fieldInfo.length > 0) {
+    //     sql += this.dataForm.fieldInfo.join(',')
+    //   } else {
+    //     sql += '*'
+    //   }
+    //   sql += ` FROM ${this.dataForm.tableName}`
+    //   return sql
+    // },
     /**
      * 取消字段描述编辑
      */
@@ -904,7 +904,7 @@ export default {
       getTableFieldList(this.dataForm.sourceId, this.dataForm.tableName).then((data) => {
         const fieldDescMap = {}
         this.fieldList = data.map(field => {
-          field.columnName = '`' + field.columnName + '`'
+          // field.columnName = '`' + field.columnName + '`'
           fieldDescMap[field.columnName] = field.columnComment
           field.isCheck = false
           if (this.dataForm.fieldInfo.includes(field.columnName)) {
@@ -959,7 +959,7 @@ export default {
       if (!this.dataForm.sourceId || !this.dataForm.tableName) return
       const executeParams = {
         dataSourceId: this.dataForm.sourceId,
-        script: this.getSql(),
+        script: this.dataForm.fieldInfo.join(','),
         // 原始表数据集没有数据集参数
         params: [],
         dataSetType: 'original',
