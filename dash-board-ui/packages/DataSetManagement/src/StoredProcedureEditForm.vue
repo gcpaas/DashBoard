@@ -586,7 +586,7 @@ import {
 import { datasourceList } from 'dashPackages/js/utils/dataSourceService'
 import { codemirror } from 'vue-codemirror'
 import 'codemirror/lib/codemirror.css'
-import 'codemirror/theme/nord.css'
+import 'codemirror/theme/base16-light.css'
 import 'codemirror/mode/sql/sql.js'
 import _ from 'lodash'
 import { datasetMixins } from 'dashPackages/js/mixins/datasetMixin'
@@ -646,7 +646,7 @@ export default {
         mode: 'text/x-mysql',
         lineNumbers: true,
         lineWrapping: true,
-        theme: 'nord',
+        theme: 'base16-light',
         extraKey: { Ctrl: 'autocomplete' },
         hintOptions: {
           completeSingle: true

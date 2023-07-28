@@ -248,14 +248,14 @@ export default {
     },
     addSource () {
       this.$refs.setDatasource.setDatasourceVisible = true
-      this.$refs.setDatasource.title = '新增'
+      this.$refs.setDatasource.title = '新增数据源'
       this.$refs.setDatasource.init()
     },
     viewSource (row) {
       // eslint-disable-next-line eqeqeq
       if (row.editable == 1 && !this.appCode) return
       this.$refs.setDatasource.setDatasourceVisible = true
-      this.$refs.setDatasource.title = '编辑'
+      this.$refs.setDatasource.title = '编辑数据源'
       this.$refs.setDatasource.init(_.cloneDeep(row))
     },
     handleDelete (row) {
