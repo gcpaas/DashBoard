@@ -37,7 +37,7 @@ registerConfig(
       '--db-el-border': 'transparent' // 边框颜色
     },
     // datasetTypeList: ['original','custom'],
-    datasetAuth:['unAdd','unEdit','unDelete'],//数据集按钮权限 新增 编辑 删除
+    datasetAuth: ['unAdd', 'unEdit', 'unDelete'], // 数据集按钮权限 新增 编辑 删除
     customPlots: [],
     // 远程组件列表
     remoteComponents,
@@ -53,6 +53,10 @@ Vue.use(ElementUI, { size: 'mini' })
 Vue.prototype.$dashboardAxios = $dashboardAxios
 Vue.config.productionTip = false
 /* eslint-disable no-new */
+// 兼容ie下双向绑定事件
+Vue.prototype.inputChange = function (e) {
+  return e.target.value
+}
 new Vue({
   el: '#app',
   router,

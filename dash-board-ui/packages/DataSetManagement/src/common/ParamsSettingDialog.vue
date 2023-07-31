@@ -219,5 +219,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../../assets/style/bsTheme.scss';
+@import '../../../assets/style/bsTheme.scss';
 </style>
