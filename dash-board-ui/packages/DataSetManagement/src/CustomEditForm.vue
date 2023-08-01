@@ -50,7 +50,7 @@
             <el-row :gutter="20">
               <el-col :span="12">
                 <el-form-item
-                  label="名称"
+                  label="数据集名称"
                   prop="name"
                 >
                   <el-input
@@ -583,6 +583,8 @@
                 <span v-else>{{ scope.row.sourceTable }}</span>
               </template>
             </el-table-column>
+            <!-- 添加一个插槽，供其他人可扩展表格列，并把表格列的数据返回出去 -->
+            <slot name="output-field-table-column" />
           </el-table>
         </div>
         <span
