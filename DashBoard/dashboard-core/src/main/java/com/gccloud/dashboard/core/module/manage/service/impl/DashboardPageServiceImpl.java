@@ -15,6 +15,7 @@ import com.gccloud.dashboard.core.module.chart.bean.Chart;
 import com.gccloud.dashboard.core.module.chart.components.datasource.DataSetDataSource;
 import com.gccloud.dashboard.core.module.manage.dto.DashboardPageDTO;
 import com.gccloud.dashboard.core.module.manage.dto.DashboardSearchDTO;
+import com.gccloud.dashboard.core.module.manage.extend.DashboardExtendClient;
 import com.gccloud.dashboard.core.module.manage.service.IDashboardPageService;
 import com.gccloud.dashboard.core.module.template.entity.PageTemplateEntity;
 import com.gccloud.dashboard.core.module.template.service.IPageTemplateService;
@@ -49,6 +50,9 @@ public class DashboardPageServiceImpl extends ServiceImpl<DashboardPageDao, Page
 
     @Resource
     private DashboardConfig dashboardConfig;
+
+    @Resource
+    private DashboardExtendClient dashboardExtendClient;
 
     @Override
     public String add(DashboardPageDTO dashboardPageDTO) {
@@ -239,5 +243,7 @@ public class DashboardPageServiceImpl extends ServiceImpl<DashboardPageDao, Page
         LambdaQueryWrapper<PageEntity> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(PageEntity::getCode, code);
         this.remove(queryWrapper);
+        // 调用扩展接口
+        dashboardExtendClient.deleteByCode(code);
     }
 }
