@@ -62,7 +62,7 @@
           @submit.native.prevent
         >
           <el-form-item
-            label='数据集名称'
+            label="数据集名称"
             class="filter-item"
             prop="name"
           >
@@ -76,7 +76,7 @@
             />
           </el-form-item>
           <el-form-item
-            label='标签'
+            label="标签"
             class="filter-item"
             prop="labelIds"
           >
@@ -96,7 +96,7 @@
                 :key="labelItem.id"
                 :label="labelItem.labelName"
                 :value="labelItem.id"
-              ></el-option>
+              />
             </el-select>
           </el-form-item>
           <el-form-item class="filter-item">
@@ -182,7 +182,7 @@
               show-overflow-tooltip
             >
               <template slot-scope="scope">
-                <span>{{getLabels(scope.row.labelIds).join(',')}}</span>
+                <span>{{ getLabels(scope.row.labelIds).join(',') }}</span>
               </template>
             </el-table-column>
             <el-table-column
@@ -202,7 +202,7 @@
                 v-if="showOperate(scope.row.datasetType)"
                 slot-scope="scope"
               >
-                 <slot :item='scope.row'>
+                <slot :item="scope.row">
                   <el-button
                     v-if="doEdit"
                     class="db-el-button-default"
@@ -211,7 +211,7 @@
                   >
                     编辑
                   </el-button>
-                   <el-button
+                  <el-button
                     v-if="isDelete"
                     class="db-el-button-default"
                     :loading="scope.row.loading"
@@ -251,8 +251,8 @@
     />
     <checkDatasource
       ref="checkDatasource"
-      :reasonList="reasonList"
-      />
+      :reason-list="reasonList"
+    />
     <component
       :is="componentData.component"
       v-if="datasetType"
@@ -271,7 +271,7 @@
 
 <script>
 import TypeTree from './TypeTree.vue'
-import JsDataSet from './JsDataSet/JsDataSet.vue'
+import JsDataSet from './JsDataSet.vue'
 import JsonEditForm from './JsonEditForm.vue'
 import table from 'dashPackages/js/utils/table.js'
 import ScriptEditForm from './ScriptEditForm.vue'
@@ -279,9 +279,10 @@ import CustomEditForm from './CustomEditForm.vue'
 import { pageMixins } from 'dashPackages/js/mixins/page'
 import checkDatasource from 'dashPackages/DataSourceManagement/src/checkDatasource.vue'
 import OriginalEditForm from './OriginalEditForm.vue'
+import HttpEditForm from './HttpEditForm.vue'
 import DatasetTypeDialog from './DatasetTypeDialog.vue'
 import StoredProcedureEditForm from './StoredProcedureEditForm.vue'
-import { datasetPage, datasetRemove ,datasetCheck} from 'dashPackages/js/utils/datasetConfigService'
+import { datasetPage, datasetRemove, datasetCheck } from 'dashPackages/js/utils/datasetConfigService'
 import { getLabelList } from 'dashPackages/js/utils/LabelConfigService'
 export default {
   name: 'DataSetManagement',
@@ -297,7 +298,8 @@ export default {
     StoredProcedureEditForm,
     ScriptEditForm,
     JsDataSet,
-    checkDatasource
+    checkDatasource,
+    HttpEditForm
   },
   mixins: [pageMixins],
   props: {
@@ -321,15 +323,15 @@ export default {
       type: Boolean,
       default: false
     },
-    ToAdd:{
+    ToAdd: {
       type: Boolean,
       default: true
     },
-    doEdit:{
+    doEdit: {
       type: Boolean,
       default: true
     },
-    isDelete:{
+    isDelete: {
       type: Boolean,
       default: true
     }
@@ -337,8 +339,8 @@ export default {
   },
   data () {
     return {
-      reasonList:[],
-       deling:false,
+      reasonList: [],
+      deling: false,
       datasetType: null,
       isEdit: false,
       categoryData: [],
@@ -375,11 +377,10 @@ export default {
       }
     }
   },
-  computed:{
-    allType(){
-      return this.datasetTypeList.map(item=>item.datasetType).filter(item=>item!='')
-    },
-
+  computed: {
+    allType () {
+      return this.datasetTypeList.map(item => item.datasetType).filter(item => item != '')
+    }
 
   },
   watch: {
@@ -404,10 +405,10 @@ export default {
     }
   },
   methods: {
-    getLabels(list){
-      const arr=[]
-      list?.forEach((item)=>{
-        arr.push(this.labelList.filter(x=>x.id==item)[0]?.labelName)
+    getLabels (list) {
+      const arr = []
+      list?.forEach((item) => {
+        arr.push(this.labelList.filter(x => x.id == item)[0]?.labelName)
       })
       return arr
     },
@@ -475,10 +476,10 @@ export default {
     },
     // 删除数据集
     delDataset (row) {
-       row.loading=true
-      datasetCheck(row.id).then((res)=>{
-        row.loading=false
-        if(res.canDelete){
+      row.loading = true
+      datasetCheck(row.id).then((res) => {
+        row.loading = false
+        if (res.canDelete) {
           this.$confirm('确定删除当前数据集吗?', '提示', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
@@ -491,12 +492,11 @@ export default {
             })
           }).catch(() => {
           })
-        }else{
-          this.reasonList=res.reasons
+        } else {
+          this.reasonList = res.reasons
           this.$refs.checkDatasource.checkDatasourceVisible = true
         }
       })
-
     },
     // 详情
     toPreview (id, type, name, typeId) {
@@ -532,7 +532,7 @@ export default {
     getComponents (componentName) {
       const components = Object.values(this.$options.components)
       let remoteComponentData = null
-      if (window.DS_CONFIG?.customDatasetComponents&&window.DS_CONFIG?.customDatasetComponents.length > 0) {
+      if (window.DS_CONFIG?.customDatasetComponents && window.DS_CONFIG?.customDatasetComponents.length > 0) {
         // 获取远程组件
         remoteComponentData = window.DS_CONFIG?.customDatasetComponents.find(item => item.config.componentName === componentName)
       }
@@ -555,18 +555,19 @@ export default {
         }
       }
       this.current = 1
-      const list=[
-          { name: '全部', datasetType: '' },
-          { name: '原始数据集', datasetType: 'original', componentName: 'OriginalEditForm' },
-          { name: '自助数据集', datasetType: 'custom', componentName: 'CustomEditForm' },
-          { name: '存储过程数据集', datasetType: 'storedProcedure', componentName: 'StoredProcedureEditForm' },
-          { name: 'JSON数据集', datasetType: 'json', componentName: 'JsonEditForm' },
-          { name: '脚本数据集', datasetType: 'script', componentName: 'ScriptEditForm' },
-          { name: 'JS数据集', datasetType: 'js', componentName: 'JsDataSet' }
-        ]
-      if( window.DS_CONFIG?.datasetTypeList&&window.DS_CONFIG?.datasetTypeList?.length!=0){
-        this.datasetTypeList=[{ name: '全部', datasetType: '' },...list.filter(item=>window.DS_CONFIG?.datasetTypeList.findIndex(x=>x===item.datasetType)!==-1)]
-      }else{
+      const list = [
+        { name: '全部', datasetType: '' },
+        { name: '原始数据集', datasetType: 'original', componentName: 'OriginalEditForm' },
+        { name: '自助数据集', datasetType: 'custom', componentName: 'CustomEditForm' },
+        { name: '存储过程数据集', datasetType: 'storedProcedure', componentName: 'StoredProcedureEditForm' },
+        { name: 'JSON数据集', datasetType: 'json', componentName: 'JsonEditForm' },
+        { name: '脚本数据集', datasetType: 'script', componentName: 'ScriptEditForm' },
+        { name: 'JS数据集', datasetType: 'js', componentName: 'JsDataSet' },
+        { name: 'HTTP数据集', datasetType: 'http', componentName: 'HttpEditForm' }
+      ]
+      if (window.DS_CONFIG?.datasetTypeList && window.DS_CONFIG?.datasetTypeList?.length != 0) {
+        this.datasetTypeList = [{ name: '全部', datasetType: '' }, ...list.filter(item => window.DS_CONFIG?.datasetTypeList.findIndex(x => x === item.datasetType) !== -1)]
+      } else {
         this.datasetTypeList = [
           ...list
         ]
@@ -578,7 +579,6 @@ export default {
         })
       }
       this.getDataList()
-
     },
     // 新增数据集
     addDataset () {
@@ -600,7 +600,7 @@ export default {
         size: this.size,
         moduleCode: this.appCode,
         ...this.queryForm,
-        datasetType:this.queryForm.datasetType===''?[...this.allType]:[this.queryForm.datasetType]
+        datasetType: this.queryForm.datasetType === '' ? [...this.allType] : [this.queryForm.datasetType]
       }).then((data) => {
         this.tableData = data.list
         this.tableData.forEach(r => {
@@ -651,13 +651,13 @@ export default {
       this.$refs.datasetsTypeTree.ztreeObj.cancelSelectedNode()
       this.getDataList()
     },
-    clearSearch(){
+    clearSearch () {
       this.current = 1
       this.queryForm.typeId = ''
       // 清除左侧机构树的选中状态
       this.$refs.datasetsTypeTree.ztreeObj.cancelSelectedNode()
-      this.queryForm.labelIds=[]
-      this.queryForm.name=''
+      this.queryForm.labelIds = []
+      this.queryForm.name = ''
       this.getDataList()
     },
     // 拖拽修改div宽度

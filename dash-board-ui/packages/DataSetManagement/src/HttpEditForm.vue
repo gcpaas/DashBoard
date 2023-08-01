@@ -9,7 +9,7 @@
           <template slot="content">
             <div class="page-header">
               <div class="page-header-left">
-                {{ !isEdit ? 'JS数据集详情' : dataForm.id ? 'JS数据集编辑' : 'JS数据集新增' }}
+                {{ !isEdit ? 'HTTP数据集详情' : dataForm.id ? 'HTTP数据集编辑' : 'HTTP数据集新增' }}
               </div>
               <div class="page-header-right">
                 <el-button
@@ -53,7 +53,6 @@
                 >
                   <el-input
                     v-model="dataForm.name"
-                    class="db-el-input"
                     clearable
                     :disabled="!isEdit"
                   />
@@ -62,18 +61,13 @@
               <el-col :span="12">
                 <el-form-item
                   label="分组"
-                  prop="typeId"
                 >
                   <el-select
                     ref="selectParentName"
                     v-model="dataForm.typeId"
-                    class="db-el-select"
-                    popper-class="db-el-select"
                     placeholder="请选择分组"
                     clearable
                     :disabled="!isEdit"
-                    filterable
-                    :filter-method="selectorFilter"
                     @clear="clearType"
                     @visible-change="setCurrentNode"
                   >
@@ -93,7 +87,6 @@
                           :highlight-current="true"
                           :expand-on-click-node="false"
                           class="db-el-tree"
-                          :filter-node-method="treeFilter"
                           @node-click="selectParentCategory"
                         >
                           <span
@@ -122,9 +115,61 @@
                 >
                   <el-input
                     v-model="dataForm.remark"
-                    class="db-el-input"
                     :disabled="!isEdit"
                   />
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item
+                  label="调用方式"
+                  prop="config.requestType"
+                >
+                  <el-select
+                    v-model="dataForm.config.requestType"
+                  >
+                    <el-option
+                      label="前台代理"
+                      value="frontend"
+                    />
+                    <el-option
+                      label="后台代理"
+                      value="backend"
+                    />
+                  </el-select>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row :gutter="20">
+              <el-col :span="21">
+                <el-form-item
+                  label="请求地址"
+                  prop="config.url"
+                >
+                  <el-input
+                    v-model="dataForm.config.url"
+                    autocomplete="off"
+                    placeholder="请输入静态请求地址或动态请求地址，动态请求地址必须以${baseUrl}开头"
+                    clearable
+                  />
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="12">
+                <el-form-item
+                  label="请求类型"
+                  prop="config.method"
+                >
+                  <el-radio-group
+                    v-model="dataForm.config.method"
+                  >
+                    <el-radio-button label="get">
+                      GET
+                    </el-radio-button>
+                    <el-radio-button label="post">
+                      POST
+                    </el-radio-button>
+                  </el-radio-group>
                 </el-form-item>
               </el-col>
               <el-col :span="12">
@@ -132,7 +177,7 @@
                   label="标签"
                   prop="labelIds"
                 >
-                  <label-select
+                  <LabelSelect
                     :dataset-id="datasetId"
                     :id-list="dataForm.labelIds"
                     @commit="(ids) =>{dataForm.labelIds = ids}"
@@ -140,24 +185,220 @@
                 </el-form-item>
               </el-col>
             </el-row>
+            <el-tabs
+              v-model="activeName"
+            >
+              <el-tab-pane
+                label="请求头"
+                name="head"
+              >
+                <el-form-item
+                  prop="config.headers"
+                  label-width="0px"
+                >
+                  <el-button
+                    type="primary"
+                    @click="addHeader"
+                  >
+                    增加
+                  </el-button>
+                  <el-row
+                    v-for="(item,index) in dataForm.config.headers"
+                    :key="index"
+                    :gutter="10"
+                    :span="21"
+                    style="margin-top: 10px"
+                  >
+                    <el-col :span="5">
+                      <el-form-item
+                        label="键"
+                        :prop="'config.headers.'+index+'.key'"
+                        label-width="50px"
+                        :rules="rules.key"
+                      >
+                        <el-input
+                          v-model="dataForm.config.headers[index].key"
+                          placeholder="请输入键"
+                          clearable
+                          @blur="dataForm.config.headers[index].key = inputChange($event)"
+                        />
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="5">
+                      <el-form-item
+                        label="值"
+                        :prop="'config.headers.'+index+'.value'"
+                        label-width="50px"
+                        :rules="rules.value"
+                      >
+                        <el-input
+                          v-model="dataForm.config.headers[index].value"
+                          placeholder="请输入值"
+                          clearable
+                          @blur="dataForm.config.headers[index].value = inputChange($event)"
+                        />
+                      </el-form-item>
+                    </el-col>
+                    <el-col
+                      :span="2"
+                      style="text-align: center"
+                    >
+                      <el-button
+                        type="primary"
+                        @click="delHeader(index)"
+                      >
+                        移除
+                      </el-button>
+                    </el-col>
+                  </el-row>
+                </el-form-item>
+              </el-tab-pane>
+              <el-tab-pane
+                label="请求参数"
+                name="param"
+              >
+                <el-form-item
+                  prop="config.params"
+                  label-width="0px"
+                  :rules="dataForm.config.method==='get'?rules.params:[{ required: false}]"
+                >
+                  <el-button
+                    type="primary"
+                    @click="addParam"
+                  >
+                    增加
+                  </el-button>
+                  <el-row
+                    v-for="(item,index) in dataForm.config.params"
+                    :key="index"
+                    :gutter="10"
+                    :span="21"
+                    style="margin-top: 10px"
+                  >
+                    <el-col :span="7">
+                      <el-form-item
+                        label="键"
+                        :prop="'config.params.'+index+'.key'"
+                        label-width="50px"
+                        :rules="rules.key"
+                      >
+                        <el-input
+                          v-model="dataForm.config.params[index].key"
+                          placeholder="请输入键"
+                          clearable
+                          @blur="dataForm.config.params[index].key = inputChange($event)"
+                        />
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="7">
+                      <el-form-item
+                        label="值"
+                        :prop="'config.params.'+index+'.value'"
+                        label-width="50px"
+                        :rules="rules.value"
+                      >
+                        <el-input
+                          v-model="dataForm.config.params[index].value"
+                          placeholder="请输入值"
+                          clearable
+                          @blur="dataForm.config.params[index].value = inputChange($event)"
+                        />
+                      </el-form-item>
+                    </el-col>
+                    <el-col
+                      :span="2"
+                      style="text-align: center"
+                    >
+                      <el-button
+                        type="primary"
+                        @click="delParam(index)"
+                      >
+                        移除
+                      </el-button>
+                    </el-col>
+                  </el-row>
+                </el-form-item>
+              </el-tab-pane>
+              <el-tab-pane
+                v-if="dataForm.config.method === 'post'"
+                label="请求体"
+                name="second"
+              >
+                <el-form-item
+                  prop="requestScript"
+                  label-width="0px"
+                >
+                  <el-input
+                    v-model="dataForm.config.body"
+                    type="textarea"
+                    :autosize="{ minRows: 10, maxRows: 10}"
+                    clearable
+                  />
+                  <div class="db-codemirror-bottom-text">
+                    <strong>
+                      1、脚本内置参数 :  请求体已经内置参数body，如需添加请求体参数，可直接加入到body对象中. <br>
+                      2、示例 : <span style="color: red;">body.test='test'</span>
+                    </strong>
+                  </div>
+                </el-form-item>
+              </el-tab-pane>
+              <el-tab-pane
+                label="请求脚本"
+                name="reqScript"
+              >
+                <el-form-item
+                  prop="requestScript"
+                  label-width="0px"
+                >
+                  <codemirror
+                    v-if="activeName==='reqScript'"
+                    v-model.trim="dataForm.config.requestScript"
+                    :options="codemirrorOption"
+                    class="code"
+                  />
+                  <div class="db-codemirror-bottom-text">
+                    <strong>
+                      1、脚本内置参数 : 请求脚本已经内置参数req，可参考请求拦截的回调参数config直接使用(修改url中的参数例外). <br>
+                      2、示例 :   <br> 如修改请求头中对应参数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">req.headers.name='tom'</span>
+                      <br> 如修改url中对应参数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">req.urlKey.age=17</span>
+                    </strong>
+                  </div>
+                </el-form-item>
+              </el-tab-pane>
+              <el-tab-pane
+                label="响应脚本"
+                name="respScript"
+              >
+                <el-form-item
+                  prop="responseScript"
+                  label-width="0px"
+                >
+                  <codemirror
+                    v-if="activeName==='respScript'"
+                    v-model.trim="dataForm.config.responseScript"
+                    :options="codemirrorOption"
+                    class="code"
+                  />
+                  <div class="db-codemirror-bottom-text">
+                    <strong>
+                      1、脚本内置参数 : 接口返回数据已经内置到参数response中，可直接使用,但是必须要返回设置后的数据. <br>
+                      2、示例 : <span style="color: red;">let data =response.data;return data;</span><br>
+                    </strong>
+                  </div>
+                </el-form-item>
+              </el-tab-pane>
+            </el-tabs>
           </el-form>
           <div
             v-if="isEdit"
-            class="javascript-config"
+            class="sql-config"
           >
-            <div>
-              <codemirror
-                v-model="dataForm.config.script"
-                :options="codemirrorOption"
-                style="margin-top: 2px;border: 1px solid rgb(232, 232, 232);"
-              />
-            </div>
             <div style="text-align: center; padding: 16px 0;">
               <el-button
                 type="primary"
                 @click="scriptExecute()"
               >
-                执行
+                解析并执行
               </el-button>
             </div>
           </div>
@@ -168,7 +409,7 @@
         >
           <div class="right-setting">
             <div class="paramConfig">
-              <div class="title-style db-title-style">
+              <div class="title-style">
                 动态参数
                 <el-button
                   type="text"
@@ -178,7 +419,7 @@
                   配置
                 </el-button>
               </div>
-              <div class="field-wrap db-field-wrap db-scrollbar">
+              <div class="field-wrap">
                 <div
                   v-for="param in dataForm.config.paramsList"
                   :key="param.name"
@@ -203,7 +444,7 @@
               </div>
             </div>
             <div class="structure">
-              <div class="title-style db-title-style">
+              <div class="title-style">
                 输出字段
                 <el-button
                   type="text"
@@ -213,7 +454,7 @@
                   配置
                 </el-button>
               </div>
-              <div class="field-wrap db-field-wrap db-scrollbar">
+              <div class="field-wrap">
                 <div
                   v-for="(field, key) in outputFieldList"
                   :key="key"
@@ -250,14 +491,13 @@
         </div>
         <div
           v-loading="tableLoading"
-          class="db-table-box is-Edit db-scrollbar"
+          class="is-Edit"
         >
           <el-table
             align="center"
             :data="dataPreviewList"
             max-height="400"
             :border="true"
-            class="db-el-table db-scrollbar"
           >
             <el-table-column
               v-for="(value, key) in dataPreviewList[0]"
@@ -278,19 +518,21 @@
         v-if="!isEdit"
         class="dataPreView"
       >
-        <el-tabs v-model="activeName">
+        <el-tabs
+          v-model="activeName"
+        >
           <el-tab-pane
             v-loading="tableLoading"
             label="数据预览"
             name="data"
           >
-            <div class="db-table-box">
+            <div>
               <el-table
+                v-if="dataPreviewList && dataPreviewList.length"
                 align="center"
                 :data="dataPreviewList"
                 max-height="400"
                 :border="true"
-                class="db-el-table"
               >
                 <el-table-column
                   v-for="(value, key) in dataPreviewList[0]"
@@ -305,6 +547,7 @@
                   </template>
                 </el-table-column>
               </el-table>
+              <el-empty v-else />
             </div>
           </el-tab-pane>
           <el-tab-pane
@@ -312,7 +555,7 @@
             label="数据集结构"
             name="structure"
           >
-            <div class="db-table-box">
+            <div>
               <el-table
                 max-height="400"
                 :data="outputFieldList"
@@ -335,7 +578,7 @@
                       v-if="isEdit"
                       v-model="scope.row.fieldDesc"
                       size="small"
-                      class="labeldsc db-el-input"
+                      class="labeldsc"
                     />
                     <span v-else>{{ scope.row.fieldDesc }}</span>
                   </template>
@@ -367,16 +610,25 @@
 
 <script>
 import LabelSelect from 'dashPackages/DataSetLabelManagement/src/LabelSelect.vue'
-import ParamsSettingDialog from './components/ParamsSettingDialog.vue'
-import OutputFieldDialog from './components/OutputFieldDialog.vue'
-import FieldFillDialog from './components/FieldFillDialog.vue'
-import { nameCheckRepeat, datasetAdd, datasetUpdate, getDataset, getCategoryTree } from 'dashPackages/js/utils/datasetConfigService'
+import ParamsSettingDialog from './common/ParamsSettingDialog.vue'
+import OutputFieldDialog from './common/OutputFieldDialog.vue'
+import FieldFillDialog from './common/FieldFillDialog.vue'
+import {
+  nameCheckRepeat,
+  datasetAdd,
+  datasetUpdate,
+  getDataset,
+  getCategoryTree,
+  datasetExecuteTest
+} from 'dashPackages/js/utils/datasetConfigService'
 import { codemirror } from 'vue-codemirror'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/eclipse.css'
+import axiosFormatting from '../../js/utils/httpParamsFormatting'
+import _ from 'lodash'
 export default {
-  name: 'JsDataSet',
+  name: 'HttpEditForm',
   components: {
     codemirror,
     FieldFillDialog,
@@ -420,7 +672,35 @@ export default {
         }
       })
     }
+    const validateUrl = (rule, value, callback) => {
+      // eslint-disable-next-line no-template-curly-in-string
+      if (value.startsWith('${baseUrl}/')) {
+        callback()
+      }
+      const reg = /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/
+      if (!reg.test(value)) {
+        // eslint-disable-next-line no-template-curly-in-string
+        callback(new Error('请输入正确的静态请求地址或动态请求地址，动态请求地址必须以${baseUrl}/开头'))
+      } else {
+        callback()
+      }
+    }
     return {
+      activeName: 'head',
+      options: [{
+        value: 'string',
+        label: '字符串'
+      }, {
+        value: 'boolean',
+        label: '布尔值'
+      }, {
+        value: 'int',
+        label: '数字'
+      }, {
+        value: 'date',
+        label: '日期'
+      }],
+      newDataForm: {}, // 替换完参数后的配置
       dataForm: {
         id: '',
         name: '',
@@ -428,8 +708,16 @@ export default {
         remark: '',
         labelIds: [],
         config: {
-          script: '',
-          paramsList: []
+          className: 'com.gccloud.dataset.entity.config.HttpDataSetConfig',
+          requestType: 'backend',
+          method: 'get',
+          url: '',
+          headers: [],
+          params: [],
+          body: '',
+          paramsList: [],
+          requestScript: '',
+          responseScript: ''
         }
       },
       rules: {
@@ -437,8 +725,15 @@ export default {
           { required: true, message: '请输入数据集名称', trigger: 'blur' },
           { validator: validateName, trigger: 'blur' }
         ],
-        typeId: [
-          { required: true, message: '请选择分组', trigger: 'blur' }
+        'config.requestType': [
+          { required: true, message: '请选择调用方式', trigger: 'change' }
+        ],
+        key: [{ required: true, message: '键不能为空', trigger: 'blur' }],
+        value: [{ required: true, message: '值不能为空', trigger: 'blur' }],
+        'config.method': [{ required: true, message: '请求类型不能为空', trigger: 'blur' }],
+        'config.url': [
+          { required: true, message: '请求地址不能为空', trigger: 'blur' },
+          { validator: validateUrl, trigger: 'blur' }
         ]
       },
       codemirrorOption: {
@@ -451,7 +746,6 @@ export default {
           completeSingle: true
         }
       },
-      activeName: 'data',
       dataPreviewList: [],
       outputFieldList: [],
       structurePreviewListCopy: [],
@@ -494,25 +788,18 @@ export default {
       }
       if (this.datasetId) {
         getDataset(this.datasetId).then(res => {
-          const { id, name, typeId, remark, config } = res
+          const { id, name, typeId, remark, datasetType, moduleCode, editable, sourceId, config } = res
           const { script, paramsList, fieldDesc, fieldList } = config
-          this.dataForm = { id, name, typeId, remark, config: { script, paramsList } }
+          this.dataForm = { id, name, typeId, remark, datasetType, moduleCode, editable, sourceId, config: { ...config } }
           this.fieldDesc = fieldDesc
           this.outputFieldList = fieldList
+          // this.replaceParams(paramsList)
           this.scriptExecute(true)
         })
       }
     },
     // 保存数据集
     save (formName, nochecktosave = false) {
-      if (this.passTest === false) {
-        this.$message.error('请确保脚本不为空且执行通过')
-        return
-      }
-      if (!this.outputFieldList.length) {
-        this.$message.warning('该执行脚本未生成输出字段，请重新检查')
-        return
-      }
       if (!nochecktosave) {
         const temp = this.outputFieldList.some(item => {
           return item.fieldDesc === '' || !item.hasOwnProperty('fieldDesc')
@@ -527,22 +814,29 @@ export default {
         if (valid) {
           this.saveloading = true
           this.saveText = '正在保存...'
-          const { datasetId, dataForm, config, appCode, fieldDesc, outputFieldList } = this
+          const { datasetId, dataForm, appCode, fieldDesc, outputFieldList } = this
           const form = {
             id: datasetId,
             name: dataForm.name,
             typeId: dataForm.typeId,
             remark: dataForm.remark,
-            datasetType: 'js',
+            datasetType: 'http',
             moduleCode: appCode,
             editable: appCode ? 1 : 0,
             labelIds: dataForm.labelIds,
             config: {
-              className: 'com.gccloud.dataset.entity.config.JsDataSetConfig',
-              script: dataForm.config.script,
+              className: 'com.gccloud.dataset.entity.config.HttpDataSetConfig',
+              method: dataForm.config.method,
+              url: dataForm.config.url,
+              headers: dataForm.config.headers,
+              params: dataForm.config.params,
+              body: dataForm.config.body,
+              requestScript: dataForm.config.requestScript,
+              responseScript: dataForm.config.responseScript,
+              requestType: dataForm.config.requestType,
               fieldDesc,
               paramsList: dataForm.config.paramsList,
-              fieldList: outputFieldList
+              fieldList: this.outputFieldList
             }
           }
           const datasetSave = this.dataForm.id === '' ? datasetAdd : datasetUpdate
@@ -559,6 +853,24 @@ export default {
           })
         }
       })
+    },
+    // 增加header
+    addHeader () {
+      const header = { key: '', type: 'string', value: '', remark: '' }
+      this.dataForm.config.headers.push(_.cloneDeep(header))
+    },
+    // 移除header
+    delHeader (index) {
+      this.dataForm.config.headers.splice(index, 1)
+    },
+    // 增加请求参数
+    addParam () {
+      const param = { key: '', value: '', remark: '' }
+      this.dataForm.config.params.push(_.cloneDeep(param))
+    },
+    // 移除请求参数
+    delParam (index) {
+      this.dataForm.config.params.splice(index, 1)
     },
     saveParams (val) {
       this.dataForm.config.paramsList = val
@@ -623,107 +935,121 @@ export default {
       })
       this.fieldDesc = fieldDesc
     },
-    // 脚本执行
-    scriptExecute (isInit = false) {
-      if (this.dataForm.config.script) {
-        const javascript = this.dataForm.config.script
-        let scriptMethod = null
-        try {
-          const scriptAfterReplacement = javascript.replace(/\${(.*?)}/g, (match, p) => {
-            return `'${this.dataForm.config.paramsList.find(param => param.name === p).value}'`
-          })
-          // eslint-disable-next-line no-new-func
-          scriptMethod = new Function(scriptAfterReplacement)
-        } catch (error) {
-          this.passTest = false
-          this.$message.error(`脚本执行错误，请检查脚本，具体错误：${error}`)
-          return
-        }
-        // 调用方法生成随机数据
-        const returnResult = scriptMethod()
-        //  检查数据是否为数组
-        if (!Array.isArray(returnResult)) {
-          this.passTest = false
-          this.$message.error('脚本执行结果不是数组，请检查脚本')
-          return
-        }
-        const keys = []
-        returnResult.forEach(item => {
-          Object.keys(item).forEach(key => {
-            if (!keys.includes(key)) {
-              keys.push(key)
-            }
-          })
-        })
-        if (this.outputFieldList.length === 0) {
-          this.outputFieldList = keys.map(item => {
-            return {
-              fieldName: item,
-              fieldDesc: ''
-            }
-          })
-        }
-        // 如果脚本有变化，生成的keys和outputFieldList的长度不一致，就重新生成outputFieldList，仅删除或添加变化的那个字段，其余的不变化
-        if (this.outputFieldList.length !== keys.length) {
-          const newOutputFieldList = []
-          keys.forEach(key => {
-            const field = this.outputFieldList.find(item => item.fieldName === key)
-            if (field) {
-              newOutputFieldList.push(field)
-            } else {
-              newOutputFieldList.push({
-                fieldName: key,
-                fieldDesc: ''
-              })
-            }
-          })
-          this.outputFieldList = newOutputFieldList
-        }
-        // 如果脚本有变化，生成的keys和outputFieldList的长度一致，仅字段名变化了，就重新生成outputFieldList
-        if (this.outputFieldList.length === keys.length) {
-          const newOutputFieldList = []
-          keys.forEach(key => {
-            const field = this.outputFieldList.find(item => item.fieldName === key)
-            if (field) {
-              newOutputFieldList.push(field)
-            } else {
-              newOutputFieldList.push({
-                fieldName: key,
-                fieldDesc: ''
-              })
-            }
-          })
-          this.outputFieldList = newOutputFieldList
-        }
-        if (this.outputFieldList.length && this.fieldDesc && !isInit) {
-          this.buildFieldDesc()
-        }
-        // 如果有数据，就通过测试
-        if (this.outputFieldList.length > 0) {
-          // this.structurePreviewListCopy = cloneDeep(this.outputFieldList)
-          this.dataPreviewList = returnResult
-          this.passTest = true
-          if (!isInit) {
-            this.$message.success('脚本执行通过')
-          }
+    // 获取请求地址、请求头、请求参数、请求体中所有的变量，在动态参数中进行变量
+    getPramsList () {
+      const paramNames1 = this.getValName(this.dataForm.config.url)
+      const paramNames2 = this.dataForm.config?.headers.map(obj => obj.value.match(/\$\{(.+?)\}/)?.[1]).filter(Boolean)
+      const paramNames3 = this.dataForm.config?.params.map(obj => obj.value.match(/\$\{(.+?)\}/)?.[1]).filter(Boolean)
+      const paramNames4 = this.getValName(this.dataForm.config.body)
+      const paramNames = new Set([...paramNames1, ...paramNames2, ...paramNames3, ...paramNames4])
+      const names = this.dataForm.config?.paramsList?.map(item => item.name)
+      const params = []
+      paramNames.forEach(name => {
+        if (names.includes(name)) {
+          const param = this.dataForm.config?.paramsList?.find(item => item.name === name)
+          params.push(param)
         } else {
-          this.passTest = false
+          params.push({
+            name: name,
+            type: 'String',
+            value: '',
+            status: 1,
+            require: 1,
+            remark: ''
+          })
         }
+      })
+      this.dataForm.config.paramsList = _.cloneDeep(params)
+    },
+    // 获取字符串中${变量名}中的变量名
+    getValName (str) {
+      // 定义正则表达式模式
+      const pattern = /\${(.*?)\}/g
+      // 使用正则表达式提取变量名
+      const variables = []
+      let match
+      while (match = pattern.exec(str)) {
+        variables.push(match[1])
+      }
+      return variables
+    },
+    // 执行配置好的接口
+    scriptExecute (isInit = false) {
+      this.getPramsList()
+      // 如果动态参数未配置，则直接打开配置弹窗
+      const flag = this.dataForm.config.paramsList.some(item => !item.value)
+      if (this.dataForm.config.paramsList && this.dataForm.config.paramsList.length && flag) {
+        this.$refs.paramsSettingDialog.open()
       } else {
-        this.passTest = false
-        this.$message.error('请填写脚本')
+        // 如果动态参数已配置则调接口
+        // 如果是前端代理，则自行组装接口及参数并调接口
+        if (this.dataForm.config.requestType === 'frontend') {
+          // this.replaceParams(this.dataForm.config.paramsList)
+          axiosFormatting({ ...this.dataForm.config }).then((res) => {
+            this.dataPreviewList = res.data && Array.isArray(res.data) ? res.data : []
+            // 获取数据后更新输出字段
+            this.updateOoutputFieldList(this.dataPreviewList)
+            this.$message.success('解析并执行成功')
+          })
+        } else {
+          // 如果是后端代理，则将配置传到后端
+          const script = JSON.stringify(this.dataForm.config)
+          const executeParams = {
+            script,
+            params: this.dataForm.paramsList,
+            dataSetType: 'http'
+          }
+          datasetExecuteTest(executeParams).then(res => {
+            this.dataPreviewList = res.data && Array.isArray(res.data) ? res.data : []
+            // 获取数据后更新输出字段
+            this.updateOoutputFieldList(this.dataPreviewList)
+            this.$message.success('解析并执行成功')
+          }).catch((e) => {
+
+          })
+        }
       }
     },
-    // 执行事件
-    // toExecute () {
-    // if (this.dataForm.config.paramsList.length) {
-    //   this.isSet = false
-    //   this.paramsVisible = true
-    // } else {
-    // 无参数，直接执行脚本
-    // this.scriptExecute()
-    // }
-    // },
+    updateOoutputFieldList (dataList) {
+      if (dataList && dataList.length) {
+        const newList = Object.keys(dataList?.[0])?.map(key => {
+          return {
+            fieldName: key,
+            fieldDesc: ''
+          }
+        })
+        this.outputFieldList = this.compareArr(newList, this.outputFieldList)
+      } else {
+        this.outputFieldList = []
+      }
+    },
+    // 用来对两个数组进行对比
+    compareArr (newList, oldList) {
+      // 创建一个空数组，用于存储最终的结果
+      const result = []
+
+      // 遍历A数组中的每个对象
+      for (const objA of newList) {
+        let found = false // 标志变量，用于表示是否在B数组中找到对应的属性
+
+        // 遍历B数组中的每个对象
+        for (const objB of oldList) {
+          if (objA.fieldName === objB.fieldName) {
+            // 如果A和B中的fieldName相同，则将B中该属性的属性值赋值给A，并将该对象添加到结果数组中
+            objA.fieldDesc = objB.fieldDesc
+            result.push(objA)
+            found = true
+            break
+          }
+        }
+
+        // 如果在B数组中没有找到对应的属性，则直接将该对象添加到结果数组中
+        if (!found) {
+          result.push(objA)
+        }
+      }
+      return result
+    },
     // 清空分类
     clearType () {
       this.typeName = ''
@@ -736,9 +1062,6 @@ export default {
         this.$refs.categorySelectTree.setCurrentKey(key)
       }
     },
-    // openParamsSetting () {
-    //   this.$refs.paramsSettingDialog.open()
-    // },
     // 分类选择
     selectParentCategory (value) {
       this.dataForm.typeId = value.id
@@ -756,23 +1079,16 @@ export default {
     },
     openNewWindow (url) {
       window.open(url, '_blank')
-    },
-    selectorFilter (value) {
-      this.$refs.categorySelectTree.filter(value)
-    },
-    treeFilter (value, data) {
-      if (!value) return true
-      return data.name.indexOf(value) !== -1
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '../../../assets/style/bsTheme.scss';
+@import '../../assets/style/bsTheme.scss';
 
 .data-set-scrollbar {
-  height: calc(100vh - 190px);
+  height: 100%;
   overflow-y: auto;
   overflow-x: none;
 
@@ -781,7 +1097,7 @@ export default {
   }
 }
 
-/deep/ .el-input__inner {
+::v-deep .el-input__inner {
   width: 100% !important;
 }
 
@@ -795,12 +1111,12 @@ export default {
   }
 }
 
-.javascript-config {
+.sql-config {
   padding: 0 16px;
 }
 
 .operation {
-  /deep/ .el-select {
+  ::v-deep .el-select {
     width: 200px !important;
     margin-right: 16px;
   }
@@ -808,7 +1124,7 @@ export default {
   display: flex;
 }
 
-/deep/ .CodeMirror {
+::v-deep .CodeMirror {
   height: 180px !important;
   font-family: Helvetica, Tahoma;
 }
@@ -817,7 +1133,7 @@ export default {
   border: 0;
 }
 
-/deep/ .fieldDescCheck {
+::v-deep .fieldDescCheck {
   .el-dialog__body {
     height: fit-content !important;
     min-height: unset !important;
@@ -899,7 +1215,7 @@ export default {
   }
 }
 
-/deep/ .db-table-box.is-Edit .el-table {
+::v-deep .db-table-box.is-Edit .el-table {
   max-height: unset !important;
 
   .el-table__body-wrapper {
@@ -915,5 +1231,8 @@ export default {
 
 .tree-box {
   padding: 0;
+}
+.tabs-box{
+  margin-left: 45px;
 }
 </style>

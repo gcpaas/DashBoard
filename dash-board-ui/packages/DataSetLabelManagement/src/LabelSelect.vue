@@ -25,7 +25,12 @@
       />
     </el-tooltip>
     <!--  配置按钮  -->
-    <el-button type="text" @click="manageLabel">管理</el-button>
+    <el-button
+      type="text"
+      @click="manageLabel"
+    >
+      管理
+    </el-button>
     <!-- 标签列表弹窗 -->
     <el-dialog
       class="db-dialog-wrap db-el-dialog"
@@ -72,23 +77,23 @@
                 :label="type"
                 :value="type"
               >
-              <span>
-                {{ type }}
-              </span>
+                <span>
+                  {{ type }}
+                </span>
                 <span style="float: right;padding-right: 20px">
-                <el-button
-                  v-if="isManage"
-                  icon="el-icon-edit"
-                  type="text"
-                  @click.stop="editLabelType(type)"
-                />
-                <el-button
-                  v-if="isManage"
-                  icon="el-icon-delete"
-                  type="text"
-                  @click.stop="deleteLabelType(type)"
-                />
-              </span>
+                  <el-button
+                    v-if="isManage"
+                    icon="el-icon-edit"
+                    type="text"
+                    @click.stop="editLabelType(type)"
+                  />
+                  <el-button
+                    v-if="isManage"
+                    icon="el-icon-delete"
+                    type="text"
+                    @click.stop="deleteLabelType(type)"
+                  />
+                </span>
               </el-option>
             </el-select>
           </el-form-item>
@@ -117,13 +122,14 @@
           element-loading-text="正在加载中..."
           :data="labelList"
           row-key="id"
+          height="calc(100vh - 450px)"
           @select="labelCheckChange"
           @select-all="selectAll"
         >
           <el-empty slot="empty" />
           <el-table-column
-            key="selection"
             v-if="!isManage"
+            key="selection"
             type="selection"
             width="55"
           />
@@ -146,11 +152,11 @@
             show-overflow-tooltip
           />
           <el-table-column
+            v-if="isManage"
             key="opt"
             align="center"
             label="操作"
             width="200"
-            v-if="isManage"
           >
             <template slot-scope="scope">
               <el-button
@@ -208,13 +214,13 @@
         </div>
         <label-edit
           v-if="editFormVisible"
-          @afterEdit="afterEdit"
           ref="labelEdit"
+          @afterEdit="afterEdit"
         />
         <label-type-edit
           v-if="labelTypeEditVisible"
-          @afterEdit="afterEdit(true)"
           ref="labelTypeEdit"
+          @afterEdit="afterEdit(true)"
         />
       </div>
     </el-dialog>
@@ -225,7 +231,7 @@
 import LabelEdit from './LabelConfigEdit'
 import LabelTypeEdit from './LabelTypeEdit.vue'
 import { pageMixins } from 'dashPackages/js/mixins/page'
-import {getLabelType, labelList, getLabelListByDatasetId, removeLabel, removeLabelByType} from 'dashPackages/js/utils/LabelConfigService'
+import { getLabelType, labelList, getLabelListByDatasetId, removeLabel, removeLabelByType } from 'dashPackages/js/utils/LabelConfigService'
 
 export default {
   name: 'LabelSelect',
@@ -308,11 +314,11 @@ export default {
     }
   },
   methods: {
-    getData(){
+    getData () {
       getLabelListByDatasetId(this.datasetId).then((data) => {
         this.selectLabelListInitial = _.cloneDeep(data)
         this.selectLabelList = _.cloneDeep(data)
-        let idList = []
+        const idList = []
         data.forEach((item) => {
           idList.push(item.id)
         })
@@ -420,7 +426,7 @@ export default {
      * 移除选中的标签
      */
     handleCloseTag (label) {
-      this.idListCopy=[]
+      this.idListCopy = []
       this.selectLabelListInitial.forEach((item, index) => {
         if (item.id === label.id) {
           this.selectLabelListInitial.splice(index, 1)
@@ -431,7 +437,7 @@ export default {
           this.selectLabelList.splice(index, 1)
         }
       })
-      this.selectLabelList.forEach(item=>{
+      this.selectLabelList.forEach(item => {
         this.idListCopy.push(item.id)
       })
       this.$emit('commit', this.idListCopy)
@@ -446,7 +452,7 @@ export default {
     /**
      * 标签管理按钮
      */
-    manageLabel() {
+    manageLabel () {
       this.init(true)
     },
     /**
@@ -506,30 +512,29 @@ export default {
       if (cleanType) {
         this.searchForm.labelType = ''
       }
-       this.labelCheckLoading = true
-        const params = {
-          current: this.current,
-          size: this.sizeLabel,
-          labelName: this.searchForm.labelName,
-          labelType: this.searchForm.labelType
-        }
-        labelList(params).then((data) => {
-          this.totalCount = data.totalCount
-          this.labelList = data.list
-          this.labelCheckLoading = false
-          this.selectLabelList.forEach((item)=>{
-          const a =this.labelList.findIndex((x)=>x.id===item.id)
-          item.labelName=this.labelList[a].labelName
+      this.labelCheckLoading = true
+      const params = {
+        current: this.current,
+        size: this.sizeLabel,
+        labelName: this.searchForm.labelName,
+        labelType: this.searchForm.labelType
+      }
+      labelList(params).then((data) => {
+        this.totalCount = data.totalCount
+        this.labelList = data.list
+        this.labelCheckLoading = false
+        this.selectLabelList.forEach((item) => {
+          const a = this.labelList.findIndex((x) => x.id === item.id)
+          item.labelName = this.labelList[a].labelName
         })
-        this.selectLabelListInitial.forEach((item)=>{
-          const a =this.labelList.findIndex((x)=>x.id===item.id)
-          item.labelName=this.labelList[a].labelName
+        this.selectLabelListInitial.forEach((item) => {
+          const a = this.labelList.findIndex((x) => x.id === item.id)
+          item.labelName = this.labelList[a].labelName
         })
-        }).catch(() => {
-          this.labelCheckLoading = false
-        })
-       this.getLabelType()
-
+      }).catch(() => {
+        this.labelCheckLoading = false
+      })
+      this.getLabelType()
     }
   }
 }
@@ -542,5 +547,9 @@ export default {
     border: none;
     background: var(--db-el-background-1);
   }
+}
+::v-deep .el-dialog__footer{
+  padding: 0;
+  margin-top: 16px;
 }
 </style>
