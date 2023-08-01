@@ -1207,4 +1207,5 @@ export default {
   top: 75%;
 }
 
+
 </style>
