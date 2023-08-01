@@ -548,8 +548,8 @@ export default {
     background: var(--db-el-background-1);
   }
 }
-::v-deep .el-dialog__footer{
-  padding: 0;
-  margin-top: 16px;
-}
+// ::v-deep .el-dialog__footer{
+//   padding: 0;
+//   margin-top: 16px;
+// }
 </style>

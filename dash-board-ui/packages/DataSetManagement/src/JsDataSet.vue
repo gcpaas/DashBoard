@@ -48,7 +48,7 @@
             <el-row :gutter="20">
               <el-col :span="12">
                 <el-form-item
-                  label="名称"
+                  label="数据集名称"
                   prop="name"
                 >
                   <el-input
@@ -354,7 +354,11 @@
         ref="outputFieldDialog"
         :output-field-list="outputFieldList"
         @setFieldList="(list) => { outputFieldList = list }"
-      />
+      >
+        <template #output-field-table-column>
+          <slot name="output-field-table-column" />
+        </template>
+      </OutputFieldDialog>
     </el-scrollbar>
     <FieldFillDialog
       ref="fieldFillDialog"

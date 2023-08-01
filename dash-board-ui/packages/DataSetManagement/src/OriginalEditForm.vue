@@ -461,6 +461,8 @@
               prop="sourceTable"
               label="字段来源"
             />
+             <!-- 添加一个插槽，供其他人可扩展表格列，并把表格列的数据返回出去 -->
+            <slot name="output-field-table-column" />
           </el-table>
         </div>
         <span
@@ -711,6 +713,9 @@ export default {
       }
       this.tableLoading = true
       datasetExecuteTest(executeParams).then((data) => {
+        if (this.dataForm.fieldList == null) {
+          this.dataForm.fieldList = _.cloneDeep(res.structure)
+        }
         this.dataPreviewList = data.data.list
         this.totalCount = data.data.totalCount
         this.tableLoading = false
@@ -1201,5 +1206,6 @@ export default {
 ::v-deep .el-loading-spinner{
   top: 75%;
 }
+
 
 </style>
