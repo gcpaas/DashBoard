@@ -40,8 +40,7 @@
 - [x] 支持组件自定义规范，按照规范开发自己的大屏组件，满足特殊需求，如：自定义网络拓扑
 
 ## 快速开始
-
-[快速开始](https://www.yuque.com/chuinixiongkou/bigscreen/ofy1bqhqgua1fu0f)
+<a href="https://www.yuque.com/chuinixiongkou/bigscreen/ofy1bqhqgua1fu0f" target="_blank">快速开始</a>
 
 ## 演示DEMO
 
