@@ -191,7 +191,7 @@
                 type="primary"
                 @click="buildParamsAndRun"
               >
-                运行
+                解析并运行
               </el-button>
             </div>
           </div>
@@ -407,7 +407,7 @@
                 <span v-else>{{ scope.row.orderNum }}</span>
               </template>
             </el-table-column>
-             <!-- 添加一个插槽，供其他人可扩展表格列，并把表格列的数据返回出去 -->
+            <!-- 添加一个插槽，供其他人可扩展表格列，并把表格列的数据返回出去 -->
             <slot name="output-field-table-column" />
           </el-table>
         </div>
