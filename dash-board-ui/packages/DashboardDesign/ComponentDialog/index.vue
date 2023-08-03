@@ -398,7 +398,7 @@ export default {
   },
   methods: {
     jumpto () {
-      const { href } = this.$router.resolve('/dashboard-components?edit=1')
+      const { href } = this.$router.resolve('/redirect?edit=component')
       window.open(href, '_blank')
     },
     chooseComponent (component) {

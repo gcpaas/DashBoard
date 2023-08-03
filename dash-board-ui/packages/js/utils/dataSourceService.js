@@ -91,7 +91,7 @@ const getSourceView = (id = '-1', flag = false) => Vue.prototype.$dashboardAxios
  * @param flag
  * @returns {Promise<*>}
  */
-const getTableFieldList = (sourceId = '-1', tableName = '', flag = false) => Vue.prototype.$dashboardAxios.get(`/datasource//getFieldList/table/${sourceId}/${tableName}`, {}, flag)
+const getTableFieldList = (sourceId = '-1', tableName = '', flag = false) => Vue.prototype.$dashboardAxios.get(`/datasource/getFieldList/table/${sourceId}/${tableName}`, {}, flag)
 
 export {
   add,

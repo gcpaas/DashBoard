@@ -74,7 +74,7 @@ function registerRouters (config, router) {
           path: config?.routers?.componentUrl,
           component: () => import('dashPackages/DashboardComponentMag'),
           meta: {
-            title: '资源管理'
+            title: '组件管理'
           }
         }
       ]
@@ -90,6 +90,11 @@ function registerRouters (config, router) {
       name: 'Preview',
       component: () =>
         require.ensure([], () => require('dashPackages/DashboardRun'))
+    },
+    {
+      path: '/redirect',
+      name: 'Redirect',
+      component: () =>import('dashPackages/Layout/Redirect/index.vue'),
     },
     {
       path: config?.routers?.appPreviewUrl,

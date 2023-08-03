@@ -40,7 +40,7 @@
         <el-table
           :key="randomKey"
           class="db-el-table"
-           max-height="450"
+           max-height="400"
           :data="tableList"
         >
           <el-empty />

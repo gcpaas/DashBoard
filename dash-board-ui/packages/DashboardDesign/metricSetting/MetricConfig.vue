@@ -5,7 +5,7 @@
     :close-on-click-modal="false"
     :before-close="handleClose"
     class="db-dialog-wrap db-el-dialog"
-    width="400px"
+    width="50%"
     append-to-body
   >
     <el-form
@@ -24,6 +24,7 @@
       <el-form-item
         label="指标字体大小"
         label-width="100px"
+         class="min"
       >
         <el-input
           v-model="customizeConfig.metricFontSize"
@@ -37,6 +38,7 @@
       <el-form-item
         label="指标字体权重"
         label-width="100px"
+         class="min"
       >
         <el-input-number
           v-model="customizeConfig.metricFontWeight"
@@ -52,6 +54,7 @@
       <el-form-item
         label="描述字体大小"
         label-width="100px"
+         class="min"
       >
         <el-input
           v-model="customizeConfig.descriptionFontSize"
@@ -65,6 +68,7 @@
       <el-form-item
         label="描述字体权重"
         label-width="100px"
+         class="min"
       >
         <el-input-number
           v-model="customizeConfig.descriptionWeight"
@@ -80,6 +84,7 @@
       <el-form-item
         label="数字格式化"
         label-width="100px"
+         class="min"
       >
         <el-select
           v-model="customizeConfig.numberFormat"
@@ -175,10 +180,13 @@ export default {
   .config-map-table {
     border-bottom: 1px solid #e6ebf5;
   }
-  /deep/ .el-input{
+  .min{
+    /deep/ .el-input{
     width: 150px !important;
+    }
+    /deep/.el-input-number--mini{
+      width: 150px !important;
+    }
   }
-  /deep/.el-input-number--mini{
-    width: 150px !important;
-  }
+
 </style>

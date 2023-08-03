@@ -150,11 +150,11 @@ export default {
     handleConfigChange (val, oldValue, type) {
       if (!_.isEqual(val, oldValue)) {
         if (type === 'configStyle') {
-          if (this.config.type === 'iframeChart') {
-            this.debounce(500, { ...val, type: this.config.type, code: this.config.code })
-          } else {
+          // if (this.config.type === 'iframeChart') {
+          //   this.debounce(500, { ...val, type: this.config.type, code: this.config.code })
+          // } else {
             this.$emit('updateSetting', { ...val, type: this.config.type, code: this.config.code })
-          }
+          // }
         } else {
           this.$emit('updateDataSetting', this.config)
         }
