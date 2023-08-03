@@ -7,7 +7,7 @@ export default function axiosFormatting (customConfig) {
   const httpConfig = {
     timeout: 1000 * 30,
     baseURL: '',
-    headers: newCustomConfig.headers
+    headers: { 'Content-Type': 'application/json', ...newCustomConfig.headers }
   }
   // let loadingInstance = null // 加载全局的loading
   const instance = axios.create(httpConfig)
@@ -19,10 +19,10 @@ export default function axiosFormatting (customConfig) {
      */
     // 执行请求脚本
     // https://mock.presstime.cn/mock/64bf8a00ce1b0ea640809069/test_copy_copy_copy/httpData?token=123&ss=ss
-    const req = { ...config, urlKey: {} }
+    const req = { ...config, url: {} }
     eval(newCustomConfig.requestScript)
-    for (const key in req.urlKey) {
-      newCustomConfig.url = replaceUrlParam(newCustomConfig.url, key, req.urlKey[key])
+    for (const key in req.url) {
+      newCustomConfig.url = replaceUrlParam(newCustomConfig.url, key, req.url[key])
     }
     config = { ...config, ...req, url: newCustomConfig.url }
     return config
@@ -33,26 +33,21 @@ export default function axiosFormatting (customConfig) {
 
   /** 添加响应拦截器  **/
   instance.interceptors.response.use(response => {
-    if (response.data.code === 200) {
-      // 执行响应脚本
-      // eslint-disable-next-line no-new-func
-      const getResp = new Function('response', newCustomConfig.responseScript)
-      const resp = getResp(response)
-      console.log(resp)
-      return Promise.resolve(resp)
+    const resp = response.data
+    console.log('resp', resp)
+    // 执行响应脚本
+    // eslint-disable-next-line no-new-func
+    if (newCustomConfig.responseScript) {
+      const getResp = new Function('resp', newCustomConfig.responseScript)
+      const res = getResp(resp)
+      console.log('resp', res)
+      return Promise.resolve(res)
     } else {
-      Message({
-        message: response.data.message,
-        type: 'error'
-      })
-      return Promise.reject(response.data.message)
+      return Promise.resolve(resp)
     }
   })
-  const body = {}
-  const pattern = /(body\.\w+)=(\w+)/g
-  const replacement = "$1='$2'"
-  newCustomConfig.body = newCustomConfig.body.replace(pattern, replacement)
-  eval(newCustomConfig.body)
+  const body = newCustomConfig?.body.replace(/: ,/g, ':undefined,').replace(/, }/g, ',undefined}')
+  /** 发送请求  **/
   return new Promise((resolve, reject) => {
     instance({
       method: newCustomConfig.method,
