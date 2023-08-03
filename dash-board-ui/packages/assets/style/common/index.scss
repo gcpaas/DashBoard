@@ -184,6 +184,12 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
       }
 
     }
+    .el-pagination{
+      padding: 0px;
+      .el-pagination .el-select .el-input{
+        margin: 0 10px;
+      }
+    }
     //分页样式
     // .db-pagination {
     //   .el-pagination.is-background .btn-prev,
