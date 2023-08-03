@@ -152,6 +152,12 @@
                 style="margin-top: 2px;border: 1px solid rgb(232, 232, 232);"
               />
             </div>
+            <div class="db-codemirror-bottom-text">
+              <strong>请使用 return，将结果返回出来，例如：return [...]</strong>
+              <br>
+              <strong>动态参数使用： 使用${}将参数包裹，例如：let name = <span style="color: red;">${name}。</span>
+              </strong>
+            </div>
             <div style="text-align: center; padding: 16px 0;">
               <el-button
                 type="primary"

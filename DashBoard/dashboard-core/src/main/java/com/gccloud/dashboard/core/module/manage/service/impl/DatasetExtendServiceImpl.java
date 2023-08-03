@@ -43,4 +43,9 @@ public class DatasetExtendServiceImpl implements IDatasetExtendService {
         msg = msg.substring(0, msg.length() - 1);
         return msg;
     }
+
+    @Override
+    public String getServiceType() {
+        return "仪表盘";
+    }
 }
