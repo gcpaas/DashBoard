@@ -51,7 +51,8 @@
           element-loading-text="加载中"
           :style="{
             display: gridComputed ? 'grid' : 'flex',
-            justifyContent: gridComputed ? 'space-around' : 'flex-start'
+            justifyContent: gridComputed ? 'space-around' : 'flex-start',
+            height:'calc(100vh - 370px)'
           }"
         >
           <!-- <div v-if="list.length !== 0"> -->
@@ -224,6 +225,9 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../assets/style/bsTheme.scss';
+.content{
+  height: calc(100vh - 290px);
+}
 .dashboard-list-wrap {
   position: relative;
   height: 100%;

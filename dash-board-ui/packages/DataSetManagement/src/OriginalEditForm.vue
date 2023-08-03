@@ -4,7 +4,7 @@
     class="inner-container"
     :element-loading-text="saveText"
   >
-    <el-scrollbar class="data-set-scrollbar">
+    <!-- <el-scrollbar class="data-set-scrollbar"> -->
       <div class="header">
         <el-page-header class="db-el-page-header">
           <template slot="content">
@@ -327,7 +327,7 @@
           <el-table
             align="center"
             :data="dataPreviewList"
-            max-height="400"
+            max-height="420"
             :border="true"
             class="db-el-table db-scrollbar"
           >
@@ -483,7 +483,7 @@
           </el-button>
         </span>
       </el-dialog>
-    </el-scrollbar>
+    <!-- </el-scrollbar> -->
   </div>
 </template>
 
@@ -1194,7 +1194,7 @@ export default {
 .db-pagination {
   position: relative !important;
   bottom: 0 !important;
-  padding: 0 12px 16px 16px !important;
+  padding: 16px 12px 0 16px !important;
   ::v-deep .el-input__inner {
     width: 110px !important;
     border: none;
