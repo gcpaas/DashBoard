@@ -172,7 +172,7 @@ export default {
   mounted () {},
   methods: {
      jumpto(){
-      let {href} = this.$router.resolve(`/redirect?edit=source`)
+      let {href} = this.$router.resolve(`/dashboard-redirect?edit=source`)
       window.open(href,'_blank')
     },
     chooseImg (img) {

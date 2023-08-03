@@ -92,7 +92,7 @@ function registerRouters (config, router) {
         require.ensure([], () => require('dashPackages/DashboardRun'))
     },
     {
-      path: '/redirect',
+      path: '/dashboard-redirect',
       name: 'Redirect',
       component: () =>import('dashPackages/Layout/Redirect/index.vue'),
     },
