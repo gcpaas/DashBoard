@@ -104,7 +104,11 @@ export default {
       ]
     }
   },
-  created () {},
+  mounted () {
+    if(this.$route.query.edit){
+     document.title = '智能报表平台-仪表盘设计器'
+    }
+  },
   methods: {
 
     changeTab (tab) {

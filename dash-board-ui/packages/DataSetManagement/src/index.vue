@@ -249,10 +249,6 @@
       :dataset-type-list="datasetTypeList"
       @openAddForm="openAddForm"
     />
-    <checkDatasource
-      ref="checkDatasource"
-      :reason-list="reasonList"
-    />
     <component
       :is="componentData.component"
       v-if="datasetType"
@@ -281,7 +277,6 @@ import table from 'dashPackages/js/utils/table.js'
 import ScriptEditForm from './ScriptEditForm.vue'
 import CustomEditForm from './CustomEditForm.vue'
 import { pageMixins } from 'dashPackages/js/mixins/page'
-import checkDatasource from 'dashPackages/DataSourceManagement/src/checkDatasource.vue'
 import OriginalEditForm from './OriginalEditForm.vue'
 import HttpEditForm from './HttpEditForm.vue'
 import DatasetTypeDialog from './DatasetTypeDialog.vue'
@@ -302,7 +297,6 @@ export default {
     StoredProcedureEditForm,
     ScriptEditForm,
     JsDataSet,
-    checkDatasource,
     HttpEditForm
   },
   mixins: [pageMixins],
@@ -497,8 +491,8 @@ export default {
           }).catch(() => {
           })
         } else {
-          this.reasonList = res.reasons
-          this.$refs.checkDatasource.checkDatasourceVisible = true
+          this.reasonList=Object.keys(res.reasons)
+          this.$message.error(`与${this.reasonList.toString()}存在关联，无法删除！`)
         }
       })
     },

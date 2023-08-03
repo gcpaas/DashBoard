@@ -130,10 +130,6 @@
       :app-code="appCode"
       @refreshTable="init"
     />
-    <checkDatasource
-      ref="checkDatasource"
-      :reasonList="reasonList"
-      />
   </div>
 </template>
 
@@ -142,7 +138,6 @@ import table from 'dashPackages/js/utils/table.js'
 import '../style/index.scss'
 import { sourceLinkTest, datasourcePage, sourceRemove, dataSourceCheck } from 'dashPackages/js/utils/dataSourceService'
 import setDatasource from './setDatasource.vue'
-import checkDatasource from './checkDatasource.vue'
 import _ from 'lodash'
 import { pageMixins } from 'dashPackages/js/mixins/page'
 export default {
@@ -151,7 +146,7 @@ export default {
     table // 注册自定义指令
   },
   components: {
-    setDatasource,checkDatasource
+    setDatasource,
   },
   mixins: [pageMixins],
   props: {
@@ -278,8 +273,8 @@ export default {
             })
           })
         }else{
-          this.reasonList=res.reasons
-          this.$refs.checkDatasource.checkDatasourceVisible = true
+          this.reasonList=Object.keys(res.reasons)
+          this.$message.error(`与${this.reasonList.toString()}存在关联，无法删除！`)
         }
       })
 

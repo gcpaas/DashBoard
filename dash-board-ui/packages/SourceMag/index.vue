@@ -31,7 +31,9 @@ export default {
       }
     }
   },
-  mounted () {},
+  mounted () {
+    
+  },
   methods: {
     getPageInfo (pageInfo) {
       this.catalogInfo = pageInfo
