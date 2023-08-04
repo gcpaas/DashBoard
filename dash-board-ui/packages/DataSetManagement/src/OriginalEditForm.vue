@@ -983,6 +983,12 @@ export default {
       datasetExecuteTest(executeParams).then((data) => {
         this.dataPreviewList = data.data.list
         this.structurePreviewList = data.structure
+        if(this.dataPreviewList.length!=0){
+          this.structurePreviewList=[]
+          Object.keys(this.dataPreviewList[0]).forEach(item=>{
+            this.structurePreviewList.push(data.structure.filter(x=>x.fieldName==item)[0])
+          })
+        }
         // 如果是初始化
         if (this.isInit) {
           this.structurePreviewList = this.dataForm.fieldList

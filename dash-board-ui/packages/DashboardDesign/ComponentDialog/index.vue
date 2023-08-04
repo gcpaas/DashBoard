@@ -438,8 +438,8 @@ export default {
       }
     },
     getDataList () {
-      this.loading = true
       if (this.activeName === 'combination') {
+        this.loading = true
         this.$dashboardAxios.get('/dashboard/design/page', {
           parentCode: this.code || null,
           current: this.current,
@@ -455,6 +455,7 @@ export default {
             this.loading = false
           })
       } else if (this.activeName === 'bizComponent') {
+        this.loading = true
         getBizComponentPage({
           parentCode: this.code || null,
           current: this.current,
