@@ -16,13 +16,15 @@
         />
       </div>
     </header>
-    <component
-      :is="resolveComponentType(config.type)"
-      :id="`${config.code}`"
-      :ref="config.code"
-      :key="config.key"
-      :config="config"
-    />
+    <div class="render-item-wrap-inner">
+      <component
+        :is="resolveComponentType(config.type)"
+        :id="`${config.code}`"
+        :ref="config.code"
+        :key="config.key"
+        :config="config"
+      />
+    </div>
     <div v-if="designVisible">
       <el-dialog
         :visible.sync="designVisible"
