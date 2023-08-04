@@ -450,6 +450,8 @@ export default {
           .then((data) => {
             this.list = data.list
             this.totalCount = data.totalCount
+          }).catch(() => {
+            this.loading = false
           })
           .finally(() => {
             this.loading = false
@@ -465,6 +467,10 @@ export default {
         }).then((data) => {
           this.bizComponentList = data.list
           this.totalCount = data.totalCount
+          this.loading = false
+        }).catch(() => {
+          this.loading = false
+        }).finally(() => {
           this.loading = false
         })
       }
