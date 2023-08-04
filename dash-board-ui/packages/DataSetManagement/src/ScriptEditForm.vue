@@ -256,11 +256,10 @@
             align="center"
             :data="dataPreviewList"
             max-height="400"
-            :border="true"
             class="db-el-table db-scrollbar"
           >
             <el-table-column
-              v-for="(value, key) in dataPreviewList[0]"
+              v-for="(value, key) in dataPreviewList[0] ? dataPreviewList[0] : noDataTableDisplayFields"
               :key="key"
               :label="key"
               align="center"
@@ -647,6 +646,16 @@ export default {
       isSet: false, // 参数是否配置状态
       passTest: false,
       fieldDesc: null // 字段描述
+    }
+  },
+  computed: {
+    noDataTableDisplayFields () {
+      // 表格列对象
+      const tableColumnObject = {}
+      this.structurePreviewList.forEach(item => {
+        tableColumnObject[item.fieldName] = ''
+      })
+      return tableColumnObject
     }
   },
   watch: {
