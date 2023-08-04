@@ -299,7 +299,7 @@
             class="db-el-table db-scrollbar"
           >
             <el-table-column
-              v-for="(value, key) in dataPreviewList[0]"
+              v-for="(value, key) in dataPreviewList[0] ? dataPreviewList[0] : noDataTableDisplayFields"
               :key="key"
               :label="key"
               align="center"
@@ -888,6 +888,14 @@ export default {
         script: this.dataForm.script,
         paramsList: this.dataForm.paramsList
       }
+    },
+    noDataTableDisplayFields () {
+      // 表格列对象
+      const tableColumnObject = {}
+      this.structurePreviewList.forEach(item => {
+        tableColumnObject[item.fieldName] = ''
+      })
+      return tableColumnObject
     }
   },
   watch: {
