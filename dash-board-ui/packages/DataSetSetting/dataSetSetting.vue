@@ -4,7 +4,7 @@
     :append-to-body="true"
     title="数据集设置"
     :visible.sync="dataSetVisible"
-    width="80%"
+    width="90%"
     class="db-dialog-wrap data-set-wrap db-el-dialog"
     :class="isUseSlot? 'tabHeight':'commonHeight'"
     @opened="openedInit"
@@ -213,7 +213,7 @@ export default {
     min-height: 480px;
 
     .el-table {
-      max-height: calc(90vh - 350px);
+      max-height:390px;
     }
     .db-table-box {
       margin-bottom: 0px;

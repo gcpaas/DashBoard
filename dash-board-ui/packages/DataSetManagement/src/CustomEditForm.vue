@@ -1357,7 +1357,7 @@ export default {
 @import '../../assets/style/bsTheme.scss';
 
 .data-set-scrollbar {
-  height: 100%;
+  height:calc(100vh - 170px);
   overflow-y: auto;
   overflow-x: none;
 }

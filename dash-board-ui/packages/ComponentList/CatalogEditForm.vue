@@ -154,7 +154,7 @@ export default {
      const validateName = (rule, value, callback) => {
       this.$dashboardAxios.post('/dashboard/type/nameRepeat', {
         name: value,
-        type: 'resourceCatalog'
+        type: this.catalogType
       }, true).then((r) => {
         if (r.data) {
           callback(new Error('分组名称已存在'))

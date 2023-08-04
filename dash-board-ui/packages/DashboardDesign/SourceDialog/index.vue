@@ -52,8 +52,7 @@
           :style="{
             display: gridComputed ? 'grid' : 'flex',
             justifyContent: gridComputed ? 'space-around' : 'flex-start',
-            height: 'calc(100vh - 400px)',
-            marginBottom: '38px'
+            height:'calc(100vh - 370px)'
           }"
         >
           <!-- <div v-if="list.length !== 0"> -->
@@ -101,23 +100,23 @@
         >
           暂无数据
         </div>
-      </div>
-      <div class="footer-pagination-wrap">
-        <div class="db-pagination">
-          <el-pagination
-            class="db-el-pagination"
-            popper-class="db-el-pagination"
-            background
-            layout="total, prev, pager, next, sizes"
-            :page-size="size"
-            prev-text="上一页"
-            next-text="下一页"
-            :total="totalCount"
-            :page-sizes="[10, 20, 50, 100]"
-            :current-page="current"
-            @current-change="currentChangeHandle"
-            @size-change="sizeChangeHandle"
-          />
+        <div class="footer-pagination-wrap">
+          <div class="db-pagination">
+            <el-pagination
+              class="db-el-pagination"
+              popper-class="db-el-pagination"
+              background
+              layout="total, prev, pager, next, sizes"
+              :page-size="size"
+              prev-text="上一页"
+              next-text="下一页"
+              :total="totalCount"
+              :page-sizes="[10, 20, 50, 100]"
+              :current-page="current"
+              @current-change="currentChangeHandle"
+              @size-change="sizeChangeHandle"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -138,7 +137,7 @@
         确定
       </el-button>
       <el-button
-        type="primary"
+        type='primary'
         @click="jumpto"
       >
         资源管理
@@ -156,7 +155,7 @@ export default {
   props: {},
   data () {
     return {
-      dialogVisible: true,
+      dialogVisible: false,
       loading: false,
       options: [],
       code: '',
@@ -172,9 +171,9 @@ export default {
   },
   mounted () {},
   methods: {
-    jumpto () {
-      const { href } = this.$router.resolve('/redirect?edit=source')
-      window.open(href, '_blank')
+     jumpto(){
+      let {href} = this.$router.resolve(`/dashboard-redirect?edit=source`)
+      window.open(href,'_blank')
     },
     chooseImg (img) {
       this.focus = _.cloneDeep(img)
@@ -226,10 +225,8 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../assets/style/bsTheme.scss';
-::v-deep .el-dialog__body{
-  position: relative;
-  min-height: 500px;
-  padding: 0 16px 16px 16px !important;
+.content{
+  height: calc(100vh - 290px);
 }
 .dashboard-list-wrap {
   position: relative;
@@ -246,10 +243,7 @@ export default {
     align-items: center;
     justify-content: flex-end;
     margin-bottom: 12px;
-    position: sticky;
-    top: 0px;
-    z-index: 999;
-    padding: 16px 0;
+
     .el-input {
       width: 200px;
       margin-right: 20px;
@@ -410,14 +404,16 @@ export default {
   .el-loading-parent--relative {
     position: unset !important;
   }
-}
-.footer-pagination-wrap {
-    bottom: 5px;
-    right: 3px;
+
+  .footer-pagination-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     width: 100%;
-    margin-top: 16px;
-    position: absolute;
+    padding: 0 20px;
+    margin-top: 8px;
   }
+}
 // .db-pagination {
 //   ::v-deep .el-input__inner {
 //     width: 110px !important;
@@ -432,5 +428,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+/deep/ .el-dialog__footer{
+  padding-right: 30px !important;
 }
 </style>
