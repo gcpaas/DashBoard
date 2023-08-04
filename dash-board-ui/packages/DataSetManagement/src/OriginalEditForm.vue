@@ -328,7 +328,6 @@
             align="center"
             :data="dataPreviewList"
             max-height="400"
-            :border="true"
             class="db-el-table db-scrollbar"
           >
             <el-table-column
