@@ -438,8 +438,8 @@ export default {
       }
     },
     getDataList () {
-      this.loading = true
       if (this.activeName === 'combination') {
+        this.loading = true
         this.$dashboardAxios.get('/dashboard/design/page', {
           parentCode: this.code || null,
           current: this.current,
@@ -450,11 +450,14 @@ export default {
           .then((data) => {
             this.list = data.list
             this.totalCount = data.totalCount
+          }).catch(() => {
+            this.loading = false
           })
           .finally(() => {
             this.loading = false
           })
       } else if (this.activeName === 'bizComponent') {
+        this.loading = true
         getBizComponentPage({
           parentCode: this.code || null,
           current: this.current,
@@ -464,6 +467,10 @@ export default {
         }).then((data) => {
           this.bizComponentList = data.list
           this.totalCount = data.totalCount
+          this.loading = false
+        }).catch(() => {
+          this.loading = false
+        }).finally(() => {
           this.loading = false
         })
       }
