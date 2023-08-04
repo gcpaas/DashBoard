@@ -207,7 +207,7 @@ export default {
           //   registerTheme(themeName, { ...res.chart })
           //   const pageConfig = this.pageConfig
           //   pageConfig.themeJson = res
-            // this.changePageConfig(pageConfig)
+          // this.changePageConfig(pageConfig)
           //   this.styleSet()
           //   this.changePageLoading(false)
           // })
@@ -388,5 +388,10 @@ export default {
 }
 /deep/.vue-grid-placeholder {
   background: #C6C8CA !important;
+}
+@media screen and (max-width: 400px) {
+  .grid-item-box{
+    width: calc(100% - 44px) !important;
+  }
 }
 </style>
