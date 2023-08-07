@@ -157,7 +157,7 @@
                     v-model="dataForm.config.url"
                     autocomplete="off"
                     class="db-el-input"
-                    placeholder="请输入静态请求地址或动态请求地址，动态请求地址必须以${baseUrl}开头"
+                    placeholder="请输入请求地址"
                     clearable
                   />
                 </el-form-item>
@@ -385,24 +385,13 @@
                     class="code"
                   />
                   <div
-                    v-if="dataForm.config.requestType === 'frontend'"
                     class="db-codemirror-bottom-text"
                   >
                     <strong>请求脚本设置规则： 请求脚本已经内置参数req，可参考下面的示例进行配置:
-                      <br> 如修改url中对应参数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">req.url.age=17</span>
+                      <br> 如修改请求地址中对应参数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">req.url.age=17</span>
                       <br> 如修改请求头中对应参数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">req.headers.name='tom'</span>
                       <br> 如修改请求参数中对应参数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">req.params.age=17</span>
                       <br> 如修改请求体中对应参数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">req.data='{"name":"223"}'</span>
-                    </strong>
-                  </div>
-                  <div
-                    v-else
-                    class="db-codemirror-bottom-text"
-                  >
-                    <strong>请求脚本设置规则： 请求脚本已经内置参数:请求头：headers（对象类型），请求参数params（对象类型），请求体body（字符串类型），注意：如果body有修改，必须在脚本最后将字符串body返回，可参考下面的示例进行配置:
-                      <br> 如修改请求头中对应参数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">headers.name='tom'</span>
-                      <br> 如修改请求参数中对应参数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">params.age=17</span>
-                      <br> 如修改请求体中对应参数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">body='XXXX'</span>
                     </strong>
                   </div>
                 </el-form-item>
@@ -425,19 +414,20 @@
                     v-if="dataForm.config.requestType === 'frontend'"
                     class="db-codemirror-bottom-text"
                   >
-                    <strong>响应脚本设置规则： 接口返回数据已经内置到参数resp中，可直接使用,但是必须要返回设置后的数据。<br> 例如：<span style="color: red;">return resp.data</span>
+                    <strong>响应脚本设置规则： 接口返回数据已经内置到参数resp中，可直接使用，但是必须要返回设置后的数据。<br> 例如：<span style="color: red;">return resp.data</span>
                     </strong>
                   </div>
                   <div
                     v-else
                     class="db-codemirror-bottom-text"
                   >
-                    <strong>响应脚本设置规则： 接口返回数据已经内置到参数responseString(已转为字符串)中，,如果需要处理成JSON格式推荐使用JsonSlurper类。
+                    <strong>响应脚本设置规则： 接口返回数据已经内置到参数responseString(已转为字符串)中，如果需要处理成JSON格式推荐使用JsonSlurper类。
                       <br> 例如： <br>
                       <span style="color: red;">
-                        import com.gccloud.common.utils.JSON <br>
-                        def respone = JSON.parseObject(responseString) <br>
-                        return respone.data
+                        import groovy.json.JsonSlurper<br>
+                        def jsonSlurper = new JsonSlurper()<br>
+                        def responseMap= jsonSlurper.parseText(responseString)<br>
+                        return responseMap.data.list<br>
                       </span>
                     </strong>
                   </div>
@@ -743,7 +733,7 @@ export default {
       const reg = /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/
       if (!reg.test(value)) {
         // eslint-disable-next-line no-template-curly-in-string
-        callback(new Error('请输入正确的静态请求地址或动态请求地址，动态请求地址必须以${baseUrl}/开头'))
+        callback(new Error('请输入请求地址'))
       } else {
         callback()
       }
@@ -1120,16 +1110,19 @@ export default {
         axiosFormatting({ ...this.dataForm.config, paramsList: this.newParamsList }).then((res) => {
           this.dataPreviewList = res && Array.isArray(res) ? res : [{ ...res }]
           // 获取数据后更新输出字段
-          console.log(res)
-          this.updateOoutputFieldList(res?.data)
+          this.updateOoutputFieldList(this.dataPreviewList)
           this.$message.success('解析并执行成功')
+        }).catch((e) => {
+          // 未成功获取数据时，清空数据预览和输出字段
+          this.dataPreviewList = []
+          this.updateOoutputFieldList(this.dataPreviewList)
         })
       } else {
         // 如果是后端代理，则将配置传到后端
         const script = JSON.stringify(this.dataForm.config)
         const executeParams = {
           script,
-          params: this.dataForm.paramsList,
+          params: this.dataForm.config.paramsList,
           dataSetType: 'http'
         }
         datasetExecuteTest(executeParams).then(res => {
@@ -1138,7 +1131,9 @@ export default {
           this.updateOoutputFieldList(this.dataPreviewList)
           this.$message.success('解析并执行成功')
         }).catch((e) => {
-
+          // 未成功获取数据时，清空数据预览和输出字段
+          this.dataPreviewList = []
+          this.updateOoutputFieldList(this.dataPreviewList)
         })
       }
     },
