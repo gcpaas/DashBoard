@@ -592,7 +592,6 @@
                 align="center"
                 :data="dataPreviewList"
                 max-height="400"
-                :border="true"
                 class="db-el-table"
               >
                 <el-table-column

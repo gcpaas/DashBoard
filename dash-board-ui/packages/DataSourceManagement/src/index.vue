@@ -274,7 +274,7 @@ export default {
           })
         }else{
           this.reasonList=Object.keys(res.reasons)
-          this.$message.error(`与${this.reasonList.toString()}存在关联，无法删除！`)
+          this.$message.error(`已被${this.reasonList.toString()}使用，无法删除！`)
         }
       })
 

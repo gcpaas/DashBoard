@@ -403,6 +403,9 @@ export default {
     }
   },
   methods: {
+    refresh(){
+      this.init(false)
+    },
     getLabels (list) {
       const arr = []
       list?.forEach((item) => {
@@ -492,7 +495,7 @@ export default {
           })
         } else {
           this.reasonList=Object.keys(res.reasons)
-          this.$message.error(`与${this.reasonList.toString()}存在关联，无法删除！`)
+          this.$message.error(`已被${this.reasonList.toString()}使用，无法删除！`)
         }
       })
     },
@@ -516,6 +519,7 @@ export default {
     back () {
       this.datasetType = null
       this.isEdit = false
+      this.refresh()
     },
     // 新增数据集-类型
     openAddForm (type, componentName) {
