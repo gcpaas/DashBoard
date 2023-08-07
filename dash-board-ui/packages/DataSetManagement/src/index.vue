@@ -178,7 +178,7 @@
             <el-table-column
               prop="labelIds"
               label="标签"
-              align="center"
+              align="left"
               show-overflow-tooltip
             >
               <template slot-scope="scope">
