@@ -1246,6 +1246,12 @@ export default {
       datasetExecuteTest(executeParams).then(res => {
         this.dataPreviewList = res.data.list
         this.structurePreviewList = res.structure
+        if(this.dataPreviewList.length!=0){
+          this.structurePreviewList=[]
+          Object.keys(this.dataPreviewList[0]).forEach(item=>{
+            this.structurePreviewList.push(res.structure.filter(x=>x.fieldName==item)[0])
+          })
+        }
         if (this.dataForm.fieldList == null) {
           this.dataForm.fieldList = _.cloneDeep(res.structure)
         }
