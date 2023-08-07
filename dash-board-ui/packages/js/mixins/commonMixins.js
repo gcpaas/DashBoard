@@ -73,6 +73,7 @@ export default {
           if (data.executionByFrontend) {
             if (data.data.datasetType === 'http') {
               _res = await axiosFormatting(data.data)
+              _res = this.httpDataFormatting(data, _res)
             }
             if (data.data.datasetType === 'js') {
               try {
@@ -118,6 +119,7 @@ export default {
           if (data.executionByFrontend) {
             if (data.data.datasetType === 'http') {
               _res = await axiosFormatting(data.data)
+              _res = this.httpDataFormatting(data, _res)
             }
             if (data.data.datasetType === 'js') {
               try {
@@ -149,6 +151,17 @@ export default {
           resolve(config)
         })
       })
+    },
+    // http前台代理需要对返回的数据进行重新组装
+    httpDataFormatting (chartRes, httpRes) {
+      let result = {}
+      result = {
+        columnData: chartRes.columnData,
+        data: httpRes,
+        success: chartRes.success
+
+      }
+      return result
     },
     dataFormatting (config, data) {
       // 覆盖
