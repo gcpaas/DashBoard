@@ -4,7 +4,7 @@
     :before-close="handleClose"
     :visible.sync="dialogFormVisible"
     class="db-dialog-wrap db-el-dialog"
-    title="标签类型修改"
+    title="编辑标签类型"
     width="500px"
   >
     <div style="margin: 20px;">
@@ -69,6 +69,7 @@ export default {
       this.dataForm.oldLabelType = labelType
     },
     handleClose () {
+      this.dialogFormVisible = false
       this.$parent.labelTypeEditVisible = false
     },
     cancel () {

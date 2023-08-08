@@ -45,7 +45,7 @@
           :inline="true"
           class="db-el-form filter-container"
         >
-          <el-form-item label="">
+          <el-form-item label="标签名称">
             <el-input
               v-model="searchForm.labelName"
               clearable
@@ -55,6 +55,7 @@
           </el-form-item>
           <el-form-item
             class="filter-item"
+            label="标签类型"
             prop="labelType"
           >
             <el-select
