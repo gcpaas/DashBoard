@@ -505,7 +505,7 @@ export default {
         getDataset(this.datasetId).then(res => {
           const { id, name, typeId, remark, config } = res
           const { script, paramsList, fieldDesc, fieldList } = config
-          this.dataForm = { id, name, typeId, remark, config: { script, paramsList } }
+          this.dataForm = { id, name, typeId, remark, config: { script, paramsList }, labelIds: this.dataForm.labelIds }
           this.fieldDesc = fieldDesc
           this.outputFieldList = fieldList
           this.scriptExecute(true)
