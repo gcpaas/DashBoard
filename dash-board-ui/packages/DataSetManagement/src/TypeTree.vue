@@ -268,7 +268,7 @@ export default {
             /* 菜单定位基于鼠标点击位置 */
             menu.style.display = ''
             menu.style.left = nodeElObj.right - 92 + 'px'
-            menu.style.top = hieght + 10.5 + 25 + 'px'
+            menu.style.top = hieght + 21 + 25 + 'px'
             menu.style.position = 'fixed' // 为新创建的DIV指定绝对定位
             menu.style.width = 110 + 'px'
           } else {
@@ -373,10 +373,10 @@ export default {
     menuClick (editType) {
       // 删除节点
       if (editType === this.editTypeConstant.deleteOrg) {
-        categoryDele(this.rightClickForm.org.id).then((res)=>{
-          if(res==0){
+        categoryDele(this.rightClickForm.org.id).then((res) => {
+          if (res == 0) {
             this.deleteOrg(this.rightClickForm.org)
-          }else{
+          } else {
             this.$message.error('当前节点下存在已定义数据集，无法删除')
           }
         })
