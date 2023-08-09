@@ -77,9 +77,13 @@ export default {
             }
             if (data.data.datasetType === 'js') {
               try {
-                const scriptAfterReplacement = data.data.replace(/\${(.*?)}/g, (match, p) => {
-                  // 根据parmas的key获取value
-                  return `'${this.config.dataSource?.params[p]}' || '${p}'`
+                const scriptAfterReplacement = data.data.script.replace(/\${(.*?)}/g, (match, p) => {
+                  const value = this.config.dataSource?.params[p]
+                  if (!isNaN(value)) {
+                    return value || p
+                  } else {
+                    return `'${value}' || '${p}'`
+                  }
                 })
                 // eslint-disable-next-line no-new-func
                 const scriptMethod = new Function(scriptAfterReplacement)
@@ -123,9 +127,13 @@ export default {
             }
             if (data.data.datasetType === 'js') {
               try {
-                const scriptAfterReplacement = data.data.replace(/\${(.*?)}/g, (match, p) => {
-                  // 根据parmas的key获取value
-                  return `'${this.config.dataSource?.params[p]}' || '${p}'`
+                const scriptAfterReplacement = data.data.script.replace(/\${(.*?)}/g, (match, p) => {
+                  const value = this.config.dataSource?.params[p]
+                  if (!isNaN(value)) {
+                    return value || p
+                  } else {
+                    return `'${value}' || '${p}'`
+                  }
                 })
                 // eslint-disable-next-line no-new-func
                 const scriptMethod = new Function(scriptAfterReplacement)
