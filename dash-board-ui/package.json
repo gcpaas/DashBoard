@@ -76,7 +76,11 @@
     "vue-router": "3.0.6",
     "vue-video-player": "^5.0.1",
     "vuex": "3.1.0",
-    "ztree": "3.5.24"
+    "ztree": "3.5.24",
+    "vue-contextmenujs": "^1.4.9",
+    "vue-json-editor": "^1.4.3",
+    "vue-json-viewer": "^2.2.22",
+    "vuedraggable": "^2.24.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -127,11 +131,7 @@
     "vue": "2.6.10",
     "babel-polyfill": "6.26.0",
     "increase-memory-limit": "^1.0.7",
-    "tiny-sass-compiler": "^0.12.2",
-    "vue-contextmenujs": "^1.4.9",
-    "vue-json-editor": "^1.4.3",
-    "vue-json-viewer": "^2.2.22",
-    "vuedraggable": "^2.24.3"
+    "tiny-sass-compiler": "^0.12.2"
   },
   "engines": {
     "node": ">=8.9",
