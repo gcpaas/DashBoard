@@ -195,6 +195,37 @@
                 </el-form-item>
               </el-col>
             </el-row>
+            <el-row v-if="dataForm.config.requestType === 'backend'">
+              <el-col :span="12">
+                <el-form-item
+                  label="数据缓存"
+                  prop="cache"
+                >
+                  <el-radio-group
+                    v-model="dataForm.cache"
+                    class="db-el-radio-group"
+                  >
+                    <el-radio :label="1">
+                      开启
+                    </el-radio>
+                    <el-radio :label="0">
+                      关闭
+                    </el-radio>
+                  </el-radio-group>
+                  <el-tooltip
+                    class="item"
+                    effect="dark"
+                    content="开启缓存:会在首次调用该数据集时，将结果缓存，在接下来的十分钟内，若再次被调用则直接返回缓存中的数据"
+                    placement="top"
+                  >
+                    <i
+                      class="el-icon-warning-outline"
+                      style="color: #E3C98C;margin-left: 16px;font-size:14px"
+                    />
+                  </el-tooltip>
+                </el-form-item>
+              </el-col>
+            </el-row>
             <el-tabs
               v-model="activeName"
               class="db-el-tabs tabs-box"
@@ -760,6 +791,7 @@ export default {
         name: '',
         typeId: '',
         remark: '',
+        cache: 0,
         labelIds: [],
         config: {
           className: 'com.gccloud.dataset.entity.config.HttpDataSetConfig',
@@ -842,9 +874,9 @@ export default {
       }
       if (this.datasetId) {
         getDataset(this.datasetId).then(res => {
-          const { id, name, typeId, remark, datasetType, moduleCode, editable, sourceId, config } = res
+          const { id, name, typeId, remark, cache, datasetType, moduleCode, editable, sourceId, config } = res
           const { script, paramsList, fieldDesc, fieldList } = config
-          this.dataForm = { id, name, typeId, remark, datasetType, moduleCode, editable, sourceId, config: { ...config }, labelIds: this.dataForm.labelIds }
+          this.dataForm = { id, name, typeId, remark, datasetType, moduleCode, editable, sourceId, cache, config: { ...config }, labelIds: this.dataForm.labelIds }
           this.fieldDesc = fieldDesc
           this.outputFieldList = fieldList
           this.newParamsList = _.cloneDeep(paramsList)
@@ -876,6 +908,7 @@ export default {
             name: dataForm.name,
             typeId: dataForm.typeId,
             remark: dataForm.remark,
+            cache: dataForm.cache,
             datasetType: 'http',
             moduleCode: appCode,
             editable: appCode ? 1 : 0,

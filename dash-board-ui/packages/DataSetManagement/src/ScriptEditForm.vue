@@ -598,6 +598,7 @@ export default {
         typeId: '',
         datasetType: 'script',
         remark: '',
+        cache: 0,
         labelIds: [],
         // 以下为config配置
         script: '',
@@ -693,6 +694,7 @@ export default {
         this.dataForm.name = res.name
         this.dataForm.typeId = res.typeId
         this.dataForm.remark = res.remark
+        this.dataForm.cache = res.cache
         this.dataForm.datasetType = res.datasetType
         this.dataForm.moduleCode = res.moduleCode
         this.dataForm.editable = res.editable
@@ -760,6 +762,7 @@ export default {
           typeId: this.dataForm.typeId,
           datasetType: 'script',
           remark: this.dataForm.remark,
+          cache: this.dataForm.cache,
           sourceId: this.dataForm.sourceId,
           moduleCode: this.appCode,
           editable: this.appCode ? 1 : 0,
