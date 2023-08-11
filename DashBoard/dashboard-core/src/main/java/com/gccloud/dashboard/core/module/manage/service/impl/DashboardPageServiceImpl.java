@@ -220,6 +220,7 @@ public class DashboardPageServiceImpl extends ServiceImpl<DashboardPageDao, Page
         AssertUtils.isTrue(!checkNameRepeat(dashboardEntity), "名称重复");
         AssertUtils.isTrue(!checkCodeRepeat(dashboardEntity), "编码重复");
         this.updateById(dashboardEntity);
+        PAGE_ENTITY_CACHE.invalidate(dashboardPageDTO.getCode());
     }
 
     @Override
@@ -243,6 +244,7 @@ public class DashboardPageServiceImpl extends ServiceImpl<DashboardPageDao, Page
         LambdaQueryWrapper<PageEntity> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(PageEntity::getCode, code);
         this.remove(queryWrapper);
+        PAGE_ENTITY_CACHE.invalidate(code);
         // 调用扩展接口
         dashboardExtendClient.deleteByCode(code);
     }
