@@ -14,7 +14,7 @@
       :data="config.option.tableData"
       :header-cell-style="headerCellStyle"
       :cell-style="cellStyle"
-      :row-class-name="tableRowClassName"
+      :row-style="rowStyle"
       @row-click="rowClick"
     >
       <el-table-column
@@ -65,16 +65,16 @@ export default {
         fontSize: this.config.customize.headerFontSize + 'px' || '14px'
       }
       return style
-    },
-    cellStyle () {
-      const style = {
-        backgroundColor: this.config.customize.bodyBackgroundColor || (this.config.customize.evenRowBackgroundColor || this.config.customize.oddRowBackgroundColor ? 'transparent' : '#fff'),
-        color: this.config.customize.bodyFontColor || '#606266',
-        fontSize: this.config.customize.bodyFontSize + 'px' || '14px',
-        border: `solid 1px ${this.config.customize.bodyBackgroundColor || 'transparent'}`
-      }
-      return style
     }
+    // cellStyle () {
+    //   const style = {
+    //     backgroundColor: this.config.customize.bodyBackgroundColor || (this.config.customize.evenRowBackgroundColor || this.config.customize.oddRowBackgroundColor ? 'transparent' : '#fff'),
+    //     color: this.config.customize.bodyFontColor || '#606266',
+    //     fontSize: this.config.customize.bodyFontSize + 'px' || '14px',
+    //     border: `solid 1px ${this.config.customize.bodyBackgroundColor || 'transparent'}`
+    //   }
+    //   return style
+    // }
   },
   created () {
 
@@ -89,28 +89,40 @@ export default {
     } else if (!(!this.config.customize.evenRowBackgroundColor && !this.config.customize.oddRowBackgroundColor)) {
       this.config.customize.bodyBackgroundColor = ''
     }
-    this.tableRowStyle()
   },
   methods: {
     // 表格点击事件
     rowClick (row) {
       this.linkage(row)
     },
-    // 表格行样式
-    tableRowClassName ({ row, rowIndex }) {
-      this.tableRowStyle()
-      return rowIndex % 2 === 0 ? `even-row${this.config.code}` : `odd-row${this.config.code}`
+    // 设置表格背景颜色
+    cellStyle ({ row, column, rowIndex, columnIndex }) {
+      const style = {
+        backgroundColor: '',
+        color: this.config.customize.bodyFontColor || '#000',
+        fontSize: this.config.customize.bodyFontSize + 'px' || '14px'
+      }
+      // 如果设置了奇偶行的背景颜色，则以奇偶行的背景颜色为主
+      if (rowIndex % 2 && this.config.customize.evenRowBackgroundColor) {
+        style.backgroundColor = this.config.customize.evenRowBackgroundColor
+      } else if (!(rowIndex % 2) && this.config.customize.oddRowBackgroundColor) {
+        style.backgroundColor = this.config.customize.oddRowBackgroundColor
+      } else {
+        style.backgroundColor = this.config.customize.bodyBackgroundColor
+      }
+      return style
     },
-    // 表格行样式
-    tableRowStyle () {
-      window.requestAnimationFrame(() => {
-        document.querySelectorAll(`.even-row${this.config.code}`).forEach(node => {
-          node.style.backgroundColor = this.config.customize.evenRowBackgroundColor
-        })
-        document.querySelectorAll(`.odd-row${this.config.code}`).forEach(node => {
-          node.style.backgroundColor = this.config.customize.oddRowBackgroundColor
-        })
-      })
+    // 设置表格行颜色
+    rowStyle ({ row, rowIndex }) {
+      if (rowIndex % 2) {
+        return {
+          backgroundColor: this.config.customize.evenRowBackgroundColor
+        }
+      } else {
+        return {
+          backgroundColor: this.config.customize.oddRowBackgroundColor
+        }
+      }
     },
     dataFormatting (config, data) {
       config.option.tableData = data?.data
