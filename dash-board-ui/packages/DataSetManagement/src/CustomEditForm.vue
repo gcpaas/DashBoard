@@ -156,6 +156,34 @@
             <el-row :gutter="20">
               <el-col :span="12">
                 <el-form-item
+                  label="数据缓存"
+                  prop="cache"
+                >
+                  <el-radio-group
+                    v-model="dataForm.cache"
+                    class="bs-el-radio-group"
+                  >
+                    <el-radio :label="1">
+                      开启
+                    </el-radio>
+                    <el-radio :label="0">
+                      关闭
+                    </el-radio>
+                  </el-radio-group>
+                  <el-tooltip
+                    class="item"
+                    content="开启缓存:会在首次调用该数据集时，将结果缓存，在接下来的十分钟内，若再次被调用则直接返回缓存中的数据，注意：在当前数据集编辑页面缓存不生效"
+                    placement="top"
+                  >
+                    <i
+                      class="el-icon-warning-outline"
+                      style="color: #E3C98C;margin-left: 16px;font-size:14px"
+                    />
+                  </el-tooltip>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item
                   label="标签"
                   prop="labelIds"
                 >
@@ -818,6 +846,7 @@ export default {
         typeId: '',
         datasetType: 'custom',
         remark: '',
+        cache: 0,
         labelIds: [],
         // 以下为config配置
         sourceId: '',
@@ -942,6 +971,7 @@ export default {
         this.dataForm.name = res.name
         this.dataForm.typeId = res.typeId
         this.dataForm.remark = res.remark
+        this.dataForm.cache = res.cache
         this.dataForm.datasetType = res.datasetType
         this.dataForm.moduleCode = res.moduleCode
         this.dataForm.editable = res.editable
@@ -1148,6 +1178,7 @@ export default {
           typeId: this.dataForm.typeId,
           datasetType: 'custom',
           remark: this.dataForm.remark,
+          cache: this.dataForm.cache,
           sourceId: this.dataForm.sourceId,
           moduleCode: this.appCode,
           editable: this.appCode ? 1 : 0,
@@ -1246,10 +1277,10 @@ export default {
       datasetExecuteTest(executeParams).then(res => {
         this.dataPreviewList = res.data.list
         this.structurePreviewList = res.structure
-        if(this.dataPreviewList.length!=0){
-          this.structurePreviewList=[]
-          Object.keys(this.dataPreviewList[0]).forEach(item=>{
-            this.structurePreviewList.push(res.structure.filter(x=>x.fieldName==item)[0])
+        if (this.dataPreviewList.length != 0) {
+          this.structurePreviewList = []
+          Object.keys(this.dataPreviewList[0]).forEach(item => {
+            this.structurePreviewList.push(res.structure.filter(x => x.fieldName == item)[0])
           })
         }
         if (this.dataForm.fieldList == null) {

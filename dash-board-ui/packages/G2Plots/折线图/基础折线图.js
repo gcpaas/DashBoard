@@ -474,7 +474,7 @@ const setting = [
     inactive: false,
     tabName: 'custom',
     groupName: 'graph'
-  },
+  }
 ]
 
 // 模拟数据
@@ -507,7 +507,6 @@ const option = {
   appendPadding: [16, 16, 16, 16], // 设置图标的边距
   xField: 'Date',
   yField: 'scales',
-  smooth: false,
   lineStyle: {
     lineWidth: 2,
     stroke: 'l(0) 0:#5F92F9 1:#62FF00'

@@ -4,10 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.gccloud.common.service.ISuperService;
 import com.gccloud.common.utils.AssertUtils;
 import com.gccloud.dashboard.core.module.basic.entity.PageEntity;
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -17,6 +20,12 @@ import java.util.stream.Collectors;
  * @date 2022/8/8 15:11
  */
 public interface IBasePageService extends ISuperService<PageEntity> {
+
+    /**
+     * 页面实体缓存
+     */
+    Cache<String, PageEntity> PAGE_ENTITY_CACHE = Caffeine.newBuilder().expireAfterWrite(1, TimeUnit.MINUTES).build();
+
 
     /**
      * 获取指定类型页面所有名称
@@ -41,10 +50,17 @@ public interface IBasePageService extends ISuperService<PageEntity> {
      * @return
      */
     default PageEntity getByCode(String code) {
+        PageEntity ifPresent = PAGE_ENTITY_CACHE.getIfPresent(code);
+        if (ifPresent != null) {
+            return ifPresent;
+        }
         AssertUtils.isTrue(StringUtils.isNotBlank(code), "页面编码不能为空");
         LambdaQueryWrapper<PageEntity> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(PageEntity::getCode, code);
         PageEntity pageEntity = getBaseMapper().selectOne(queryWrapper);
+        if (pageEntity != null) {
+            PAGE_ENTITY_CACHE.put(code, pageEntity);
+        }
         return pageEntity;
     }
 

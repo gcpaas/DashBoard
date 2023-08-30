@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.gccloud</groupId>
         <artifactId>dashboard</artifactId>
-        <version>1.0.1.2023080901.Alpha</version>
+        <version>1.0.1.2023081101.Alpha</version>
     </parent>
 
     <artifactId>dashboard-server</artifactId>
@@ -19,6 +19,13 @@
     </properties>
 
     <dependencies>
+        <!--h2database-->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.200</version>
+            <scope>runtime</scope>
+        </dependency>
         <dependency>
             <groupId>com.gccloud</groupId>
             <artifactId>dashboard-core</artifactId>

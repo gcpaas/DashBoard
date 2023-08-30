@@ -257,10 +257,40 @@
             </el-col>
             <el-col :span="12">
               <el-form-item
+                label="数据缓存"
+                prop="cache"
+              >
+                <el-radio-group
+                  v-model="dataForm.cache"
+                  class="db-el-radio-group"
+                >
+                  <el-radio :label="1">
+                    开启
+                  </el-radio>
+                  <el-radio :label="0">
+                    关闭
+                  </el-radio>
+                </el-radio-group>
+                <el-tooltip
+                  class="item"
+                  content="开启缓存:会在首次调用该数据集时，将结果缓存，在接下来的十分钟内，若再次被调用则直接返回缓存中的数据，注意：在当前数据集编辑页面缓存不生效"
+                  placement="top"
+                >
+                  <i
+                    class="el-icon-warning-outline"
+                    style="color: #E3C98C;margin-left: 16px;font-size:14px"
+                  />
+                </el-tooltip>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">
+              <el-form-item
                 label="标签"
                 prop="labelIds"
               >
-                <label-select
+                <LabelSelect
                   :dataset-id="datasetId"
                   :id-list="dataForm.labelIds"
                   @commit="(ids) =>{dataForm.labelIds = ids}"
@@ -542,6 +572,7 @@ export default {
         typeId: '',
         datasetType: 'original',
         remark: '',
+        cache: 0,
         // 关联的标签id
         labelIds: [],
         // 以下为config信息
@@ -675,6 +706,7 @@ export default {
         this.dataForm.name = res.name
         this.dataForm.typeId = res.typeId
         this.dataForm.remark = res.remark
+        this.dataForm.cache = res.cache
         this.dataForm.datasetType = res.datasetType
         this.dataForm.moduleCode = res.moduleCode
         this.dataForm.editable = res.editable
@@ -826,6 +858,7 @@ export default {
           name: this.dataForm.name,
           typeId: this.dataForm.typeId,
           remark: this.dataForm.remark,
+          cache: this.dataForm.cache,
           datasetType: 'original',
           sourceId: this.dataForm.sourceId,
           labelIds: this.dataForm.labelIds,
