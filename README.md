@@ -1,6 +1,6 @@
 ## 📚简介
 
-🔥基于SpringBoot、MyBatisPlus、ElementUI、G2Plot、Echarts等技术栈的仪表盘设计器，具备仪表盘目录管理、仪表盘设计、仪表盘预览能力，支持MySQL、Oracle、PostgreSQL、JSON等数据集接入，对于复杂数据处理还可以使用Groovy脚本数据集，使用简单，完全免费，代码开源。
+🔥基于SpringBoot、MyBatisPlus、ElementUI、G2Plot、Echarts等技术栈的仪表盘设计器，具备仪表盘目录管理、仪表盘设计、仪表盘预览能力，支持MySQL、Oracle、PostgreSQL、MSSQL、JSON等数据集接入，对于复杂数据处理还可以使用Groovy脚本数据集，使用简单，完全免费，代码开源。
 
 <p align="center">
     <img alt="stars" src="https://gitee.com/gcpaas/DashBoard/badge/star.svg?theme=dark">
