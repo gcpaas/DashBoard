@@ -577,7 +577,7 @@ export default {
         labelIds: [],
         // 以下为config信息
         sourceId: '',
-        repeatStatus: 1,
+        repeatStatus: 0,
         tableName: '',
         fieldInfo: [],
         fieldDesc: {},
