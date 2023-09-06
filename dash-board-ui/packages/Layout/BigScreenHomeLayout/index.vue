@@ -15,6 +15,16 @@
           @change="changeTab"
         />
       </div>
+      <a
+        class="fork-me-on-gitee"
+        href="https://gitee.com/gcpaas/DashBoard"
+        target="_blank"
+      >
+        <img
+          src="https://gitee.com/gcpaas/DashBoard/widgets/widget_1.svg?color=007bff"
+          alt="Fork me on Gitee"
+        >
+      </a>
     </header>
     <div class="dashboard-router-view-wrap">
       <keep-alive>
@@ -100,13 +110,13 @@ export default {
           name: '数据集管理',
           path: window?.DS_CONFIG?.routers?.dataSetUrl || '/dashboard-dataSet',
           icon: 'icon-data'
-        },
+        }
       ]
     }
   },
   mounted () {
-    if(this.$route.query.edit){
-     document.title = '智能报表平台-仪表盘设计器'
+    if (this.$route.query.edit) {
+      document.title = '智能报表平台-仪表盘设计器'
     }
   },
   methods: {
@@ -117,10 +127,10 @@ export default {
           path: tab.path,
           query: { edit: 1 }
         })
-      }else{
-      this.$router.push({
-        path: tab.path
-      })
+      } else {
+        this.$router.push({
+          path: tab.path
+        })
       }
     }
   }
@@ -197,6 +207,16 @@ export default {
   100% {
     background-position: 0 0;
     -webkit-background-clip: text;
+  }
+}
+.fork-me-on-gitee{
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 999;
+  img{
+    width: 120px;
+    height: 120px;
   }
 }
 </style>
