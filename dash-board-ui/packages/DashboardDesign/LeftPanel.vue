@@ -500,6 +500,7 @@ export default {
           width: 100%;
           font-size: 12px;
           color: var(--db-el-title);
+          text-align: center;
         }
       }
     }
