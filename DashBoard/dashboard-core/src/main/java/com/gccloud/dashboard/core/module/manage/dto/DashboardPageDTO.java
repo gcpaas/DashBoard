@@ -1,5 +1,7 @@
 package com.gccloud.dashboard.core.module.manage.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.gccloud.common.utils.EmptyAsNullDeserializer;
 import com.gccloud.common.validator.group.Insert;
 import com.gccloud.common.validator.group.Update;
 import com.gccloud.dashboard.core.constant.PageDesignConstant;
@@ -20,6 +22,7 @@ import java.util.List;
 @Data
 public class DashboardPageDTO extends BasePageDTO {
 
+    @JsonDeserialize(using = EmptyAsNullDeserializer.class)
     @NotBlank(message = "id不能为空", groups = Update.class)
     @ApiModelProperty(notes = "主键id")
     private String id;

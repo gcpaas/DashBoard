@@ -72,11 +72,12 @@ public interface IBasePageService extends ISuperService<PageEntity> {
     default boolean checkNameRepeat(PageEntity entity) {
         AssertUtils.isTrue(StringUtils.isNotBlank(entity.getName()), "名称不能为空");
         LambdaQueryWrapper<PageEntity> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.select(PageEntity::getId);
         queryWrapper.eq(StringUtils.isNotBlank(entity.getAppCode()), PageEntity::getAppCode, entity.getAppCode())
                 .eq(PageEntity::getName, entity.getName())
                 .eq(PageEntity::getType, entity.getType())
                 .ne(StringUtils.isNotBlank(entity.getId()), PageEntity::getId, entity.getId());
-        return getBaseMapper().selectCount(queryWrapper) > 0;
+        return getBaseMapper().selectList(queryWrapper).size() > 0;
     }
 
     /**
@@ -90,11 +91,12 @@ public interface IBasePageService extends ISuperService<PageEntity> {
     default boolean checkNameRepeat(String appCode, String name, String id, String type) {
         AssertUtils.isTrue(StringUtils.isNotBlank(name), "名称不能为空");
         LambdaQueryWrapper<PageEntity> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.select(PageEntity::getId);
         queryWrapper.eq(StringUtils.isNotBlank(appCode), PageEntity::getAppCode, appCode)
                 .eq(PageEntity::getName, name)
                 .eq(PageEntity::getType, type)
                 .ne(StringUtils.isNotBlank(id), PageEntity::getId, id);
-        return getBaseMapper().selectCount(queryWrapper) > 0;
+        return getBaseMapper().selectList(queryWrapper).size() > 0;
     }
 
 
@@ -106,11 +108,12 @@ public interface IBasePageService extends ISuperService<PageEntity> {
     default boolean checkCodeRepeat(PageEntity entity) {
         AssertUtils.isTrue(StringUtils.isNotBlank(entity.getCode()), "编码不能为空");
         LambdaQueryWrapper<PageEntity> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.select(PageEntity::getId);
         queryWrapper.eq(StringUtils.isNotBlank(entity.getAppCode()), PageEntity::getAppCode, entity.getAppCode())
                 .eq(PageEntity::getCode, entity.getCode())
                 .eq(PageEntity::getType, entity.getType())
                 .ne(StringUtils.isNotBlank(entity.getId()), PageEntity::getId, entity.getId());
-        return getBaseMapper().selectCount(queryWrapper) > 0;
+        return getBaseMapper().selectList(queryWrapper).size() > 0;
     }
 
 }
