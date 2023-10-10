@@ -26,6 +26,11 @@ spring:
     view:
       prefix: classpath:/static/
       suffix: .html
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  web:
+    resources:
+      static-locations: classpath:/static/,classpath:/META-INF/resources/,classpath:/META-INF/resources/webjars/,file:${gc.starter.file.basePath}
 
 mybatis-plus:
   # mybatis plus xml配置文件扫描，多个通过分号隔开
