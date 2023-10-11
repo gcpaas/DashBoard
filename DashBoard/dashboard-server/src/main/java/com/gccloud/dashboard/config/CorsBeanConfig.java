@@ -22,7 +22,7 @@ public class CorsBeanConfig implements WebMvcConfigurer {
         Cors cors = new Cors();
         CorsRegistration corsRegistration = registry.addMapping(cors.getMapping());
         corsRegistration
-                .allowedOrigins(cors.getAllowedOrigins().toArray(new String[cors.getAllowedOrigins().size()]))
+                .allowedOriginPatterns(cors.getAllowedOrigins().toArray(new String[cors.getAllowedOrigins().size()]))
                 .allowCredentials(cors.getAllowCredentials())
                 .allowedMethods(cors.getAllowedMethods().toArray(new String[cors.getAllowedMethods().size()]))
                 .maxAge(cors.getMaxAge());
