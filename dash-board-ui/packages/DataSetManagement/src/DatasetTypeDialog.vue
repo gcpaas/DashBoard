@@ -92,7 +92,7 @@ export default {
       color: var(--db-el-color-primary);
     }
 }
-/deep/ .el-dialog__body {
+::v-deep .el-dialog__body {
   min-height: 130px !important;
 }
 .el-col {

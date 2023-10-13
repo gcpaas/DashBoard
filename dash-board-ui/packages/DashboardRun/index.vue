@@ -386,7 +386,7 @@ export default {
     border: 1px solid #e8e8e8
   }
 }
-/deep/.vue-grid-placeholder {
+::v-deep.vue-grid-placeholder {
   background: #C6C8CA !important;
 }
 @media screen and (max-width: 400px) {

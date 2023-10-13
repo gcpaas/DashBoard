@@ -795,7 +795,7 @@ export default {
   }
 }
 
-/deep/ .el-input__inner {
+::v-deep .el-input__inner {
   width: 100% !important;
 }
 
@@ -814,7 +814,7 @@ export default {
 }
 
 .operation {
-  /deep/ .el-select {
+  ::v-deep .el-select {
     width: 200px !important;
     margin-right: 16px;
   }
@@ -822,7 +822,7 @@ export default {
   display: flex;
 }
 
-/deep/ .CodeMirror {
+::v-deep .CodeMirror {
   height: 180px !important;
   font-family: Helvetica, Tahoma;
 }
@@ -831,7 +831,7 @@ export default {
   border: 0;
 }
 
-/deep/ .fieldDescCheck {
+::v-deep .fieldDescCheck {
   .el-dialog__body {
     height: fit-content !important;
     min-height: unset !important;
@@ -913,7 +913,7 @@ export default {
   }
 }
 
-/deep/ .db-table-box.is-Edit .el-table {
+::v-deep .db-table-box.is-Edit .el-table {
   max-height: unset !important;
 
   .el-table__body-wrapper {

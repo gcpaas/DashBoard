@@ -189,19 +189,19 @@ export default {
 }
 
 .commonHeight{
-   /deep/ .el-dialog__body {
+   ::v-deep .el-dialog__body {
     min-height: 500px;
   }
 }
 
 .tabHeight{
-   /deep/ .el-dialog__body {
+   ::v-deep .el-dialog__body {
     min-height: 512px;
   }
 }
 
 .data-set-wrap {
-  /deep/ .el-dialog__body {
+  ::v-deep .el-dialog__body {
     position: relative;
     padding: 0 !important;
     // min-height: 575px;
@@ -253,7 +253,7 @@ export default {
     }
   }
 }
-/deep/.db-pagination{
+::v-deep.db-pagination{
   position: relative !important;
   margin-top:16px !important;
 }

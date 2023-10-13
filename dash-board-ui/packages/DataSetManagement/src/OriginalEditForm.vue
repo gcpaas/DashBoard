@@ -1150,7 +1150,7 @@ export default {
 //   max-height: 270px;
 // }
 
-/deep/ .el-input__inner {
+::v-deep .el-input__inner {
   width: 100% !important;
 }
 
@@ -1164,7 +1164,7 @@ export default {
   }
 }
 
-/deep/ .fieldDescCheck {
+::v-deep .fieldDescCheck {
   .el-dialog__body {
     height: fit-content !important;
     min-height: unset !important;
@@ -1202,7 +1202,7 @@ export default {
   }
 }
 
-/deep/ .db-table-box.is-Edit .el-table {
+::v-deep .db-table-box.is-Edit .el-table {
   max-height: calc(100vh - 600px) !important;
   // overflow-y: auto !important;
 

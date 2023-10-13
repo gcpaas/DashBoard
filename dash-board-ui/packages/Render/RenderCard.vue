@@ -120,7 +120,7 @@ export default {
 
 <style lang="scss" scoped>
 .db-el-dialog{
-  /deep/.el-dialog__body{
+  ::v-deep.el-dialog__body{
     overflow-y: hidden !important;
   }
 

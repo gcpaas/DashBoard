@@ -151,7 +151,7 @@
 }
 
 .selectStyle{
-  /deep/.el-select-dropdown__wrap {
+  ::v-deep.el-select-dropdown__wrap {
     margin-bottom: 0px !important;
   }
 }
@@ -505,11 +505,11 @@
 
 //img
 .db-el-img {
-  /deep/.el-image__error {
+  ::v-deep.el-image__error {
     background-color: var(--db-background-1) !important;
   }
 
-  /deep/.close-icon {
+  ::v-deep.close-icon {
     color: var(--db-el-title);
   }
 }
