@@ -275,7 +275,7 @@ export default {
         labelName: '',
         labelType: ''
       },
-      sizeLabel: 20,
+      sizeLabel: 10,
       labelTypeList: [],
       labelCheckLoading: false
     }

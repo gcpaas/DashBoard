@@ -467,7 +467,7 @@
               <span v-else>{{ scope.row.fieldDesc }}</span>
             </template>
           </el-table-column>
-          <el-table-column
+          <!-- <el-table-column
             align="center"
             prop="orderNum"
             label="字段排序"
@@ -482,7 +482,7 @@
               />
               <span v-else>{{ scope.row.orderNum }}</span>
             </template>
-          </el-table-column>
+          </el-table-column> -->
           <el-table-column
             align="center"
             prop="sourceTable"
