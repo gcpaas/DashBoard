@@ -488,7 +488,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/style/bsTheme.scss';
 
-/deep/ .el-tabs {
+::v-deep .el-tabs {
   .el-tabs__header {
     margin: 0;
 
@@ -532,7 +532,7 @@ export default {
       background-color: var(--db-el-background-3) !important;
     }
   }
-/deep/ .el-tabs__nav-wrap::after {
+::v-deep .el-tabs__nav-wrap::after {
   display: none !important;
 }
 

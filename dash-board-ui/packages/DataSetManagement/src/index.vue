@@ -740,7 +740,7 @@ export default {
 }
 
 .db-container .inner-container .el-form .filter-item {
-  /deep/ .el-input__inner {
+  ::v-deep .el-input__inner {
     width: 200px;
   }
 }
@@ -790,11 +790,11 @@ export default {
       height: calc(90vh - 340px);
     }
 
-    /deep/ .ztree {
+    ::v-deep .ztree {
       max-height: calc(90vh - 325px) !important;
     }
 
-    /deep/ .el-tabs__item.is-active {
+    ::v-deep .el-tabs__item.is-active {
       border-bottom: none !important;
     }
 

@@ -397,7 +397,7 @@ export default {
     },
     // 自定义属性更新
     updateSetting (config) {
-      if (config.type === 'map'||config.type === 'video') {
+      if (config.type === 'map'||config.type === 'video'||config.type==='iframeChart') {
         config.key = new Date().getTime()
       }
       this.changeChartConfig(_.cloneDeep(config))
@@ -476,13 +476,13 @@ export default {
           margin-right: 16px;
         }
 
-        /deep/ .el-select {
+        ::v-deep .el-select {
           width: 150px !important;
         }
       }
     }
 
-    /deep/ .el-loading-mask {
+    ::v-deep .el-loading-mask {
       background-color: transparent !important;
     }
     // 移动端样式
@@ -518,12 +518,12 @@ export default {
         }
       }
     }
-    /deep/::-webkit-scrollbar {
+    ::v-deep::-webkit-scrollbar {
       width: 8px;
       border-radius: 8px;
       height: 8px;
     }
-    /deep/::-webkit-scrollbar-thumb {
+    ::v-deep::-webkit-scrollbar-thumb {
       background: #dddddd;
       border-radius: 10px;
     }

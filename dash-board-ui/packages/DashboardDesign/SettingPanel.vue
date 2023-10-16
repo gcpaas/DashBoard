@@ -338,7 +338,7 @@ export default {
   opacity: 0;
 }
 
-/deep/ .el-scrollbar__view {
+::v-deep .el-scrollbar__view {
   height: calc(100vh - 80px);
   overflow-x: unset;
 }

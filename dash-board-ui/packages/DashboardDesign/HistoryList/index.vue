@@ -111,7 +111,7 @@ export default {
 @import '../../DashboardDesign/fonts/iconfont.css';
 @import '../../assets/style/bsTheme.scss';
 .layer-list-wrap {
-  /deep/ .choosed-row {
+  ::v-deep .choosed-row {
     .db-el-table-column {
       border-color: var(--db-el-border) !important;
       background: var(--db-background-2) !important;

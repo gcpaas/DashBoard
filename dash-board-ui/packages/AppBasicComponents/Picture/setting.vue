@@ -223,13 +223,13 @@ export default {
 .db-setting-wrap {
   padding-top: 16px;
 
-  /deep/ .hide .el-upload--picture-card {
+  ::v-deep .hide .el-upload--picture-card {
     display: none;
   }
-  /deep/.el-upload-list__item {
+  ::v-deep.el-upload-list__item {
     transition: none !important;
   }
-  /deep/ .el-upload--picture-card {
+  ::v-deep .el-upload--picture-card {
     margin-bottom: 12px;
   }
 }

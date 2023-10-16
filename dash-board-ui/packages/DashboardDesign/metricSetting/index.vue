@@ -220,22 +220,22 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  /deep/ .el-tabs__nav-scroll {
+  ::v-deep .el-tabs__nav-scroll {
     display: flex;
     justify-content: center;
   }
 
-  /deep/ .el-tabs__nav-wrap::after {
+  ::v-deep .el-tabs__nav-wrap::after {
     height: 0;
   }
 
-  /deep/ .el-collapse-item__header {
+  ::v-deep .el-collapse-item__header {
     background: #f2f3f5;
     height: 32px;
     padding: 0 12px;
   }
 
-  /deep/ .el-collapse-item__content {
+  ::v-deep .el-collapse-item__content {
     padding-bottom: 0;
   }
 
@@ -243,25 +243,25 @@ export default {
     padding: 12px;
   }
 
-  /deep/ .el-tabs__nav-scroll {
+  ::v-deep .el-tabs__nav-scroll {
     display: flex;
     justify-content: center;
   }
 
-  /deep/ .el-tabs__nav-wrap::after {
+  ::v-deep .el-tabs__nav-wrap::after {
     height: 0;
   }
 
-  /deep/ .el-tabs__content {
+  ::v-deep .el-tabs__content {
     /*overflow-y: auto;*/
   }
   .design-tab-warp {
     padding: 10px;
   }
-  /deep/.el-tabs--top {
+  ::v-deep.el-tabs--top {
     height: 100%;
   }
-  /deep/ .el-tabs__content {
+  ::v-deep .el-tabs__content {
     height: calc(100% - 85px);
     overflow-y: auto;
   }
@@ -294,7 +294,7 @@ export default {
       justify-content: center;
       margin-right: 2px;
 
-      /deep/.el-form-item {
+      ::v-deep.el-form-item {
         margin-bottom: 0 !important;
       }
 
