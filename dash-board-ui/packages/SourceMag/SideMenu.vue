@@ -125,6 +125,7 @@ export default {
   data () {
      const validateName = (rule, value, callback) => {
       this.$dashboardAxios.post('/dashboard/type/nameRepeat', {
+        id: this.currentCatalog.id,
         name: value,
         type: 'resourceCatalog'
       }, true).then((r) => {
