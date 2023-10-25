@@ -36,8 +36,8 @@
           >
             <el-option
               v-for="sourceType in sourceTypeList"
-              :key="sourceType.id"
-              :label="sourceType.name"
+              :key="sourceType.code"
+              :label="sourceType.label"
               :value="sourceType.code"
             />
           </el-select>
@@ -221,23 +221,6 @@ export default {
       setDatasourceVisible: false,
       title: '',
       linkLoading: false,
-      sourceTypeList: [
-        { name: 'Mysql', code: 'mysql' },
-        { name: 'ClickHouse', code: 'clickhouse' },
-        { name: 'PostgreSQL', code: 'postgresql' },
-        { name: 'Oracle', code: 'oracle' },
-        { name: 'Sqlserver', code: 'sqlserver' }
-      ],
-      driverCLassList: [
-        { code: 'mysqlDriver', name: 'com.mysql.jdbc.Driver' },
-        { code: 'clickhouseDriver', name: 'ru.yandex.clickhouse.ClickHouseDriver' },
-        { code: 'oracleDriver', name: 'oracle.jdbc.driver.OracleDriver' },
-        { code: 'postgresqlDriver', name: 'org.postgresql.Driver' },
-        { code: 'hsqlDriver', name: 'org.hsqldb.jdbc.JDBCDriver' },
-        { code: 'ibmdb2Driver', name: 'com.ibm.db2.jcc.DB2Driver' },
-        { code: 'sqlserverDriver', name: 'com.microsoft.sqlserver.jdbc.SQLServerDriver' },
-        { code: 'hiveDriver', name: 'org.apache.hive.jdbc.HiveDriver' }
-      ],
       dataForm: {
         id: '',
         sourceName: '',
@@ -323,6 +306,17 @@ export default {
       }
     }
   },
+  computed: {
+    sourceTypeList () {
+      return window.DS_CONFIG?.sourceTypeList || [
+        { label: 'Mysql', code: 'mysql', name: 'com.mysql.jdbc.Driver' },
+        { label: 'ClickHouse', code: 'clickhouse', name: 'ru.yandex.clickhouse.ClickHouseDriver' },
+        { label: 'PostgreSQL', code: 'postgresql', name: 'org.postgresql.Driver' },
+        { label: 'Oracle', code: 'oracle', name: 'oracle.jdbc.driver.OracleDriver' },
+        { label: 'Sqlserver', code: 'sqlserver', name: 'com.microsoft.sqlserver.jdbc.SQLServerDriver' }
+      ]
+    }
+  },
   methods: {
     // 初始化
     init (row) {
@@ -371,15 +365,8 @@ export default {
     // 数据源类型选择
     sourceTypeChange (code) {
       if (!this.dataForm.id && code) {
-        let driverName = ''
-        driverName = code + 'Driver'
-        // 从驱动列表中获取驱动的对应的jdbcUrl
-        this.driverCLassList.forEach(driver => {
-          if (driverName === driver.code) {
-            this.dataForm.driverClassName = driver.name
-            this.queryDriverTemp(driver.name)
-          }
-        })
+        this.dataForm.driverClassName = this.sourceTypeList.find(item => item.code === code)?.name
+        this.queryDriverTemp(this.dataForm.driverClassName)
       }
     },
     queryDriverTemp (val) {
@@ -402,7 +389,7 @@ export default {
       //     return false
       //   } else {
       //     if (flag === 0) {
-            this.sourceLinkTest(this.dataForm)
+      this.sourceLinkTest(this.dataForm)
       //     }
       //   }
       // })
@@ -481,14 +468,13 @@ export default {
               this.handleClose()
             })
           }
-
         } else {
           return false
         }
       })
     }
-    }
   }
+}
 </script>
 
 <style lang="scss" scoped>

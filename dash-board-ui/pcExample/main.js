@@ -36,7 +36,11 @@ registerConfig(
       '--db-el-color-primary': '#409EFF', // elment-ui主题色，激活
       '--db-el-border': 'transparent' // 边框颜色
     },
-    // datasetTypeList: ['original','custom'],
+    // datasetTypeList: ['original', 'custom'],
+    // sourceTypeList: [
+    //   { label: 'Mysql', code: 'mysql', name: 'com.mysql.jdbc.Driver' },
+    //   { label: 'ClickHouse', code: 'clickhouse', name: 'ru.yandex.clickhouse.ClickHouseDriver' }
+    // ],
     datasetAuth: ['unAdd', 'unEdit', 'unDelete'], // 数据集按钮权限 新增 编辑 删除
     customPlots: [],
     // 远程组件列表
