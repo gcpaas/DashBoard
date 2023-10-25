@@ -224,7 +224,7 @@ export default {
       dataForm: {
         id: '',
         sourceName: '',
-        sourceType: 'Mysql',
+        sourceType: 'mysql',
         driverClassName: 'com.mysql.jdbc.Driver',
         username: '',
         password: '',
@@ -386,7 +386,7 @@ export default {
       this.dataForm = {
         id: '',
         sourceName: '',
-        sourceType: 'Mysql',
+        sourceType: 'mysql',
         driverClassName: 'com.mysql.jdbc.Driver',
         username: '',
         password: '',
