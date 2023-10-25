@@ -5,7 +5,7 @@
 
     <groupId>com.gccloud</groupId>
     <artifactId>dashboard</artifactId>
-    <version>1.0.1.2023102001.Alpha</version>
+    <version>1.0.1.2023102501.Alpha</version>
 
     <packaging>pom</packaging>
     <name>dashboard</name>
