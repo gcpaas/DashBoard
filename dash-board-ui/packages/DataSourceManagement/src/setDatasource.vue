@@ -309,11 +309,11 @@ export default {
   computed: {
     sourceTypeList () {
       return window.DS_CONFIG?.sourceTypeList || [
-        { label: 'Mysql', code: 'mysql', name: 'com.mysql.jdbc.Driver' },
-        { label: 'ClickHouse', code: 'clickhouse', name: 'ru.yandex.clickhouse.ClickHouseDriver' },
-        { label: 'PostgreSQL', code: 'postgresql', name: 'org.postgresql.Driver' },
-        { label: 'Oracle', code: 'oracle', name: 'oracle.jdbc.driver.OracleDriver' },
-        { label: 'Sqlserver', code: 'sqlserver', name: 'com.microsoft.sqlserver.jdbc.SQLServerDriver' }
+        { label: 'Mysql', code: 'mysql', name: 'com.mysql.jdbc.Driver', url: 'jdbc:mysql://localhost:3306/db_name?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useSSL=false&useOldAliasMetadataBehavior=true' },
+        { label: 'ClickHouse', code: 'clickhouse', name: 'ru.yandex.clickhouse.ClickHouseDriver', url: 'jdbc:clickhouse://localhost:8123/db_name' },
+        { label: 'PostgreSQL', code: 'postgresql', name: 'org.postgresql.Driver', url: 'jdbc:postgresql://localhost:13308/db_name' },
+        { label: 'Oracle', code: 'oracle', name: 'oracle.jdbc.driver.OracleDriver', url: 'jdbc:oracle:thin:@localhost:1521:orcl' },
+        { label: 'Sqlserver', code: 'sqlserver', name: 'com.microsoft.sqlserver.jdbc.SQLServerDriver', url: 'jdbc:sqlserver://localhost:1433;databaseName=db_name' }
       ]
     }
   },
@@ -326,26 +326,6 @@ export default {
       }
       if (row && row.id) {
         this.dataForm = row
-      }
-    },
-    getUrl (driverClassName) {
-      switch (driverClassName) {
-        case 'com.mysql.jdbc.Driver':
-          return 'jdbc:mysql://localhost:3306/db_name?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useSSL=false&useOldAliasMetadataBehavior=true'
-        case 'ru.yandex.clickhouse.ClickHouseDriver':
-          return 'jdbc:clickhouse://localhost:8123/db_name'
-        case 'oracle.jdbc.driver.OracleDriver':
-          return 'jdbc:oracle:thin:@localhost:1521:orcl'
-        case 'org.hsqldb.jdbc.JDBCDriver':
-          return 'jdbc:hsqldb:http://localhost:1527/db_name'
-        case 'com.ibm.db2.jcc.DB2Driver':
-          return 'jdbc:db2://localhost:5000/db_name'
-        case 'com.microsoft.sqlserver.jdbc.SQLServerDriver':
-          return 'jdbc:sqlserver://localhost:1433;databaseName=db_name'
-        case 'org.postgresql.Driver':
-          return 'jdbc:postgresql://localhost:13308/db_name'
-        case 'org.apache.hive.jdbc.HiveDriver':
-          return 'jdbc:hive2://localhost:10000/db_name'
       }
     },
     // 名称校验
@@ -366,11 +346,8 @@ export default {
     sourceTypeChange (code) {
       if (!this.dataForm.id && code) {
         this.dataForm.driverClassName = this.sourceTypeList.find(item => item.code === code)?.name
-        this.queryDriverTemp(this.dataForm.driverClassName)
+        this.$set(this.dataForm, 'url', this.sourceTypeList.find(item => item.code === code)?.url)
       }
-    },
-    queryDriverTemp (val) {
-      this.$set(this.dataForm, 'url', this.getUrl(val))
     },
     // 阻止文本域回车换行
     textareaKeydown () {
