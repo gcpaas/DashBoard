@@ -665,6 +665,29 @@ export default {
       },
       deep: true,
       immediate: true
+    },
+    fieldList: {
+      handler (val) {
+        if (val && val.length) {
+          try {
+            this.setCheck()
+            const fieldDescMap = {}
+            this.fieldList.forEach((item) => {
+              if (this.dataForm.fieldInfo.length !== 0 && !this.dataForm.fieldInfo.includes(item.columnName)) {
+                return
+              }
+              fieldDescMap[item.columnName] = item.columnComment
+            })
+            // 与this.dataForm.fieldDesc合并，columnName相同的，取this.dataForm.fieldDesc中的值
+            const fieldDescMapNew = { ...fieldDescMap, ...this.dataForm.fieldDesc }
+            this.getPreViewData(fieldDescMapNew)
+          } catch (error) {
+            console.error(error)
+          }
+        }
+      },
+      deep: true,
+      immediate: true
     }
   },
   mounted () {
