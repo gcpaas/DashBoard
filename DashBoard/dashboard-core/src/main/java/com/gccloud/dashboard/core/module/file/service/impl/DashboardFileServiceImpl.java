@@ -31,6 +31,9 @@ public class DashboardFileServiceImpl extends ServiceImpl<DashboardFileDao, Dash
         LambdaQueryWrapper<DashboardFileEntity> queryWrapper = QueryWrapperUtils.wrapperLike(new LambdaQueryWrapper(), searchDTO.getSearchKey(), DashboardFileEntity::getOriginalName);
         queryWrapper.eq(StringUtils.isNotBlank(searchDTO.getModule()), DashboardFileEntity::getModule, searchDTO.getModule());
         queryWrapper.eq(StringUtils.isNotBlank(searchDTO.getExtension()), DashboardFileEntity::getExtension, searchDTO.getExtension());
+        if (searchDTO.getExtensionList() != null && searchDTO.getExtensionList().size() > 0) {
+            queryWrapper.in(DashboardFileEntity::getExtension, searchDTO.getExtensionList());
+        }
         queryWrapper.orderByDesc(DashboardFileEntity::getCreateDate);
         return page(searchDTO, queryWrapper);
     }
