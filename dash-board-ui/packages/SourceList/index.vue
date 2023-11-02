@@ -35,7 +35,6 @@
           搜索
         </el-button>
         <el-upload
-          accept="image/*, video/*"
           class="upload-demo"
           :action="upLoadUrl"
           :headers="headers"
@@ -105,9 +104,23 @@
                 </div>
               </div>
             </div>
-            <div class="dashboard-card-img">
+            <div v-if="imgExtends.includes(screen.extension)" class="big-screen-card-img">
               <el-image
-                :src="screen.url"
+                :src="getCoverPicture(screen.url)"
+                fit="contain"
+                style="width: 100%; height: 100%"
+              >
+                <div
+                  slot="placeholder"
+                  class="image-slot"
+                >
+                  加载中···
+                </div>
+              </el-image>
+            </div>
+            <div v-else class="dashboard-card-img">
+              <el-image
+                :src="getUrl(screen)"
                 fit="contain"
                 style="width: 100%; height: 100%"
               >
@@ -170,6 +183,8 @@
 // import { get, post, download } from 'dashPackages/js/utils/http'
 import { pageMixins } from 'dashPackages/js/mixins/page'
 import EditForm from './EditForm.vue'
+import { getFileUrl } from 'dashPackages/js/utils/file'
+
 export default {
   name: 'BigScreenList',
   mixins: [pageMixins],
@@ -197,8 +212,17 @@ export default {
         ...window.DS_CONFIG?.httpConfigs?.headers
       },
       fileList: [],
-      defaultImg: require('./images/defaultImg.png'),
-      loading: false
+      loading: false,
+      sourceExtends: window.DS_CONFIG?.sourceExtends || ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'webp', 'ico', 'xls', 'xlsx', 'csv'],
+      imgExtends: ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'webp', 'ico'],
+      otherExtends: {
+        video: ['mp4', 'avi', 'mov', 'wmv', 'flv', 'f4v', 'rmvb', 'rm', '3gp', 'dat', 'ts', 'mts', 'vob'],
+        audio: ['mp3', 'wav', 'wma', 'ogg', 'aac', 'flac', 'ape', 'm4a', 'm4r', 'amr', 'ac3'],
+        excel: ['xls', 'xlsx', 'csv'],
+        word: ['doc', 'docx'],
+        ppt: ['ppt', 'pptx'],
+        pdf: ['pdf']
+      }
     }
   },
   computed: {
@@ -220,17 +244,38 @@ export default {
     this.getDataList()
   },
   methods: {
+    getUrl(file) {
+      let extension = file.extension
+      if (this.otherExtends.video.includes(extension)) {
+        return require('./images/video.svg')
+      }
+      if (this.otherExtends.audio.includes(extension)) {
+        return require('./images/audio.svg')
+      }
+      if (this.otherExtends.excel.includes(extension)) {
+        return require('./images/excel.svg')
+      }
+      if (this.otherExtends.word.includes(extension)) {
+        return require('./images/word.svg')
+      }
+      if (this.otherExtends.ppt.includes(extension)) {
+        return require('./images/ppt.svg')
+      }
+      if (this.otherExtends.pdf.includes(extension)) {
+        return require('./images/pdf.svg')
+      }
+      return require('./images/unknown.svg')
+    },
     uploadError (err, file, fileList) {
     },
     beforeUpload (file) {
-      const isImage = file.type.startsWith('image/')
-      const isVideo = file.type.startsWith('video/')
-      const isValidFileType = isImage || isVideo
-
+      // 获取文件后缀
+      const extension = file.name.split('.').pop()
+      // 判断文件类型是否符合要求
+      const isValidFileType = this.sourceExtends.includes(extension)
       if (!isValidFileType) {
-        this.$message.error('只能上传图片或视频文件')
+        this.$message.error('不支持的文件类型：' + extension)
       }
-
       return isValidFileType
     },
     uploadSuccess (response, file, fileList) {
@@ -252,9 +297,9 @@ export default {
     handlePreview (file) {
     },
     getOptions () {
-      this.$dashboardAxios.get('/dashboard/file/getAllFileSuffix').then((data) => {
-        data.forEach((item) => this.options.push({ label: item, value: item }))
-      })
+      this.options = []
+      this.options.push({label: '全部', value: ''})
+      this.sourceExtends.forEach((ext) => this.options.push({label: ext, value: ext}))
     },
     getDataList () {
       this.loading = true
@@ -274,7 +319,7 @@ export default {
         })
     },
     preview (screen) {
-      window.open(screen.url, '_blank')
+      window.open(getFileUrl(screen.url), '_blank')
     },
     downLoad (screen) {
       this.$dashboardAxios.download(`/dashboard/file/download/${screen.id}`)
@@ -308,7 +353,7 @@ export default {
       this.$message.success('复制成功')
       const transfer = document.createElement('input')
       document.body.appendChild(transfer)
-      transfer.value = screen.url // 这里表示想要复制的内容
+      transfer.value = getFileUrl(screen.url) // 这里表示想要复制的内容
       transfer.focus()
       transfer.select()
       if (document.execCommand('copy')) {
@@ -316,6 +361,14 @@ export default {
       }
       transfer.blur()
       transfer.style.display = 'none'
+    },
+    /**
+     * 获取封面图片,如果是相对路径则拼接上文件访问前缀地址
+     * @param url
+     * @returns {*}
+     */
+    getCoverPicture (url) {
+      return getFileUrl(url)
     }
   }
 }

@@ -59,7 +59,7 @@
             >
               <img
                 class="el-upload-list__item-thumbnail"
-                :src="file.url"
+                :src="getCoverPicture(file.url)"
                 alt=""
               >
               <span class="el-upload-list__item-actions">
@@ -100,6 +100,8 @@
 </template>
 <script>
 import SettingTitle from 'dashPackages/SettingTitle/index.vue'
+import { getFileUrl } from 'dashPackages/js/utils/file'
+
 export default {
   name: 'PicSetting',
   components: {
@@ -206,7 +208,14 @@ export default {
       }
       return isLt2M
     },
-
+    /**
+     * 获取图片访问地址,如果是相对路径则拼接上文件访问前缀地址
+     * @param url
+     * @returns {*}
+     */
+    getCoverPicture (url) {
+      return getFileUrl(url)
+    }
   }
 }
 </script>

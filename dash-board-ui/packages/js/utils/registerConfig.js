@@ -176,7 +176,10 @@ export default function (config, router) {
   }
   window.DS_CONFIG = {}
   window.DS_CONFIG = configDeepMerge(window.DS_CONFIG, config)
-
+  if (!config?.httpConfigs?.fileUrlPrefix) {
+    // 如果没有配置文件访问前缀，使用baseURL加上/static作为文件前缀
+    window.DS_CONFIG.httpConfigs.fileUrlPrefix = window.DS_CONFIG.httpConfigs.baseURL + '/static'
+  }
   // 注册路由
   registerRouters(config, router)
   // 注册自定义主题

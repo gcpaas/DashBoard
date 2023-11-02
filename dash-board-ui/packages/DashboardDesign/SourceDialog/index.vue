@@ -25,7 +25,7 @@
             v-model="code"
             class="db-el-select"
             popper-class="db-el-select"
-            placeholder="请选择类型"
+            placeholder="请选择分组"
             clearable
             @change="reSearch"
           >
@@ -71,7 +71,7 @@
             >
               <div class="dashboard-card-img">
                 <el-image
-                  :src="screen.url"
+                  :src="getCoverPicture(screen.url)"
                   fit="contain"
                   style="width: 100%; height: 100%"
                 >
@@ -148,6 +148,8 @@
 <script>
 // import { get } from 'dashPackages/js/utils/http'
 import { pageMixins } from 'dashPackages/js/mixins/page'
+import { getFileUrl } from 'dashPackages/js/utils/file'
+
 import _ from 'lodash'
 export default {
   name: 'SourceDialog',
@@ -161,7 +163,8 @@ export default {
       code: '',
       focus: -1,
       list: [],
-      searchKey: ''
+      searchKey: '',
+      imgExtends: ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'webp', 'ico']
     }
   },
   computed: {
@@ -200,7 +203,8 @@ export default {
         module: this.code,
         current: this.current,
         size: this.size,
-        extension: '',
+        // 资源库中只显示图片类型的文件
+        extensionList: this.imgExtends,
         searchKey: this.searchKey
       })
         .then((data) => {
@@ -218,6 +222,14 @@ export default {
           this.options = data
         })
         .catch(() => {})
+    },
+    /**
+     * 获取封面图片,如果是相对路径则拼接上文件访问前缀地址
+     * @param url
+     * @returns {*}
+     */
+    getCoverPicture (url) {
+      return getFileUrl(url)
     }
   }
 }

@@ -1,6 +1,7 @@
 window.ENV = 'development'
 var developmentConfig = {
-  baseUrl: 'http://192.168.212.55:8082/dashboardServer'
+  baseUrl: 'http://127.0.0.1:8082/dashboardServer',
+  fileUrlPrefix: 'http://127.0.0.1:8082/dashboardServer' + '/static'
 }
 // 必须的
 window.CONFIG = configDeepMerge(window.CONFIG, developmentConfig)

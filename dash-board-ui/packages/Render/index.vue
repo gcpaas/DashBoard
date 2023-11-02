@@ -8,7 +8,7 @@
       width: '100%',
       height: '100%',
       backgroundColor: pageInfo.pageConfig.bgColor,
-      backgroundImage: `url(${pageInfo.pageConfig.bg})`
+      backgroundImage: `url(${getCoverPicture(pageInfo.pageConfig.bg)})`
     }"
     @drop="drop($event)"
     @dragover.prevent
@@ -64,6 +64,8 @@ import { compile } from 'tiny-sass-compiler/dist/tiny-sass-compiler.esm-browser.
 import plotList, { getCustomPlots } from '../G2Plots/plotList'
 import VueGridLayout from 'vue-grid-layout'
 import _ from 'lodash'
+import { getFileUrl } from 'dashPackages/js/utils/file'
+
 export default {
   name: 'DashboardRender',
   components: {
@@ -298,6 +300,14 @@ export default {
       newItem.y = edgeY++
       this.$set(layout, index, newItem)
       return layout
+    },
+    /**
+     * 获取图片访问地址,如果是相对路径则拼接上文件访问前缀地址
+     * @param url
+     * @returns {*}
+     */
+    getCoverPicture (url) {
+      return getFileUrl(url)
     }
   }
 }

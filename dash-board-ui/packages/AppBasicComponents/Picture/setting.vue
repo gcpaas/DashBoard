@@ -58,7 +58,7 @@
             >
               <img
                 class="el-upload-list__item-thumbnail"
-                :src="file.url"
+                :src="getCoverPicture(file.url)"
                 alt=""
               >
               <span class="el-upload-list__item-actions">
@@ -110,6 +110,7 @@
 <script>
 import SettingTitle from 'dashPackages/SettingTitle/index.vue'
 import PosWhSetting from 'dashPackages/DashboardDesign/RightSetting/PosWhSetting.vue'
+import { getFileUrl } from 'dashPackages/js/utils/file'
 export default {
   name: 'PicSetting',
   components: {
@@ -133,21 +134,21 @@ export default {
         'customize.url': [
           { required: true, message: '请输入链接地址', trigger: 'blur' },
           // 地址校验
-          {
-            validator: (rule, value, callback) => {
-              if (value) {
-                const reg = /^(http|https):\/\/([\w.]+\/?)\S*/
-                if (!reg.test(value)) {
-                  callback(new Error('请输入正确的链接地址'))
-                } else {
-                  callback()
-                }
-              } else {
-                callback()
-              }
-            },
-            trigger: 'blur'
-          }
+          // {
+          //   validator: (rule, value, callback) => {
+          //     if (value) {
+          //       const reg = /^(http|https):\/\/([\w.]+\/?)\S*/
+          //       if (!reg.test(value)) {
+          //         callback(new Error('请输入正确的链接地址'))
+          //       } else {
+          //         callback()
+          //       }
+          //     } else {
+          //       callback()
+          //     }
+          //   },
+          //   trigger: 'blur'
+          // }
         ]
       }
     }
@@ -202,6 +203,14 @@ export default {
     },
     handleUrlChange (val) {
       this.config.customize.url = val
+    },
+    /**
+     * 获取图片访问地址,如果是相对路径则拼接上文件访问前缀地址
+     * @param url
+     * @returns {*}
+     */
+    getCoverPicture (url) {
+      return getFileUrl(url)
     }
   }
 }

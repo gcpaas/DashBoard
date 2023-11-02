@@ -20,7 +20,9 @@ registerConfig(
       pageManagementUrl: '/'
     },
     httpConfigs: {
-      baseURL: window.CONFIG?.baseUrl
+      baseURL: window.CONFIG?.baseUrl,
+      // 现在文件路径保存的是相对路径，所以需要加上前缀,这个值一般和后端的gc.starter.file.urlPrefix一致
+      fileUrlPrefix: window.CONFIG.fileUrlPrefix ? window.CONFIG.fileUrlPrefix : window.CONFIG?.baseUrl + '/static',
     },
     customTheme: {
       '--db-background-header': '#007aff', // 头部颜色
@@ -36,6 +38,8 @@ registerConfig(
       '--db-el-color-primary': '#409EFF', // elment-ui主题色，激活
       '--db-el-border': 'transparent' // 边框颜色
     },
+    // 允许上传的资源库文件类型
+    sourceExtends: ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'webp', 'ico', 'xls', 'xlsx', 'csv'],
     // datasetTypeList: ['original', 'custom'],
     // sourceTypeList: [
     //   { label: 'Mysql', code: 'mysql', name: 'com.mysql.jdbc.Driver', url: 'jdbc:mysql://localhost:3306/db_name?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useSSL=false&useOldAliasMetadataBehavior=true' },

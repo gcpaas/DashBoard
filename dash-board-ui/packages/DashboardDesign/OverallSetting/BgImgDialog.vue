@@ -82,7 +82,8 @@
   </el-dialog>
 </template>
 <script>
-// import { get } from 'dashPackages/js/utils/http'
+import { getFileUrl } from 'dashPackages/js/utils/file'
+
 export default {
   name: 'BgImgDialog',
   props: {
@@ -115,10 +116,10 @@ export default {
     init () {
       this.dialogVisible = true
       this.imgUrl = this.form.bg
-      this.fileList = this.imgUrl
+      this.fileList =  this.getCoverPicture(this.imgUrl)
         ? [{
             name: '背景图',
-            url: this.imgUrl
+            url:  this.getCoverPicture(this.imgUrl)
           }]
         : []
       this.hideUploadImgBtn = this.fileList.length !== 0
@@ -156,6 +157,14 @@ export default {
     },
     confirm () {
       this.dialogVisible = false
+    },
+    /**
+     * 获取图片访问地址,如果是相对路径则拼接上文件访问前缀地址
+     * @param url
+     * @returns {*}
+     */
+    getCoverPicture (url) {
+      return getFileUrl(url)
     }
   }
 }

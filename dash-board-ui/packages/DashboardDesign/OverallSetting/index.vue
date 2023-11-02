@@ -19,7 +19,7 @@
           <el-image
             v-if="form.bg"
             class="bg-img db-el-img"
-            :src="form.bg"
+            :src="getCoverPicture(form.bg)"
             fit="cover"
             @click="$refs.bgImg.init()"
           />
@@ -58,6 +58,7 @@ import { mapState, mapMutations } from 'vuex'
 import { getThemeConfig } from 'dashPackages/js/api/bigScreenApi'
 import _ from 'lodash'
 import { G2 } from '@antv/g2plot'
+import { getFileUrl } from 'dashPackages/js/utils/file'
 export default {
   name: 'OverallSetting',
   components: {
@@ -255,6 +256,14 @@ export default {
     close () {
       this.drawerVisible = false
       this.$emit('close')
+    },
+    /**
+     * 获取图片访问地址,如果是相对路径则拼接上文件访问前缀地址
+     * @param url
+     * @returns {*}
+     */
+    getCoverPicture (url) {
+      return getFileUrl(url)
     }
   }
 }

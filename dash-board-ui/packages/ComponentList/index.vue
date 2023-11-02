@@ -121,7 +121,7 @@
             </div>
             <div class="dashboard-card-img">
               <el-image
-                :src="catalogInfo !== 'system' ? screen.coverPicture : screen.img"
+                :src="catalogInfo !== 'system' ? getCoverPicture(screen.coverPicture) : screen.img"
                 fit="fill"
                 style="width: 100%; height: 100%"
               >
@@ -200,6 +200,8 @@ import { pageMixins } from 'dashPackages/js/mixins/page'
 import EditForm from './EditForm.vue'
 import CatalogEditForm from './CatalogEditForm'
 import innerRemoteComponents, { getRemoteComponents } from 'dashPackages/RemoteComponents/remoteComponentsList'
+import { getFileUrl } from 'dashPackages/js/utils/file'
+
 export default {
   name: 'BigScreenList',
   mixins: [pageMixins],
@@ -406,6 +408,14 @@ export default {
         .catch((e) => {
           console.error(e)
         })
+    },
+    /**
+     * 获取图片访问地址,如果是相对路径则拼接上文件访问前缀地址
+     * @param url
+     * @returns {*}
+     */
+    getCoverPicture (url) {
+      return getFileUrl(url)
     }
   }
 }

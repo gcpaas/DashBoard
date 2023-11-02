@@ -48,7 +48,6 @@
   <NotPermission v-else />
 </template>
 <script>
-// import { get } from 'dashPackages/js/utils/http'
 import RenderCard from 'dashPackages/Render/RenderCard.vue'
 import { mapActions, mapMutations, mapState } from 'vuex'
 import { getThemeConfig } from 'dashPackages/js/api/bigScreenApi'
@@ -56,6 +55,8 @@ import { compile } from 'tiny-sass-compiler/dist/tiny-sass-compiler.esm-browser.
 import { G2 } from '@antv/g2plot'
 import VueGridLayout from 'vue-grid-layout'
 import NotPermission from 'dashPackages/NotPermission'
+import { getFileUrl } from 'dashPackages/js/utils/file'
+
 export default {
   name: 'DashboardRun',
   components: {
@@ -120,7 +121,7 @@ export default {
       const bg = this.fitMode !== 'none'
         ? {
             backgroundColor: this.fitPageConfig.bgColor,
-            backgroundImage: `url(${this.fitPageConfig.bg})`,
+            backgroundImage: `url(${this.getCoverPicture(this.fitPageConfig.bg)})`,
             backgroundSize: 'cover'
           }
         : {}
@@ -141,7 +142,7 @@ export default {
       const bg = this.fitMode === 'none'
         ? {
             backgroundColor: this.fitPageConfig.bgColor,
-            backgroundImage: `url(${this.fitPageConfig.bg})`,
+            backgroundImage: `url(${this.getCoverPicture(this.fitPageConfig.bg)})`,
             backgroundSize: 'cover'
           }
         : {}
@@ -365,6 +366,14 @@ export default {
         overflowY
       }
       return newPageConfig
+    },
+    /**
+     * 获取图片访问地址,如果是相对路径则拼接上文件访问前缀地址
+     * @param url
+     * @returns {*}
+     */
+    getCoverPicture (url) {
+      return getFileUrl(url)
     }
   }
 }
