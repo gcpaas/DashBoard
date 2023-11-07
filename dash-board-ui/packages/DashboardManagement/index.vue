@@ -594,13 +594,21 @@ export default {
         className
       }).then((code) => {
         const path = window.DS_CONFIG?.routers?.designUrl || '/dashboard/design'
-        const { href } = this.$router.resolve({
-          path,
-          query: {
-            code: code
+        // const { href } = this.$router.resolve({
+        //   path,
+        //   query: {
+        //     code: code
+        //   }
+        // })
+        // window.open(href, '_self')
+        this.$route.push(
+          {
+            path,
+            query: {
+              code: code
+            }
           }
-        })
-        window.open(href, '_self')
+        )
       }).finally(() => {
         this.templateLoading = true
       })
@@ -714,14 +722,32 @@ export default {
     // 点击进入页面设计
     gopageDesign (nodeData) {
       const path = window.DS_CONFIG?.routers?.designUrl || '/dashboard/design'
-      const openType = nodeData.type === 'report' ? '_blank' : '_self'
-      const { href } = this.$router.resolve({
-        path,
-        query: {
-          code: nodeData.code
-        }
-      })
-      window.open(href, openType)
+      // const openType = nodeData.type === 'report' ? '_blank' : '_self'
+      // const { href } = this.$router.resolve({
+      //   path,
+      //   query: {
+      //     code: nodeData.code
+      //   }
+      // })
+      // window.open(href, openType)
+      if (nodeData.type === 'report') {
+        const { href } = this.$router.resolve({
+          path,
+          query: {
+            code: nodeData.code
+          }
+        })
+        window.open(href, '_blank')
+      } else {
+        this.$route.push(
+          {
+            path,
+            query: {
+              code: nodeData.code
+            }
+          }
+        )
+      }
     }
   }
 }

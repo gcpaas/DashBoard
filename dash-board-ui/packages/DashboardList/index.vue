@@ -240,13 +240,19 @@ export default {
     },
     design (screen) {
       const path = window.DS_CONFIG?.routers?.designUrl || '/dashboard/design'
-      const { href } = this.$router.resolve({
+      // const { href } = this.$router.resolve({
+      //   path,
+      //   query: {
+      //     code: screen.code
+      //   }
+      // })
+      // window.open(href, '_self')
+      this.$router.push({
         path,
         query: {
           code: screen.code
         }
       })
-      window.open(href, '_self')
     },
     add () {
       const page = {

@@ -281,13 +281,19 @@ export default {
     },
     // 跳转设计态
     toDesign (form) {
-      const { href: bigScreenHref } = this.$router.resolve({
+      // const { href: bigScreenHref } = this.$router.resolve({
+      //   path: window.DS_CONFIG?.routers?.designUrl || '/dashboard/design',
+      //   query: {
+      //     code: form.code
+      //   }
+      // })
+      // window.open(bigScreenHref, '_self')
+      this.$router.push({
         path: window.DS_CONFIG?.routers?.designUrl || '/dashboard/design',
         query: {
           code: form.code
         }
       })
-      window.open(bigScreenHref, '_self')
     }
   }
 }

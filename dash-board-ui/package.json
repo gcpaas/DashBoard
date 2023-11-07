@@ -1,6 +1,6 @@
 {
   "name": "@gcpaas/dash-board-ui",
-  "version":  "1.0.1-2023102601-Alpha",
+  "version": "1.0.1-20230803002-Alpha",
   "description": "自定义仪表盘",
   "author": "gc-starter",
   "license": "MIT",
@@ -128,7 +128,7 @@
     "url-loader": "^4.1.1",
     "vue-template-compiler": "2.6.10",
     "webpack-bundle-analyzer": "^4.9.0",
-    "vue": "2.6.10",
+    "vue": "2.7.14",
     "babel-polyfill": "6.26.0",
     "increase-memory-limit": "^1.0.7",
     "tiny-sass-compiler": "^0.12.2"
