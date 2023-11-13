@@ -845,7 +845,7 @@ export default {
           position: relative;
           overflow: auto;
           overflow-x: hidden;
-          ::v-deep.el-input__suffix-inner{
+          ::v-deep .el-input__suffix-inner{
             /*pointer-events: none!important;*/
           }
           .preview-wrap{
@@ -873,7 +873,7 @@ export default {
     cursor: pointer;
   }
   .catalog-dialog{
-    ::v-deep .el-dialog__body{
+    ::v-deep  .el-dialog__body{
       min-height: 80px;
     }
   }
@@ -883,7 +883,7 @@ export default {
   .el-dropdown-menu--mini .el-dropdown-menu__item i{
     padding-top: 6px;
   }
-  .el-dropdown-menu--mini ::v-deep .el-dropdown-menu__item{
+  .el-dropdown-menu--mini ::v-deep  .el-dropdown-menu__item{
       display: flex;
       min-width: 100px!important;
       line-height: 36px;
@@ -936,19 +936,19 @@ export default {
     }
   }
  /* 去除tree前面的小三角形*/
-  .page-list-tree ::v-deep .el-tree-node__content > .el-tree-node__expand-icon{
+  .page-list-tree ::v-deep  .el-tree-node__content > .el-tree-node__expand-icon{
     width: 20px;
     opacity: 0 !important;
   }
   /*选中树节点后*/
-  .page-list-tree  ::v-deep .ztree li a.curSelectedNode span{
+  .page-list-tree  ::v-deep  .ztree li a.curSelectedNode span{
     color: var(--db-el-color-primary)!important;
   }
   #settingDropdown{
     display: inline-block;
     float: right;
   }
-  ::v-deep .el-tree-node{
+  ::v-deep  .el-tree-node{
     line-height: 40px;
     .el-tree-node__content{
       line-height: 40px;
@@ -956,11 +956,11 @@ export default {
     }
   }
   /*当前tree节点激活样式*/
- .page-list-tree ::v-deep.is-current>.el-tree-node__content{
+ .page-list-tree ::v-deep .is-current>.el-tree-node__content{
     background: #007aff10;
     color: var(--db-el-color-primary);
   }
-  .page-list-tree ::v-deep.is-current>.el-tree-node__content::before{
+  .page-list-tree ::v-deep .is-current>.el-tree-node__content::before{
     position: absolute;
     left: 0;
     border-left: 4px solid var(--db-el-color-primary);
@@ -968,18 +968,18 @@ export default {
     height: 40px;
     width: 4px;
   }
-  ::v-deep .el-icon-more{
+  ::v-deep  .el-icon-more{
     transform: rotate(90deg);
     color: #999999;
     font-size: 10px;
   }
   /*滚动条样式*/
-  ::v-deep::-webkit-scrollbar {
+  ::v-deep ::-webkit-scrollbar {
     width: 6px;
     border-radius: 4px;
     /*height: 4px;*/
   }
-  ::v-deep::-webkit-scrollbar-thumb {
+  ::v-deep ::-webkit-scrollbar-thumb {
     background: #dddddd !important;
     border-radius: 10px;
   }

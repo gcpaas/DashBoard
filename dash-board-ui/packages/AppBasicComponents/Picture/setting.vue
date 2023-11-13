@@ -62,13 +62,13 @@
                 alt=""
               >
               <span class="el-upload-list__item-actions">
-                  <span
-                    class="el-upload-list__item-delete"
-                    @click="handleRemove(file)"
-                  >
-                    <i class="el-icon-delete" />
-                  </span>
+                <span
+                  class="el-upload-list__item-delete"
+                  @click="handleRemove(file)"
+                >
+                  <i class="el-icon-delete" />
                 </span>
+              </span>
             </div>
             <el-input
               slot="tip"
@@ -132,7 +132,7 @@ export default {
       hideUpload: false,
       rules: {
         'customize.url': [
-          { required: true, message: '请输入链接地址', trigger: 'blur' },
+          { required: true, message: '请输入链接地址', trigger: 'blur' }
           // 地址校验
           // {
           //   validator: (rule, value, callback) => {
@@ -232,13 +232,13 @@ export default {
 .db-setting-wrap {
   padding-top: 16px;
 
-  ::v-deep .hide .el-upload--picture-card {
+  ::v-deep  .hide .el-upload--picture-card {
     display: none;
   }
-  ::v-deep.el-upload-list__item {
+  ::v-deep .el-upload-list__item {
     transition: none !important;
   }
-  ::v-deep .el-upload--picture-card {
+  ::v-deep  .el-upload--picture-card {
     margin-bottom: 12px;
   }
 }

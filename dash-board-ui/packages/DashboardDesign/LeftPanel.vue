@@ -343,7 +343,7 @@ export default {
         height: 100%;
       }
 
-      ::v-deep.el-tabs__content {
+      ::v-deep .el-tabs__content {
         height: 100%;
         width: 160px;
 
@@ -444,13 +444,13 @@ export default {
       }
     }
 
-    ::v-deep.el-tabs__header {
+    ::v-deep .el-tabs__header {
       width: 45px;
       height: 100%;
       margin-right: 0 !important;
     }
 
-    ::v-deep.el-tabs--left .el-tabs__nav-wrap.is-left::after {
+    ::v-deep .el-tabs--left .el-tabs__nav-wrap.is-left::after {
       width: 0 !important;
     }
 
@@ -468,7 +468,7 @@ export default {
       /* border-right: 1px solid #ccc; */
     }
 
-    ::v-deep .el-tabs__nav-scroll {
+    ::v-deep  .el-tabs__nav-scroll {
       background-color: var(--db-background-2);
     }
   }
@@ -483,7 +483,7 @@ export default {
     }
   }
   .left-tabs-box {
-    ::v-deep.el-tabs__item {
+    ::v-deep .el-tabs__item {
       height: 70px !important;
       .menu-slot {
         height: 100%;
@@ -523,12 +523,12 @@ export default {
   opacity: 0;
 }
 
-::v-deep .el-tabs__item.is-left {
+::v-deep  .el-tabs__item.is-left {
   text-align: center;
   padding: 0;
 }
 
-::v-deep .el-scrollbar__wrap{
+::v-deep  .el-scrollbar__wrap{
   // margin-right: 0 !important;
 }
 </style>

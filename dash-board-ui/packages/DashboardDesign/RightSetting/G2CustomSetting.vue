@@ -296,11 +296,11 @@ export default {
   }
 }
 
-::v-deep .el-color-picker__trigger {
+::v-deep  .el-color-picker__trigger {
   border-color: var(--db-el-border);
 }
 .color-picker-box{
-  ::v-deep .el-color-picker__trigger {
+  ::v-deep  .el-color-picker__trigger {
     width: 27px!important;
   }
 }

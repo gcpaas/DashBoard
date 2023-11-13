@@ -64,7 +64,7 @@ export default {
 .border-color {
   display: flex;
 
-  ::v-deep .el-input {
+  ::v-deep  .el-input {
     width: auto;
     position: relative;
     margin-right: 5px;
@@ -86,7 +86,7 @@ export default {
     }
   }
 
-  ::v-deep .el-color-picker__trigger {
+  ::v-deep  .el-color-picker__trigger {
     width: 32.5px;
     height: 32.5px;
     border-color: var(--db-el-border);

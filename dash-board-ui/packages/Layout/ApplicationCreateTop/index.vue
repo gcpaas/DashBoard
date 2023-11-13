@@ -63,7 +63,7 @@ export default {
 
 <style lang="scss">
 .header-new-drop {
-  ::v-deep .el-dropdown-menu__item {
+  ::v-deep  .el-dropdown-menu__item {
     height: 50px !important;
   }
 }
@@ -114,10 +114,10 @@ export default {
       align-items: center;
       justify-content: center;
 
-      ::v-deep.el-tabs__header {
+      ::v-deep .el-tabs__header {
         margin: 0;
 
-        ::v-deep.el-tabs__item {
+        ::v-deep .el-tabs__item {
           height: 51px;
           line-height: 51px;
           color: #ffffff;
@@ -127,33 +127,33 @@ export default {
         }
       }
 
-      ::v-deep.el-tabs__header {
+      ::v-deep .el-tabs__header {
         margin: 0 !important;
       }
 
-      ::v-deep.el-tabs__item {
+      ::v-deep .el-tabs__item {
         height: 40px !important;
         line-height: 40px !important;
         padding:0 10px!important;
         box-sizing: border-box;
       }
 
-      ::v-deep.el-tabs__active-bar {
+      ::v-deep .el-tabs__active-bar {
         width: 0 !important;
       }
 
-      ::v-deep.el-tabs__item.is-active {
+      ::v-deep .el-tabs__item.is-active {
         color: #ffffff !important;
         background-color: hsla(0, 0%, 100%, 0.1) !important;
       }
 
-      ::v-deep.el-tabs__item:hover {
+      ::v-deep .el-tabs__item:hover {
         color: #fff !important;
         cursor: pointer;
         background-color: hsla(0, 0%, 100%, 0.1) !important;
       }
 
-      ::v-deep.el-tabs__item {
+      ::v-deep .el-tabs__item {
         color: #fff !important;
       }
     }
@@ -165,7 +165,7 @@ export default {
       margin-right: 20px;
       justify-content: flex-end;
 
-      ::v-deep .el-dropdown {
+      ::v-deep  .el-dropdown {
         padding: 4px 8px;
         border-radius: 4px;
       }
@@ -200,7 +200,7 @@ export default {
     padding: 16px;
   }
 
-  ::v-deep .el-tabs__nav-wrap::after {
+  ::v-deep  .el-tabs__nav-wrap::after {
     width: 0 !important;
   }
 }

@@ -353,7 +353,7 @@ export default {
     .el-input {
       width: 200px;
       margin-right: 20px;
-      ::v-deep.el-input__inner {
+      ::v-deep .el-input__inner {
         // background-color: #232832 !important;
       }
     }
@@ -370,7 +370,7 @@ export default {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 15px;
 
-    ::v-deep .el-loading-mask {
+    ::v-deep  .el-loading-mask {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -474,14 +474,14 @@ export default {
             object-fit: cover;
           }
 
-          ::v-deep.image-slot {
+          ::v-deep .image-slot {
             height: 100%;
             background-color: var(--db-background-2);
             display: flex;
             align-items: center;
             justify-content: center;
           }
-          ::v-deep.el-image__error {
+          ::v-deep .el-image__error {
             // background-color: #1d1d1d;
           }
         }
@@ -556,7 +556,7 @@ export default {
   }
 }
 // .db-pagination {
-//   ::v-deep .el-input__inner {
+//   ::v-deep  .el-input__inner {
 //     width: 110px !important;
 //     border: none;
 //     background: var(--db-el-background-2);

@@ -239,13 +239,13 @@ export default {
     margin-bottom: 14px !important;
   }
 
-  ::v-deep .hide .el-upload--picture-card {
+  ::v-deep  .hide .el-upload--picture-card {
     display: none;
   }
-  ::v-deep.el-upload-list__item {
+  ::v-deep .el-upload-list__item {
     transition: none !important;
   }
-  ::v-deep .el-upload--picture-card {
+  ::v-deep  .el-upload--picture-card {
     margin-bottom: 12px;
   }
 }

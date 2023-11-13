@@ -395,7 +395,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-::v-deep .el-dialog__body {
+::v-deep  .el-dialog__body {
   overflow-y: auto;
 }
 
@@ -403,7 +403,7 @@ export default {
   height: 300px;
   overflow-x: hidden;
 
-  ::v-deep .el-scrollbar__view {
+  ::v-deep  .el-scrollbar__view {
     overflow-x: hidden;
   }
 }
@@ -432,7 +432,7 @@ export default {
     position: relative;
   }
 
-  ::v-deep .el-color-picker__trigger {
+  ::v-deep  .el-color-picker__trigger {
     top: 0;
     right: 0;
     width: 21px;
@@ -536,19 +536,19 @@ export default {
     cursor: pointer;
   }
 
-  ::v-deep.el-radio__label {
+  ::v-deep .el-radio__label {
     display: none;
   }
 }
 
 /*滚动条样式*/
-::v-deep::-webkit-scrollbar {
+::v-deep ::-webkit-scrollbar {
   width: 6px;
   border-radius: 4px;
   height: 4px;
 }
 
-::v-deep::-webkit-scrollbar-thumb {
+::v-deep ::-webkit-scrollbar-thumb {
   background: #dddddd !important;
   border-radius: 10px;
 }

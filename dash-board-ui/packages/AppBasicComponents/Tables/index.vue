@@ -177,23 +177,23 @@ export default {
 
 <style lang="scss" scoped>
 
-  ::v-deep .el-table {
+  ::v-deep  .el-table {
     height: 100%;
     background-color: transparent;
   }
-  ::v-deep .el-table tr {
+  ::v-deep  .el-table tr {
     background-color: transparent;
   }
 
-  ::v-deep .el-table__body {
+  ::v-deep  .el-table__body {
     height: 100%;
   }
 
-  ::v-deep .el-table .el-table__header tr {
+  ::v-deep  .el-table .el-table__header tr {
     background-color: transparent;
   }
 
-  ::v-deep tr.el-table__row--striped {
+  ::v-deep  tr.el-table__row--striped {
     z-index: 1;
     /*将容器的 z-index 设为 1，以便其在蒙版之上*/
     position: relative;
@@ -201,7 +201,7 @@ export default {
     opacity: 0.9;
   }
 
-  ::v-deep tr.el-table__row--striped::before {
+  ::v-deep  tr.el-table__row--striped::before {
     position: absolute;
     /*设置蒙版为绝对定位*/
     top: 0;
@@ -214,7 +214,7 @@ export default {
     /*将蒙版的 z-index 设为 2，以便其覆盖在容器之上*/
   }
 
-  ::v-deep .overlay {
+  ::v-deep  .overlay {
     position: absolute;
     /*设置蒙版为绝对定位*/
     top: 0;
@@ -227,14 +227,14 @@ export default {
     /*将蒙版的 z-index 设为 2，以便其覆盖在容器之上*/
   }
 
-  ::v-deep .cell.el-tooltip {
+  ::v-deep  .cell.el-tooltip {
     z-index: 3;
     min-width: 50px;
     white-space: nowrap;
     position: inherit;
   }
 
-  ::v-deep .el-table {
+  ::v-deep  .el-table {
     .el-table__cell {
       border-bottom: none !important;
     }
@@ -250,22 +250,22 @@ export default {
   }
 
   // 关键css代码
-  ::v-deep .el-table__header colgroup col[name="gutter"] {
+  ::v-deep  .el-table__header colgroup col[name="gutter"] {
     display: table-cell !important;
   }
 
- .notScrollbar ::v-deep .el-table__body-wrapper::-webkit-scrollbar {
+ .notScrollbar ::v-deep  .el-table__body-wrapper::-webkit-scrollbar {
     width: 0; // 横向滚动条
     height: 0; // 纵向滚动条 必写
     background-color: transparent;
   }
-  .scrollbar ::v-deep .el-table__body-wrapper::-webkit-scrollbar {
+  .scrollbar ::v-deep  .el-table__body-wrapper::-webkit-scrollbar {
     width: 4px; // 横向滚动条
     height: 4px; // 纵向滚动条 必写
     background-color: transparent;
   }
   // 滚动条的滑块
-   ::v-deep .el-table__body-wrapper::-webkit-scrollbar-thumb {
+   ::v-deep  .el-table__body-wrapper::-webkit-scrollbar-thumb {
     background-color: #9093994D;
     border-radius: 5px;
 
@@ -276,7 +276,7 @@ export default {
   .db-design-wrap {
     overflow-y: auto;
   }
-  ::v-deep.el-table__fixed::before{
+  ::v-deep .el-table__fixed::before{
     height: 0!important;
   }
 </style>

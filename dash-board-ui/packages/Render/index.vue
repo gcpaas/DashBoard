@@ -323,7 +323,7 @@ export default {
     cursor: move;
   }
 
-  ::v-deep .vdr {
+  ::v-deep  .vdr {
     border: none;
   }
   .h-line {
@@ -341,11 +341,11 @@ export default {
   height: 100% !important;
 }
 
-::v-deep.vue-grid-placeholder {
+::v-deep .vue-grid-placeholder {
   background: #C6C8CA !important;
 }
 
-::v-deep.vue-resizable-handle{
+::v-deep .vue-resizable-handle{
   z-index: 999;
 }
 

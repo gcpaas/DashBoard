@@ -150,12 +150,12 @@ export default {
         }
       }
 
-      ::v-deep .el-tabs__item {
+      ::v-deep  .el-tabs__item {
         text-align: left;
         width: 290px;
       }
 
-      ::v-deep .el-tabs__nav-wrap::after {
+      ::v-deep  .el-tabs__nav-wrap::after {
         background-color: #fff !important;
       }
     }
@@ -172,7 +172,7 @@ export default {
       height: 100%;
       box-sizing: border-box;
     }
-    ::v-deep.el-scrollbar__view{
+    ::v-deep .el-scrollbar__view{
       height: 100%;
       .inner-router-view-wrap{
         height: 100%;

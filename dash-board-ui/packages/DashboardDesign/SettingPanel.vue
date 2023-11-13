@@ -338,7 +338,7 @@ export default {
   opacity: 0;
 }
 
-::v-deep .el-scrollbar__view {
+::v-deep  .el-scrollbar__view {
   height: calc(100vh - 80px);
   overflow-x: unset;
 }
@@ -357,11 +357,11 @@ export default {
     margin-bottom: 18px;
   }
 
-  ::v-deep .el-select {
+  ::v-deep  .el-select {
     width: 110px;
   }
 
-  ::v-deep .el-input-number {
+  ::v-deep  .el-input-number {
     width: 100px;
   }
 }

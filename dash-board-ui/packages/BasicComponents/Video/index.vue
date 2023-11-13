@@ -103,17 +103,17 @@ export default {
 }
 
 /*滚动条样式*/
-::v-deep::-webkit-scrollbar {
+::v-deep ::-webkit-scrollbar {
   width: 4px;
   border-radius: 4px;
   height: 4px;
 }
 
-::v-deep::-webkit-scrollbar-thumb {
+::v-deep ::-webkit-scrollbar-thumb {
   background: #dddddd !important;
   border-radius: 10px;
 }
-::v-deep .video-js .vjs-big-play-button {
+::v-deep  .video-js .vjs-big-play-button {
   z-index: 100;
   left: 50%;
   top: 50%;

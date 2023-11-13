@@ -184,31 +184,31 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/style/bsTheme.scss';
-::v-deep .el-tabs__header{
+::v-deep  .el-tabs__header{
   margin-bottom: 0;
 }
 
 .commonHeight{
-   ::v-deep .el-dialog__body {
+   ::v-deep  .el-dialog__body {
     min-height: 500px;
   }
 }
 
 .tabHeight{
-   ::v-deep .el-dialog__body {
+   ::v-deep  .el-dialog__body {
     min-height: 512px;
   }
 }
 
 .data-set-wrap {
-  ::v-deep .el-dialog__body {
+  ::v-deep  .el-dialog__body {
     position: relative;
     padding: 0 !important;
     // min-height: 575px;
     overflow: hidden;
   }
 
-  ::v-deep .db-container {
+  ::v-deep  .db-container {
     padding: 0;
     min-height: 480px;
 
@@ -225,35 +225,35 @@ export default {
   }
 
   .db-data-set-management {
-    ::v-deep .db-container{
+    ::v-deep  .db-container{
       margin-left: 0 !important;
     }
-    ::v-deep .ztree {
+    ::v-deep  .ztree {
       height: auto !important;
     }
-     ::v-deep  .layout {
+     ::v-deep   .layout {
         position: absolute !important;
       }
 
-    ::v-deep .db-table-box {
+    ::v-deep  .db-table-box {
       height: auto !important;
     }
 
-    ::v-deep .db-el-pagination {
+    ::v-deep  .db-el-pagination {
       right: 6px !important;
        position: relative !important;
        margin-top:10px !important;
     }
 
-    // ::v-deep .data-set-scrollbar {
+    // ::v-deep  .data-set-scrollbar {
     //     height: 515px !important;
     // }
-    ::v-deep .el-scrollbar{
+    ::v-deep  .el-scrollbar{
        height: 515px !important;
     }
   }
 }
-::v-deep.db-pagination{
+::v-deep .db-pagination{
   position: relative !important;
   margin-top:16px !important;
 }

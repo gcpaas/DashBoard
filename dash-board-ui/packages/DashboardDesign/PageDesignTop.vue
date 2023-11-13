@@ -412,7 +412,7 @@ export default {
     cursor: pointer;
   }
 
-  ::v-deep.el-radio__label {
+  ::v-deep .el-radio__label {
     display: none;
   }
 }

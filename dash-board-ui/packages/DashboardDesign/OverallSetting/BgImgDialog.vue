@@ -176,11 +176,11 @@ export default {
   display: none !important;
 }
 
-::v-deep .el-upload-list__item {
+::v-deep  .el-upload-list__item {
   transition: none !important;
 }
 
-::v-deep .el-upload--picture-card {
+::v-deep  .el-upload--picture-card {
   width: 0;
   height: 0;
   display: table-row;
@@ -188,7 +188,7 @@ export default {
   background-color: transparent;
 }
 
-::v-deep .el-upload-list__item {
+::v-deep  .el-upload-list__item {
   width: 200px;
   height: 150px;
   margin: 0;
