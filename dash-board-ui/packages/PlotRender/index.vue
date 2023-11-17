@@ -151,18 +151,29 @@ export default {
       if (data.success) {
         data = data.data
         config = this.transformSettingToOption(config, 'data')
-        // 获取到后端返回的数据，有则赋值
+        // // 获取到后端返回的数据，有则赋值
         const option = config.option
         const setting = config.setting
-        if (config.dataHandler) {
-          try {
-            // 此处函数处理data
-            eval(config.dataHandler)
-          } catch (e) {
-            console.error(e)
+        // 如果维度为数字类型则转化为字符串，否则在不增加其他配置的情况下会导致图标最后一项不显示（g2plot官网已说明）
+        const xAxis = config.setting.find(item => item.field === 'xField')?.value
+        const yAxis = config.setting.find(item => item.field === 'yField')?.value
+        config.option.data = data?.map(item => {
+          // 此处函数处理data
+          if (config.dataHandler) {
+            try {
+              // 此处函数处理data
+              eval(config.dataHandler)
+            } catch (e) {
+              console.error(e)
+            }
           }
-        }
-        config.option.data = data
+          if (config.chartType !== 'Bar' && xAxis && typeof item[xAxis] === 'number') {
+            item[xAxis] = (item[xAxis]).toString()
+          } else if (config.chartType === 'Bar' && yAxis && typeof item[yAxis] === 'number') {
+            item[yAxis] = (item[yAxis]).toString()
+          }
+          return item
+        })
       } else {
         // 数据返回失败则赋前端的模拟数据
         config.option.data = this.plotList?.find(plot => plot.name === config.name)?.option?.data
