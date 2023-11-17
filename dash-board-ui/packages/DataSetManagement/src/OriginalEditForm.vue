@@ -1189,7 +1189,7 @@ export default {
 //   max-height: 270px;
 // }
 
-::v-deep .el-input__inner {
+::v-deep  .el-input__inner {
   width: 100% !important;
 }
 
@@ -1203,7 +1203,7 @@ export default {
   }
 }
 
-::v-deep .fieldDescCheck {
+::v-deep  .fieldDescCheck {
   .el-dialog__body {
     height: fit-content !important;
     min-height: unset !important;
@@ -1241,7 +1241,7 @@ export default {
   }
 }
 
-::v-deep .db-table-box.is-Edit .el-table {
+::v-deep  .db-table-box.is-Edit .el-table {
   max-height: calc(100vh - 600px) !important;
   // overflow-y: auto !important;
 
@@ -1280,7 +1280,7 @@ export default {
   position: relative !important;
   bottom: 0 !important;
   padding: 16px 12px 0 16px !important;
-  ::v-deep .el-input__inner {
+  ::v-deep  .el-input__inner {
     width: 110px !important;
     border: none;
     background: var(--db-el-background-1);
@@ -1288,7 +1288,7 @@ export default {
 }
 
 // 修改el-select样式 loading 位置
-::v-deep .el-loading-spinner{
+::v-deep  .el-loading-spinner{
   top: 75%;
 }
 

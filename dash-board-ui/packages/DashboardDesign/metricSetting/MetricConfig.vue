@@ -181,10 +181,10 @@ export default {
     border-bottom: 1px solid #e6ebf5;
   }
   .min{
-    ::v-deep .el-input{
+    ::v-deep  .el-input{
     width: 150px !important;
     }
-    ::v-deep.el-input-number--mini{
+    ::v-deep .el-input-number--mini{
       width: 150px !important;
     }
   }

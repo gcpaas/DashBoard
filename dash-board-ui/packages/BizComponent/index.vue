@@ -333,7 +333,7 @@ export default {
       align-items: center;
       height: 100%;
 
-      ::v-deep.head-btn {
+      ::v-deep .head-btn {
         color: var(--db-background-1);
       }
     }

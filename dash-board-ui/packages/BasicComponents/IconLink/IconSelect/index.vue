@@ -222,7 +222,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
-::v-deep .el-dialog__body {
+::v-deep  .el-dialog__body {
   overflow-y: hidden;
 }
 .el-scrollbar {
@@ -253,7 +253,7 @@ export default {
     position: relative;
   }
 
-  ::v-deep .el-color-picker__trigger {
+  ::v-deep  .el-color-picker__trigger {
     top: 0;
     right: 0;
     width: 21px;

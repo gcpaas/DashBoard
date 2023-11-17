@@ -95,7 +95,7 @@ export default {
     height: 100%;
     width: 100%;
 
-    ::v-deep .el-input__inner {
+    ::v-deep  .el-input__inner {
       height: 100%;
       width: 100%;
     }

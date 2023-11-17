@@ -488,7 +488,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/style/bsTheme.scss';
 
-::v-deep .el-tabs {
+::v-deep  .el-tabs {
   .el-tabs__header {
     margin: 0;
 
@@ -512,7 +512,7 @@ export default {
     }
   }
 }
- ::v-deep .ztree {
+ ::v-deep  .ztree {
     span {
       color: var(--db-el-text);
     }
@@ -532,7 +532,7 @@ export default {
       background-color: var(--db-el-background-3) !important;
     }
   }
-::v-deep .el-tabs__nav-wrap::after {
+::v-deep  .el-tabs__nav-wrap::after {
   display: none !important;
 }
 

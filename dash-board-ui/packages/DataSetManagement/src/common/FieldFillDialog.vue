@@ -74,7 +74,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../../assets/style/bsTheme.scss';
 
-::v-deep .el-dialog__body {
+::v-deep  .el-dialog__body {
     height: fit-content;
     min-height: unset;
 }

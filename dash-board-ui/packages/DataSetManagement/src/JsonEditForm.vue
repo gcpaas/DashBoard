@@ -829,12 +829,12 @@ export default {
   overflow: auto;
 }
 
-::v-deep .jsoneditor-poweredBy,
-::v-deep .jsoneditor-modes {
+::v-deep  .jsoneditor-poweredBy,
+::v-deep  .jsoneditor-modes {
   display: none;
 }
 
-::v-deep .ace_editor.ace-jsoneditor {
+::v-deep  .ace_editor.ace-jsoneditor {
   min-height: 250px;
 }
 
@@ -875,7 +875,7 @@ export default {
   }
 }
 
-::v-deep .fieldDescCheck {
+::v-deep  .fieldDescCheck {
   .el-dialog__body {
     height: fit-content !important;
     min-height: unset !important;
@@ -902,16 +902,16 @@ export default {
   }
 }
 
-::v-deep .ace_layer.ace_gutter-layer.ace_folding-enabled {
+::v-deep  .ace_layer.ace_gutter-layer.ace_folding-enabled {
   background: #f6f7fb;
 }
 
-::v-deep .jsoneditor-menu {
+::v-deep  .jsoneditor-menu {
   background: var(--db-el-color-primary);
   border-color: var(--db-el-color-primary);
 }
 
-::v-deep .jsoneditor-mode-code {
+::v-deep  .jsoneditor-mode-code {
   border-color: var(--db-el-color-primary);
 }
 
@@ -919,7 +919,7 @@ export default {
   margin-bottom: 0;
 }
 
-::v-deep .db-table-box.is-Edit .el-table {
+::v-deep  .db-table-box.is-Edit .el-table {
   max-height: unset !important;
 
   .el-table__body-wrapper {

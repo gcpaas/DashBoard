@@ -277,7 +277,7 @@ export default {
   .el-input {
     width: 200px;
     margin-right: 20px;
-    ::v-deep.el-input__inner {
+    ::v-deep .el-input__inner {
       /*background-color: #232832 !important;*/
     }
   }

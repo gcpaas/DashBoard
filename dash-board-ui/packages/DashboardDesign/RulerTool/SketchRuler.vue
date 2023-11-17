@@ -318,11 +318,11 @@ export default {
   top: 50px;
   left: 50px;
 }
-::v-deep .line {
+::v-deep  .line {
   border-left: 1px dashed #0089d0 !important;
   border-top: 1px dashed #0089d0 !important;
 }
-::v-deep.action {
+::v-deep .action {
   .value {
     background: var(--db-el-color-primary);
     padding: 4px;
@@ -333,15 +333,15 @@ export default {
     color: var(--db-el-color-primary);
   }
 }
-::v-deep .ruler, ::v-deep .corner {
+::v-deep  .ruler, ::v-deep  .corner {
   background: var(--db-background-1);
 }
-::v-deep .corner {
+::v-deep  .corner {
   z-index: 999;
   background: var(--db-background-1) !important;
 }
 
-::v-deep .mb-ruler {
+::v-deep  .mb-ruler {
   z-index: 998
 }
 .grid-bg {

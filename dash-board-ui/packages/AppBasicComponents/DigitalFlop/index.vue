@@ -140,7 +140,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  ::v-deep .van-swipe-item{
+  ::v-deep  .van-swipe-item{
     box-sizing: border-box;
   }
   .content {
@@ -190,12 +190,12 @@ export default {
   }
 }
 /*滚动条样式*/
-::v-deep::-webkit-scrollbar {
+::v-deep ::-webkit-scrollbar {
   width: 4px;
   border-radius: 4px;
   height: 4px;
 }
-::v-deep::-webkit-scrollbar-thumb {
+::v-deep ::-webkit-scrollbar-thumb {
   background: #dddddd !important;
   border-radius: 10px;
 }

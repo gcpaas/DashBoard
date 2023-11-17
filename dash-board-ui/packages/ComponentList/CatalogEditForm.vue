@@ -280,7 +280,7 @@ export default {
   .el-input {
     width: 200px;
     margin-right: 20px;
-    ::v-deep.el-input__inner {
+    ::v-deep .el-input__inner {
       /*background-color: #232832 !important;*/
     }
   }
@@ -293,13 +293,13 @@ export default {
     // .el-input {
     //   width: 200px;
     //   margin-right: 20px;
-    //   ::v-deep.el-input__inner {
+    //   ::v-deep .el-input__inner {
     //     background-color: #151A26 !important;
     //   }
     // }
   }
 }
-// ::v-deep.el-dialog__body{
+// ::v-deep .el-dialog__body{
 //   min-height: 300px !important;
 // }
 </style>

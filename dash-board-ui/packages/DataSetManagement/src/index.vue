@@ -732,7 +732,7 @@ export default {
 @import '../../assets/style/zTree/treePackUp.scss';
 
 .db-pagination {
-  ::v-deep .el-input__inner {
+  ::v-deep  .el-input__inner {
     width: 110px !important;
     border:none;
     background: var(--db-el-background-1);
@@ -740,7 +740,7 @@ export default {
 }
 
 .db-container .inner-container .el-form .filter-item {
-  ::v-deep .el-input__inner {
+  ::v-deep  .el-input__inner {
     width: 200px;
   }
 }
@@ -748,7 +748,7 @@ export default {
 .right-box {
   // margin-left: 20px;
 
-  // ::v-deep .ztreeNodeMenu {
+  // ::v-deep  .ztreeNodeMenu {
   //   ul {
   //     background-color: var(--db-background-1);
   //   }
@@ -768,17 +768,17 @@ export default {
 
 }
 
-::v-deep .left-tab-box {
+::v-deep  .left-tab-box {
   span {
     color: var(--db-el-text);
   }
 }
 
-::v-deep .left-tab-box ul li.tab-active {
+::v-deep  .left-tab-box ul li.tab-active {
   background-color: var(--db-el-background-3);
 }
 
-::v-deep .left-tab-box ul li:hover {
+::v-deep  .left-tab-box ul li:hover {
   background-color: var(--db-el-background-3);
 }
 
@@ -790,11 +790,11 @@ export default {
       height: calc(90vh - 340px);
     }
 
-    ::v-deep .ztree {
+    ::v-deep  .ztree {
       max-height: calc(90vh - 325px) !important;
     }
 
-    ::v-deep .el-tabs__item.is-active {
+    ::v-deep  .el-tabs__item.is-active {
       border-bottom: none !important;
     }
 
@@ -802,7 +802,7 @@ export default {
 
 }
 
-::v-deep .ztreeNodeMenu {
+::v-deep  .ztreeNodeMenu {
   ul {
     background-color: var(--db-background-1);
   }

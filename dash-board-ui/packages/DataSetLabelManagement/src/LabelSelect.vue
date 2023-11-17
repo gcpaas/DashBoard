@@ -544,12 +544,12 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/style/bsTheme.scss';
 .db-pagination {
-  ::v-deep .el-input__inner {
+  ::v-deep  .el-input__inner {
     border: none;
     background: var(--db-el-background-1);
   }
 }
-// ::v-deep .el-dialog__footer{
+// ::v-deep  .el-dialog__footer{
 //   padding: 0;
 //   margin-top: 16px;
 // }

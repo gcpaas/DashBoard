@@ -30,14 +30,14 @@
   display: none;
 }
 
-::v-deep .el-input__icon {
+::v-deep  .el-input__icon {
   line-height: 30px;
 }
 
 .scrollInSelect {
   height: calc(100vh - 480px);
 
-  ::v-deep .el-scrollbar__wrap {
+  ::v-deep  .el-scrollbar__wrap {
     margin-bottom: 0 !important;
     overflow-x: auto;
   }
@@ -45,7 +45,7 @@
   .ztree {
     height: 100%;
     padding: 0;
-    ::v-deep li a.curSelectedNode {
+    ::v-deep  li a.curSelectedNode {
       color: var(--db-el-color-primary);
       text-decoration: none;
     }

@@ -211,7 +211,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/style/settingWrap.scss';
 .db-setting-wrap {
-  ::v-deep .el-form-item{
+  ::v-deep  .el-form-item{
     margin-bottom: 14px!important
   }
   .setting-inner-wrap {
@@ -244,7 +244,7 @@ export default {
     width: 100%;
   }
 
-  ::v-deep.el-button--primary  {
+  ::v-deep .el-button--primary  {
     span {
       margin: 0 auto;
     }

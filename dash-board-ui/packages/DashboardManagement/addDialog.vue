@@ -366,13 +366,19 @@ export default {
     // 跳转设计态
     toDesign (form) {
       // eslint-disable-next-line no-case-declarations
-      const { href: bigScreenHref } = this.$router.resolve({
+      // const { href: bigScreenHref } = this.$router.resolve({
+      //   path: window.DS_CONFIG?.routers?.designUrl || '/dashboard/design',
+      //   query: {
+      //     code: form.code
+      //   }
+      // })
+      // window.open(bigScreenHref, '_self')
+      this.$router.push({
         path: window.DS_CONFIG?.routers?.designUrl || '/dashboard/design',
         query: {
           code: form.code
         }
       })
-      window.open(bigScreenHref, '_self')
     },
     // 得到模板列表
     getTemplateList (type) {
@@ -389,7 +395,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-::v-deep .el-dialog__body {
+::v-deep  .el-dialog__body {
   overflow-y: auto;
 }
 
@@ -397,7 +403,7 @@ export default {
   height: 300px;
   overflow-x: hidden;
 
-  ::v-deep .el-scrollbar__view {
+  ::v-deep  .el-scrollbar__view {
     overflow-x: hidden;
   }
 }
@@ -426,7 +432,7 @@ export default {
     position: relative;
   }
 
-  ::v-deep .el-color-picker__trigger {
+  ::v-deep  .el-color-picker__trigger {
     top: 0;
     right: 0;
     width: 21px;
@@ -530,19 +536,19 @@ export default {
     cursor: pointer;
   }
 
-  ::v-deep.el-radio__label {
+  ::v-deep .el-radio__label {
     display: none;
   }
 }
 
 /*滚动条样式*/
-::v-deep::-webkit-scrollbar {
+::v-deep ::-webkit-scrollbar {
   width: 6px;
   border-radius: 4px;
   height: 4px;
 }
 
-::v-deep::-webkit-scrollbar-thumb {
+::v-deep ::-webkit-scrollbar-thumb {
   background: #dddddd !important;
   border-radius: 10px;
 }

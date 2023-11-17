@@ -844,10 +844,10 @@ export default {
   .form {
     padding: 12px;
   }
-  ::v-deep .el-tag__close.el-icon-close::before {
+  ::v-deep  .el-tag__close.el-icon-close::before {
     color: #fff;
   }
-  ::v-deep .el-tag__close.el-icon-close {
+  ::v-deep  .el-tag__close.el-icon-close {
     top: -1px;
     &:hover {
       background-color:var(--db-el-color-primary);

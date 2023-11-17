@@ -476,13 +476,13 @@ export default {
           margin-right: 16px;
         }
 
-        ::v-deep .el-select {
+        ::v-deep  .el-select {
           width: 150px !important;
         }
       }
     }
 
-    ::v-deep .el-loading-mask {
+    ::v-deep  .el-loading-mask {
       background-color: transparent !important;
     }
     // 移动端样式
@@ -518,12 +518,12 @@ export default {
         }
       }
     }
-    ::v-deep::-webkit-scrollbar {
+    ::v-deep ::-webkit-scrollbar {
       width: 8px;
       border-radius: 8px;
       height: 8px;
     }
-    ::v-deep::-webkit-scrollbar-thumb {
+    ::v-deep ::-webkit-scrollbar-thumb {
       background: #dddddd;
       border-radius: 10px;
     }
