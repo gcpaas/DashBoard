@@ -104,7 +104,6 @@ function arrCompare (list1, list2) {
     // 如果存在交集
     if (fieldList.includes(item.field)) {
       // 保留旧数据的value
-      // console.log(list1.filter(j => j.field === item.field))
       value = (list1.filter(j => {
         return j.field === item.field
       }))[0].value

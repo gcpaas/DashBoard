@@ -1035,7 +1035,6 @@ export default {
      * @param fieldDescMap 字段描述
      */
     getPreViewData (fieldDescMap) {
-      console.log('获取数据预览')
       this.dataPreviewList = []
       this.structurePreviewList = []
       this.structurePreviewListCopy = []

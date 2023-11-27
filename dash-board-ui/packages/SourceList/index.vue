@@ -104,7 +104,10 @@
                 </div>
               </div>
             </div>
-            <div v-if="imgExtends.includes(screen.extension)" class="big-screen-card-img">
+            <div
+              v-if="imgExtends.includes(screen.extension)"
+              class="dashboard-card-img"
+            >
               <el-image
                 :src="getCoverPicture(screen.url)"
                 fit="contain"
@@ -118,7 +121,10 @@
                 </div>
               </el-image>
             </div>
-            <div v-else class="dashboard-card-img">
+            <div
+              v-else
+              class="dashboard-card-img"
+            >
               <el-image
                 :src="getUrl(screen)"
                 fit="contain"
@@ -244,8 +250,8 @@ export default {
     this.getDataList()
   },
   methods: {
-    getUrl(file) {
-      let extension = file.extension
+    getUrl (file) {
+      const extension = file.extension
       if (this.otherExtends.video.includes(extension)) {
         return require('./images/video.svg')
       }
@@ -298,8 +304,8 @@ export default {
     },
     getOptions () {
       this.options = []
-      this.options.push({label: '全部', value: ''})
-      this.sourceExtends.forEach((ext) => this.options.push({label: ext, value: ext}))
+      this.options.push({ label: '全部', value: '' })
+      this.sourceExtends.forEach((ext) => this.options.push({ label: ext, value: ext }))
     },
     getDataList () {
       this.loading = true
@@ -516,9 +522,32 @@ export default {
           font-size: 24px;
         }
 
-        .dashboard-card-img {
+        .dashboard-card-img  {
           width: 100%;
-          height: 180px;
+          height: 180px !important;
+
+          img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+          }
+
+          ::v-deep .image-slot {
+            height: 100%;
+            background-color: var(--db-background-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          ::v-deep .el-image__error {
+            // background-color: #1d1d1d;
+          }
+        }
+
+        .dashboard-card-img  {
+          width: 100%;
+          height: 180px !important;
 
           img {
             width: 100%;

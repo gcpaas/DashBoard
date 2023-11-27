@@ -972,7 +972,6 @@ export default {
       this.dataForm.config.paramsList = val
     },
     saveNewParams (val) {
-      console.log(val)
       this.newParamsList = val
     },
     // 取消操作

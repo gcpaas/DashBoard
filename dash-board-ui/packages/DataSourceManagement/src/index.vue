@@ -257,7 +257,6 @@ export default {
       // eslint-disable-next-line eqeqeq
       if (row.editable == 1 && !this.appCode) return
       row.loading=true
-      console.log(row.loading)
       dataSourceCheck(row.id).then((res)=>{
         row.loading=false
         if(res.canDelete){

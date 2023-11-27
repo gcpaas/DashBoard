@@ -34,13 +34,11 @@ export default function axiosFormatting (customConfig) {
   /** 添加响应拦截器  **/
   instance.interceptors.response.use(response => {
     const resp = response.data
-    console.log('resp', resp)
     // 执行响应脚本
     // eslint-disable-next-line no-new-func
     if (newCustomConfig.responseScript) {
       const getResp = new Function('resp', newCustomConfig.responseScript)
       const res = getResp(resp)
-      console.log('resp', res)
       return Promise.resolve(res)
     } else {
       return Promise.resolve(resp)

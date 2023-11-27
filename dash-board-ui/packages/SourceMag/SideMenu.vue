@@ -129,7 +129,6 @@ export default {
         name: value,
         type: 'resourceCatalog'
       }, true).then((r) => {
-        console.log(r)
         if (r.data) {
           callback(new Error('分组名称已存在'))
         } else {

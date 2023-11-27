@@ -87,7 +87,7 @@ export default {
                 })
                 // eslint-disable-next-line no-new-func
                 const scriptMethod = new Function(scriptAfterReplacement)
-                data.data = scriptMethod()
+                _res.data = scriptMethod()
               } catch (error) {
                 console.error('数据集脚本执行失败', error)
               }
@@ -96,7 +96,7 @@ export default {
           config = this.dataFormatting(config, _res)
           this.changeChartConfig(config)
         }).catch((err) => {
-          console.log(err)
+          console.info(err)
         }).finally(() => {
           resolve(config)
         })
@@ -137,7 +137,7 @@ export default {
                 })
                 // eslint-disable-next-line no-new-func
                 const scriptMethod = new Function(scriptAfterReplacement)
-                data.data = scriptMethod()
+                _res.data = scriptMethod()
               } catch (error) {
                 console.error('数据集脚本执行失败', error)
               }
@@ -154,7 +154,7 @@ export default {
             }
           }
         }).catch(err => {
-          console.log(err)
+          console.info(err)
         }).finally(() => {
           resolve(config)
         })
