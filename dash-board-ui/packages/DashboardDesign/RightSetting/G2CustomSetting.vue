@@ -45,6 +45,7 @@
                   popper-class="db-el-select"
                   class="db-el-select"
                   :placeholder="`请选择${setting.label}`"
+                  :filterable="setting.filterable"
                   clearable
                 >
                   <el-option
