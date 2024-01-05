@@ -968,7 +968,7 @@ export default {
      * 选中原始表
      * @param value
      */
-    async setTable(value) {
+    async setTable (value) {
       this.fieldList = []
       if (!this.dataForm.tableName) {
         this.dataForm.fieldInfo = []
@@ -978,7 +978,7 @@ export default {
       // dataForm.fieldInfo的清空会触发监听事件，如果在queryAllField之前清空，会导致监听事件中的getPreViewData方法获取不到fieldList
       this.dataForm.fieldInfo = []
     },
-    queryAllField() {
+    queryAllField () {
       return new Promise((resolve, reject) => {
         getTableFieldList(this.dataForm.sourceId, this.dataForm.tableName)
           .then((data) => {
@@ -1086,10 +1086,13 @@ export default {
               }
               this.$set(item, 'fieldDesc', fieldDesc)
               // this.structurePreviewList 和 this.oldStructurePreviewList 比较，如果旧的数据里fieldDesc有值则重新赋值给新的数据
-              this.structurePreviewList.forEach(item => {
-                const oldItem = this.oldStructurePreviewList.find(oldItem => oldItem.fieldName === item.fieldName)
-                if (oldItem && oldItem.fieldDesc) {
-                  item.fieldDesc = oldItem.fieldDesc
+              this.structurePreviewList = this.oldStructurePreviewList.map(oldItem => {
+                const data = this.structurePreviewList.find(item => oldItem.fieldName === item.fieldName)
+                if (data) {
+                  return {
+                    ...oldItem,
+                    fieldDesc: oldItem.fieldDesc
+                  }
                 }
               })
             }

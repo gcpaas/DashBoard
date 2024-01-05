@@ -1286,12 +1286,15 @@ export default {
         if (this.dataForm.fieldList == null) {
           this.dataForm.fieldList = _.cloneDeep(res.structure)
         }
-        this.structurePreviewList.forEach(field => {
-          const fieldInfo = this.dataForm.fieldList.find(item => item.fieldName === field.fieldName)
+        this.structurePreviewList = this.dataForm.fieldList.map(field => {
+          const fieldInfo = this.structurePreviewList.find(item => item.fieldName === field.fieldName)
           if (fieldInfo) {
-            field.fieldDesc = fieldInfo.fieldDesc
-            field.orderNum = fieldInfo.orderNum
-            field.sourceTable = fieldInfo.sourceTable
+            return {
+              ...field,
+              fieldDesc: fieldInfo.fieldDesc,
+              orderNum: fieldInfo.orderNum,
+              sourceTable: fieldInfo.sourceTable
+            }
           }
         })
         this.structurePreviewList.forEach(item => {
