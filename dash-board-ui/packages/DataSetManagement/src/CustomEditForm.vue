@@ -1286,15 +1286,18 @@ export default {
         if (this.dataForm.fieldList == null) {
           this.dataForm.fieldList = _.cloneDeep(res.structure)
         }
-        this.structurePreviewList = this.dataForm.fieldList.map(field => {
-          const fieldInfo = this.structurePreviewList.find(item => item.fieldName === field.fieldName)
+        this.structurePreviewList.forEach(field => {
+          const fieldInfo = this.dataForm.fieldList.find(item => item.fieldName === field.fieldName)
           if (fieldInfo) {
-            return {
-              ...field,
-              fieldDesc: field.fieldDesc,
-              orderNum: field.orderNum,
-              sourceTable: field.sourceTable
-            }
+            const { fieldDesc, orderNum, sourceTable, ...rest } = fieldInfo
+            field.fieldDesc = fieldDesc
+            field.orderNum = orderNum
+            field.sourceTable = sourceTable
+            Object.keys(rest).forEach(key => {
+              if (!field.hasOwnProperty(key)) {
+                this.$set(field, key, rest[key])
+              }
+            })
           }
         })
         this.structurePreviewList.forEach(item => {
