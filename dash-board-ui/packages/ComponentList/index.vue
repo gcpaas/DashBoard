@@ -203,7 +203,7 @@ import innerRemoteComponents, { getRemoteComponents } from 'dashPackages/RemoteC
 import { getFileUrl } from 'dashPackages/js/utils/file'
 
 export default {
-  name: 'BigScreenList',
+  name: 'ComponentList',
   mixins: [pageMixins],
   props: {
     catalogInfo: {

@@ -166,7 +166,7 @@ import EditForm from './EditForm.vue'
 import { getFileUrl } from 'dashPackages/js/utils/file'
 
 export default {
-  name: 'BigScreenList',
+  name: 'DashboardList',
   mixins: [pageMixins],
   props: {
     type: {

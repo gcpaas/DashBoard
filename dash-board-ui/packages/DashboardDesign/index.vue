@@ -121,7 +121,7 @@ import AppDashBoard from 'dashPackages/DashboardAppRun/index.vue'
 import { EventBus } from 'dashPackages/js/utils/eventBus'
 import NotPermission from 'dashPackages/NotPermission'
 export default {
-  name: 'BigScreenDesign',
+  name: 'DashboardDesign',
   components: {
     PageTopSetting,
     LeftPanel,
