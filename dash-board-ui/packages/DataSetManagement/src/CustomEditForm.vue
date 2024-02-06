@@ -184,6 +184,37 @@
               </el-col>
               <el-col :span="12">
                 <el-form-item
+                  label="语法类型"
+                  prop="syntaxType"
+                >
+                  <el-radio-group
+                    v-model="dataForm.syntaxType"
+                    class="bs-el-radio-group"
+                  >
+                    <el-radio label="normal">
+                      普通
+                    </el-radio>
+                    <el-radio label="mybatis">
+                      Mybatis
+                    </el-radio>
+                  </el-radio-group>
+                  <el-tooltip
+                    class="item"
+                    effect="light"
+                    content="Mybatis类型可使用动态标签来处理sql，如if、choose、where，具体用法可参考示例"
+                    placement="top"
+                  >
+                    <i
+                      class="el-icon-warning-outline"
+                      style="color: #E3C98C;margin-left: 16px;font-size:14px"
+                    />
+                  </el-tooltip>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row :gutter="20">
+              <el-col :span="12">
+                <el-form-item
                   label="标签"
                   prop="labelIds"
                 >
@@ -207,10 +238,41 @@
                 :options="cOptions"
                 style="margin-top: 2px;border: 1px solid rgb(232, 232, 232);"
               />
-              <div class="db-codemirror-bottom-text">
+              <div
+                v-if="dataForm.syntaxType === 'mybatis'"
+                class="bs-codemirror-bottom-text"
+              >
                 示例：
                 <strong><br>
-                  1、常规使用 select * from table where table_field = <span style="color: red;">${参数名称}</span><br>
+                  1、常规使用
+                  <el-tooltip
+                    class="item"
+                    effect="dark"
+                    content="${参数名称}会将参数值直接填充到sql中，#{参数名称}会将参数值进行转义（比如字符串类型会添加''）后填充到sql中"
+                    placement="top-start"
+                  ><i class="el-icon-question" />
+                  </el-tooltip>
+                  select * from table where table_field = <span style="color: #CC7832;">${参数名称}</span> ( 或 <span style="color: #CC7832;">#{参数名称}</span> )<br>
+                  2、条件判断
+                  <el-tooltip
+                    class="item"
+                    effect="dark"
+                    content="支持Mybatis的所有动态标签，如if、choose、where等，具体用法请参考Mybatis官方文档"
+                    placement="top-start"
+                  ><i class="el-icon-question" />
+                  </el-tooltip>
+                  select * from table where 1=1 <span style="color: #2F67A7;">&lt;if test="参数名称 != null and 参数名称 !=''"&gt;</span> and table_field = <span
+                    style="color: #CC7832;"
+                  >${参数名称}</span> <span style="color: #2F67A7;">&lt;/if&gt;</span>
+                </strong>
+              </div>
+              <div
+                v-else
+                class="bs-codemirror-bottom-text"
+              >
+                示例：
+                <strong><br>
+                  1、常规使用 select * from table where table_field = <span style="color: #CC7832;">${参数名称}</span><br>
                   2、标签使用
                   <el-tooltip
                     class="item"
@@ -219,9 +281,9 @@
                     placement="top-start"
                   ><i class="el-icon-question" />
                   </el-tooltip>
-                  select * from table where 1=1 <span style="color: blue;">&lt;参数名称&gt;</span> and table_field = <span
-                    style="color: red;"
-                  >${参数名称}</span> <span style="color: blue;">&lt;/参数名称&gt;</span>
+                  select * from table where 1=1 <span style="color: #2F67A7;">&lt;参数名称&gt;</span> and table_field = <span
+                    style="color: #CC7832;"
+                  >${参数名称}</span> <span style="color: #2F67A7;">&lt;/参数名称&gt;</span>
                 </strong>
               </div>
             </div>
@@ -855,7 +917,8 @@ export default {
         fieldDesc: {},
         fieldList: [],
         script: '',
-        cacheCoherence: null
+        cacheCoherence: null,
+        syntaxType: 'normal'
       },
       rules: {
         name: [
@@ -982,6 +1045,7 @@ export default {
         this.dataForm.fieldDesc = res.config.fieldDesc
         this.dataForm.fieldList = res.config.fieldList
         this.dataForm.cacheCoherence = res.config.cacheCoherence
+        this.dataForm.syntaxType = res.config.syntaxType ? res.config.syntaxType : 'normal'
         // 使用传入的数据集名称 ？
         this.dataForm.name = this.datasetName
         this.paramsListCopy = _.cloneDeep(this.dataForm.paramsList)
@@ -1189,7 +1253,8 @@ export default {
             sqlProcess: this.dataForm.sqlProcess,
             paramsList: this.dataForm.paramsList,
             fieldList: this.dataForm.fieldList,
-            fieldDesc: this.dataForm.fieldDesc
+            fieldDesc: this.dataForm.fieldDesc,
+            syntaxType: this.dataForm.syntaxType,
           }
         }
         datasetSave(datasetParams).then(res => {
@@ -1212,8 +1277,13 @@ export default {
      */
     buildParamsAndRun () {
       this.isTest = true
+      // 匹配 ${}
       const reg = /\${(.*?)}/g
-      const paramNames = [...new Set([...this.dataForm.sqlProcess.matchAll(reg)].map(item => item[1]))]
+      let paramNames = [...new Set([...this.dataForm.sqlProcess.matchAll(reg)].map(item => item[1]))]
+      // 匹配 #{}
+      const reg2 = /#{(.*?)}/g
+      const paramNames2 = [...new Set([...this.dataForm.sqlProcess.matchAll(reg2)].map(item => item[1]))]
+      paramNames.push(...paramNames2)
       const names = this.dataForm.paramsList.map(item => item.name)
       const params = []
       paramNames.forEach(name => {
@@ -1271,6 +1341,7 @@ export default {
         script: this.dataForm.sqlProcess,
         params: this.dataForm.paramsList,
         dataSetType: 'custom',
+        syntaxType: this.dataForm.syntaxType,
         size: this.size,
         current: this.current
       }
@@ -1325,7 +1396,7 @@ export default {
           const checkList = this.structurePreviewList.filter(item => item.fieldName === param.name)
           if (checkList.length) {
             paramsNameCheck = true
-            param.name = ''
+            // param.name = ''
           }
         })
         if (paramsNameCheck) {
