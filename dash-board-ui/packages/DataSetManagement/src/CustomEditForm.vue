@@ -868,6 +868,7 @@ import 'codemirror/mode/sql/sql.js'
 import 'codemirror/theme/eclipse.css'
 import 'codemirror/lib/codemirror.css'
 import _ from 'lodash'
+import { log } from '@antv/g2plot/lib/utils'
 export default {
   name: 'CustomEditForm',
   components: {
@@ -1263,7 +1264,7 @@ export default {
             paramsList: this.dataForm.paramsList,
             fieldList: this.dataForm.fieldList,
             fieldDesc: this.dataForm.fieldDesc,
-            syntaxType: this.dataForm.syntaxType,
+            syntaxType: this.dataForm.syntaxType
           }
         }
         datasetSave(datasetParams).then(res => {
@@ -1285,13 +1286,15 @@ export default {
      * 解析并运行数据集
      */
     buildParamsAndRun () {
+      console.log('11', this.dataForm.paramsList)
       this.isTest = true
       // 匹配 ${}
       const reg = /\${(.*?)}/g
-      let paramNames = [...new Set([...this.dataForm.sqlProcess.matchAll(reg)].map(item => item[1]))]
+      const paramNames = [...new Set([...this.dataForm.sqlProcess.matchAll(reg)].map(item => item[1]))]
       // 匹配 #{}
       const reg2 = /#{(.*?)}/g
       const paramNames2 = [...new Set([...this.dataForm.sqlProcess.matchAll(reg2)].map(item => item[1]))]
+      console.log('paramNames', paramNames)
       paramNames.push(...paramNames2)
       const names = this.dataForm.paramsList.map(item => item.name)
       const params = []
@@ -1310,7 +1313,7 @@ export default {
           })
         }
       })
-      this.dataForm.paramsList = _.cloneDeep(params)
+      this.dataForm.paramsList = [..._.cloneDeep(params), ...this.dataForm.paramsList]
       this.paramsListCopy = _.cloneDeep(this.dataForm.paramsList)
       if (this.dataForm.paramsList.length) {
         this.paramsVisible = true
@@ -1344,7 +1347,7 @@ export default {
         this.current = 1
       }
       this.saveLoading = true
-
+      console.log(this.dataForm.paramsList)
       const executeParams = {
         dataSourceId: this.dataForm.sourceId,
         script: this.dataForm.sqlProcess,
