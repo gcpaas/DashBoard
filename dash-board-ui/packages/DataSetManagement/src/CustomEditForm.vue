@@ -717,7 +717,16 @@
               prop="name"
               label="参数名称"
               align="center"
-            />
+            >
+              <template slot-scope="scope">
+                <el-input
+                  v-model="scope.row.name"
+                  class="db-el-input"
+                  placeholder="请输入名称"
+                  clearable
+                />
+              </template>
+            </el-table-column>
             <el-table-column
               prop="type"
               label="参数类型"
