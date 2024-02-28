@@ -1294,7 +1294,6 @@ export default {
       // 匹配 #{}
       const reg2 = /#{(.*?)}/g
       const paramNames2 = [...new Set([...this.dataForm.sqlProcess.matchAll(reg2)].map(item => item[1]))]
-      console.log('paramNames', paramNames)
       paramNames.push(...paramNames2)
       const names = this.dataForm.paramsList.map(item => item.name)
       const params = []
@@ -1314,6 +1313,7 @@ export default {
         }
       })
       this.dataForm.paramsList = [..._.cloneDeep(params), ...this.dataForm.paramsList]
+      this.dataForm.paramsList = this.dataForm.paramsList?.filter((obj, index) => this.dataForm.paramsList?.findIndex(item => item.name === obj.name) === index)
       this.paramsListCopy = _.cloneDeep(this.dataForm.paramsList)
       if (this.dataForm.paramsList.length) {
         this.paramsVisible = true
