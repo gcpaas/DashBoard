@@ -1404,15 +1404,18 @@ export default {
         }
         this.structurePreviewListCopy = _.cloneDeep(this.structurePreviewList)
         let paramsNameCheck = false
+        let checkList = []
         this.dataForm.paramsList.forEach(param => {
-          const checkList = this.structurePreviewList.filter(item => item.fieldName === param.name)
-          if (checkList.length) {
-            paramsNameCheck = true
-            // param.name = ''
-          }
+          const list = this.structurePreviewList.filter(item => item.fieldName === param.name)?.map(i => i.fieldName)
+          checkList = [...checkList, ...list]
         })
+        if (checkList.length) {
+          paramsNameCheck = true
+          // param.name = ''
+        }
         if (paramsNameCheck) {
-          this.$message.warning('参数名称不可以与字段名相同！')
+          const str = checkList.join('、')
+          this.$message.warning(`参数名称${str}与字段名相同,请重新命名！`)
           this.passTest = false
         } else {
           if (val) this.$message.success('运行成功')
