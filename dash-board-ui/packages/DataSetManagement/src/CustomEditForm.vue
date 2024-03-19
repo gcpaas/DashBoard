@@ -717,7 +717,16 @@
               prop="name"
               label="参数名称"
               align="center"
-            />
+            >
+              <template slot-scope="scope">
+                <el-input
+                  v-model="scope.row.name"
+                  class="db-el-input"
+                  placeholder="请输入名称"
+                  clearable
+                />
+              </template>
+            </el-table-column>
             <el-table-column
               prop="type"
               label="参数类型"
@@ -859,6 +868,7 @@ import 'codemirror/mode/sql/sql.js'
 import 'codemirror/theme/eclipse.css'
 import 'codemirror/lib/codemirror.css'
 import _ from 'lodash'
+import { log } from '@antv/g2plot/lib/utils'
 export default {
   name: 'CustomEditForm',
   components: {
@@ -1254,7 +1264,7 @@ export default {
             paramsList: this.dataForm.paramsList,
             fieldList: this.dataForm.fieldList,
             fieldDesc: this.dataForm.fieldDesc,
-            syntaxType: this.dataForm.syntaxType,
+            syntaxType: this.dataForm.syntaxType
           }
         }
         datasetSave(datasetParams).then(res => {
@@ -1276,10 +1286,11 @@ export default {
      * 解析并运行数据集
      */
     buildParamsAndRun () {
+      console.log('11', this.dataForm.paramsList)
       this.isTest = true
       // 匹配 ${}
       const reg = /\${(.*?)}/g
-      let paramNames = [...new Set([...this.dataForm.sqlProcess.matchAll(reg)].map(item => item[1]))]
+      const paramNames = [...new Set([...this.dataForm.sqlProcess.matchAll(reg)].map(item => item[1]))]
       // 匹配 #{}
       const reg2 = /#{(.*?)}/g
       const paramNames2 = [...new Set([...this.dataForm.sqlProcess.matchAll(reg2)].map(item => item[1]))]
@@ -1301,7 +1312,8 @@ export default {
           })
         }
       })
-      this.dataForm.paramsList = _.cloneDeep(params)
+      this.dataForm.paramsList = [..._.cloneDeep(params), ...this.dataForm.paramsList]
+      this.dataForm.paramsList = this.dataForm.paramsList?.filter((obj, index) => this.dataForm.paramsList?.findIndex(item => item.name === obj.name) === index)
       this.paramsListCopy = _.cloneDeep(this.dataForm.paramsList)
       if (this.dataForm.paramsList.length) {
         this.paramsVisible = true
@@ -1335,7 +1347,7 @@ export default {
         this.current = 1
       }
       this.saveLoading = true
-
+      console.log(this.dataForm.paramsList)
       const executeParams = {
         dataSourceId: this.dataForm.sourceId,
         script: this.dataForm.sqlProcess,
@@ -1392,15 +1404,18 @@ export default {
         }
         this.structurePreviewListCopy = _.cloneDeep(this.structurePreviewList)
         let paramsNameCheck = false
+        let checkList = []
         this.dataForm.paramsList.forEach(param => {
-          const checkList = this.structurePreviewList.filter(item => item.fieldName === param.name)
-          if (checkList.length) {
-            paramsNameCheck = true
-            // param.name = ''
-          }
+          const list = this.structurePreviewList.filter(item => item.fieldName === param.name)?.map(i => i.fieldName)
+          checkList = [...checkList, ...list]
         })
+        if (checkList.length) {
+          paramsNameCheck = true
+          // param.name = ''
+        }
         if (paramsNameCheck) {
-          this.$message.warning('参数名称不可以与字段名相同！')
+          const str = checkList.join('、')
+          this.$message.warning(`参数名称${str}与字段名相同,请重新命名！`)
           this.passTest = false
         } else {
           if (val) this.$message.success('运行成功')
