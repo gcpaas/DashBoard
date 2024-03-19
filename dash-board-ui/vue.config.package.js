@@ -34,7 +34,7 @@ module.exports = {
       'tiny-sass-compiler': 'tiny-sass-compiler',
       'vue-codemirror': 'vue-codemirror',
       'vue-contextmenujs': 'vue-contextmenujs',
-      'vue-json-editor': 'vue-json-editor',
+      'vue-json-editor-fix-cn': 'vue-json-editor-fix-cn',
       'vue-json-viewer': 'vue-json-viewer',
       'vue-quill-editor': 'vue-quill-editor',
       vuedraggable: 'vuedraggable',

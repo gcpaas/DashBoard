@@ -137,8 +137,8 @@ module.exports = {
           priority: 10 // 优化将优先考虑具有更高 priority（优先级）的缓存组
         },
         vueJsonEditor: {
-          name: 'vue-json-editor',
-          test: /[\\/]vue-json-editor[\\/]/,
+          name: 'vue-json-editor-fix-cn',
+          test: /[\\/]vue-json-editor-fix-cn[\\/]/,
           chunks: 'all',
           priority: 10 // 优化将优先考虑具有更高 priority（优先级）的缓存组
         },

@@ -340,7 +340,7 @@
 
 <script>
 import LabelSelect from 'dashPackages/DataSetLabelManagement/src/LabelSelect.vue'
-import vueJsonEditor from 'vue-json-editor'
+import vueJsonEditor from 'vue-json-editor-fix-cn'
 import vueJsonViewer from 'vue-json-viewer'
 import { getCategoryTree, datasetAdd, datasetUpdate, getDataset, nameCheckRepeat } from 'dashPackages/js/utils/datasetConfigService'
 import _ from 'lodash'
