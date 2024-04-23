@@ -1286,7 +1286,6 @@ export default {
      * 解析并运行数据集
      */
     buildParamsAndRun () {
-      console.log('11', this.dataForm.paramsList)
       this.isTest = true
       // 匹配 ${}
       const reg = /\${(.*?)}/g
@@ -1347,7 +1346,7 @@ export default {
         this.current = 1
       }
       this.saveLoading = true
-      console.log(this.dataForm.paramsList)
+
       const executeParams = {
         dataSourceId: this.dataForm.sourceId,
         script: this.dataForm.sqlProcess,
@@ -1357,18 +1356,18 @@ export default {
         size: this.size,
         current: this.current
       }
+      // 暂存上一次修改的字段描述
+      let structureDesc = {}
+      structureDesc = this.structurePreviewList.reduce((acc, cur) => {
+        if (cur.fieldDesc) {
+          acc[cur.fieldName] = cur.fieldDesc
+        }
+        return acc
+      }, {})
       datasetExecuteTest(executeParams).then(res => {
         this.dataPreviewList = res.data.list
         this.structurePreviewList = res.structure
-        if (this.dataPreviewList.length != 0) {
-          this.structurePreviewList = []
-          Object.keys(this.dataPreviewList[0]).forEach(item => {
-            this.structurePreviewList.push(res.structure.filter(x => x.fieldName == item)[0])
-          })
-        }
-        if (this.dataForm.fieldList == null) {
-          this.dataForm.fieldList = _.cloneDeep(res.structure)
-        }
+        // 输出字段描述合并
         this.structurePreviewList.forEach(field => {
           const fieldInfo = this.dataForm.fieldList.find(item => item.fieldName === field.fieldName)
           if (fieldInfo) {
@@ -1381,6 +1380,9 @@ export default {
                 this.$set(field, key, rest[key])
               }
             })
+          }
+          if (structureDesc[field.fieldName]) {
+            field.fieldDesc = structureDesc[field.fieldName]
           }
         })
         this.structurePreviewList.forEach(item => {
@@ -1402,23 +1404,22 @@ export default {
             item.sourceTable = this.tableNameList[0]
           })
         }
-        this.structurePreviewListCopy = _.cloneDeep(this.structurePreviewList)
-        let paramsNameCheck = false
-        let checkList = []
-        this.dataForm.paramsList.forEach(param => {
-          const list = this.structurePreviewList.filter(item => item.fieldName === param.name)?.map(i => i.fieldName)
-          checkList = [...checkList, ...list]
+        this.structurePreviewListCopy = _.cloneDeep(this.structurePreviewList).sort((a, b) => {
+          return a.orderNum - b.orderNum
         })
-        if (checkList.length) {
-          paramsNameCheck = true
-          // param.name = ''
-        }
+        let paramsNameCheck = false
+        this.dataForm.paramsList.forEach(param => {
+          const checkList = this.structurePreviewList.filter(item => item.fieldName === param.name)
+          if (checkList.length) {
+            paramsNameCheck = true
+            // param.name = ''
+          }
+        })
         if (paramsNameCheck) {
-          const str = checkList.join('、')
-          this.$message.warning(`参数名称${str}与字段名相同,请重新命名！`)
+          this.$message.warning('参数名称不可以与字段名相同！')
           this.passTest = false
         } else {
-          if (val) this.$message.success('运行成功')
+          if (val) this.$message.success('脚本执行通过')
           this.exception = ''
           this.msg = ''
           this.passTest = true
