@@ -124,12 +124,13 @@ export default {
         this.linkage(formData)
       })
     },
-    // 将config.setting的配置转化为option里的配置，这里之所以将转化的方法提出来，是因为在改变维度指标和样式的时候都需要转化
     transformSettingToOption (config, type) {
       let option = null
       config.setting.forEach(set => {
         if (set.optionField) {
+          // 例 point.style.fill
           const optionField = set.optionField.split('.')
+          // 例 [point,style,fill]
           option = config.option
           optionField.forEach((field, index) => {
             if (index === optionField.length - 1) {
@@ -138,12 +139,15 @@ export default {
                 option[field] = set.value
               }
             } else {
+              // 如果没有这个属性，则创建该属性，并赋值为空对值
+              if (!option[field]) {
+                option[field] = {}
+              }
               option = option[field]
             }
           })
         }
       })
-      config.option = option
       return config
     },
     dataFormatting (config, data) {
