@@ -156,6 +156,11 @@ public interface PageDesignConstant {
              */
             String BIG_NUMBER = "bigNumber";
 
+            /**
+             * K线图
+             */
+            String K_LINE = "kLine";
+
         }
     }
 
