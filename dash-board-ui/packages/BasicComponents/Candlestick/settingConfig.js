@@ -16,21 +16,6 @@ export const settingConfig = {
     },
     headerField: {
       enable: false
-    },
-    mapField: {
-      enable: true
-    },
-    metricField: {
-      // 指标
-      label: '维度',
-      enable: false,
-      multiple: false // 是否多选
-    },
-    dimensionField: {
-      // 表格列
-      label: '展示字段', // 维度/查询字段
-      enable: false,
-      multiple: false // 是否多选
     }
   }
 }
@@ -130,7 +115,7 @@ export const candlestickData = {
   icon: Icon.getNameList()[18],
   border: { type: '', titleHeight: 60, fontSize: 16, isTitle: true, padding: [0, 0, 0, 0] },
   className:
-    'com.gccloud.dataroom.core.module.chart.components.ScreenMapChart',
+    'com.gccloud.dashboard.core.module.chart.components.DashboardCandlestickChart',
   w: 12,
   h: 10,
   x: 0,
@@ -141,5 +126,13 @@ export const candlestickData = {
   },
   setting: undefined, // 右侧面板自定义配置
   dataHandler: {}, // 数据自定义处理js脚本
-  ...cloneDeep(dataConfig)
+  ...cloneDeep(dataConfig),
+  dataSource: {
+    ...cloneDeep(dataConfig.dataSource),
+    xField: '',
+    openField: '',
+    closeField: '',
+    lowField: '',
+    highField: ''
+  }
 }

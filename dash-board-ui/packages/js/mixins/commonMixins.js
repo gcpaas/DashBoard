@@ -153,6 +153,9 @@ export default {
               this.chart.changeData(config.option.data)
             }
           }
+          if (this.config.type === 'candlestick' && this.charts) {
+            this.updateChartData(config, _res)
+          }
         }).catch(err => {
           console.info(err)
         }).finally(() => {
