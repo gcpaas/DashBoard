@@ -153,7 +153,7 @@ export default {
               this.chart.changeData(config.option.data)
             }
           }
-          if (this.config.type === 'candlestick' && this.charts) {
+          if (['candlestick', 'sankey'].includes(this.config.type) && this.charts) {
             this.updateChartData(config, _res)
           }
         }).catch(err => {

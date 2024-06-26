@@ -6,6 +6,7 @@
 import { dataConfig, settingConfig } from '../PlotRender/settingConfig'
 import { mapData } from 'dashPackages/BasicComponents/Map/settingConfig'
 import { candlestickData } from 'dashPackages/BasicComponents/Candlestick/settingConfig'
+import { sankeyData } from 'dashPackages/BasicComponents/Sankey/settingConfig'
 import _ from 'lodash'
 import sortList from './plotListSort'
 // 遍历 当前文件夹下的所有文件，找到中文.js文件，然后导出
@@ -85,5 +86,5 @@ export function getCustomPlots () {
   return list
 }
 
-const plots = [...plotList, ...customPlots, candlestickData, mapData]
+const plots = [...plotList, ...customPlots, sankeyData, candlestickData, mapData]
 export default plots
