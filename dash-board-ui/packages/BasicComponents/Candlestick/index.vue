@@ -48,7 +48,7 @@ export default {
   },
   mounted () {
     this.chartInit()
-    // 监听窗口大小变化
+    // 监听窗口或者父盒子大小变化
     this.chartResize()
   },
   beforeDestroy () {
