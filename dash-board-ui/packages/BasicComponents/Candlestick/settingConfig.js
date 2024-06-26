@@ -44,26 +44,26 @@ const customConfig = {
     gridWidth: 1,
     xAxis: {
       name: '',
-      nameColor: '#fff',
+      nameColor: 'rgba(140, 140, 140, 1)',
       nameSize: 16,
-      position: 'end',
+      position: 'center',
       tickWidth: 1,
-      tickColor: '#fff',
-      labelColor: '#fff',
+      tickColor: 'rgba(208, 208, 208, 1)',
+      labelColor: 'rgba(140, 140, 140, 1)',
       labelSize: 12,
-      lineColor: '#fff',
+      lineColor: 'rgba(140, 140, 140, 1)',
       lineWidth: 1
     },
     yAxis: {
       name: '',
-      nameColor: '#fff',
+      nameColor: 'rgba(140, 140, 140, 1)',
       nameSize: 16,
-      position: 'end',
+      position: 'center',
       tickWidth: 1,
-      tickColor: '#fff',
-      labelColor: '#fff',
+      tickColor: 'rgba(208, 208, 208, 1)',
+      labelColor: 'rgba(140, 140, 140, 1)',
       labelSize: 12,
-      lineColor: '#fff',
+      lineColor: 'rgba(140, 140, 140, 1)',
       lineWidth: 1
     }
   }
