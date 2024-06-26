@@ -40,7 +40,7 @@ const customConfig = {
     highColor: '#c23531',
     lowColor: '#314656',
     gridShow: true,
-    gridColor: '#314656',
+    gridColor: 'rgba(208, 208, 208, 1)',
     gridWidth: 1,
     left: 50,
     right: 20,
@@ -56,7 +56,7 @@ const customConfig = {
       tickColor: 'rgba(208, 208, 208, 1)',
       labelColor: 'rgba(140, 140, 140, 1)',
       labelSize: 12,
-      lineColor: 'rgba(140, 140, 140, 1)',
+      lineColor: 'rgba(208, 208, 208, 1)',
       lineWidth: 1
     },
     yAxis: {
@@ -69,7 +69,7 @@ const customConfig = {
       tickColor: 'rgba(208, 208, 208, 1)',
       labelColor: 'rgba(140, 140, 140, 1)',
       labelSize: 12,
-      lineColor: 'rgba(140, 140, 140, 1)',
+      lineColor: 'rgba(208, 208, 208, 1)',
       lineWidth: 1
     }
   }
