@@ -228,9 +228,9 @@ export default {
         tooltip: {
           // 显示提示框
           show: true,
-          trigger: 'axis',
+          trigger: 'item',
           axisPointer: {
-            type: 'cross'
+            type: 'line'
           }
         },
         series: [
