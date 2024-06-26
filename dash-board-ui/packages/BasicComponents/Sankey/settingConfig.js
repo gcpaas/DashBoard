@@ -58,7 +58,7 @@ const customConfig = {
     normal: {
       labelPosition: 'right',
       labelColor: 'rgba(140, 140, 140, 1)',
-      labelFontSize: 12,
+      labelSize: 12,
       labelFontWeight: 'normal',
       itemBorderColor: '#aaa',
       itemBorderWidth: 1,
@@ -69,7 +69,7 @@ const customConfig = {
     emphasis: {
       labelPosition: 'right',
       labelColor: 'rgba(140, 140, 140, 1)',
-      labelFontSize: 12,
+      labelSize: 12,
       labelFontWeight: 'bold',
       itemBorderColor: '#aaa',
       itemBorderWidth: 1,
