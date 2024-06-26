@@ -106,6 +106,18 @@
             />
           </el-select>
         </el-form-item>
+        <el-form-item
+          label="标题间距"
+          label-width="100px"
+        >
+          <el-input-number
+            v-model="config.customize.xAxis.nameGap"
+            class="bs-el-input-number"
+            placeholder="请输入标题间距"
+            :min="0"
+            clearable
+          />
+        </el-form-item>
 
         <el-form-item
           label="标题字体大小"
@@ -228,6 +240,19 @@
         </el-form-item>
 
         <el-form-item
+          label="标题间距"
+          label-width="100px"
+        >
+          <el-input-number
+            v-model="config.customize.yAxis.nameGap"
+            class="bs-el-input-number"
+            placeholder="请输入标题间距"
+            :min="0"
+            clearable
+          />
+        </el-form-item>
+
+        <el-form-item
           label="标题字体大小"
           label-width="100px"
         >
@@ -312,35 +337,35 @@
             v-model="config.customize.yAxis.tickColor"
           />
         </el-form-item>
-        <SettingTitle>
-          边距
-        </SettingTitle>
-        <div class="lc-field-body">
-          <el-form-item label="上边距">
-            <el-input-number
-              v-model="config.customize.top"
-              class="bs-el-input-number"
-            />
-          </el-form-item>
-          <el-form-item label="下边距">
-            <el-input-number
-              v-model="config.customize.bottom"
-              class="bs-el-input-number"
-            />
-          </el-form-item>
-          <el-form-item label="左边距">
-            <el-input-number
-              v-model="config.customize.left"
-              class="bs-el-input-number"
-            />
-          </el-form-item>
-          <el-form-item label="右边距">
-            <el-input-number
-              v-model="config.customize.right"
-              class="bs-el-input-number"
-            />
-          </el-form-item>
-        </div>
+      </div>
+      <SettingTitle>
+        边距
+      </SettingTitle>
+      <div class="lc-field-body">
+        <el-form-item label="上边距">
+          <el-input-number
+            v-model="config.customize.top"
+            class="bs-el-input-number"
+          />
+        </el-form-item>
+        <el-form-item label="下边距">
+          <el-input-number
+            v-model="config.customize.bottom"
+            class="bs-el-input-number"
+          />
+        </el-form-item>
+        <el-form-item label="左边距">
+          <el-input-number
+            v-model="config.customize.left"
+            class="bs-el-input-number"
+          />
+        </el-form-item>
+        <el-form-item label="右边距">
+          <el-input-number
+            v-model="config.customize.right"
+            class="bs-el-input-number"
+          />
+        </el-form-item>
       </div>
     </el-form>
   </div>
