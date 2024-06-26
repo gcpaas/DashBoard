@@ -27,6 +27,7 @@
       />
     </div>
     <el-dialog
+      v-if="formVisible"
       :visible.sync="formVisible"
       :append-to-body="true"
       :title="config.title"
@@ -39,11 +40,10 @@
         style="height: 500px"
       >
         <component
-          v-if="formVisible"
           :is="resolveComponentType(config.type)"
           :id="`${config.code}${config.key}`"
           :ref="config.code"
-          :key="config.key + 'dialog'"
+          :key="keyCodes"
           :config="config"
           :is-dialog="isDialog"
         />
@@ -67,6 +67,7 @@ for (const key in pcComponent) {
     components[key] = pcComponent[key]
   }
 }
+console.log(pcComponent)
 export default {
   name: 'RenderCard',
   components: {
@@ -89,6 +90,7 @@ export default {
   },
   data () {
     return {
+      keyCodes: new Date().getTime(),
       isDialog: true,
       formVisible: false,
       icons: Icon.getNameList()
@@ -111,6 +113,7 @@ export default {
       'changeChartConfig'
     ]),
     openDialog () {
+      this.keyCodes = new Date().getTime()
       this.formVisible = true
     },
     resolveComponentType

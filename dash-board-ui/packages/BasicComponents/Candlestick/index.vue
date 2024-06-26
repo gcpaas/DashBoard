@@ -127,6 +127,9 @@ export default {
      * @param {*} config
      */
     async newChart (config) {
+      if (this.charts) {
+        this.charts.dispose()
+      }
       this.charts = echarts.init(
         document.getElementById(`chart${this.config.code}`)
       )

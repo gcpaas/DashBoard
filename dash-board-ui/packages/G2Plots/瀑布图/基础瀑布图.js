@@ -263,7 +263,7 @@ const setting = [
     optionField: 'xAxis.label.style.fill',
     // 是否多选
     multiple: false,
-    value: '#e9e9e9',
+    value: 'rgba(140, 140, 140, 1)',
     tabName: 'custom',
     groupName: 'xAxis'
   },
@@ -283,7 +283,7 @@ const setting = [
     optionField: 'xAxis.line.style.stroke',
     // 是否多选
     multiple: false,
-    value: '#C9CDD4',
+    value: 'rgba(140, 140, 140, 1)',
     tabName: 'custom',
     groupName: 'xAxis'
   },
@@ -303,7 +303,7 @@ const setting = [
     optionField: 'xAxis.tickLine.style.stroke',
     // 是否多选
     multiple: false,
-    value: '#C9CDD4',
+    value: 'rgba(140, 140, 140, 1)',
     tabName: 'custom',
     groupName: 'xAxis'
   },
@@ -407,7 +407,7 @@ const setting = [
     optionField: 'yAxis.title.style.fill',
     // 是否多选
     multiple: false,
-    value: '#e9e9e9',
+    value: 'rgba(140, 140, 140, 1)',
     tabName: 'custom',
     groupName: 'yAxis'
   },
@@ -438,7 +438,7 @@ const setting = [
     optionField: 'yAxis.label.style.fill',
     // 是否多选
     multiple: false,
-    value: '#e9e9e9',
+    value: 'rgba(140, 140, 140, 1)',
     tabName: 'custom',
     groupName: 'yAxis'
   },
@@ -458,7 +458,7 @@ const setting = [
     optionField: 'yAxis.line.style.stroke',
     // 是否多选
     multiple: false,
-    value: '#C9CDD4',
+    value: 'rgba(140, 140, 140, 1)',
     tabName: 'custom',
     groupName: 'yAxis'
   },
@@ -537,19 +537,19 @@ const option = {
       autoHideEnable: true,
       autoHideMinGap: 2,
       style: {
-        fill: '#e9e9e9',
+        fill: 'rgba(140, 140, 140, 1)',
         fontSize: 12
       }
     },
     line: {
       style: {
-        stroke: '#C9CDD4',
+        stroke: 'rgba(140, 140, 140, 1)',
         lineWidth: 1
       }
     },
     tickLine: {
       style: {
-        stroke: '#C9CDD4',
+        stroke: 'rgba(140, 140, 140, 1)',
         lineWidth: 1
       }
     }
@@ -561,14 +561,14 @@ const option = {
       autoRotate: false,
       // rotation: Math.PI / 2,
       style: {
-        fill: '#8C8C8C',
+        fill: 'rgba(140, 140, 140, 1)',
         fontSize: 12
       }
     },
     grid: {
       line: {
         style: {
-          stroke: '#E5E6EB10',
+          stroke: 'rgba(140, 140, 140, 1)',
           lineWidth: 1,
           lineDash: [4, 5],
           strokeOpacity: 0.7
@@ -585,14 +585,14 @@ const option = {
         return `${(v / 10e8).toFixed(1)} B`
       },
       style: {
-        fill: '#e9e9e9',
+        fill: 'rgba(140, 140, 140, 1)',
         fontSize: 12,
         opacity: 1
       }
     },
     line: {
       style: {
-        stroke: '#C9CDD4',
+        stroke: 'rgba(140, 140, 140, 1)',
         lineWidth: 0
       }
     }
