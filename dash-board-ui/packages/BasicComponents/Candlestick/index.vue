@@ -111,6 +111,10 @@ export default {
       this.handleOption(config)
       this.charts.setOption(this.option)
     },
+    changeStyle (config) {
+      this.handleOption(config)
+      this.charts.setOption(this.option)
+    },
     /**
      * 初始化地图
      * 该方法继承自commonMixins
@@ -130,13 +134,118 @@ export default {
      */
     handleOption (config) {
       this.option = {
-        xAxis: {
-          data: this.xData
+        xAxis: [
+          {
+            show: true,
+            name: config.customize.xAxis.name,
+            nameGap: 30,
+            data: this.xData,
+            nameTextStyle: {
+              color: config.customize.xAxis.nameColor,
+              fontSize: config.customize.xAxis.nameSize
+            },
+            nameLocation: config.customize.xAxis.position,
+            // 坐标轴刻度设置
+            axisTick: {
+              show: true,
+              alignWithLabel: true,
+              lineStyle: {
+                width: config.customize.xAxis.tickWidth,
+                color: config.customize.xAxis.tickColor
+              }
+            },
+            // 是否显示坐标轴的轴线
+            axisLine: {
+              show: true,
+              lineStyle: {
+                color: config.customize.xAxis.lineColor,
+                width: config.customize.xAxis.lineWidth
+              }
+            },
+            // 坐标轴刻度标签
+            axisLabel: {
+              show: true,
+              textStyle: {
+                fontSize: config.customize.xAxis.labelSize,
+                color: config.customize.xAxis.labelColor
+              },
+              margin: 30
+            }
+          }
+        ],
+        yAxis: {
+          name: config.customize.yAxis.name,
+          nameGap: 10,
+          nameTextStyle: {
+            color: config.customize.yAxis.nameColor,
+            fontSize: config.customize.yAxis.nameSize
+          },
+          nameLocation: config.customize.yAxis.position,
+          show: true,
+          axisLabel: {
+            show: true,
+            textStyle: {
+              fontSize: config.customize.yAxis.labelSize,
+              color: config.customize.yAxis.labelColor
+            },
+            margin: 10
+          },
+          axisTick: {
+            show: true,
+            length: 1,
+            lineStyle: {
+              width: config.customize.yAxis.tickWidth,
+              color: config.customize.yAxis.tickColor
+            }
+          },
+          // 分隔线
+          splitLine: {
+            show: config.customize.gridShow, // yAxis.show配置为true时，该配置才有效
+            lineStyle: {
+              color: config.customize.gridColor,
+              width: config.customize.gridWidth
+            }
+          },
+          // y轴轴线是否显示
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: config.customize.yAxis.lineColor,
+              width: config.customize.yAxis.lineWidth
+            }
+
+          }
         },
-        yAxis: {},
+        tooltip: {
+          // 显示提示框
+          show: true,
+          trigger: 'axis',
+          backgroundColor: 'rgba(50,50,50,0.7)',
+          borderColor: '#333',
+          borderWidth: 1,
+          textStyle: {
+            color: '#fff',
+            fontSize: 12,
+            fontWeight: 'normal'
+          },
+
+          axisPointer: {
+            type: 'cross'
+          }
+        },
         series: [
           {
             type: 'candlestick',
+            label: {
+              show: true,
+              position: 'inside',
+              color: '#fff',
+              fontSize: 12
+            },
+            itemStyle: {
+              color: config.customize.highColor,
+              color0: config.customize.lowColor
+            },
             data: this.yData
           }
         ]

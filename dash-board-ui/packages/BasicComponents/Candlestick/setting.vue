@@ -1,11 +1,11 @@
 <template>
-  <div class="db-setting-wrap">
+  <div class="bs-setting-wrap">
     <el-form
       ref="form"
       :model="config"
       label-width="90px"
       label-position="left"
-      class="setting-body"
+      class="setting-body bs-el-form"
     >
       <SettingTitle>标题</SettingTitle>
       <div class="lc-field-body">
@@ -20,198 +20,310 @@
           />
         </el-form-item>
       </div>
-      <SettingTitle>基础</SettingTitle>
+      <SettingTitle>图表</SettingTitle>
       <div class="lc-field-body">
         <el-form-item
-          label="是否显示地名"
-          label-width="100px"
-        >
-          <el-switch
-            v-model="config.customize.mapName"
-            class="db-el-switch"
-            active-color="#007aff"
-          />
-        </el-form-item>
-        <el-form-item
-          label="地图级别"
-          label-width="100px"
-        >
-          <el-select
-            v-model="config.customize.level"
-            popper-class="db-el-select"
-            class="db-el-select"
-            @change="changeLevel()"
-          >
-            <el-option
-              label="国家"
-              value="country"
-            />
-            <el-option
-              label="省份"
-              value="province"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item
-          v-if="config.customize.level == 'province'"
-          label="地图显示区域"
-          label-width="100px"
-        >
-          <el-select
-            v-model="config.customize.dataMap"
-            popper-class="db-el-select"
-            class="db-el-select"
-          >
-            <el-option
-              v-for="map in mapList"
-              :key="map.name"
-              :label="map.name"
-              :value="map.url"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item
-          label="地图背景色"
+          label="上升色"
           label-width="100px"
         >
           <ColorPicker
-            v-model="config.customize.backgroundColor"
+            v-model="config.customize.highColor"
             :predefine-colors="predefineThemeColors"
           />
         </el-form-item>
         <el-form-item
-          label="地图分割线颜色"
+          label="下降色"
           label-width="100px"
         >
           <ColorPicker
-            v-model="config.customize.mapLineColor"
+            v-model="config.customize.lowColor"
             :predefine-colors="predefineThemeColors"
           />
         </el-form-item>
         <el-form-item
-          label="地图分割块颜色"
-          label-width="100px"
-        >
-          <ColorPicker
-            v-model="config.customize.areaColor"
-            :predefine-colors="predefineThemeColors"
-          />
-        </el-form-item>
-        <el-form-item
-          label="是否打点"
-          label-width="100px"
-        >
-          <el-switch
-            v-model="config.customize.scatter"
-            class="db-el-switch"
-            active-color="#007aff"
-          />
-        </el-form-item>
-        <el-form-item
-          v-if="config.customize.scatter"
-          label="打点图背景色"
-          label-width="100px"
-        >
-          <ColorPicker
-            v-model="config.customize.scatterBackgroundColor"
-            :predefine-colors="predefineThemeColors"
-          />
-        </el-form-item>
-        <el-form-item
-          v-if="config.customize.scatter"
-          label="打点图文字颜色"
-          label-width="100px"
-        >
-          <ColorPicker
-            v-model="config.customize.scatterColor"
-            :predefine-colors="predefineThemeColors"
-          />
-        </el-form-item>
-        <el-form-item
-          v-if="!config.customize.scatter"
-          label="悬浮框背景色"
-          label-width="100px"
-        >
-          <ColorPicker
-            v-model="config.customize.tooltipBackgroundColor"
-            :predefine-colors="predefineThemeColors"
-          />
-        </el-form-item>
-        <el-form-item
-          v-if="!config.customize.scatter"
-          label="悬浮框边框色"
-          label-width="100px"
-        >
-          <ColorPicker
-            v-model="config.customize.borderColor"
-            :predefine-colors="predefineThemeColors"
-          />
-        </el-form-item>
-        <el-form-item
-          label="是否开启筛选"
-          label-width="100px"
-        >
-          <el-switch
-            v-model="config.customize.visual"
-            class="db-el-switch"
-            active-color="#007aff"
-          />
-        </el-form-item>
-        <el-form-item
-          v-if="config.customize.visual"
-          label="数值范围"
+
+          label="地名字体权重"
           label-width="100px"
         >
           <el-input-number
-            v-model="config.customize.range[0]"
-            placeholder="请输入最小值"
-            controls-position="right"
-            :step="1"
+            v-model="config.customize.mapNameWeight"
+            class="bs-el-input-number"
+            placeholder="请输入字体权重"
+            :min="100"
+            :step="100"
           />
-          -
-          <el-input-number
-            v-model="config.customize.range[1]"
-            controls-position="right"
-            placeholder="请输入最大值"
-            :step="1"
+        </el-form-item>
+      </div>
+      <SettingTitle>
+        网格线
+      </SettingTitle>
+      <div class="lc-field-body">
+        <el-form-item
+
+          label="网格线"
+          label-width="100px"
+        >
+          <el-switch
+            v-model="config.customize.gridShow"
+            class="bs-el-switch"
           />
         </el-form-item>
         <el-form-item
-          v-if="config.customize.visual"
-          label="配色方案"
+          label="宽度"
           label-width="100px"
         >
-          <color-select
-            v-model="config.customize.rangeColor"
-            @update="updateColorScheme"
+          <el-input-number
+            v-model="config.customize.gridWidth"
+            class="bs-el-input-number"
           />
-          <div
-            style="
-                display: flex;
-                align-items: center;
-                height: 42px;
-                flex-wrap: wrap;
-              "
+        </el-form-item>
+        <el-form-item
+          label="颜色"
+          label-width="100px"
+        >
+          <ColorPicker
+            v-model="config.customize.gridColor"
+            :predefine-colors="predefineThemeColors"
+          />
+        </el-form-item>
+      </div>
+      <SettingTitle>
+        x轴
+      </SettingTitle>
+      <div class="lc-field-body">
+        <el-form-item
+
+          label="标题"
+          label-width="100px"
+        >
+          <el-input
+            v-model="config.customize.xAxis.name"
+          />
+        </el-form-item>
+        <el-form-item
+
+          label="标题位置"
+          label-width="100px"
+        >
+          <el-select
+            v-model="config.customize.xAxis.position"
+            popper-class="bs-el-select"
+            class="bs-el-select"
+            placeholder="请选择位置"
           >
-            <el-color-picker
-              v-for="(colorItem, index) in colors"
-              :key="index"
-              v-model="config.customize.rangeColor[index]"
-              show-alpha
-              class="start-color"
+            <el-option
+              v-for="item in axisPositionList"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
             />
-            <span
-              class="el-icon-circle-plus-outline"
-              style="color: #007aff; font-size: 20px"
-              @click="addColor"
+          </el-select>
+        </el-form-item>
+
+        <el-form-item
+          label="标题字体大小"
+          label-width="100px"
+        >
+          <el-input-number
+            v-model="config.customize.xAxis.nameSize"
+            class="bs-el-input-number"
+            placeholder="请输入标题字体大小"
+            clearable
+          />
+        </el-form-item>
+        <el-form-item
+
+          label="标题颜色"
+          label-width="100px"
+        >
+          <ColorPicker
+            v-model="config.customize.xAxis.nameColor"
+            :predefine-colors="predefineThemeColors"
+          />
+        </el-form-item>
+
+        <el-form-item
+          label="标签字体大小"
+          label-width="100px"
+        >
+          <el-input-number
+            v-model="config.customize.xAxis.labelSize"
+            class="bs-el-input-number"
+            placeholder="请输入标题字体大小"
+            clearable
+          />
+        </el-form-item>
+        <el-form-item
+
+          label="标签颜色"
+          label-width="100px"
+        >
+          <ColorPicker
+            v-model="config.customize.xAxis.labelColor"
+            :predefine-colors="predefineThemeColors"
+          />
+        </el-form-item>
+        <el-form-item
+          label="轴线宽度"
+          label-width="100px"
+        >
+          <el-input-number
+            v-model="config.customize.xAxis.lineWidth"
+            class="bs-el-input-number"
+            placeholder="请输入标题字体大小"
+            clearable
+          />
+        </el-form-item>
+        <el-form-item
+
+          label="轴线颜色"
+          label-width="100px"
+        >
+          <ColorPicker
+            v-model="config.customize.xAxis.lineColor"
+            :predefine-colors="predefineThemeColors"
+          />
+        </el-form-item>
+
+        <el-form-item
+          label="刻度线宽度"
+          label-width="100px"
+        >
+          <el-input-number
+            v-model="config.customize.xAxis.tickWidth"
+            class="bs-el-input-number"
+            placeholder="请输入标题字体大小"
+            clearable
+          />
+        </el-form-item>
+        <el-form-item
+
+          label="刻度线颜色"
+          label-width="100px"
+        >
+          <ColorPicker
+            v-model="config.customize.xAxis.tickColor"
+            :predefine-colors="predefineThemeColors"
+          />
+        </el-form-item>
+      </div>
+      <SettingTitle>
+        y轴
+      </SettingTitle>
+      <div class="lc-field-body">
+        <el-form-item
+
+          label="标题"
+          label-width="100px"
+        >
+          <el-input
+            v-model="config.customize.yAxis.name"
+          />
+        </el-form-item>
+        <el-form-item
+
+          label="标题位置"
+          label-width="100px"
+        >
+          <el-select
+            v-model="config.customize.yAxis.position"
+            popper-class="bs-el-select"
+            class="bs-el-select"
+            placeholder="请选择位置"
+          >
+            <el-option
+              v-for="item in axisPositionList"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
             />
-            <span
-              v-if="colors.length"
-              class="el-icon-remove-outline"
-              style="color: #ea0b30; font-size: 20px"
-              @click="delColor"
-            />
-          </div>
+          </el-select>
+        </el-form-item>
+
+        <el-form-item
+          label="标题字体大小"
+          label-width="100px"
+        >
+          <el-input-number
+            v-model="config.customize.yAxis.nameSize"
+            class="bs-el-input-number"
+            placeholder="请输入标题字体大小"
+            clearable
+          />
+        </el-form-item>
+        <el-form-item
+
+          label="标题颜色"
+          label-width="100px"
+        >
+          <ColorPicker
+            v-model="config.customize.yAxis.nameColor"
+            :predefine-colors="predefineThemeColors"
+          />
+        </el-form-item>
+
+        <el-form-item
+          label="标签字体大小"
+          label-width="100px"
+        >
+          <el-input-number
+            v-model="config.customize.yAxis.labelSize"
+            class="bs-el-input-number"
+            placeholder="请输入标题字体大小"
+            clearable
+          />
+        </el-form-item>
+        <el-form-item
+
+          label="标签颜色"
+          label-width="100px"
+        >
+          <ColorPicker
+            v-model="config.customize.yAxis.labelColor"
+            :predefine-colors="predefineThemeColors"
+          />
+        </el-form-item>
+        <el-form-item
+          label="轴线宽度"
+          label-width="100px"
+        >
+          <el-input-number
+            v-model="config.customize.yAxis.lineWidth"
+            class="bs-el-input-number"
+            placeholder="请输入标题字体大小"
+            clearable
+          />
+        </el-form-item>
+        <el-form-item
+
+          label="轴线颜色"
+          label-width="100px"
+        >
+          <ColorPicker
+            v-model="config.customize.yAxis.lineColor"
+            :predefine-colors="predefineThemeColors"
+          />
+        </el-form-item>
+
+        <el-form-item
+          label="刻度线宽度"
+          label-width="100px"
+        >
+          <el-input-number
+            v-model="config.customize.yAxis.tickWidth"
+            class="bs-el-input-number"
+            placeholder="请输入标题字体大小"
+            clearable
+          />
+        </el-form-item>
+        <el-form-item
+
+          label="刻度线颜色"
+          label-width="100px"
+        >
+          <el-color-picker
+            v-model="config.customize.yAxis.tickColor"
+          />
         </el-form-item>
       </div>
     </el-form>
@@ -222,31 +334,64 @@ import SettingTitle from 'dashPackages/SettingTitle/index.vue'
 import { chartSettingMixins } from 'dashPackages/js/mixins/chartSettingMixins'
 import ColorSelect from 'dashPackages/ColorMultipleSelect/index.vue'
 import ColorPicker from 'dashPackages/ColorPicker/index.vue'
-// import { get } from 'dashPackages/js/utils/http'
-import PosWhSetting from 'dashPackages/DashboardDesign/RightSetting/PosWhSetting.vue'
+import { predefineColors } from 'dashPackages/js/utils/colorList'
 export default {
   name: 'BarSetting',
   components: {
     ColorSelect,
     ColorPicker,
-    PosWhSetting,
     SettingTitle
   },
   mixins: [chartSettingMixins],
   props: {},
   data () {
     return {
+      colors: [],
       mapList: [],
-      predefineThemeColors: [
-        '#007aff',
-        '#1aa97b',
-        '#ff4d53',
-        '#1890FF',
-        '#DF0E1B',
-        '#0086CC',
-        '#2B74CF',
-        '#00BC9D',
-        '#ED7D32'
+      predefineThemeColors: predefineColors,
+      mapTree: [],
+      currentMap: {},
+      axisPositionList: [
+        {
+          label: '左',
+          value: 'start'
+        },
+        {
+          label: '中',
+          value: 'center'
+        },
+        {
+          label: '右',
+          value: 'end'
+        }],
+      levelList: [
+        { value: '0', label: '世界' },
+        { value: '1', label: '国家' },
+        { value: '2', label: '省份' },
+        { value: '3', label: '城市' },
+        { value: '4', label: '区县' }
+      ],
+      symbolList: [
+        { value: 'circle', label: '圆形' },
+        { value: 'rect', label: '矩形' },
+        { value: 'roundRect', label: '圆角矩形' },
+        { value: 'triangle', label: '三角形' },
+        { value: 'diamond', label: '菱形' },
+        { value: 'pin', label: '水滴' },
+        { value: 'arrow', label: '箭头' }
+      ],
+      // 旧版本地图等级，该数据用于兼容旧版本
+      oldLevelMap: {
+        world: '0',
+        country: '1',
+        province: '2'
+      },
+      downLevelList: [
+        { value: 1, label: '下钻一层' },
+        { value: 2, label: '下钻两层' },
+        { value: 3, label: '下钻三层' },
+        { value: 4, label: '下钻四层' },
+        { value: 5, label: '下钻五层' }
       ]
     }
   },
@@ -262,30 +407,18 @@ export default {
   },
   watch: {},
   mounted () {
-    this.getMapList()
+    this.colors = this.config.customize.rangeColor
   },
   methods: {
-    getMapList () {
-      this.$dashboardAxios.get(
-        `${window.DS_CONFIG?.httpConfigs?.baseURL}/dashboard/design/map/list/${this.config.customize.level}`
-      ).then((res) => {
-        this.mapList = res
-      })
-    },
     changeLevel () {
-      this.getMapList()
-      if (this.config.customize.level === 'country') {
-        this.config.customize.dataMap = '中华人民共和国.json'
-      } else if (this.config.customize.level === 'province') {
-        this.config.customize.dataMap = '安徽省.json'
-      }
     },
     delColor () {
-      this.colors = []
-      this.config.customize.rangeColor = []
+      if (this.colors.length <= 2) return
+      this.colors.pop()
+      this.config.customize.rangeColor.pop()
     },
     addColor () {
-      this.colors.push('')
+      this.colors.push('#fff')
     },
     updateColorScheme (colors) {
       this.colors = [...colors]
@@ -297,6 +430,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../assets/style/settingWrap.scss';
+@import '../../assets/style/bsTheme.scss';
 // 筛选条件的按钮样式
 .add-filter-box {
   position: relative;
@@ -311,5 +445,11 @@ export default {
 }
 .lc-field-body {
   padding: 12px 16px;
+}
+::v-deep .bs-el-slider-dark {
+
+  .el-slider__runway {
+    background-color: var(--bs-el-background-1) !important;
+  }
 }
 </style>
