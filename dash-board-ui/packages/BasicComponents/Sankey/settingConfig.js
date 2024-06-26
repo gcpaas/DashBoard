@@ -14,13 +14,13 @@ export const settingConfig = {
     params: {
       enable: true
     },
-    metricField: {
+    dimensionField: {
       // 指标
       label: '起始节点',
       enable: true,
       multiple: false // 是否多选
     },
-    dimensionField: {
+    metricField: {
       label: '目标节点', // 维度/查询字段
       enable: true,
       multiple: false // 是否多选
@@ -50,12 +50,16 @@ const customConfig = {
     skewY: 0
   },
   customize: {
+    top: 20,
+    bottom: 20,
+    left: 20,
+    right: 50,
     // 自定义样式
     normal: {
       labelPosition: 'right',
-      labelColor: '#fff',
+      labelColor: 'rgba(140, 140, 140, 1)',
       labelFontSize: 12,
-      labelFontWeight: 'bold',
+      labelFontWeight: 'normal',
       itemBorderColor: '#aaa',
       itemBorderWidth: 1,
       itemBorderType: 'solid',
@@ -64,7 +68,7 @@ const customConfig = {
     },
     emphasis: {
       labelPosition: 'right',
-      labelColor: '#fff',
+      labelColor: 'rgba(140, 140, 140, 1)',
       labelFontSize: 12,
       labelFontWeight: 'bold',
       itemBorderColor: '#aaa',
@@ -83,7 +87,7 @@ export const dataConfig = {
 export const sankeyData = {
   name: '桑基图',
   title: '桑基图',
-  icon: Icon.getNameList()[18],
+  icon: Icon.getNameList()[19],
   border: { type: '', titleHeight: 60, fontSize: 16, isTitle: true, padding: [0, 0, 0, 0] },
   className:
     'com.gccloud.dashboard.core.module.chart.components.DashboardCandlestickChart',

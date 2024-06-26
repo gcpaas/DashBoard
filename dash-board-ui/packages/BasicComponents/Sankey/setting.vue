@@ -164,7 +164,10 @@
           label="图形背景色"
           label-width="100px"
         >
-          <el-radio-group v-model="lineColorType">
+          <el-radio-group
+            v-model="lineColorType"
+            style="margin-bottom: 8px;"
+          >
             <el-radio :label="'theme'">
               颜色字段
             </el-radio>
@@ -265,8 +268,36 @@
             />
           </el-select>
         </el-form-item>
+        <SettingTitle>
+          边距
+        </SettingTitle>
+        <div class="lc-field-body">
+          <el-form-item label="上边距">
+            <el-input-number
+              v-model="config.customize.top"
+              class="bs-el-input-number"
+            />
+          </el-form-item>
+          <el-form-item label="下边距">
+            <el-input-number
+              v-model="config.customize.bottom"
+              class="bs-el-input-number"
+            />
+          </el-form-item>
+          <el-form-item label="左边距">
+            <el-input-number
+              v-model="config.customize.left"
+              class="bs-el-input-number"
+            />
+          </el-form-item>
+          <el-form-item label="右边距">
+            <el-input-number
+              v-model="config.customize.right"
+              class="bs-el-input-number"
+            />
+          </el-form-item>
+        </div>
       </div>
-
     </el-form>
   </div>
 </template>
@@ -288,22 +319,22 @@ export default {
   data () {
     return {
       lineColorType: 'theme',
-      fontWeightList:[
+      fontWeightList: [
         {
-        label: '正常',
-        value:'normal'
-      },
+          label: '正常',
+          value: 'normal'
+        },
         {
           label: '粗体',
-          value:'bold'
+          value: 'bold'
         },
         {
           label: '加粗',
-          value:'bolder'
+          value: 'bolder'
         },
         {
           label: '细体',
-          value:'lighter'
+          value: 'lighter'
         }
       ],
       colorFields: [

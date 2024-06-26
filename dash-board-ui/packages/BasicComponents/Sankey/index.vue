@@ -199,12 +199,16 @@ export default {
         series: [
           {
             type: 'sankey',
+            top: config.customize.top || 20,
+            bottom: config.customize.bottom || 20,
+            left: config.customize.left || 20,
+            right: config.customize.right || 50,
             label: {
               show: true,
               position: config.customize.normal.labelPosition || 'right',
-              color: config.customize.normal.labelColor || '#fff',
+              color: config.customize.normal.labelColor || 'rgba(140, 140, 140, 1)',
               fontSize: config.customize.normal.labelSize || 12,
-              fontWeight: config.customize.normal.labelFontWeight || 'bold'
+              fontWeight: config.customize.normal.labelFontWeight || 'normal'
             },
             itemStyle: {
               borderColor: config.customize.normal.itemBorderColor || '#aaa',
@@ -220,7 +224,7 @@ export default {
               disabled: false,
               focus: 'trajectory',
               label: {
-                color: config.customize.emphasis.labelColor || '#fff',
+                color: config.customize.emphasis.labelColor || 'rgba(140, 140, 140, 1)',
                 fontSize: config.customize.emphasis.labelSize || 12,
                 fontWeight: config.customize.normal.labelFontWeight || 'bold',
               },
