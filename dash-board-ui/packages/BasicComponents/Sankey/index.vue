@@ -11,7 +11,7 @@
     style="width: 100%; height: 100%"
   >
     <div
-      :id="`chart${config.code}`"
+      :id="chatId"
       style="width: 100%; height: 100%"
     />
   </div>
@@ -176,7 +176,7 @@ export default {
         this.charts.dispose()
       }
       this.charts = echarts.init(
-        document.getElementById(`chart${this.config.code}`)
+        document.getElementById(this.chatId)
       )
       // 处理option，将配置项转换为echarts的option
       this.handleOption(config)

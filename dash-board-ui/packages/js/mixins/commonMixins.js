@@ -15,12 +15,38 @@ export default {
       dataLoading: false
     }
   },
+  props: {
+    isDialog: {
+      type: Boolean,
+      default: false
+    }
+  },
   computed: {
     ...mapState({
       pageCode: state => state.dashboard.pageInfo.code
     }),
     isPreview () {
       return this.$route.path !== window?.DS_CONFIG?.routers?.designUrl
+    },
+    chatId () {
+      let prefix = 'chart_'
+      if (this.isDialog) {
+        prefix = 'isDialog_chart_'
+      } else {
+        if (this.$route.path === window?.DS_CONFIG?.routers?.previewUrl) {
+          prefix = 'preview_chart_'
+        }
+
+        if (this.$route.path === window?.DS_CONFIG?.routers?.designUrl) {
+          prefix = 'design_chart_'
+        }
+
+        if (this.$route.path === window?.DS_CONFIG?.routers?.pageListUrl) {
+          prefix = 'management_chart_'
+        }
+      }
+
+      return prefix + this.config.code
     }
   },
   mounted () {
