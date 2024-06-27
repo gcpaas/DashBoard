@@ -7,7 +7,7 @@
 <template>
   <div
     :id="config.code + 'wrap'"
-    class="bs-design-wrap bs-bar"
+    class="db-design-wrap db-bar"
     style="width: 100%; height: 100%"
   >
     <div
@@ -261,7 +261,7 @@ export default {
   background-color: rgba(0, 0, 0, 0);
 }
 
-.bs-design-wrap {
+.db-design-wrap {
   position: relative;
 
   .button {

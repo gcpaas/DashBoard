@@ -1,11 +1,11 @@
 <template>
-  <div class="bs-setting-wrap">
+  <div class="db-setting-wrap">
     <el-form
       ref="form"
       :model="config"
       label-width="90px"
       label-position="left"
-      class="setting-body bs-el-form"
+      class="setting-body db-el-form"
     >
       <SettingTitle>标题</SettingTitle>
       <div class="lc-field-body">
@@ -37,8 +37,8 @@
           <el-select
             v-if="lineColorType === 'theme'"
             v-model="config.customize.normal.lineColor"
-            popper-class="bs-el-select"
-            class="bs-el-select"
+            popper-class="db-el-select"
+            class="db-el-select"
             placeholder="请选择颜色字段"
           >
             <el-option
@@ -63,7 +63,7 @@
             :min="0"
             :max="1"
             :step="0.1"
-            class="bs-el-input-number"
+            class="db-el-input-number"
           />
         </el-form-item>
         <el-form-item
@@ -81,7 +81,7 @@
         >
           <el-input-number
             v-model="config.customize.normal.itemBorderWidth"
-            class="bs-el-input-number"
+            class="db-el-input-number"
           />
         </el-form-item>
         <el-form-item
@@ -91,8 +91,8 @@
         >
           <el-select
             v-model="config.customize.normal.itemBorderType"
-            popper-class="bs-el-select"
-            class="bs-el-select"
+            popper-class="db-el-select"
+            class="db-el-select"
             placeholder="请选择位置"
           >
             <el-option
@@ -110,8 +110,8 @@
         >
           <el-select
             v-model="config.customize.normal.labelPosition"
-            popper-class="bs-el-select"
-            class="bs-el-select"
+            popper-class="db-el-select"
+            class="db-el-select"
             placeholder="请选择位置"
           >
             <el-option
@@ -137,7 +137,7 @@
         >
           <el-input-number
             v-model="config.customize.normal.labelSize"
-            class="bs-el-input-number"
+            class="db-el-input-number"
           />
         </el-form-item>
         <el-form-item
@@ -146,8 +146,8 @@
         >
           <el-select
             v-model="config.customize.normal.labelFontWeight"
-            popper-class="bs-el-select"
-            class="bs-el-select"
+            popper-class="db-el-select"
+            class="db-el-select"
             placeholder="请选择位置"
           >
             <el-option
@@ -181,8 +181,8 @@
           <el-select
             v-if="lineColorType === 'theme'"
             v-model="config.customize.emphasis.lineColor"
-            popper-class="bs-el-select"
-            class="bs-el-select"
+            popper-class="db-el-select"
+            class="db-el-select"
             placeholder="请选择颜色字段"
           >
             <el-option
@@ -213,7 +213,7 @@
         >
           <el-input-number
             v-model="config.customize.emphasis.itemBorderWidth"
-            class="bs-el-input-number"
+            class="db-el-input-number"
           />
         </el-form-item>
         <el-form-item
@@ -223,8 +223,8 @@
         >
           <el-select
             v-model="config.customize.emphasis.itemBorderType"
-            popper-class="bs-el-select"
-            class="bs-el-select"
+            popper-class="db-el-select"
+            class="db-el-select"
             placeholder="请选择位置"
           >
             <el-option
@@ -250,7 +250,7 @@
         >
           <el-input-number
             v-model="config.customize.emphasis.labelSize"
-            class="bs-el-input-number"
+            class="db-el-input-number"
           />
         </el-form-item>
         <el-form-item
@@ -259,8 +259,8 @@
         >
           <el-select
             v-model="config.customize.emphasis.labelFontWeight"
-            popper-class="bs-el-select"
-            class="bs-el-select"
+            popper-class="db-el-select"
+            class="db-el-select"
             placeholder="请选择位置"
           >
             <el-option
@@ -278,25 +278,25 @@
           <el-form-item label="上边距">
             <el-input-number
               v-model="config.customize.top"
-              class="bs-el-input-number"
+              class="db-el-input-number"
             />
           </el-form-item>
           <el-form-item label="下边距">
             <el-input-number
               v-model="config.customize.bottom"
-              class="bs-el-input-number"
+              class="db-el-input-number"
             />
           </el-form-item>
           <el-form-item label="左边距">
             <el-input-number
               v-model="config.customize.left"
-              class="bs-el-input-number"
+              class="db-el-input-number"
             />
           </el-form-item>
           <el-form-item label="右边距">
             <el-input-number
               v-model="config.customize.right"
-              class="bs-el-input-number"
+              class="db-el-input-number"
             />
           </el-form-item>
         </div>
@@ -492,11 +492,5 @@ export default {
 }
 .lc-field-body {
   padding: 12px 16px;
-}
-::v-deep .bs-el-slider-dark {
-
-  .el-slider__runway {
-    background-color: var(--bs-el-background-1) !important;
-  }
 }
 </style>

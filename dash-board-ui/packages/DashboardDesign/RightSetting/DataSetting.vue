@@ -217,8 +217,8 @@
               <el-select
                 v-model="config.dataSource[fieldItem.name]"
                 :multiple="fieldItem.multiple"
-                class="bs-el-select"
-                popper-class="bs-el-select"
+                class="db-el-select"
+                popper-class="db-el-select"
                 filterable
                 clearable
               >

@@ -1,11 +1,11 @@
 <template>
-  <div class="bs-setting-wrap">
+  <div class="db-setting-wrap">
     <el-form
       ref="form"
       :model="config"
       label-width="90px"
       label-position="left"
-      class="setting-body bs-el-form"
+      class="setting-body db-el-form"
     >
       <SettingTitle>标题</SettingTitle>
       <div class="lc-field-body">
@@ -52,7 +52,7 @@
         >
           <el-switch
             v-model="config.customize.gridShow"
-            class="bs-el-switch"
+            class="db-el-switch"
           />
         </el-form-item>
         <el-form-item
@@ -61,7 +61,7 @@
         >
           <el-input-number
             v-model="config.customize.gridWidth"
-            class="bs-el-input-number"
+            class="db-el-input-number"
           />
         </el-form-item>
         <el-form-item
@@ -94,8 +94,8 @@
         >
           <el-select
             v-model="config.customize.xAxis.position"
-            popper-class="bs-el-select"
-            class="bs-el-select"
+            popper-class="db-el-select"
+            class="db-el-select"
             placeholder="请选择位置"
           >
             <el-option
@@ -112,7 +112,7 @@
         >
           <el-input-number
             v-model="config.customize.xAxis.nameGap"
-            class="bs-el-input-number"
+            class="db-el-input-number"
             placeholder="请输入标题间距"
             :min="0"
             clearable
@@ -125,7 +125,7 @@
         >
           <el-input-number
             v-model="config.customize.xAxis.nameSize"
-            class="bs-el-input-number"
+            class="db-el-input-number"
             placeholder="请输入标题字体大小"
             clearable
           />
@@ -147,7 +147,7 @@
         >
           <el-input-number
             v-model="config.customize.xAxis.labelSize"
-            class="bs-el-input-number"
+            class="db-el-input-number"
             placeholder="请输入标题字体大小"
             clearable
           />
@@ -168,7 +168,7 @@
         >
           <el-input-number
             v-model="config.customize.xAxis.lineWidth"
-            class="bs-el-input-number"
+            class="db-el-input-number"
             placeholder="请输入标题字体大小"
             clearable
           />
@@ -190,7 +190,7 @@
         >
           <el-input-number
             v-model="config.customize.xAxis.tickWidth"
-            class="bs-el-input-number"
+            class="db-el-input-number"
             placeholder="请输入标题字体大小"
             clearable
           />
@@ -226,8 +226,8 @@
         >
           <el-select
             v-model="config.customize.yAxis.position"
-            popper-class="bs-el-select"
-            class="bs-el-select"
+            popper-class="db-el-select"
+            class="db-el-select"
             placeholder="请选择位置"
           >
             <el-option
@@ -245,7 +245,7 @@
         >
           <el-input-number
             v-model="config.customize.yAxis.nameGap"
-            class="bs-el-input-number"
+            class="db-el-input-number"
             placeholder="请输入标题间距"
             :min="0"
             clearable
@@ -258,7 +258,7 @@
         >
           <el-input-number
             v-model="config.customize.yAxis.nameSize"
-            class="bs-el-input-number"
+            class="db-el-input-number"
             placeholder="请输入标题字体大小"
             clearable
           />
@@ -280,7 +280,7 @@
         >
           <el-input-number
             v-model="config.customize.yAxis.labelSize"
-            class="bs-el-input-number"
+            class="db-el-input-number"
             placeholder="请输入标题字体大小"
             clearable
           />
@@ -301,7 +301,7 @@
         >
           <el-input-number
             v-model="config.customize.yAxis.lineWidth"
-            class="bs-el-input-number"
+            class="db-el-input-number"
             placeholder="请输入标题字体大小"
             clearable
           />
@@ -323,7 +323,7 @@
         >
           <el-input-number
             v-model="config.customize.yAxis.tickWidth"
-            class="bs-el-input-number"
+            class="db-el-input-number"
             placeholder="请输入标题字体大小"
             clearable
           />
@@ -345,25 +345,25 @@
         <el-form-item label="上边距">
           <el-input-number
             v-model="config.customize.top"
-            class="bs-el-input-number"
+            class="db-el-input-number"
           />
         </el-form-item>
         <el-form-item label="下边距">
           <el-input-number
             v-model="config.customize.bottom"
-            class="bs-el-input-number"
+            class="db-el-input-number"
           />
         </el-form-item>
         <el-form-item label="左边距">
           <el-input-number
             v-model="config.customize.left"
-            class="bs-el-input-number"
+            class="db-el-input-number"
           />
         </el-form-item>
         <el-form-item label="右边距">
           <el-input-number
             v-model="config.customize.right"
-            class="bs-el-input-number"
+            class="db-el-input-number"
           />
         </el-form-item>
       </div>
@@ -455,11 +455,5 @@ export default {
 }
 .lc-field-body {
   padding: 12px 16px;
-}
-::v-deep .bs-el-slider-dark {
-
-  .el-slider__runway {
-    background-color: var(--bs-el-background-1) !important;
-  }
 }
 </style>
