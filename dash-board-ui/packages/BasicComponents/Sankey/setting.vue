@@ -60,6 +60,9 @@
         >
           <el-input-number
             v-model="config.customize.normal.lineCurveness"
+            :min="0"
+            :max="1"
+            :step="0.1"
             class="bs-el-input-number"
           />
         </el-form-item>
