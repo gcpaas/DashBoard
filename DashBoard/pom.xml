@@ -5,7 +5,7 @@
 
     <groupId>com.gccloud</groupId>
     <artifactId>dashboard</artifactId>
-    <version>1.0.1.2023122801.Alpha</version>
+    <version>1.0.1.2024062701</version>
 
     <packaging>pom</packaging>
     <name>dashboard</name>
@@ -42,7 +42,7 @@
         <swagger-models.version>1.5.21</swagger-models.version>
         <jackson.version.core>2.13.3</jackson.version.core>
         <json.version>20220320</json.version>
-        <dataset.core.version>2.0.1.2023122801.Alpha</dataset.core.version>
+        <dataset.core.version>2.1.0.2024042401.Alpha</dataset.core.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     </properties>
 

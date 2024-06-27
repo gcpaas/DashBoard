@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.gccloud</groupId>
         <artifactId>dashboard</artifactId>
-        <version>1.0.1.2023122801.Alpha</version>
+        <version>1.0.1.2024062701</version>
     </parent>
 
     <artifactId>dashboard-core</artifactId>
