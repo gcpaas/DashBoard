@@ -382,8 +382,8 @@ export default {
         })
         return
       }
-      if (window.CONFIG.dataRoom.datasetBtn.disabled) {
-        this.$message.error(window.CONFIG.dataRoom.datasetBtn.message)
+      if (window.CONFIG.dashboard.datasetBtn.disabled) {
+        this.$message.error(window.CONFIG.dashboard.datasetBtn.message)
         return
       }
       // 编辑节点

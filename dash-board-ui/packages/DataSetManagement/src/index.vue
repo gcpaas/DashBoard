@@ -508,8 +508,8 @@ export default {
       this.isEdit = false
     },
     toEdit (id, type, name, typeId) {
-      if (window.CONFIG.dataRoom.datasetBtn.disabled) {
-        this.$message.error(window.CONFIG.dataRoom.datasetBtn.message)
+      if (window.CONFIG.dashboard.datasetBtn.disabled) {
+        this.$message.error(window.CONFIG.dashboard.datasetBtn.message)
         return
       }
       this.datasetId = id
@@ -588,8 +588,8 @@ export default {
     },
     // 新增数据集
     addDataset () {
-      if (window.CONFIG.dataRoom.datasetBtn.disabled) {
-        this.$message.error(window.CONFIG.dataRoom.datasetBtn.message)
+      if (window.CONFIG.dashboard.datasetBtn.disabled) {
+        this.$message.error(window.CONFIG.dashboard.datasetBtn.message)
         return
       }
       this.$refs.DatasetTypeDialog.dialogVisible = true
