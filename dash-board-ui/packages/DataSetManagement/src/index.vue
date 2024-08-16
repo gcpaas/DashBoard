@@ -121,6 +121,7 @@
             <el-button
               v-if="ToAdd"
               class="db-el-button-default"
+              disabled
               @click="addDataset"
             >
               新增
@@ -203,10 +204,18 @@
                 slot-scope="scope"
               >
                 <slot :item="scope.row">
+<!--                  <el-button-->
+<!--                    v-if="doEdit"-->
+<!--                    class="db-el-button-default"-->
+<!--                    :disabled="scope.row.editable === 1 && !appCode"-->
+<!--                    @click="toEdit(scope.row.id, scope.row.datasetType, scope.row.name, scope.row.typeId)"-->
+<!--                  >-->
+<!--                    编辑-->
+<!--                  </el-button>-->
                   <el-button
                     v-if="doEdit"
                     class="db-el-button-default"
-                    :disabled="scope.row.editable === 1 && !appCode"
+                    disabled
                     @click="toEdit(scope.row.id, scope.row.datasetType, scope.row.name, scope.row.typeId)"
                   >
                     编辑
