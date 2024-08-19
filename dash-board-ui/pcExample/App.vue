@@ -56,7 +56,7 @@ export default {
   methods: {
     init () {
       // 如果不是演示环境或者已经阅读过免责声明，则不显示弹窗
-      if (!window?.SITE_CONFIG?.demoEnv && sessionStorage.getItem('disclaimer') === 'read ') {
+      if ((!window?.SITE_CONFIG?.demoEnv) || sessionStorage.getItem('disclaimer') === 'read ') {
         return
       }
       this.dialogVisible = true
