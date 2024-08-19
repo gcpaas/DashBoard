@@ -1,5 +1,6 @@
 package com.gccloud.dashboard.core.config;
 
+import com.gccloud.dashboard.core.config.bean.DemoEnv;
 import com.gccloud.dashboard.core.config.bean.FileConfig;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -25,4 +26,7 @@ public class DashboardConfig {
      */
     @NestedConfigurationProperty
     private FileConfig file = new FileConfig();
+
+    @NestedConfigurationProperty
+    private DemoEnv demoEnv = new DemoEnv();
 }
