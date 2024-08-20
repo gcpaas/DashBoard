@@ -4,4 +4,5 @@ var productionConfig = {
   fileUrlPrefix: 'http://gcpaas.gccloud.com/dashboardServer' + '/static'
 }
 // 必须的
+window.CONFIG = {}
 window.CONFIG = configDeepMerge(window.CONFIG, productionConfig)
