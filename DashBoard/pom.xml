@@ -44,6 +44,10 @@
         <json.version>20220320</json.version>
         <dataset.core.version>2.1.0.2024042401.Alpha</dataset.core.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <jjwt.version>0.9.1</jjwt.version>
+        <captcha.version>1.6.2</captcha.version>
+        <fastjson.version>1.2.72</fastjson.version>
+        <shiro.version>1.7.1</shiro.version>
     </properties>
 
     <dependencyManagement>
