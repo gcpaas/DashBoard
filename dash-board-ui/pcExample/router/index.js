@@ -4,6 +4,10 @@ import Router from 'vue-router'
 Vue.use(Router)
 const baseRoutes = [
   {
+    path: '/login',
+    component: () => import('dashPackages/Login/index.vue')
+  },
+  {
     path: '/notPermission',
     component: () => import('dashPackages/NotPermission/index.vue')
   }

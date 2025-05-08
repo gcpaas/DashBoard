@@ -80,7 +80,9 @@
     "vue-contextmenujs": "^1.4.9",
     "vue-json-editor-fix-cn": "1.4.3",
     "vue-json-viewer": "^2.2.22",
-    "vuedraggable": "^2.24.3"
+    "vuedraggable": "^2.24.3",
+    "js-sha256": "^0.9.0",
+    "vue-cookie": "^1.1.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

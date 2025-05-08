@@ -2,6 +2,8 @@ import axios from 'axios'
 import qs from 'qs'
 import _ from 'lodash'
 import { Message } from 'element-ui'
+import * as tokenCacheService from "dashPackages/js/utils/tokenCacheService"
+import vm from 'dashPackages/js/utils/vm'
 /**
  * 统一进行异常输出
  * 如果异常只是弹框显示即可，可使用该实例
@@ -36,9 +38,10 @@ function EipException (message, code) {
  * 请求拦截
  */
 http.interceptors.request.use(config => {
+  config.headers.token = tokenCacheService.get()
   return {
     ...config,
-    ..._.merge(httpConfig, window.DS_CONFIG?.httpConfigs)
+    ...window.DS_CONFIG?.httpConfigs
   }
 }, error => {
   return Promise.reject(error)
@@ -48,6 +51,7 @@ http.interceptors.request.use(config => {
  * 自定义请求拦截
  */
 httpCustom.interceptors.request.use(config => {
+  config.headers.token = tokenCacheService.get()
   return config
 }, error => {
   return Promise.reject(error)
@@ -61,6 +65,12 @@ http.interceptors.response.use(response => {
   // 异常拦截
   // eslint-disable-next-line no-empty
   if (res && res.code === 401) {
+    // 跳转到登录页面，发送事件
+    console.error('接口没有携带：%s 或 已过期 或 用户未登录 ','token')
+    // 清空token，防止死循环发送请求
+    tokenCacheService.remove()
+    // Token校验失败
+    vm.$emit('TokenVerifyError')
   } else if (res && res.code !== 200) {
     // return Promise.reject(response.data.msg)
     Message({
@@ -93,7 +103,25 @@ http.interceptors.response.use(response => {
  */
 httpCustom.interceptors.response.use(response => {
   const res = response.data
-  return res
+  // 异常拦截
+  // eslint-disable-next-line no-empty
+  if (res && res.code === 401) {
+    // 跳转到登录页面，发送事件
+    console.error('接口没有携带：%s 或 已过期 或 用户未登录 ','token')
+    // 清空token，防止死循环发送请求
+    tokenCacheService.remove()
+    // Token校验失败
+    vm.$emit('TokenVerifyError')
+  } else if (res && res.code !== 200) {
+    // return Promise.reject(response.data.msg)
+    Message({
+      message: response.data.msg,
+      type: 'error'
+    })
+    throw new EipException(response.data.msg, response.data.code)
+  } else {
+    return res
+  }
 }, error => {
   if (error.message && error.message === 'Network Error') {
     return Promise.reject(error)
@@ -223,4 +251,10 @@ export function download (url, headers = {}, params = {}, body = {}) {
       console.error('服务异常')
     })
   })
+}
+export function wrapUrl (url) {
+  if (!url.startsWith('http')) {
+    url = window.DS_CONFIG?.httpConfigs?.baseURL + url
+  }
+  return url
 }

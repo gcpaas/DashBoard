@@ -43,7 +43,7 @@ function EipException(message, code) {
 http.interceptors.request.use(
   config => {
     // 请求头带上token
-    config.headers[tokenCacheService.getKey()] = tokenCacheService.get()
+    config.headers.token = tokenCacheService.get()
     return config
   },
   error => {
@@ -57,7 +57,7 @@ http.interceptors.request.use(
 httpCustom.interceptors.request.use(
   config => {
     // 请求头带上token
-    config.headers[tokenCacheService.getKey()] = tokenCacheService.get()
+    config.headers.token = tokenCacheService.get()
     return config
   },
   error => {
