@@ -190,6 +190,7 @@
 import { pageMixins } from 'dashPackages/js/mixins/page'
 import EditForm from './EditForm.vue'
 import { getFileUrl } from 'dashPackages/js/utils/file'
+import * as tokenCacheService from "dashPackages/js/utils/tokenCacheService"
 
 export default {
   name: 'SourceList',
@@ -215,7 +216,8 @@ export default {
       list: [],
       fileUploadParam: {},
       headers: {
-        ...window.DS_CONFIG?.httpConfigs?.headers
+        ...window.DS_CONFIG?.httpConfigs?.headers,
+        token: tokenCacheService.get()
       },
       fileList: [],
       loading: false,

@@ -111,6 +111,8 @@
 import SettingTitle from 'dashPackages/SettingTitle/index.vue'
 import PosWhSetting from 'dashPackages/DashboardDesign/RightSetting/PosWhSetting.vue'
 import { getFileUrl } from 'dashPackages/js/utils/file'
+import * as tokenCacheService from "dashPackages/js/utils/tokenCacheService"
+
 export default {
   name: 'PicSetting',
   components: {
@@ -125,7 +127,8 @@ export default {
         module: 'form'
       },
       headers: {
-        ...window.DS_CONFIG?.httpConfigs?.headers
+        ...window.DS_CONFIG?.httpConfigs?.headers,
+        token: tokenCacheService.get()
       },
       fileList: [],
       accept: 'image/*',

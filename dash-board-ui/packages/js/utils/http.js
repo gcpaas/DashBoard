@@ -38,10 +38,14 @@ function EipException (message, code) {
  * 请求拦截
  */
 http.interceptors.request.use(config => {
-  config.headers.token = tokenCacheService.get()
   return {
     ...config,
-    ...window.DS_CONFIG?.httpConfigs
+    ...window.DS_CONFIG?.httpConfigs,
+    headers:{
+      ...config.headers,
+      ...window.DS_CONFIG?.httpConfigs.headers,
+      token: tokenCacheService.get()
+    }
   }
 }, error => {
   return Promise.reject(error)

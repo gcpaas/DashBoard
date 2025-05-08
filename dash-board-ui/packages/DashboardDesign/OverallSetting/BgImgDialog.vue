@@ -83,6 +83,8 @@
 </template>
 <script>
 import { getFileUrl } from 'dashPackages/js/utils/file'
+import * as tokenCacheService from "dashPackages/js/utils/tokenCacheService"
+
 
 export default {
   name: 'BgImgDialog',
@@ -103,7 +105,9 @@ export default {
         module: 'attachment'
       },
       headers: {
-        ...window.DS_CONFIG?.httpConfigs?.headers
+        ...window.DS_CONFIG?.httpConfigs?.headers,
+        token: tokenCacheService.get()
+
       },
       actionUrl: window?.DS_CONFIG.httpConfigs?.baseURL + '/dashboard/file/upload'
     }

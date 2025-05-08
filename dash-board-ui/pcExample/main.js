@@ -14,7 +14,6 @@ import * as $dashboardAxios from 'dashPackages/js/utils/http.js'
 import remoteComponents from '@/remoteComponents/exports.js'
 import customDatasetComponents from '@/customDatasetComponents/exports.js'
 import './permission'
-import * as tokenCacheService from "dashPackages/js/utils/tokenCacheService"
 
 Vue.use(ElementUI, { size: 'mini' })
 registerConfig(
@@ -23,9 +22,6 @@ registerConfig(
       pageManagementUrl: '/'
     },
     httpConfigs: {
-      headers: {
-        token: tokenCacheService.get()
-      },
       baseURL: window.CONFIG?.baseUrl,
       // 现在文件路径保存的是相对路径，所以需要加上前缀,这个值一般和后端的gc.starter.file.urlPrefix一致
       fileUrlPrefix: window.CONFIG.fileUrlPrefix ? window.CONFIG.fileUrlPrefix : window.CONFIG?.baseUrl + '/static',
