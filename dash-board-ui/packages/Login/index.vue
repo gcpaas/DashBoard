@@ -185,7 +185,7 @@ export default {
       let welcome = this.starter.login.welcome
       this.$notify({
         title: welcome?.title ?? '欢迎',
-        message: welcome?.template ?? '您好，欢迎访问大屏设计器',
+        message: welcome?.template ?? '您好，欢迎访问仪表盘设计器',
         type: 'success'
       })
         // 跳转到首页

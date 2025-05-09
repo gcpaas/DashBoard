@@ -14,7 +14,8 @@ import * as $dashboardAxios from 'dashPackages/js/utils/http.js'
 import remoteComponents from '@/remoteComponents/exports.js'
 import customDatasetComponents from '@/customDatasetComponents/exports.js'
 import './permission'
-
+import supportIE from 'dashPackages/js/utils/supportPlaceholder'
+Vue.use(supportIE)
 Vue.use(ElementUI, { size: 'mini' })
 registerConfig(
   {
