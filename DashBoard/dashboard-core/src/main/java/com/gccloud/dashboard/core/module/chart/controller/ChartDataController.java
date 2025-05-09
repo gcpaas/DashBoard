@@ -1,5 +1,6 @@
 package com.gccloud.dashboard.core.module.chart.controller;
 
+import com.gccloud.common.permission.ApiPermission;
 import com.gccloud.common.utils.AssertUtils;
 import com.gccloud.common.vo.R;
 import com.gccloud.dashboard.core.module.basic.dto.BasePageDTO;
@@ -11,6 +12,7 @@ import com.gccloud.dashboard.core.module.chart.service.ChartMockData;
 import com.gccloud.dashboard.core.module.chart.vo.ChartDataVO;
 import com.gccloud.dashboard.core.module.manage.dto.DashboardPageDTO;
 import com.gccloud.dashboard.core.module.manage.service.IDashboardPageService;
+import com.gccloud.dashboard.core.permission.Permission;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +42,7 @@ public class ChartDataController {
     @Resource
     private BaseChartDataService baseChartDataService;
 
+    @ApiPermission(permissions = {Permission.Dataset.VIEW})
     @PostMapping("/list")
     @ApiOperation(value = "图表数据", position = 10, notes = "获取指定图表的数据(通过唯一编码)", produces = MediaType.APPLICATION_JSON_VALUE)
     public R<ChartDataVO> getChartDataByCode(@RequestBody ChartDataSearchDTO chartDataSearchDTO) {
@@ -58,6 +61,7 @@ public class ChartDataController {
         return getChartData(chartDataSearchDTO, config, chart);
     }
 
+    @ApiPermission(permissions = {Permission.Dataset.VIEW})
     @PostMapping("/chart")
     @ApiOperation(value = "图表数据", position = 10, notes = "获取指定图表的数据(通过配置)", produces = MediaType.APPLICATION_JSON_VALUE)
     public R<ChartDataVO> getChartDataByChart(@RequestBody ChartDataSearchDTO chartDataSearchDTO) {
