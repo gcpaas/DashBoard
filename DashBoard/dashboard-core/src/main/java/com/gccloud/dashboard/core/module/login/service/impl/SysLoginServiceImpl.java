@@ -11,6 +11,7 @@ import com.gccloud.dashboard.core.constant.DashboardConst;
 import com.gccloud.dashboard.core.module.login.cache.SysTokenCache;
 import com.gccloud.dashboard.core.module.login.dto.SysLoginDTO;
 import com.gccloud.dashboard.core.module.login.service.ISysLoginService;
+import com.gccloud.dashboard.core.module.login.vo.SysCurrentUserVO;
 import com.gccloud.dashboard.core.module.login.vo.SysTokenVO;
 import com.gccloud.dashboard.core.utils.IPUtils;
 import com.github.benmanes.caffeine.cache.Cache;
@@ -174,6 +175,20 @@ public class SysLoginServiceImpl implements ISysLoginService {
                 .filter(u -> u.getUserId().equals(claims.get(DashboardConst.Jwt.USER_ID)))
                 .findFirst()
                 .orElseThrow(() -> new GlobalException("用户不存在", DashboardConst.Response.Code.NO_FOUND));
+    }
+
+    @Override
+    public SysCurrentUserVO current() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        String token = request.getHeader("token");
+        if ("null".equals(token) || StringUtils.isBlank(token)) {
+            throw new GlobalException(DashboardConst.Response.Msg.NO_LOGIN, DashboardConst.Response.Code.NO_LOGIN);
+        }
+        SysUserConfig.User currentUser = getUserFromToken(token);
+        if (currentUser == null) {
+            throw new GlobalException("TOKEN无效或已过期", DashboardConst.Response.Code.NO_FOUND);
+        }
+        return BeanConvertUtils.convert(currentUser, SysCurrentUserVO.class);
     }
 
     @Override

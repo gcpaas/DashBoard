@@ -7,6 +7,7 @@ import com.gccloud.dashboard.core.config.SysUserConfig;
 import com.gccloud.dashboard.core.constant.DashboardConst;
 import com.gccloud.dashboard.core.module.login.dto.SysLoginDTO;
 import com.gccloud.dashboard.core.module.login.service.ISysLoginService;
+import com.gccloud.dashboard.core.module.login.vo.SysCurrentUserVO;
 import com.gccloud.dashboard.core.module.login.vo.SysTokenVO;
 import com.wf.captcha.*;
 import com.wf.captcha.base.Captcha;
@@ -90,6 +91,16 @@ public class SysLoginController {
         sysLoginService.saveCaptcha(uuid, code);
         captcha.out(response.getOutputStream());
         return R.success();
+    }
+
+    @GetMapping("/current")
+    @ApiOperation(value = "当前登录用户", notes = "当前登录用户", produces = MediaType.APPLICATION_JSON_VALUE)
+    public R<SysCurrentUserVO> current() {
+        SysCurrentUserVO vo = sysLoginService.current();
+        if (vo == null) {
+            return R.error("未获取到当前用户信息");
+        }
+        return R.success(sysLoginService.current());
     }
 
 }

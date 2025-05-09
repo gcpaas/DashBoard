@@ -2,6 +2,7 @@ package com.gccloud.dashboard.core.module.login.service;
 
 import com.gccloud.dashboard.core.config.SysUserConfig;
 import com.gccloud.dashboard.core.module.login.dto.SysLoginDTO;
+import com.gccloud.dashboard.core.module.login.vo.SysCurrentUserVO;
 import com.gccloud.dashboard.core.module.login.vo.SysTokenVO;
 
 import java.util.Map;
@@ -48,6 +49,11 @@ public interface ISysLoginService {
      * @return
      */
     SysUserConfig.User getUserFromToken(String token);
+    /**
+     * 获取当前用户信息
+     * @return
+     */
+    SysCurrentUserVO current();
     /**
      * 加密
      * @param password

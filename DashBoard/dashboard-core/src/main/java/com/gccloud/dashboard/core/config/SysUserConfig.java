@@ -51,6 +51,7 @@ public class SysUserConfig {
                     permissions.add(DatasetConstant.Permission.Dataset.VIEW);
                     permissions.add(DatasetConstant.Permission.Dataset.EXECUTE);
                     permissions.add(DatasetConstant.Permission.Dataset.CATEGORY_VIEW);
+                    permissions.add(DatasetConstant.Permission.Dataset.LABEL_VIEW);
                     break;
                 case "dataRoomWrite":
                     // 写权限
