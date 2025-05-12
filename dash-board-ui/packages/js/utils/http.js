@@ -44,7 +44,7 @@ http.interceptors.request.use(config => {
     headers:{
       ...config.headers,
       ...window.DS_CONFIG?.httpConfigs.headers,
-      token: tokenCacheService.get()
+      dashBoardToken: tokenCacheService.get()
     }
   }
 }, error => {
@@ -55,7 +55,7 @@ http.interceptors.request.use(config => {
  * 自定义请求拦截
  */
 httpCustom.interceptors.request.use(config => {
-  config.headers.token = tokenCacheService.get()
+  config.headers.dashBoardToken = tokenCacheService.get()
   return config
 }, error => {
   return Promise.reject(error)
@@ -70,7 +70,7 @@ http.interceptors.response.use(response => {
   // eslint-disable-next-line no-empty
   if (res && res.code === 401) {
     // 跳转到登录页面，发送事件
-    console.error('接口没有携带：%s 或 已过期 或 用户未登录 ','token')
+    console.error('接口没有携带：%s 或 已过期 或 用户未登录 ','dashBoardToken')
     // 清空token，防止死循环发送请求
     tokenCacheService.remove()
     // Token校验失败
@@ -111,7 +111,7 @@ httpCustom.interceptors.response.use(response => {
   // eslint-disable-next-line no-empty
   if (res && res.code === 401) {
     // 跳转到登录页面，发送事件
-    console.error('接口没有携带：%s 或 已过期 或 用户未登录 ','token')
+    console.error('接口没有携带：%s 或 已过期 或 用户未登录 ','dashBoardToken')
     // 清空token，防止死循环发送请求
     tokenCacheService.remove()
     // Token校验失败

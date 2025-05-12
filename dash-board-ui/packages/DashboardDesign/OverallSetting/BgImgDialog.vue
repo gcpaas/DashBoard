@@ -106,7 +106,7 @@ export default {
       },
       headers: {
         ...window.DS_CONFIG?.httpConfigs?.headers,
-        token: tokenCacheService.get()
+        dashBoardToken: tokenCacheService.get()
 
       },
       actionUrl: window?.DS_CONFIG.httpConfigs?.baseURL + '/dashboard/file/upload'

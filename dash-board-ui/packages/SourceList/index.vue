@@ -217,7 +217,7 @@ export default {
       fileUploadParam: {},
       headers: {
         ...window.DS_CONFIG?.httpConfigs?.headers,
-        token: tokenCacheService.get()
+        dashBoardToken: tokenCacheService.get()
       },
       fileList: [],
       loading: false,

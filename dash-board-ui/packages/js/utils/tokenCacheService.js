@@ -1,17 +1,17 @@
 import Cookies from 'vue-cookie'
 
 const set = ( value) => {
-  Cookies.set('token', value)
+  Cookies.set('dashBoardToken', value)
 }
 
 // 获取方式
 const get = () => {
-  return Cookies.get('token')
+  return Cookies.get('dashBoardToken')
 }
 
 // 删除方式
 const remove = () => {
-  Cookies.delete('token')
+  Cookies.delete('dashBoardToken')
 }
 
 export {

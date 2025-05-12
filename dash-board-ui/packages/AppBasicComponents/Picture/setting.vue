@@ -128,7 +128,7 @@ export default {
       },
       headers: {
         ...window.DS_CONFIG?.httpConfigs?.headers,
-        token: tokenCacheService.get()
+        dashBoardToken: tokenCacheService.get()
       },
       fileList: [],
       accept: 'image/*',
