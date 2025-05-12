@@ -180,7 +180,7 @@ public class SysLoginServiceImpl implements ISysLoginService {
     @Override
     public SysCurrentUserVO current() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-        String token = request.getHeader("token");
+        String token = request.getHeader("dashBoardToken");
         if ("null".equals(token) || StringUtils.isBlank(token)) {
             throw new GlobalException(DashboardConst.Response.Msg.NO_LOGIN, DashboardConst.Response.Code.NO_LOGIN);
         }

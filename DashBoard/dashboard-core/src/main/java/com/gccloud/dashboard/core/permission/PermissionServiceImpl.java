@@ -41,7 +41,7 @@ public class PermissionServiceImpl implements IApiPermissionService {
     }
 
     private Set<String> getUserPermissions(HttpServletRequest httpServletRequest) {
-        String token = httpServletRequest.getHeader("token");
+        String token = httpServletRequest.getHeader("dashBoardToken");
         if ("null".equals(token) || StringUtils.isBlank(token)) {
             throw new GlobalException(DashboardConst.Response.Msg.NO_LOGIN, DashboardConst.Response.Code.NO_LOGIN);
         }
