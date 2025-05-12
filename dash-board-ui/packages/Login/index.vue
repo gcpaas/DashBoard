@@ -148,7 +148,7 @@ export default {
       const imgUrl = require('./assets/QQ.png') // 先获取图片路径
       this.$alert(`
     <div>
-      <p>请加入官方交流群获取演示环境登录凭证：</p>
+      <p>请加入官方交流群获取演示环境登录账号：</p>
       <div style="display: flex;justify-content: center">
        <img
         src="${imgUrl}"
@@ -157,6 +157,7 @@ export default {
        </div>
     </div>
   `, '提示', {
+        showConfirmButton:false,
         dangerouslyUseHTMLString: true // 关键：允许渲染HTML
       })
     },
