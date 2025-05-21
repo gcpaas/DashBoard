@@ -1,7 +1,7 @@
 window.ENV = 'development'
 var developmentConfig = {
-  baseUrl: 'http://gcpaas.gccloud.com/dashboardServer',
-  fileUrlPrefix: 'http://gcpaas.gccloud.com/dashboardServer' + '/static'
+  baseUrl: 'http://localhost:8082/dashboardServer',
+  fileUrlPrefix: 'http://localhost:8082/dashboardServer' + '/static'
 }
 window.CONFIG={}
 // 必须的
