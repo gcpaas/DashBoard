@@ -17,7 +17,7 @@ spring:
       # 字符串转允许List，否则导致 @RequestBody List<T> list 类型无法解析
       ACCEPT_SINGLE_VALUE_AS_ARRAY: true
   resources:
-    static-locations: classpath:/static/,classpath:/META-INF/resources/,classpath:/META-INF/resources/webjars/,file:${gc.starter.file.basePath}
+    static-locations: classpath:/static/,classpath:/META-INF/resources/,classpath:/META-INF/resources/webjars/,file:${gc.starter.file.basePath},file:${gc.starter.file.uiPath}
   # 静态资源配置
   mvc:
     throw-exception-if-no-handler-found: true
@@ -30,7 +30,7 @@ spring:
       matching-strategy: ANT_PATH_MATCHER
   web:
     resources:
-      static-locations: classpath:/static/,classpath:/META-INF/resources/,classpath:/META-INF/resources/webjars/,file:${gc.starter.file.basePath}
+      static-locations: classpath:/static/,classpath:/META-INF/resources/,classpath:/META-INF/resources/webjars/,file:${gc.starter.file.basePath},file:${gc.starter.file.uiPath}
 
 mybatis-plus:
   # mybatis plus xml配置文件扫描，多个通过分号隔开
@@ -42,31 +42,3 @@ mybatis-plus:
       #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"唯一ID";
       id-type: 0
 
-gc:
-  starter:
-    captcha:
-      enable: true
-    jwt:
-      # 密钥，每个系统一定要自己修改下
-      secret: vT9~lW1^
-      alg: HS256
-      issuer: gc
-    dataroom:
-      users:
-        - username: admin
-          userId: 1
-          password: kdgc@2025
-          role:
-            - dataRoomWrite
-            - dataRoomRead
-        - username: sysadmin
-          userId: 2
-          password: KDGC@2025
-          role:
-            - dataRoomWrite
-            - dataRoomRead
-        - username: user
-          userId: 3
-          password: user@2025
-          role:
-            - dataRoomRead
