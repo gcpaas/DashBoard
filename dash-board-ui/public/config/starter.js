@@ -5,7 +5,7 @@
       title: '仪表盘设计器',
       version: 'v2.1.0',
       // 登陆页面描述
-      description: '<h5>大屏设计器</h5>' +
+      description: '<h5>仪表盘设计器</h5>' +
         '<ul>' +
         '<li>基于Vue+ElementUI+SpringBoot技术栈开发</li>' +
         '<li>提供100+种组件、可视化拖拉拽</li>' +
