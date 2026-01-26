@@ -4,5 +4,4 @@ var productionConfig = {
   fileUrlPrefix: 'http://localhost:8082/dashboardServer' + '/static'
 }
 // 必须的
-window.CONFIG = {}
-window.CONFIG = configDeepMerge(window.CONFIG, productionConfig)
+window.CONFIG = configDeepMerge({}, productionConfig)
