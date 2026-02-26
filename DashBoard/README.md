@@ -5,6 +5,7 @@
 <p align="center">
     <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/gcpaas/DashBoard?style=social">
     <img alt="GitHub forks" src="https://img.shields.io/github/forks/gcpaas/DashBoard?style=social">
+    <img alt="AtomGitStars" src="https://atomgit.com/gcpaas/DashBoard/star/badge.svg"> 
     <img alt="GitHub license" src="https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg">
     <img alt="npm" src="https://img.shields.io/npm/v/@gcpaas/dash-board-ui">
     <img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.gccloud/dashboard-core">
@@ -30,7 +31,7 @@
 ## 常见问题
 
 * [使用手册、二次开发、部署手册、常见问题](https://www.yuque.com/chuinixiongkou/dashboard/index)
-* [代码仓库(GitHub)](https://github.com/gcpaas/DashBoard)、[代码仓库(码云)](https://gitee.com/gcpaas/DashBoard)
+* [代码仓库(GitHub)](https://github.com/gcpaas/DashBoard)、[代码仓库(码云)](https://gitee.com/gcpaas/DashBoard)、[代码仓库(AtomGit)](https://atomgit.com/gcpaas/DashBoard)
 
 
 ## 联系我们
