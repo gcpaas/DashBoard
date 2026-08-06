@@ -15,11 +15,6 @@
 
 -------------------------------------------------------------------------------
 
-## 效果图
-
-<img alt="logo" src="./doc/images/design01.png">
-
-
 ## 优势
 
 * 一站式仪表盘解决方案，从**数据处理**->**仪表盘设计**->**仪表盘预览**->**生产使用**
@@ -40,33 +35,9 @@
 - [x] 支持自定义接口权限、数据权限，保证仪表盘数据安全
 - [x] 支持组件自定义规范，按照规范开发自己的大屏组件，满足特殊需求，如：自定义网络拓扑
 
-## 快速开始
-<a href="https://www.yuque.com/chuinixiongkou/dashboard/nfii3f6fd3o7rlz7" target="_blank">快速开始</a>
+## 特别说明
 
-## 演示DEMO
-
-<a href="http://gcpaas.gccloud.com/dashboard" target="_blank"> http://gcpaas.gccloud.com/dashboard </a>
-<span style="color: red">（请不要在演示环境中放入生产数据）</span>
-
-## 常见问题
-
-* [使用手册、二次开发、部署手册、常见问题](https://www.yuque.com/chuinixiongkou/dashboard/index)
-* [代码仓库(GitHub)](https://github.com/gcpaas/DashBoard)、[代码仓库(码云)](https://gitee.com/gcpaas/DashBoard)、[代码仓库(AtomGit)](https://atomgit.com/gcpaas/DashBoard)
-
-
-## 公司登记
-
-为了更好的做开源与产品推广，欢迎接入的公司在[此处登记](https://gitee.com/gcpaas/DataRoom/issues/IAQO4F )
-
-
-
-## 联系我们
-
-<table>
-    <tr>
-        <td style="text-align: center;font-weight: bold;"><p>QQ群</p><p><img alt="logo" width="200" src="./doc/images/qq7.jpg"></p></td>
-    </tr>
-</table>
+本仓库已不再维护，已合并到DataRoom中，请移步[https://gitee.com/gcpaas/DataRoom)
 
 ## License
 
